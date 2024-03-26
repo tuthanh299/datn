@@ -46,6 +46,6 @@ class CategoryController extends Controller
     }
     public function delete($id)
     {
-        https://www.youtube.com/watch?v=0nZ3sR-eluE&list=PL3V6a6RU5ogEAKIuGjfPEJ77FGmEAQXTT&index=11 17.57
+
     }
 }
