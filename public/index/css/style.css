@@ -1,0 +1,58 @@
+/* Setting */
+body{font-family:'Courier New',Courier,monospace;font-size:14px;}
+.wrap-content{max-width:1200px;margin:auto;width:calc(100% - 30px);}
+.wrap-container{position:relative;overflow:hidden;}
+a{color:#000;text-decoration:unset !important;}
+/* Header */
+.header-top{background:linear-gradient(90deg,#0063B6 0%,#0982E8 25.5%,#0063B6 54%,#0982E8 78.47%,#0063B6 100%);padding:10px 0px;}
+.flex-header-top{display:flex;align-items:center;justify-content:space-between;}
+.header-top-address{width:50%;}
+.header-top a{color:#fff;}
+.flex-social{display:flex;align-items:center;gap:10px;}
+.header-bottom{padding:10px 0px;}
+.flex-header-bottom{display:flex;align-items:center;justify-content:space-between;}
+.header-bottom-logo img{width:100px;}
+.header-bottom-banner img{width:500px;}
+.header-bottom-contact-img img{width:50px;animation:phonering-alo-circle-img-anim 1s infinite ease-in-out;}
+.flex-header-bottom-contact{display:flex;align-items:center;gap:10px;}
+.header-bottom-contact-text{font-weight:bold;}
+.header-bottom-contact-num a{color:#000;font-weight:bold;}
+.header-bottom-contact-num a:hover{color:#0063B6;}
+@keyframes phonering-alo-circle-img-anim{0%{-webkit-transform:rotate(0) scale(1) skew(1deg);}
+10%{-webkit-transform:rotate(-25deg) scale(1) skew(1deg);}
+20%{-webkit-transform:rotate(25deg) scale(1) skew(1deg);}
+30%{-webkit-transform:rotate(-25deg) scale(1) skew(1deg);}
+40%{-webkit-transform:rotate(25deg) scale(1) skew(1deg);}
+50%{-webkit-transform:rotate(0) scale(1) skew(1deg);}
+100%{-webkit-transform:rotate(0) scale(1) skew(1deg);}
+}
+.flex-header-bottom-personalized{display:flex;align-items:center;gap:10px;}
+.header-bottom-account{display:flex;align-items:center;gap:10px;}
+.header-bottom-cart{display:flex;align-items:center;gap:20px;}
+.header-bottom-cart-icon{position:relative;}
+.header-bottom-cart-num{position:absolute;top:-10px;right:-15px;background:#0063B6;border-radius:100%;color:#fff;width:25px;height:25px;text-align:center;}
+.flex-header-bottom-personalized i{font-size:30px;}
+.header-bottom-account-text{font-size:16px;font-weight:bold;}
+.header-bottom-cart-text{font-size:16px;font-weight:bold;}
+.header-bottom-account-positon{position:relative;}
+.header-bottom-account-positon:hover,.header-bottom-cart:hover{cursor: pointer;color: #0063B6;}
+.header-bottom-account-hidden{position:absolute;top:35px;left:0;width:280px;background:#0982E8;padding:10px;border-radius:5px;display:none;}
+.flex-header-bottom-account-hidden-cover{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.flex-header-bottom-account-hidden-btn{display:flex;align-items:center;justify-content:space-between;}
+.header-bottom-account-hidden-register{width:120px;height:40px;display:flex;align-items:center;justify-content:center;border:solid 1px #ccc;border-radius:25px;background:#d00;}
+.header-bottom-account-hidden-login{width:120px;height:40px;display:flex;align-items:center;justify-content:center;border:solid 1px #ccc;border-radius:25px;background:#0063B6;}
+.header-bottom-account-hidden-login a{color:#fff;}
+.header-bottom-account-hidden-register a{color:#fff;}
+.header-bottom-account-hidden-cover-text{font-size:16px;font-weight:bold;color:#fff;}
+.header-bottom-account-hidden-cover-close-btn i{color:#fff;}
+.header-bottom-account-hidden-cover-close-btn,.header-bottom-account-hidden-login,.header-bottom-account-hidden-register:hover{cursor:pointer;opacity:0.8;}
+.header-bottom-account-hidden-login:hover a{color:#000;}
+.header-bottom-account-hidden-register:hover a{color:#000;}
+.flex-header-bottom-cart-icon-hidden-cover{display: flex;align-items: center;justify-content: space-between;}
+.header-bottom-cart-icon-hidden{width: 320px;position: absolute;top: 35px;right: 0;background:#0982E8;padding:10px;border-radius:5px;}
+.header-bottom-cart-icon-position{position: relative;}
+.header-bottom-cart-icon-hidden-cover-text{font-size:16px;font-weight:bold;color:#fff;}
+/* Menu */
+ .menu-main{padding:0;margin:0;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+.menu{background:linear-gradient(90deg,#0063B6 0%,#0982E8 25.5%,#0063B6 54%,#0982E8 78.47%,#0063B6 100%);padding:10px 0px;;}
+.menu-main li a{font-weight: bold;color: #fff;font-size: 16px;text-transform: capitalize;}
