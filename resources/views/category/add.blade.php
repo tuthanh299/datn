@@ -18,9 +18,9 @@
                             <input type="text" class="form-control" name="name" placeholder="Nhập tên danh mục">
                         </div>
                         <div class="form-group">
-                            <label>Chọn Danh Mục cha</label>
+                            <label>Chọn Danh Mục Cha</label>
                             <select class="form-control" name="parent_id">
-                                <option value="0">Chọn Danh Mục cha</option>
+                                <option value="0">Chọn Danh Mục Cha</option>
                                 {!! $categoryoption !!}
                             </select>
                           
