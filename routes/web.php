@@ -12,6 +12,10 @@ Route::post('login', [AdminController::class, 'postLoginAdmin'])->name('post.log
 Route::get('/home', function () {
     return view('home');
 });
+
+Route::get('/', function () {
+    return view('home');
+});
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
