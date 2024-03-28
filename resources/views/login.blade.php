@@ -26,7 +26,7 @@ foreach ($cssFiles as $file) {
                         class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form id="login-form" class="form" action="" method="POST">
+                    <form id="login-form" class="form" action="{{route('postlogin')}}" method="POST">
                         @csrf
                         <div class="divider d-flex align-items-center my-4">
                             <p class="text-center fw-bold mx-3 mb-0">Sign in</p>
@@ -56,8 +56,9 @@ foreach ($cssFiles as $file) {
                         </div> 
                         <div class="text-center text-lg-start mt-4 pt-2">
                         <input type="submit" name="submit" class="btn btn-primary btn-lg" value="Login"style="padding-left: 2.5rem; padding-right: 2.5rem;"> 
-                            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
-                                    class="link-danger">Register</a></p>
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? 
+                                <a href="#" class="link-danger">Register</a>
+                            </p>
                         </div>
                     </form>
                 </div>
@@ -72,16 +73,16 @@ foreach ($cssFiles as $file) {
             <!-- Copyright -->
             <!-- Right -->
             <div>
-                <a href="#!" class="text-white me-4">
+                <a href="#" class="text-white me-4">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="#!" class="text-white me-4">
+                <a href="#" class="text-white me-4">
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="#!" class="text-white me-4">
+                <a href="#" class="text-white me-4">
                     <i class="fab fa-google"></i>
                 </a>
-                <a href="#!" class="text-white">
+                <a href="#" class="text-white">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
             </div>

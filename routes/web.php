@@ -6,16 +6,17 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('login', [AdminController::class, 'loginAdmin'])->name('login');
-Route::post('login', [AdminController::class, 'postLoginAdmin'])->name('post.login');
+Route::post('login', [AdminController::class, 'postLoginAdmin'])->name('postlogin');
  
 
 Route::get('/home', function () {
     return view('home');
-});
+})->name('home');
 
-Route::get('/', function () {
-    return view('home');
-});
+/*Route::get('/', function () {
+    return view('index.index');
+});*/
+
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
