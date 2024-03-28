@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('login', [AdminController::class, 'loginAdmin'])->name('login');
-Route::post('login', [AdminController::class, 'postLoginAdmin'])->name('postlogin');
+Route::post('postlogin', [AdminController::class, 'postLoginAdmin'])->name('postlogin');
  
 
 Route::get('/home', function () {
