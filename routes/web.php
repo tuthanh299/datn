@@ -9,8 +9,8 @@ Route::post('/login', [AdminController::class, 'postLoginAdmin'])->name('login.p
 Route::get('/home', function () {
     return view('home');
 });
-Route::get('/index', function () {
-    return view('index');
+Route::get('/homepage', function () {
+    return view('homepage');
 });
 Route::prefix('admin')->group(function () {
     Route::prefix('categories')->group(function () {
