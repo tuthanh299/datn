@@ -1,13 +1,8 @@
 <?php
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BooksController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/home', function () {
     return view('home');
@@ -18,3 +13,21 @@ Route::post('/categories', [CategoryController::class, 'store'])->name('categori
 Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
 Route::get('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
 Route::post('/categories/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
+
+Route::get('/', function () {
+    return view('index');
+})->name('index');
+
+//Route::get('/', [BooksController::class,'getCategory'])->name('test');
+
+Route::get('dangnhap', function () {
+    return view('DangNhap');
+})->name('dangnhap');
+
+Route::get('dangki', function () {
+    return view('DangKy');
+})->name('dangki');
+
+//cổng thanh toán
+Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay');
+Route::post('/momo_payment', [PaymentController::class, 'momo_payment'])->name('momo');
