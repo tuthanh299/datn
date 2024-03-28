@@ -17,14 +17,9 @@ class CategoryController extends Controller
     }
     public function create()
     {
-        $data = $this->category->all();
-        $recusive = new Recusive($data); 
-        $categoryoption = $recusive->categoryRecusive();  
+        $categoryoption = $this->getCategory($parentId ='');
         return view('category.add', compact('categoryoption'));
-        
-       
     }
-
     public function index()
     {
         $categories = $this->category->latest()->paginate(10);
@@ -39,13 +34,34 @@ class CategoryController extends Controller
         ]);
         return redirect()->route('categories.index');
     }
+    public function getCategory($parentId)
+    {
+        $data = $this->category->all();
+        $recusive = new Recusive($data);
+        $categoryoption = $recusive->categoryRecusive($parentId);
+        return $categoryoption;
+    }   
+
     public function edit($id)
     {
         $category = $this->category->find($id);
-        return view('category.edit',compact('category'));
+        $categoryoption = $this->getCategory($category->parent_id);
+        return view('category.edit', compact('category', 'categoryoption'));
+    }
+    public function update($id, Request $request)
+    {
+
+        $this->category->find($id)->update([
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+            'slug' => Str::slug($request->name),
+        ]);
+        return redirect()->route('categories.index');
+
     }
     public function delete($id)
     {
-        
+        $this->category->find($id)->delete();
+        return redirect()->route('categories.index');
     }
 }

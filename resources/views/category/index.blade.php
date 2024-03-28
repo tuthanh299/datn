@@ -22,7 +22,7 @@
                             @foreach($categories as $category)
                             <tr>
                                 <th scope="row">{{$category->id}}</th>
-                                <td>{{ $category->name }}</td>
+                                <td class="name-category">{{ $category->name }}</td>
                                 <td>
                                     <a href="{{route('categories.edit', ['id' => $category->id])}}" class="btn btn-default">Edit</a>
                                     <a href="{{route('categories.delete', ['id' => $category->id])}}" class="btn btn-danger">Delete</a>
