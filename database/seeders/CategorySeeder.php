@@ -14,29 +14,28 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        /*Category::factory()->create([
+        Category::create([
             "name"=> "Sách Giáo Khoa",
             "parent_id"=> "GK",
             "slug"=> ""
         ]);
 
-        Category::factory()->create([
+        Category::create([
             "name"=> "Sách Tham Khảo",
             "parent_id"=> "TK",
             "slug"=> ""
         ]);
 
-        Category::factory()->create([
+        Category::create([
             "name"=> "Sách Kỹ Năng Sống",
             "parent_id"=> "KNS",
             "slug"=> ""
-        ]);*/
+        ]);
 
-        DB::table("categories")->insert([
+        /*DB::table("categories")->insert([
             ["name"=> "Sách Giáo Khoa", "parent_id"=> "GK", "slug"=> ""],
             ["name"=> "Sách Tham Khảo", "parent_id"=> "TK", "slug"=> ""],
             ["name"=> "Sách Kỹ Năng Sống", "parent_id"=> "KNS", "slug"=> ""],
-        ]);
+        ]);*/
     }
 }

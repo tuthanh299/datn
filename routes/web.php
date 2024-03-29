@@ -1,7 +1,6 @@
 <?php
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;

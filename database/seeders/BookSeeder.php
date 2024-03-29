@@ -14,7 +14,7 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        /*Book::factory()->create([
+        Book::create([
             "category_id"=> "KNS",
             "name"=> "Đắc nhân tâm",
             "desc"=> "Mô tả",
@@ -32,7 +32,7 @@ class BookSeeder extends Seeder
             "outstanding"=> 0,
         ]);
 
-        Book::factory()->create([
+        Book::create([
             "category_id"=>"GK",
             "name"=> "Âm Nhạc Và Mỹ Thuật Lớp 6",
             "desc"=> "Mô tả",
@@ -50,7 +50,7 @@ class BookSeeder extends Seeder
             "outstanding"=> 0,
         ]);
 
-        Book::factory()->create([
+        Book::create([
             "category_id"=>"GK",
             "name"=> "Âm Nhạc Và Mỹ Thuật Lớp 7",
             "desc"=> "Mô tả",
@@ -68,7 +68,7 @@ class BookSeeder extends Seeder
             "outstanding"=> 0,
         ]);
 
-        Book::factory()->create([
+        Book::create([
             "category_id"=>"TK",
             "name"=> "50 Đề Minh Hoạ 2023 Toán Học 12",
             "desc"=> "Mô tả",
@@ -84,9 +84,9 @@ class BookSeeder extends Seeder
             "code"=> "",
             "status"=> 1,
             "outstanding"=> 0,
-        ]);*/
+        ]);
 
-        DB::table("books")->insert([
+        /*DB::table("books")->insert([
             [
             "category_id"=> "KNS",
             "name"=> "Đắc nhân tâm",
@@ -155,6 +155,6 @@ class BookSeeder extends Seeder
                 "status"=> 1,
                 "outstanding"=> 0,
             ]
-        ]);
+        ]);*/
     }
 }
