@@ -18,12 +18,12 @@ class CategoryController extends Controller
     public function create()
     {
         $categoryoption = $this->getCategory($parentId ='');
-        return view('category.add', compact('categoryoption'));
+        return view('admin.category.add', compact('categoryoption'));
     }
     public function index()
     {
         $categories = $this->category->latest()->paginate(10);
-        return view('category.index', compact('categories'));
+        return view('admin.category.index', compact('categories'));
     }
     public function store(Request $request)
     {
@@ -41,12 +41,19 @@ class CategoryController extends Controller
         $categoryoption = $recusive->categoryRecusive($parentId);
         return $categoryoption;
     }   
+    // public function getCategorylist($parentId)
+    // {
+    //     $data = $this->category->all();
+    //     $recusive = new Recusive($data);
+    //     $category = $recusive->categorylistRecusive($parentId);
+    //     return $category;
+    // }   
 
     public function edit($id)
     {
         $category = $this->category->find($id);
         $categoryoption = $this->getCategory($category->parent_id);
-        return view('category.edit', compact('category', 'categoryoption'));
+        return view('admin.category.edit', compact('category', 'categoryoption'));
     }
     public function update($id, Request $request)
     {
@@ -64,4 +71,5 @@ class CategoryController extends Controller
         $this->category->find($id)->delete();
         return redirect()->route('categories.index');
     }
+    
 }
