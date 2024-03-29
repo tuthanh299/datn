@@ -53,7 +53,27 @@ window.onload = function () {
       api.resume();
     });
   });
-
+ $(".changeLanguage").click(function(event) {
+        var value = $(this).data("value");
+        var text = $(this).data("text");
+        $(".changeLanguage").removeClass("active");
+        $(this).addClass("active");
+        var text_1 = $(".changeLanguage.active").html();
+        $(".lang_current").html(text_1);
+        doGoogleLanguageTranslator(value);
+        return false;
+    });
+    $('.box_solang').hide();
+    $('.lang_current').click(function(e) {
+        e.stopPropagation();
+        $('.box_solang').slideToggle();
+    });
+    $('.box_solang').click(function(e) {
+        e.stopPropagation();
+    });
+    $(document).click(function() {
+        $('.box_solang').slideUp();
+    });
   // GoTop
   var progressPath = document.querySelector(".scrollToTop path");
   var pathLength = progressPath.getTotalLength();
