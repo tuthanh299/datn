@@ -71,6 +71,33 @@
                                     </div>
                                 </div>
                             </div>
+                                <div id="google_language_translator"></div>
+    <div class="lang_current">
+        <img src="assets/images/vi.jpg" class="img-lang" alt=" ">
+    </div>
+    <div class="box_solang">
+        <div class="lang  col-lang">
+            <a href="" data-value="vi|vi" data-active="/vi/vi" class="changeLanguage" data-text="VN" onclick="doGoogleLanguageTranslator('vi|vi'); return false;">
+                <img class="hvr-float vi-flag" src="assets/images/vi.jpg" />
+            </a>
+            <a href="" data-value="vi|en" data-active="/vi/en" class="changeLanguage" data-text="VN" onclick="doGoogleLanguageTranslator('vi|en'); return false;">
+                <img class="hvr-float eng-flag" src="assets/images/eng.jpg" />
+            </a>
+            <a href="" data-value="vi|zh-CN" data-active="/vi/zh-CN" class="changeLanguage" data-text="VN" onclick="doGoogleLanguageTranslator('vi|zh-CN'); return false;">
+                <img class="hvr-float cn-flag" src="assets/images/cn.png" />
+            </a>  
+        </div>
+    </div>
+    <style>
+        .goog-te-gadget,
+        .skiptranslate {
+            display: none;
+        }
+
+        body {
+            top: 0px !important;
+        }
+    </style>
                         </div>
                     </div>
                 </div>
