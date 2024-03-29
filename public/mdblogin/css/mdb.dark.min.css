@@ -1,33 +1,4 @@
-.divider:after,
-.divider:before {
-content: "";
-flex: 1;
-height: 1px;
- }
-.h-custom {
-height: calc(100% - 73px);
-}
-@media (max-width: 450px) {
-.h-custom {
-height: 100%;
-}
-}
-/* CSS cho tất cả các trình duyệt hiện đại */
-::placeholder {
-    color: gray !important; /* Thay 'gray' bằng màu bạn muốn */
-    opacity: 1 !important; /* Đặt độ mờ cho placeholder nếu cần */
-  }
-  
-  /* CSS cho Internet Explorer 10+ */
-  :-ms-input-placeholder {
-    color: gray !important; /* Thay 'gray' bằng màu bạn muốn */
-  }
-  
-  /* CSS cho Microsoft Edge */
-  ::-ms-input-placeholder {
-    color: gray !important; /* Thay 'gray' bằng màu bạn muốn */
-  }
-  
+
 /*!
 * MDB5
 * Version: FREE 7.2.0
