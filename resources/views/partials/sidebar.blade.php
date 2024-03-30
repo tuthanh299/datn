@@ -46,6 +46,15 @@
                           </p>
                       </a>
                   </li>
+                <ul class="nav nav-tree-view">
+                    @foreach($categories as $category)
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            {{$category->name}}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
 
                   <li class="nav-item">
                       <a href=" " class="nav-link">

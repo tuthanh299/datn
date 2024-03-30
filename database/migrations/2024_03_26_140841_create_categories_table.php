@@ -15,7 +15,7 @@ return new class extends Migration
             //$table ->id();
             $table ->string('id');
             $table ->string('name');
-            $table ->integer('parent_id')->default(0);
+            $table ->string('parent_id');
             $table ->string('slug');
             $table->timestamps();
 

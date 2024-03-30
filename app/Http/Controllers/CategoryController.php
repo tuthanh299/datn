@@ -71,5 +71,10 @@ class CategoryController extends Controller
         $this->category->find($id)->delete();
         return redirect()->route('categories.index');
     }
+
+    public function slide() {
+        $categories = $this->category->latest()->paginate(10);
+        return view('sidebar', compact('categories'));
+    }
     
 }

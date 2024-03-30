@@ -16,21 +16,21 @@ class CategoriesSeeder extends Seeder
         Category::create([
             'id' => 'GK',
             "name"=> "Sách Giáo Khoa",
-            //"parent_id"=> "GK",
+            "parent_id"=> "GK",
             "slug"=> ""
         ]);
 
         Category::create([
             'id' => 'TK',
             "name"=> "Sách Tham Khảo",
-            //"parent_id"=> "TK",
+            "parent_id"=> "TK",
             "slug"=> ""
         ]);
 
         Category::create([
             'id' => 'KNS',
             "name"=> "Sách Kỹ Năng Sống",
-            //"parent_id"=> "KNS",
+            "parent_id"=> "KNS",
             "slug"=> ""
         ]);
     }
