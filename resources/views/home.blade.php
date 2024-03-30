@@ -1,6 +1,8 @@
-@extends('layouts.admin') @section('title')
+@extends('layouts.admin') 
+@section('title')
 <title>Trang Chủ</title>
-@endsection @section('content')
+@endsection 
+@section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
