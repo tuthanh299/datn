@@ -3,7 +3,10 @@
 @endsection @section('content')
 @section('css')
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
-@endsection 
+@endsection
+@section('js')
+     <script src="{{ asset('/admins/js/app.js') }}"></script>
+@endsection
 <div class="content-wrapper">
 
     @include('partials.content-header',['name'=>'Nhà Xuất Bản','key'=>'/ Sửa'])
@@ -34,8 +37,9 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh</label>
-                            <input type="file" class="form-control-file @error('photo_path') is-invalid @enderror"
+                            <input type="file" onchange="previewImage(event)" class="form-control-file @error('photo_path') is-invalid @enderror"
                                 name="photo_path">
+                                <img id="preview" src="" alt="Image Preview" style="display: none;"/>
                                 <div class="col-4 box-image">
                                 <div class="row">
                                     <img class="photo-publisher" src="{{$publisher->photo_path}}" alt="">

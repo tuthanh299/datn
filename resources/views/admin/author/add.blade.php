@@ -2,8 +2,10 @@
 <title>Thêm Tác Giả</title>
 @endsection @section('content')
 @section('css')
- 
-<link href="{{asset('admins/css/style.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
+@endsection
+@section('js')
+     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
    
@@ -32,7 +34,8 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh</label>
-                            <input type="file" class="form-control-file @error('photo_path') is-invalid @enderror" name="photo_path">
+                            <input type="file" onchange="previewImage(event)" class="form-control-file @error('photo_path') is-invalid @enderror" name="photo_path">
+                            <img id="preview" src="" alt="Image Preview" style="display: none;"/>
                             @error('photo_path')
                             <div class="alert alert-danger">{{$message}}</div>
                             @enderror
