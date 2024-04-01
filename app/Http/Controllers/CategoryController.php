@@ -6,9 +6,13 @@ use App\Components\Recusive;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Http\Requests\CategoryAddRequest;
+use App\Traits\DeleteModelTrait;
 
 class CategoryController extends Controller
 {
+    use DeleteModelTrait;
+
     private $category;
     public function __construct(Category $category)
     {
@@ -25,7 +29,7 @@ class CategoryController extends Controller
         $categories = $this->category->latest()->paginate(10);
         return view('admin.category.index', compact('categories'));
     }
-    public function store(Request $request)
+    public function store(CategoryAddRequest $request)
     {
         $this->category->create([
             'name' => $request->name,
@@ -41,13 +45,7 @@ class CategoryController extends Controller
         $categoryoption = $recusive->categoryRecusive($parentId);
         return $categoryoption;
     }   
-    // public function getCategorylist($parentId)
-    // {
-    //     $data = $this->category->all();
-    //     $recusive = new Recusive($data);
-    //     $categorylist = $recusive->categorylistRecusive($parentId);
-    //     return  view('patials.sidebar',compact('category'));
-    // }   
+    
 
     public function edit($id)
     {
@@ -68,8 +66,9 @@ class CategoryController extends Controller
     }
     public function delete($id)
     {
-        $this->category->find($id)->delete();
-        return redirect()->route('categories.index');
+        
+        return $this->deleteModelTrait($id,$this->category);
+
     }
     
 }

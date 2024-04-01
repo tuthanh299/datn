@@ -2,6 +2,9 @@
 @section('title')
 <title>Trang Chủ</title>
 @endsection 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
+@endsection
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -13,7 +16,6 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                 
                 <div class="col-md-12">
                     <div class="col-md-12">
                      Trang chủ

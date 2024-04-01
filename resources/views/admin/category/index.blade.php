@@ -1,8 +1,15 @@
 @extends('layouts.admin') @section('title')
 <title>Danh Mục Sản Phẩm</title>
 @endsection @section('content') 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
+@endsection
+@section('js')
+    <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
+    <script src="{{ asset('/admins/js/app.js') }}"></script>
+@endsection
 <div class="content-wrapper"> 
-    @include('partials.content-header',['name'=>'Category','key'=>'List']) 
+    @include('partials.content-header',['name'=>'Danh Mục Sản Phẩm','key'=>'/ Danh Sách']) 
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -13,7 +20,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                 
                                 <th scope="col">Tên Danh Mục</th>
                                 <th scope="col">Thao tác</th> 
                             </tr>
@@ -21,11 +28,11 @@
                         <tbody>
                             @foreach($categories as $category)
                             <tr>
-                                <th scope="row">{{$category->id}}</th>
+                                 
                                 <td class="name-category">{{ $category->name }}</td>
                                 <td>
                                     <a href="{{route('categories.edit', ['id' => $category->id])}}" class="btn btn-default">Edit</a>
-                                    <a href="{{route('categories.delete', ['id' => $category->id])}}" class="btn btn-danger">Delete</a>
+                                    <a data-url="{{ route('categories.delete', ['id' => $category->id]) }}" class="action_delete btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             @endforeach

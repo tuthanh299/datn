@@ -4,7 +4,7 @@
 
 <div class="content-wrapper">
 
-    @include('partials.content-header',['name'=>'Category','key'=>'Add'])
+    @include('partials.content-header',['name'=>'Danh Mục Sản Phẩm','key'=>'/ Thêm'])
 
     <div class="content">
         <div class="container-fluid">
@@ -14,7 +14,10 @@
                         @csrf
                         <div class="form-group">
                             <label>Tên Danh Mục</label>
-                            <input type="text" class="form-control" name="name" placeholder="Nhập tên danh mục">
+                            <input type="text" class="form-control" name="name" @error('name') is-invalid @enderror" placeholder="Nhập tên danh mục">
+                            @error('name')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Chọn Danh Mục Cha</label>

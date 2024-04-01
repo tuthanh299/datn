@@ -4,7 +4,7 @@
 
 <div class="content-wrapper">
 
-    @include('partials.content-header',['name'=>'Category','key'=>'Edit'])
+    @include('partials.content-header',['name'=>'Danh Mục Sản Phẩm','key'=>'/ Sửa'])
 
     <div class="content">
         <div class="container-fluid">
