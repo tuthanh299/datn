@@ -44,7 +44,8 @@
                               Danh Mục Sản Phẩm
                               <span class="right badge badge-danger">New</span>
                           </p>
-                      </a>
+                      </a> 
+                     
                   </li>
                 <ul class="nav nav-tree-view">
                     @foreach($categories as $category)

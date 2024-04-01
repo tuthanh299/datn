@@ -45,8 +45,8 @@ class CategoryController extends Controller
     // {
     //     $data = $this->category->all();
     //     $recusive = new Recusive($data);
-    //     $category = $recusive->categorylistRecusive($parentId);
-    //     return $category;
+    //     $categorylist = $recusive->categorylistRecusive($parentId);
+    //     return  view('patials.sidebar',compact('category'));
     // }   
 
     public function edit($id)

@@ -16,6 +16,16 @@
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
             <a
+                class="nav-link" target="_blank"
+                href="http://127.0.0.1:8000/homepage"
+                role="button"
+            >
+            <i class="fa-solid fa-reply"></i>
+            </a>
+             
+        </li>
+        <li class="nav-item">
+            <a
                 class="nav-link"
                 data-widget="navbar-search"
                 href="#"
