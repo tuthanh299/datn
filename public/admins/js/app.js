@@ -1,4 +1,4 @@
-/* Action delete */ 
+/* Action delete */
 function actionDelete(event) {
     event.preventDefault();
     let urlRequest = $(this).data("url");
@@ -35,13 +35,25 @@ function actionDelete(event) {
 $(function () {
     $(document).on("click", ".action_delete", actionDelete);
 });
+
 /* Preview Photo */
 function previewImage(event) {
     var reader = new FileReader();
-    reader.onload = function(){
-        var output = document.getElementById('preview');
+    reader.onload = function () {
+        var output = document.getElementById("preview");
         output.src = reader.result;
-        output.style.display = 'block';
+        output.style.display = "block";
     };
     reader.readAsDataURL(event.target.files[0]);
 }
+$(".select2_option").select2({
+    placeholder: "Chọn vai trò",
+});
+
+/* Validate name input */
+// document.querySelector('input[name="name"]').addEventListener('input', function (e) {
+//     e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s]/g, '');
+// });
+
+/* Select2 */
+/* Admin select roles */

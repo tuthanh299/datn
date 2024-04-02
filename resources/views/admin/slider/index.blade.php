@@ -20,7 +20,6 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                
                                 <th scope="col">Tên Slider</th>
                                 <th scope="col">Mô Tả</th>
                                 <th scope="col">Hình Ảnh</th>
@@ -39,7 +38,7 @@
                                 <td>
                                     <a href="{{ route('slider.edit', ['id' => $slider->id]) }}"
                                         class="btn btn-default">Edit</a>
-                                    <a href=" "data-url="{{ route('slider.delete', ['id' => $slider->id]) }}"
+                                    <a href=" " data-url="{{ route('slider.delete', ['id' => $slider->id]) }}"
                                         class="btn btn-danger action_delete">Delete</a>
                                 </td>
                             </tr>

@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController; 
+use App\Http\Controllers\SettingController; 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\AuthorController;
@@ -20,6 +22,34 @@ Route::get('/', function () {
 
 
 Route::prefix('admin')->group(function () {
+     
+    /* User */
+    Route::prefix('users')->group(function () {
+        Route::get('', [UserController::class, 'index'])->name('users.index');
+        Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/store', [UserController::class, 'store'])->name('users.store');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+        Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
+        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+    });
+    /* Setting */
+    Route::prefix('settings')->group(function () {
+        Route::get('', [SettingController::class, 'index'])->name('settings.index');
+        Route::get('/create', [SettingController::class, 'create'])->name('settings.create');
+        Route::post('/store', [SettingController::class, 'store'])->name('settings.store');
+        Route::get('/edit/{id}', [SettingController::class, 'edit'])->name('settings.edit');
+        Route::post('/update/{id}', [SettingController::class, 'update'])->name('settings.update');
+        Route::get('/delete/{id}', [SettingController::class, 'delete'])->name('settings.delete');
+    });
+    /* User */
+    Route::prefix('users')->group(function () {
+        Route::get('', [UserController::class, 'index'])->name('users.index');
+        Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/store', [UserController::class, 'store'])->name('users.store');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+        Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
+        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+    });
     /* Category */
     Route::prefix('categories')->group(function () {
         Route::get('', [CategoryController::class, 'index'])->name('categories.index');

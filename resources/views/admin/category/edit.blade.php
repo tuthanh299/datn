@@ -1,7 +1,12 @@
 @extends('layouts.admin') @section('title')
 <title>Sửa Danh Mục Sản Phẩm</title>
 @endsection @section('content')
-
+@section('css')
+    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
+@endsection
+@section('js')
+     <script src="{{ asset('/admins/js/app.js') }}"></script>
+@endsection
 <div class="content-wrapper">
 
     @include('partials.content-header',['name'=>'Danh Mục Sản Phẩm','key'=>'/ Sửa'])

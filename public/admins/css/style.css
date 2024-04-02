@@ -9,3 +9,5 @@
 /* BreadCrumb */
 .breadcrumb-item-none .breadcrumb-item+.breadcrumb-item::before{display: none;}
 .breadcrumb-item-none .breadcrumb-item+.breadcrumb-item {padding-left: 5px;}
+/* Admin Select option */
+.select2-container--default .select2-dropdown .select2-search__field:focus,.select2-container--default .select2-search--inline .select2-search__field:focus{border:unset;}

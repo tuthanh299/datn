@@ -73,10 +73,18 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="" class="nav-link">
+                      <a href="{{route('settings.index')}}" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
-                              Settings 
+                              Cấu Hình Chung
+                          </p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{route('users.index')}}" class="nav-link">
+                          <i class="nav-icon fas fa-th"></i>
+                          <p>
+                              Danh Sách Nhân Viên
                           </p>
                       </a>
                   </li>
