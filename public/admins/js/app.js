@@ -46,6 +46,24 @@ function previewImage(event) {
     };
     reader.readAsDataURL(event.target.files[0]);
 }
+class ImagePreviewer {
+    constructor(previewElementId) {
+        this.previewElement = document.getElementById(previewElementId);
+    }
+
+    previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = () => {
+            this.previewElement.src = reader.result;
+            this.previewElement.style.display = "block";
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+}
+
+var previewer1 = new ImagePreviewer('preview1');
+var previewer2 = new ImagePreviewer('preview2');
+
 $(".select2_option").select2({
     placeholder: "Chọn vai trò",
 });

@@ -1,28 +1,26 @@
 <?php
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController; 
-use App\Http\Controllers\SettingController; 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SliderController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
- 
-Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login'); 
+Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
 Route::post('/login', [AdminController::class, 'postLoginAdmin']);
- 
+
 Route::get('/home', function () {
     return view('home');
 })->middleware('auth');
 
 Route::get('/', function () {
     return view('homepage');
-}); 
-
+});
 
 Route::prefix('admin')->group(function () {
-     
+
     /* User */
     Route::prefix('users')->group(function () {
         Route::get('', [UserController::class, 'index'])->name('users.index');
@@ -33,14 +31,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
     });
     /* Setting */
-    Route::prefix('settings')->group(function () {
-        Route::get('', [SettingController::class, 'index'])->name('settings.index');
-        Route::get('/create', [SettingController::class, 'create'])->name('settings.create');
-        Route::post('/store', [SettingController::class, 'store'])->name('settings.store');
-        Route::get('/edit/{id}', [SettingController::class, 'edit'])->name('settings.edit');
-        Route::post('/update/{id}', [SettingController::class, 'update'])->name('settings.update');
-        Route::get('/delete/{id}', [SettingController::class, 'delete'])->name('settings.delete');
-    });
+    
+    Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
+
     /* User */
     Route::prefix('users')->group(function () {
         Route::get('', [UserController::class, 'index'])->name('users.index');
@@ -88,4 +82,3 @@ Route::prefix('admin')->group(function () {
     });
 
 });
-

@@ -17,7 +17,7 @@
         <li class="nav-item">
             <a
                 class="nav-link" target="_blank"
-                href="http://127.0.0.1:8000/homepage"
+                href="http://127.0.0.1:8000/"
                 role="button"
             >
             <i class="fa-solid fa-reply"></i>

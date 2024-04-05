@@ -10,62 +10,95 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-    @include('partials.content-header', ['name' => 'Settings', 'key' => 'List'])
+    @include('partials.content-header', ['name' => 'Settings', 'key' => ''])
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-
                 <div class="col-md-12">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Zalo</th>
-                                <th>Address</th>
-                                <th>Fanpage</th>
-                                <th>Website</th>
-                                <th>Link Map</th>
-                                <th>Iframe Map</th>
-                                <th>Logo Path</th>
-                                <th>Logo Name</th>
-                                <th>Favicon Path</th>
-                                <th>Favicon Name</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($settings as $setting)
-                                <tr>
-                                    <td>{{ $setting->id }}</td>
-                                    <td>{{ $setting->name }}</td>
-                                    <td>{{ $setting->description }}</td>
-                                    <td>{{ $setting->phone }}</td>
-                                    <td>{{ $setting->email }}</td>
-                                    <td>{{ $setting->zalo }}</td>
-                                    <td>{{ $setting->address }}</td>
-                                    <td>{{ $setting->fanpage }}</td>
-                                    <td>{{ $setting->website }}</td>
-                                    <td>{{ $setting->link_map }}</td>
-                                    <td>{{ $setting->iframe_map }}</td>
-                                    <td>{{ $setting->logo_path }}</td>
-                                    <td>{{ $setting->logo_name }}</td>
-                                    <td>{{ $setting->favicon_path }}</td>
-                                    <td>{{ $setting->favicon_name }}</td> 
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
+                    <form action="{{ route('setting.update') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>Favicon</label>
+                                <input type="file" onchange="previewer1.previewImage(event)"
+                                    class="form-control-file  " name="favicon_path">
+                                <img id="preview1" src="" alt="Image Preview" style="display: none;" />
+                                <div class="col-4 box-image">
+                                    <div class="row">
+                                        <img class="favicon-setting" src="{{ $settings->favicon_path }}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Logo</label>
+                                <input type="file" onchange="previewer2.previewImage(event)"
+                                    class="form-control-file  " name="logo_path">
+                                <img id="preview2" src="" alt="Image Preview" style="display: none;" />
+                                <div class="col-4 box-image">
+                                    <div class="row">
+                                        <img class="logo-setting" src="{{ $settings->logo_path }}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Tên doanh nghiệp</label>
+                                <input type="text" class="form-control" name="name"
+                                    placeholder="Nhập tên doanh nghiệp" value="{{ $settings->name }}">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Điện thoại</label>
+                                <input type="number" class="form-control" name="phone" placeholder="Nhập điện thoại"
+                                    value="{{ $settings->phone }}">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Mô tả</label>
+                                <textarea type="text" class="form-control" name="description" placeholder="Nhập mô tả"
+                                    value="">{{ $settings->description }}
+                                </textarea>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Zalo</label>
+                                <input type="number" class="form-control" name="zalo" placeholder="Nhập zalo"
+                                    value="{{ $settings->zalo }}">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Iframe google map</label>
+                                <textarea type="text" class="form-control" name="iframe_map" placeholder="Nhập iframe google map"
+                                    value="">{{ $settings->iframe_map }}
+                                </textarea>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="email" placeholder="Nhập email"
+                                    value="{{ $settings->email }}">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Địa chỉ</label>
+                                <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ"
+                                    value="{{ $settings->address }}">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Fanpage</label>
+                                <input type="text" class="form-control" name="fanpage" placeholder="Nhập fanpage"
+                                    value="{{ $settings->fanpage }}">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Link google map</label>
+                                <input type="text" class="form-control" name="link_map"
+                                    placeholder="Nhập link google map" value="{{ $settings->link_map }}">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Website</label>
+                                <input type="text" class="form-control" name="website" placeholder="Nhập website"
+                                    value="{{ $settings->website }}">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
 
 @endsection
