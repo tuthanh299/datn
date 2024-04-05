@@ -50,9 +50,7 @@ class SettingController extends Controller
             if (!empty($dataFaviconSetting)) {
                 $dataUpdate['favicon_name'] = $dataFaviconSetting['file_name'];
                 $dataUpdate['favicon_path'] = $dataFaviconSetting['file_path'];
-            }       
-            // dd($request->file('favicon_path'));   
-            // dd($request->file('logo_path'));   
+            }        
             $setting->update($dataUpdate);
             return redirect()->route('setting.index');
         } catch (\Exception $exception) {
