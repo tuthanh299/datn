@@ -17,13 +17,15 @@ class UsersSeeder extends Seeder
         User::factory()->create([
             'name' => 'Long',
             'email' => 'long@example.com',
-            'password' => '123456@'
+            'password' => '123456@',
+            'phone' => '0909123456'
         ]);
 
         User::factory()->create([
             'name' => 'Tú',
             'email' => 'tu@example.com',
-            'password' => '123456@'
+            'password' => '123456@',
+            'phone' => '0909123456',           
         ]);
     }
 }

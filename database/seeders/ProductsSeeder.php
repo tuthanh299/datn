@@ -16,7 +16,7 @@ class ProductsSeeder extends Seeder
         Product::create([
             "category_id"=> "KNS",
             "name"=> "Đắc nhân tâm",
-            "desc"=> "Mô tả",
+            "description"=> "Mô tả",
             "content"=> "Nội Dung",
             "slug"=> "",
             "photo"=> "",
@@ -34,7 +34,7 @@ class ProductsSeeder extends Seeder
         Product::create([
             "category_id"=>"GK",
             "name"=> "Âm Nhạc Và Mỹ Thuật Lớp 6",
-            "desc"=> "Mô tả",
+            "description"=> "Mô tả",
             "content"=> "Nội Dung",
             "slug"=> "",
             "photo"=> "an-v6.jpg",
@@ -52,7 +52,7 @@ class ProductsSeeder extends Seeder
         Product::create([
             "category_id"=>"GK",
             "name"=> "Âm Nhạc Và Mỹ Thuật Lớp 7",
-            "desc"=> "Mô tả",
+            "description"=> "Mô tả",
             "content"=> "Nội Dung",
             "slug"=> "",
             "photo"=> "an-v7.jpg",
@@ -70,7 +70,7 @@ class ProductsSeeder extends Seeder
         Product::create([
             "category_id"=>"TK",
             "name"=> "50 Đề Minh Hoạ 2023 Toán Học 12",
-            "desc"=> "Mô tả",
+            "description"=> "Mô tả",
             "content"=> "Nội Dung",
             "slug"=> "",
             "photo"=> "50dmh-t12.jpg",

@@ -2,6 +2,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
@@ -34,16 +35,6 @@ Route::prefix('admin')->group(function () {
     
     Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
     Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
-
-    /* User */
-    Route::prefix('users')->group(function () {
-        Route::get('', [UserController::class, 'index'])->name('users.index');
-        Route::get('/create', [UserController::class, 'create'])->name('users.create');
-        Route::post('/store', [UserController::class, 'store'])->name('users.store');
-        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-        Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
-        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
-    });
     /* Category */
     Route::prefix('categories')->group(function () {
         Route::get('', [CategoryController::class, 'index'])->name('categories.index');
@@ -80,5 +71,12 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', [PublisherController::class, 'update'])->name('publisher.update');
         Route::get('/delete/{id}', [PublisherController::class, 'delete'])->name('publisher.delete');
     });
-
+    /*Invoice Import*/
+    /*Route::prefix('invoice-import')->group(function() {
+        Route::get('',[InvoiceImportController::class, 'index'])->name('import.index');
+    });*/
+    /*Products*/
+    Route::prefix('product')->group(function() {
+        Route::get('',[ProductController::class, 'index'])->name('product.index');
+    });
 });
