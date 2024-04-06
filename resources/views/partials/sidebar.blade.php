@@ -46,51 +46,49 @@
                           </p>
                       </a> 
                      
-                  </li>
-                <ul class="nav nav-tree-view">
-                    @foreach($categories as $category)
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            {{$category->name}}
-                        </a>
-                    </li>
-                    @endforeach
-                </ul>
-
+                  </li> 
+                   
                   <li class="nav-item">
-                      <a href=" " class="nav-link">
+                      <a href="{{route('slider.index')}}" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
-                              Sản phẩm
-
+                              Slider 
                           </p>
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="  " class="nav-link">
+                      <a href="{{route('author.index')}}" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
-                              Slider
-
+                              Tác giả
                           </p>
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="  " class="nav-link">
+                      <a href="{{route('publisher.index')}}" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
-                              Settings 
+                            Nhà Xuất Bản 
                           </p>
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href=" " class="nav-link">
+                      <a href="{{route('setting.index')}}" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
-                              Danh sách nhân viên
+                              Cấu Hình Chung
                           </p>
                       </a>
                   </li>
+                  <li class="nav-item">
+                      <a href="{{route('users.index')}}" class="nav-link">
+                          <i class="nav-icon fas fa-th"></i>
+                          <p>
+                              Danh Sách Nhân Viên
+                          </p>
+                      </a>
+                  </li>
+                   
               </ul>
           </nav>
 
