@@ -17,7 +17,7 @@ Route::get('/home', function () {
 
 Route::get('/', function () {
     return view('homepage');
-});
+})->name('homepage');
 
 Route::prefix('admin')->group(function () {
 
