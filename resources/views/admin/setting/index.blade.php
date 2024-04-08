@@ -1,5 +1,5 @@
 @extends('layouts.admin') @section('title')
-    <title>Settings</title>
+    <title>Cấu hình chung</title>
     @endsection @section('content')
 
 @section('css')
@@ -10,7 +10,7 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-    @include('partials.content-header', ['name' => 'Settings', 'key' => ''])
+    @include('partials.content-header', ['name' => 'Cấu hình chung', 'key' => ''])
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -93,7 +93,7 @@
                                     value="{{ $settings->website }}">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>
             </div>

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('fanpage');
             $table->string('website');
             $table->string('link_map');
-            $table->string('iframe_map');
+            $table->mediumText('iframe_map');
             $table->string('logo_path');
             $table->string('logo_name');
             $table->string('favicon_path');

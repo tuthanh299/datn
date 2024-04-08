@@ -24,12 +24,12 @@
                         </div>
                         <div class="form-group">
                             <label>Chọn Danh Mục Cha</label>
-                            <select class="form-control" name="parent_id">
+                            <select class="form-control select-category-parent" name="parent_id">
                                 <option value="0">Chọn Danh Mục Cha</option>
                                 {!! $categoryoption !!}
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>
             </div>

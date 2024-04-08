@@ -9,5 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Author extends Model
 {
     use SoftDeletes;
-    protected $guarded =[];
+    protected $fillable =['name','description','photo_path','photo_name'];
+
 }

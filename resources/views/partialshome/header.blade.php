@@ -6,9 +6,7 @@
                     <a href target="_blank">
                         <i class="fa-solid fa-location-dot"></i>
                         Địa chỉ:
-                        16-18 Hai Ba Trung Street, Ben Nghe Ward,
-                        District 1,Ho
-                        Chi Minh City
+                        65 Đ. Huỳnh Thúc Kháng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh
                     </a>
                 </div>
                 <div class="header-top-social">

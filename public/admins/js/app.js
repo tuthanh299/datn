@@ -64,9 +64,18 @@ class ImagePreviewer {
 var previewer1 = new ImagePreviewer('preview1');
 var previewer2 = new ImagePreviewer('preview2');
 
-$(".select2_option").select2({
-    placeholder: "Chọn vai trò",
-});
+// $(".select2_option").select2({
+//     placeholder: "Chọn vai trò",
+// });
+
+
+ 
+ClassicEditor
+		.create( document.querySelector( '#editor' ) )
+		.catch( error => {
+			console.error( error );
+		} );
+
 
 /* Validate name input */
 // document.querySelector('input[name="name"]').addEventListener('input', function (e) {
