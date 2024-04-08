@@ -4,11 +4,11 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
+    <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
 @endsection
 @section('js')
+    <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
-
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
@@ -21,23 +21,21 @@
                         @csrf
                         <div class="form-group">
                             <label>Tiêu đề</label>
-                            <input type="text" value="{{$staticnews->name}} " class="form-control" name="name" placeholder="Nhập tiêu đề">
+                            <input type="text" value="{{ $staticnews->name }} " class="form-control" name="name"
+                                placeholder="Nhập tiêu đề">
                         </div>
-                         
-                            <div class="form-group">
-                                <label>Mô tả</label>
-                                <textarea class="form-control  " name="description"
-                                    id="editor" rows="3">{{$staticnews->description}}
+
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <textarea class="form-control summernote " name="description" rows="3">{{ $staticnews->description }}
                                      </textarea>
-                            </div>
-                         
-                            <div class="form-group">
-                                <label>Nội dung</label>
-                                <textarea class="form-control  " name="content"
-                                      rows="3">{{$staticnews->content}}
+                        </div>
+                        <div class="form-group">
+                            <label>Nội dung</label>
+                            <textarea class="form-control summernote " name="content" rows="3">{{ $staticnews->content }}
                                      </textarea>
-                            </div>
-                         
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>

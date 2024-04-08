@@ -1,11 +1,13 @@
 @extends('layouts.admin') @section('title')
     <title>Cấu hình chung</title>
     @endsection @section('content')
-
 @section('css')
+    <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
+    <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
+
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
@@ -52,8 +54,7 @@
                             </div>
                             <div class="form-group col-6">
                                 <label>Mô tả</label>
-                                <textarea type="text" class="form-control" name="description" placeholder="Nhập mô tả"
-                                    value="">{{ $settings->description }}
+                                <textarea type="text" class="form-control" name="description" placeholder="Nhập mô tả" value="">{{ $settings->description }}
                                 </textarea>
                             </div>
                             <div class="form-group col-6">
@@ -63,7 +64,7 @@
                             </div>
                             <div class="form-group col-6">
                                 <label>Iframe google map</label>
-                                <textarea type="text" class="form-control" name="iframe_map" placeholder="Nhập iframe google map"
+                                <textarea type="text" class="form-control summernote" name="iframe_map" placeholder="Nhập iframe google map"
                                     value="">{{ $settings->iframe_map }}
                                 </textarea>
                             </div>
@@ -100,5 +101,4 @@
         </div>
     </div>
 </div>
-
 @endsection

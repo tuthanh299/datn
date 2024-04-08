@@ -70,11 +70,9 @@ var previewer2 = new ImagePreviewer('preview2');
 
 
  
-ClassicEditor
-		.create( document.querySelector( '#editor' ) )
-		.catch( error => {
-			console.error( error );
-		} );
+$(document).ready(function() {
+    $('.summernote').summernote();
+  });
 
 
 /* Validate name input */

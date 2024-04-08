@@ -14,7 +14,6 @@
 $cssFiles = glob('vendors/mdblogin/css/*.css');
 foreach ($cssFiles as $file) {
     echo '<link rel="stylesheet" type="text/css" href="' . $file . '">';
-
 }
 ?>
     <?php
