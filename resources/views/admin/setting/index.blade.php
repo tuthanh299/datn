@@ -1,16 +1,18 @@
 @extends('layouts.admin') @section('title')
-    <title>Settings</title>
+    <title>Cấu hình chung</title>
     @endsection @section('content')
-
 @section('css')
+    <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
+    <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
+
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-    @include('partials.content-header', ['name' => 'Settings', 'key' => ''])
+    @include('partials.content-header', ['name' => 'Cấu hình chung', 'key' => ''])
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -52,8 +54,7 @@
                             </div>
                             <div class="form-group col-6">
                                 <label>Mô tả</label>
-                                <textarea type="text" class="form-control" name="description" placeholder="Nhập mô tả"
-                                    value="">{{ $settings->description }}
+                                <textarea type="text" class="form-control" name="description" placeholder="Nhập mô tả" value="">{{ $settings->description }}
                                 </textarea>
                             </div>
                             <div class="form-group col-6">
@@ -63,7 +64,7 @@
                             </div>
                             <div class="form-group col-6">
                                 <label>Iframe google map</label>
-                                <textarea type="text" class="form-control" name="iframe_map" placeholder="Nhập iframe google map"
+                                <textarea type="text" class="form-control summernote" name="iframe_map" placeholder="Nhập iframe google map"
                                     value="">{{ $settings->iframe_map }}
                                 </textarea>
                             </div>
@@ -93,12 +94,11 @@
                                     value="{{ $settings->website }}">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection

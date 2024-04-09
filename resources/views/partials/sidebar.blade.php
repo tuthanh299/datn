@@ -42,7 +42,7 @@
                           <i class="nav-icon fas fa-th"></i>
                           <p>
                               Danh Mục Sản Phẩm
-                              <span class="right badge badge-danger">New</span>
+                              
                           </p>
                       </a> 
                      
@@ -94,6 +94,22 @@
                             Hoá Đơn Bán
                         </p>
                     </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('users.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Hoá Đơn Bán
+                        </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{route('staticnews.index')}}" class="nav-link">
+                          <i class="nav-icon fas fa-th"></i>
+                          <p>
+                             Bài viết giới thiệu
+                          </p>
+                      </a>
                   </li>
                   <li class="nav-item">
                       <a href="{{route('users.index')}}" class="nav-link">

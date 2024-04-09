@@ -16,7 +16,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('users.create') }} " class="btn btn-success float-right m-2">Add</a>
+                    <a href="{{ route('users.create') }} " class="btn btn-success float-right m-2">Thêm</a>
                 </div>
                 <div class="col-md-12">
                     <table class="table">
@@ -36,9 +36,9 @@
 
                                     <td>
                                         <a href="{{ route('users.edit', ['id' => $user->id]) }} "
-                                            class="btn btn-default">Edit</a>
+                                            class="btn btn-default">Sửa</a>
                                         <a href="" data-url="{{ route('users.delete', ['id' => $user->id]) }}"
-                                            class="btn btn-danger action_delete">Delete</a>
+                                            class="btn btn-danger action_delete">Xóa</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -11,14 +11,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <?php
-$cssFiles = glob('mdblogin/css/*.css');
+$cssFiles = glob('vendors/mdblogin/css/*.css');
 foreach ($cssFiles as $file) {
     echo '<link rel="stylesheet" type="text/css" href="' . $file . '">';
-
 }
 ?>
     <?php
-$jsFiles = glob(public_path('mdblogin/js/*.js'));
+$jsFiles = glob(public_path('vendors/mdblogin/js/*.js'));
 foreach ($jsFiles as $file) {
     $file = str_replace(public_path(), '', $file);
     echo '<script src="' . $file . '"></script>';

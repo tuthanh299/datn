@@ -7,6 +7,7 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StaticNewsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
@@ -31,10 +32,22 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
     });
-    /* Setting */
-    
+    /* Setting */    
     Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
     Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
+    /* Staticnews */    
+    Route::get('staticnews', [StaticNewsController::class, 'index'])->name('staticnews.index');
+    Route::post('staticnews/update', [StaticNewsController::class, 'update'])->name('staticnews.update');
+
+    /* User */
+    Route::prefix('users')->group(function () {
+        Route::get('', [UserController::class, 'index'])->name('users.index');
+        Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/store', [UserController::class, 'store'])->name('users.store');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+        Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
+        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+    });
     /* Category */
     Route::prefix('categories')->group(function () {
         Route::get('', [CategoryController::class, 'index'])->name('categories.index');

@@ -26,7 +26,7 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         try {
-            // Lấy bản ghi đầu tiên
+           
             $setting = $this->setting->first();
 
             $dataUpdate = [

@@ -2,9 +2,13 @@
     <title>Sửa Nhà Xuất Bản</title>
     @endsection @section('content')
 @section('css')
+    <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
+    <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
+
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
@@ -30,7 +34,7 @@
                         <div class="form-group">
                             <label>Mô tả</label>
 
-                            <textarea name="description" class="form-control @error('description') is-invalid @enderror" rows="4">{{ $publisher->description }}</textarea>
+                            <textarea name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="4">{{ $publisher->description }}</textarea>
                             @error('description')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -49,7 +53,7 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>
             </div>
@@ -59,6 +63,4 @@
     </div>
 
 </div>
-
-
 @endsection

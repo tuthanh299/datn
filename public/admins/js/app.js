@@ -64,9 +64,16 @@ class ImagePreviewer {
 var previewer1 = new ImagePreviewer('preview1');
 var previewer2 = new ImagePreviewer('preview2');
 
-$(".select2_option").select2({
-    placeholder: "Chọn vai trò",
-});
+// $(".select2_option").select2({
+//     placeholder: "Chọn vai trò",
+// });
+
+
+ 
+$(document).ready(function() {
+    $('.summernote').summernote();
+  });
+
 
 /* Validate name input */
 // document.querySelector('input[name="name"]').addEventListener('input', function (e) {

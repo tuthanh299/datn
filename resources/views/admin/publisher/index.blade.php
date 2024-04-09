@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{route('publisher.create')}} " class="btn btn-success float-right m-2">Add</a>
+                    <a href="{{route('publisher.create')}} " class="btn btn-success float-right m-2">Thêm</a>
                 </div>
                 <div class="col-md-12">
                     <table class="table">
@@ -40,7 +40,7 @@
                                     <a href="{{ route('publisher.edit', ['id' => $publisher->id]) }}"
                                         class="btn btn-default">Edit</a>
                                     <a href=" "data-url="{{ route('publisher.delete', ['id' => $publisher->id]) }}"
-                                        class="btn btn-danger action_delete">Delete</a>
+                                        class="btn btn-danger action_delete">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach
