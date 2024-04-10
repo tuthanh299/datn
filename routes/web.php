@@ -2,15 +2,22 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StaticNewsController;
+use App\Http\Controllers\Auth\ProviderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
 Route::post('/login', [AdminController::class, 'postLoginAdmin']);
+
+Route::get('logout', [AdminController::class, 'logoutAdmin'])->name('logout');
+
+Route::get('/login', [HomePageController::class, 'login'])->name('user.login');
+Route::get('/register', [HomePageController::class, 'register'])->name('user.register');
 
 Route::get('/home', function () {
     return view('home');
@@ -18,7 +25,7 @@ Route::get('/home', function () {
 
 Route::get('/', function () {
     return view('homepage');
-});
+})->name('homepage');
 
 Route::prefix('admin')->group(function () {
 
@@ -85,3 +92,8 @@ Route::prefix('admin')->group(function () {
     });
 
 });
+
+Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect'])->name('redirect');
+Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback'])->name('callback');
+
+

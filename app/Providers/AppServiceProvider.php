@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       Schema::defaultStringLength(length:191);
+       Schema::defaultStringLength(length:255);
        Blade::directive('convert', function ($m) {
         return "<?= number_format($m, '2' ,',','.') ?>";
        });

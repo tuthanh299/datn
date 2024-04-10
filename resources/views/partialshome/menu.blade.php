@@ -76,7 +76,7 @@
                                             <div class="menu-bottom-account-hidden-btn">
                                                 <div class="flex-menu-bottom-account-hidden-btn">
                                                     <div class="menu-bottom-account-hidden-login">
-                                                        <a href="login">Đăng
+                                                        <a href="{{route('user.login')}}">Đăng
                                                             nhập</a>
                                                     </div>
                                                     <div class="menu-bottom-account-hidden-register">

@@ -27,4 +27,9 @@ class AdminController extends Controller
             ]);
         }
     }
+
+    public function logoutAdmin()
+    {
+        return auth()->logout();
+    }
 }
