@@ -70,5 +70,10 @@ class CategoryController extends Controller
         return $this->deleteModelTrait($id,$this->category);
 
     }
+
+    public function slide() {
+        $categories = $this->category->latest()->paginate(10);
+        return view('sidebar', compact('categories'));
+    }
     
 }

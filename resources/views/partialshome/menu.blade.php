@@ -2,13 +2,13 @@
     <div class="wrap-content">
         <ul class="menu-main">
             <li>
-                <a href="danh-muc-san-pham" title="Danh mục" title="Danh mục sản phẩm">
-                    Danh mục sản phẩm
+                <a href="{{route('homepage')}}" title="Trang chủ" title="Trang chủ">
+                    Trang chủ
                 </a>
             </li>
             <li>
-                <a href="trang-chu" title="Trang chủ" title="Trang chủ">
-                    Trang chủ
+                <a href="danh-muc-san-pham" title="Danh mục" title="Danh mục sản phẩm">
+                    Danh mục sản phẩm
                 </a>
             </li>
             <li>

@@ -47,7 +47,14 @@
                       </a> 
                      
                   </li> 
-                   
+                  <li class="nav-item">
+                    <a href="{{route('product.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Sản Phẩm
+                        </p>
+                    </a>
+                  </li>
                   <li class="nav-item">
                       <a href="{{route('slider.index')}}" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
@@ -79,6 +86,22 @@
                               Cấu Hình Chung
                           </p>
                       </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('users.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Hoá Đơn Bán
+                        </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('users.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Hoá Đơn Bán
+                        </p>
+                    </a>
                   </li>
                   <li class="nav-item">
                       <a href="{{route('staticnews.index')}}" class="nav-link">

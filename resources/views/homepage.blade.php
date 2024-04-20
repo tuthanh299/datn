@@ -1,6 +1,10 @@
 @extends('layoutshome.index') 
 @section('title')
+@extends('layoutshome.index') 
+@section('title')
 <title>Trang Chủ</title>
+@endsection 
+@section('content')
 @endsection 
 @section('content')
 <!-- Content Wrapper. Contains page content -->

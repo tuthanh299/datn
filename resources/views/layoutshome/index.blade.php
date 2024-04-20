@@ -12,7 +12,7 @@
         @include('partialshome.header')
         <!-- Menu -->
         @include('partialshome.menu')
-
+        <!-- Content -->
         @yield('content')
 
         <!-- Footer -->
