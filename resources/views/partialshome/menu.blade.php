@@ -53,6 +53,7 @@
                     <div class="menu-user-option">
                         <div class="menu-bottom-personalized">
                             <div class="flex-menu-bottom-personalized">
+                                @if ($user == null)
                                 <div class="menu-bottom-account-positon">
                                     <div id="open-user-btn" class="menu-bottom-account">
                                         <div class="menu-bottom-account-icon">
@@ -66,7 +67,6 @@
                                         <div class="menu-bottom-account-hidden-cover">
                                             <div class="flex-menu-bottom-account-hidden-cover">
                                                 <div class="menu-bottom-account-hidden-cover-text">
-                                                    Tài khoản của tôi
                                                 </div>
                                                 <div id="close-user-btn"
                                                     class="menu-bottom-account-hidden-cover-close-btn">
@@ -88,42 +88,80 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="menu-bottom-cart-icon-position">
-                                    <div id="open-cart-list" class="menu-bottom-cart">
-                                        <div class="menu-bottom-cart-icon">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                            <div class="menu-bottom-cart-num">
-                                                0
-                                            </div>
+                                @else
+                                <div class="menu-bottom-account-positon">
+                                    <div id="open-user-btn" class="menu-bottom-account">
+                                        <div class="menu-bottom-account-icon">
+                                            <i class="fa-solid fa-user"></i>
                                         </div>
-                                        <div class="menu-bottom-cart-text">
-                                            Giỏ hàng
+                                        <div class="menu-bottom-account-text">
+                                            Xin chào {{$user->name}}
                                         </div>
                                     </div>
-                                    <div class="menu-bottom-cart-icon-hidden">
-                                        <div class="flex-menu-bottom-cart-icon-hidden-cover">
-                                            <div class="menu-bottom-cart-icon-hidden-cover-text">
-                                                Sản phẩm trong giỏ hàng
+                                    <div class="menu-bottom-account-hidden">
+                                        <div class="menu-bottom-account-hidden-cover">
+                                            <div class="flex-menu-bottom-account-hidden-cover">
+                                                <div class="menu-bottom-account-hidden-cover-text">
+                                                    Tài khoản của tôi
+                                                </div>
+                                                <div id="close-user-btn"
+                                                    class="menu-bottom-account-hidden-cover-close-btn">
+                                                    <i class="fa-solid fa-circle-xmark"></i>
+                                                </div>
                                             </div>
-                                            <div id="close-cart-btn"
-                                                class="menu-bottom-cart-icon-hidden-cover-close-btn">
-                                                <i class="fa-solid fa-circle-xmark"></i>
-                                            </div>
-                                        </div>
-                                        <div class="menu-bottom-cart-list">
-                                            <!-- If here -->
-                                            <div class="menu-bottom-cart-list-scroll">
-
-                                            </div>
-
-                                            <div class="menu-bottom-cart-list-none">
-                                                Bạn chưa có sản phẩm nào
-                                                trong giỏ hàng!
+                                            <div class="menu-bottom-account-hidden-btn">
+                                                <div class="flex-menu-bottom-account-hidden-btn">
+                                                    <div class="menu-bottom-account-hidden-login">
+                                                        <a href="#">Thông tin</a>
+                                                    </div>
+                                                    <div class="menu-bottom-account-hidden-register">
+                                                        <a href="{{route('userlogout')}}">Đăng xuất</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+
+                                <a href="#">
+                                    <div class="menu-bottom-cart-icon-position">
+                                        <div id="open-cart-list" class="menu-bottom-cart">
+                                            <div class="menu-bottom-cart-icon">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <div class="menu-bottom-cart-num">
+                                                    0
+                                                </div>
+                                            </div>
+                                            <div class="menu-bottom-cart-text">
+                                                Giỏ hàng
+                                            </div>
+                                        </div>
+                                        <div class="menu-bottom-cart-icon-hidden">
+                                            <div class="flex-menu-bottom-cart-icon-hidden-cover">
+                                                <div class="menu-bottom-cart-icon-hidden-cover-text">
+                                                    Sản phẩm trong giỏ hàng
+                                                </div>
+                                                <div id="close-cart-btn"
+                                                    class="menu-bottom-cart-icon-hidden-cover-close-btn">
+                                                    <i class="fa-solid fa-circle-xmark"></i>
+                                                </div>
+                                            </div>
+                                            <div class="menu-bottom-cart-list">
+                                                <!-- If here -->
+                                                <div class="menu-bottom-cart-list-scroll">
+    
+                                                </div>
+    
+                                                <div class="menu-bottom-cart-list-none">
+                                                    Bạn chưa có sản phẩm nào
+                                                    trong giỏ hàng!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
                             </div>
                         </div>
                     </div>

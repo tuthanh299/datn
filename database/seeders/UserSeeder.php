@@ -25,6 +25,13 @@ class UserSeeder extends Seeder
             'address' => 'Tp. Hồ Chí Minh',
             'email' => '0306201299@caothang.edu.vn',
             'password' => Hash::make('123456'),
+            'provider' => '',
+            'provider_id' => '',
+            'provider_token' => '',
+            'remember_token' => '',
+            'email_verified_at' => null,
+            'created_at' => now(),
+            'updated_at' => null,
         ]);
 
         User::factory()->create([
@@ -33,6 +40,13 @@ class UserSeeder extends Seeder
             'address' => 'Tp. Hồ Chí Minh',
             'email' => '0306201253@caothang.edu.vn',
             'password' => Hash::make('123456'),
+            'provider' => '',
+            'provider_id' => '',
+            'provider_token' => '',
+            'remember_token' => '',
+            'email_verified_at' => null,
+            'created_at' => now(),
+            'updated_at' => null,
         ]);
     }
 }

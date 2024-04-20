@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Đăng Nhập</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -35,7 +35,7 @@ foreach ($jsFiles as $file) {
                         class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form id="login-form" class="form" action="" method="post">
+                    <form id="login-form" class="form" action="{{route('userlogin.post')}}" method="post">
                         @csrf
                         <div class="divider d-flex align-items-center my-4">
                             <p class="text-center fw-bold mx-3 mb-0">Đăng nhập</p>
@@ -70,7 +70,7 @@ foreach ($jsFiles as $file) {
                         </div>
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <input type="submit" id="remember-me" name="remember_me" class="btn btn-primary btn-lg"
-                                value="Login" style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                                value="Đăng nhập" style="padding-left: 2.5rem; padding-right: 2.5rem;">
                             <p class="small fw-bold mt-2 pt-1 mb-0">Không có tài khoản? <a href="#!"
                                     class="link-danger">Đăng ký</a></p>
                         </div>

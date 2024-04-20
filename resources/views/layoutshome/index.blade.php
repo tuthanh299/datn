@@ -12,10 +12,8 @@
         @include('partialshome.header')
         <!-- Menu -->
         @include('partialshome.menu')
-        <!-- Slider -->
-        @include('partialshome.slider')
-        <!-- Content -->
-        @include('partialshome.content')
+
+        @yield('content')
 
         <!-- Footer -->
         @include('partialshome.footer')

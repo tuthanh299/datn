@@ -9,22 +9,40 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\Auth\ProviderController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
-Route::post('/login', [AdminController::class, 'postLoginAdmin']);
+Route::post('/login', [AdminController::class, 'postLoginAdmin'])->name('adminlogin.post');
 
 Route::get('logout', [AdminController::class, 'logoutAdmin'])->name('logout');
 
 Route::get('/login', [HomePageController::class, 'login'])->name('user.login');
+Route::post('login', [HomePageController::class, 'postLogin'])->name('userlogin.post');
 Route::get('/register', [HomePageController::class, 'register'])->name('user.register');
+Route::post('register', [HomePageController::class, 'postRegister'])->name('userregister.post');
+
+Route::get('logout', function() {
+    Auth::logout();
+    return redirect('/');
+})->name('userlogout');
 
 Route::get('/home', function () {
     return view('home');
 })->middleware('auth');
 
 Route::get('/', function () {
-    return view('homepage');
+    if (Auth::check()) 
+    {
+        $user = Auth::user();
+        return view('homepage', compact('user'));
+    }
+    else 
+    {
+        $user = null;
+        return view('homepage', compact('user'));
+    }
+
 })->name('homepage');
 
 Route::prefix('admin')->group(function () {
