@@ -124,13 +124,13 @@
                                 </div>
                                 @endif
 
-                                <a href="#">
+                                <a href="{{route('cart.index')}}">
                                     <div class="menu-bottom-cart-icon-position">
                                         <div id="open-cart-list" class="menu-bottom-cart">
                                             <div class="menu-bottom-cart-icon">
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                                 <div class="menu-bottom-cart-num">
-                                                    0
+                                                    {{count($cart1s)}}
                                                 </div>
                                             </div>
                                             <div class="menu-bottom-cart-text">

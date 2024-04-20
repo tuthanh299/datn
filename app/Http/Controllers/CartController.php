@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -24,7 +25,17 @@ class CartController extends Controller
                 'quantity' => 1
             ],
         ];
-        return view('cart.index', compact('carts', 'cart1s'));
+        if (Auth::check()) 
+        {
+            $user = Auth::user();
+            return view('cart.index', compact('carts', 'cart1s', 'user'));
+        }
+        else 
+        {
+            $user = null;
+            return view('cart.index', compact('carts', 'cart1s', 'user'));
+        }
+        
         //dd($carts, $cart1s);
     }
 }

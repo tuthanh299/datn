@@ -33,15 +33,30 @@ Route::get('/home', function () {
 })->middleware('auth');
 
 Route::get('/', function () {
+    $cart1s = [
+        [
+            'id' => 1,
+            'name' => 'Product 1',
+            'price' => 1000,
+            'quantity' => 1
+        ],
+        [
+            'id' => 2,
+            'name' => 'Product 2',
+            'price' => 1000,
+            'quantity' => 1
+        ],
+    ];
+
     if (Auth::check()) 
     {
         $user = Auth::user();
-        return view('homepage', compact('user'));
+        return view('homepage', compact('user', 'cart1s'));
     }
     else 
     {
         $user = null;
-        return view('homepage', compact('user'));
+        return view('homepage', compact('user', 'cart1s'));
     }
 
 })->name('homepage');
@@ -114,5 +129,7 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect'])->name('redirect');
 Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback'])->name('callback');
+
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 
 

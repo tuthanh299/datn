@@ -11,7 +11,7 @@
     </div>
     <form action="#" method="POST">
         @csrf
-        @if ($carts == null)
+        @if ($cart1s == null)
             <div>Không có sản phẩm nào trong giỏ hàng</div>
             <a href="{{ route('homepage') }}" class="btn btn-primary">Tiếp tục mua hàng</a>
         @else
@@ -34,7 +34,8 @@
                     <td>
                         <input type="number" name="quantity" value="{{ $cart['quantity'] }}">
                     </td>
-                    <td>@convert($cart['price'] * $cart['quantity'])</td>   
+                    <td>@convert($cart['price'] * $cart['quantity'])</td>
+                    <td><a href="#" class="btn btn-danger">Xóa</a></td>
                 </tr>
                 @endforeach
             </tbody>            
