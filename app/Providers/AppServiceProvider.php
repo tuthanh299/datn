@@ -20,9 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       Schema::defaultStringLength(length:191);
-       Blade::directive('convert', function ($money) {
-        return "<?php echo number_format($money, '2'); ?>";
-    });
+        Blade::directive('convert', function ($money) {
+            return "<?php echo number_format($money, '0', '', '.'); ?>";
+        });
+        Schema::defaultStringLength(length:255);
     }
 }

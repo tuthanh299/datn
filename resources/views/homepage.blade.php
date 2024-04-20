@@ -1,6 +1,8 @@
- @extends('layoutshome.index') @section('title')
+@extends('layoutshome.index') 
+@section('title')
 <title>Trang Chủ</title>
-@endsection @section('content')
+@endsection 
+@section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -8,20 +10,8 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                 
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                     Trang chủ
-                </div>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
-    </div>
+    @include('partialshome.slider')
+    @include('partialshome.content')
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->

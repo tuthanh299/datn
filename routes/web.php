@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
@@ -93,3 +94,5 @@ Route::prefix('admin')->group(function () {
         Route::get('',[ProductController::class, 'index'])->name('product.index');
     });
 });
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
