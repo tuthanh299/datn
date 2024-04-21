@@ -1,3 +1,20 @@
+function isExist(ele) {
+	return ele.length;
+}
+
+/* PreviewImage */
+function previewImage(inputId, previewId) {
+    const fileInput = document.getElementById(inputId);
+    const output = document.getElementById(previewId);
+
+    fileInput.addEventListener('change', function(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            output.innerHTML = '<img class="rounded" src="' + reader.result + '" alt="Preview Photo">';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    });
+}
 /* Action delete */
 function actionDelete(event) {
     event.preventDefault();
@@ -31,54 +48,25 @@ function actionDelete(event) {
         }
     });
 }
-
 $(function () {
     $(document).on("click", ".action_delete", actionDelete);
 });
-
-/* Preview Photo */
-function previewImage(event) {
-    var reader = new FileReader();
-    reader.onload = function () {
-        var output = document.getElementById("preview");
-        output.src = reader.result;
-        output.style.display = "block";
-    };
-    reader.readAsDataURL(event.target.files[0]);
+/* Select  Roles User */
+function initializeSelect2() {
+    $(".select2_option").select2({
+        placeholder: "Chọn vai trò",
+    });
 }
-class ImagePreviewer {
-    constructor(previewElementId) {
-        this.previewElement = document.getElementById(previewElementId);
-    }
-
-    previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = () => {
-            this.previewElement.src = reader.result;
-            this.previewElement.style.display = "block";
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-}
-
-var previewer1 = new ImagePreviewer('preview1');
-var previewer2 = new ImagePreviewer('preview2');
-
-// $(".select2_option").select2({
-//     placeholder: "Chọn vai trò",
-// });
-
+/* Call */
+$(document).ready(function() {
+    previewImage('file-zone', 'photoUpload-preview'); // Cho Favicon
+    previewImage('file-zone2', 'photoUpload-preview2'); // Cho Logo
+});
+$(document).ready(function () {
+    initializeSelect2();
+});
+$(document).ready(function () {
+    $(".summernote").summernote();
+});
 
  
-$(document).ready(function() {
-    $('.summernote').summernote();
-  });
-
-
-/* Validate name input */
-// document.querySelector('input[name="name"]').addEventListener('input', function (e) {
-//     e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s]/g, '');
-// });
-
-/* Select2 */
-/* Admin select roles */

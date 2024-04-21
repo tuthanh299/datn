@@ -1,4 +1,4 @@
-@extends('layouts.admin') @section('title')
+@extends('admin.layouts.admin') @section('title')
     <title>Sửa Nhân Viên</title>
     @endsection @section('content')
 @section('css')
@@ -11,7 +11,7 @@
 @endsection
 <div class="content-wrapper">
 
-    @include('partials.content-header', ['name' => 'Danh Sách Nhân Viên', 'key' => ' /Nhân Viên'])
+    @include('admin.partials.content-header', ['name' => 'Danh Sách Nhân Viên', 'key' => ' /Nhân Viên'])
 
     <div class="content">
         <div class="container-fluid">
@@ -23,12 +23,12 @@
                         @csrf
                         <div class="form-group">
                             <label>Tên Nhân Viên</label>
-                            <input type="text" class="form-control"  name=" name" placeholder="Nhập tên nhân viên"
+                            <input type="text" class="text-capitalize form-control"  name=" name" placeholder="Nhập tên nhân viên"
                                 value="{{ $user->name }}">
                         </div>
                         <div class="form-group">
                             <label>Số Điện Thoại</label>
-                            <input type="text" class="form-control"  name="phone" placeholder="Nhập số điện thoại"
+                            <input type="number" class="form-control"  name="phone" placeholder="Nhập số điện thoại"
                                 value="{{ $user->phone }}">
                         </div>
                         <div class="form-group">
@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" class="form-control"   name=" email" placeholder="Nhập email"
+                            <input type="email" class="text-lowercase form-control"   name=" email" placeholder="Nhập email"
                                 value="{{ $user->email }}">
                         </div>
                         <div class="form-group">
@@ -53,7 +53,7 @@
                                 <option value=""> </option>
                                 @foreach ($roles as $role)
                                     <option {{ $roleUser->contains('id', $role->id) ? 'selected' : '' }}
-                                        value="{{ $role->id }}"> {{ $role->name }}</option>
+                                        class="" value="{{ $role->id }}"> {{ $role->name }}</option>
                                 @endforeach
                             </select>
                         </div>
