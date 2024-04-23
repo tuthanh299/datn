@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('authors', function (Blueprint $table) {
+        Schema::create('product_galleries', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->mediumText('description');
-            $table->string('photo_path');
+            $table->integer('product_id');
+            $table->string('photo_path')->nullable();
             $table->string('photo_name');
             $table->timestamps();
-           
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('authors');
+        Schema::dropIfExists('product_galleries');
     }
 };

@@ -1,5 +1,5 @@
-@extends('layouts.admin') @section('title')
-<title>Tác Giả</title>
+@extends('admin.layouts.admin') @section('title')
+<title>Bài viết</title>
 @endsection @section('content') 
 @section('css')
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
@@ -9,37 +9,39 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper"> 
-    @include('partials.content-header',['name'=>'Tác Giả','key'=>'/ Danh Sách']) 
+    @include('admin.partials.content-header',['name'=>'Bài viết','key'=>'/ Danh Sách']) 
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{route('author.create')}} " class="btn btn-success float-right m-2">Thêm</a>
+                    <a href="{{route('news.create')}} " class="btn btn-success float-right m-2">Thêm</a>
                 </div>
                 <div class="col-md-12">
                     <table class="table">
                         <thead>
                             <tr>
                                 
-                                <th scope="col">Tên Tác giả</th>
-                                <th scope="col">Mô Tả</th>
+                                <th scope="col">Tên Bài viết</th>
+                                
                                 <th scope="col">Hình Ảnh</th>
                                 <th scope="col">Thao tác</th> 
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($authors as $author)
+                            @foreach ($newspost as $news)
                             <tr>
                                 
-                                <td>{{ $author->name }}</td>
-                                <td>{{ $author->description }}</td>
+                                <td>{{ $news->name }}</td>
+                                 
+
+                               
                                 <td>
-                                    <img class="author-image-thumb" src="{{ $author->photo_path }}" alt="">
+                                    <img class="news-image-thumb" src="{{ $news->photo_path }}" alt="">
                                 </td>
                                 <td>
-                                    <a href="{{ route('author.edit', ['id' => $author->id]) }}"
+                                    <a href="{{ route('news.edit', ['id' => $news->id]) }}"
                                         class="btn btn-default">Sửa</a>
-                                    <a href=" "data-url="{{ route('author.delete', ['id' => $author->id]) }}"
+                                    <a href=" "data-url="{{ route('news.delete', ['id' => $news->id]) }}"
                                         class="btn btn-danger action_delete">Xóa</a>
                                 </td>
                             </tr>
@@ -48,7 +50,7 @@
                     </table>
                 </div>
                  <div class="col-md-12">
-                    {{ $authors->links('pagination::bootstrap-5') }}
+                    {{ $newspost->links('pagination::bootstrap-5') }}
 
                  </div>
             </div> 

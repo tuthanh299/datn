@@ -11,6 +11,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\Auth\ProviderController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
@@ -28,8 +32,8 @@ Route::get('logout', function() {
     return redirect('/');
 })->name('userlogout');
 
-Route::get('/home', function () {
-    return view('home');
+Route::get('/admin', function () {
+    return view('admin');
 })->middleware('auth');
 
 Route::get('/', function () {
@@ -62,7 +66,10 @@ Route::get('/', function () {
 })->name('homepage');
 
 Route::prefix('admin')->group(function () {
-
+    /* Dashboard */ 
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+      
     /* User */
     Route::prefix('users')->group(function () {
         Route::get('', [UserController::class, 'index'])->name('users.index');
@@ -73,21 +80,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
     });
     /* Setting */    
-    Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
-    Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
-    /* Staticnews */    
-    Route::get('staticnews', [StaticNewsController::class, 'index'])->name('staticnews.index');
-    Route::post('staticnews/update', [StaticNewsController::class, 'update'])->name('staticnews.update');
+        Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+        Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
+        /* Staticnews */    
+        Route::get('staticnews', [StaticNewsController::class, 'index'])->name('staticnews.index');
+        Route::post('staticnews/update', [StaticNewsController::class, 'update'])->name('staticnews.update');
 
-    /* User */
-    Route::prefix('users')->group(function () {
-        Route::get('', [UserController::class, 'index'])->name('users.index');
-        Route::get('/create', [UserController::class, 'create'])->name('users.create');
-        Route::post('/store', [UserController::class, 'store'])->name('users.store');
-        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-        Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
-        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
-    });
+   
     /* Category */
     Route::prefix('categories')->group(function () {
         Route::get('', [CategoryController::class, 'index'])->name('categories.index');
@@ -106,15 +105,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', [SliderController::class, 'update'])->name('slider.update');
         Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('slider.delete');
     });
-    /* Author */
-    Route::prefix('author')->group(function () {
-        Route::get('', [AuthorController::class, 'index'])->name('author.index');
-        Route::get('/create', [AuthorController::class, 'create'])->name('author.create');
-        Route::post('/store', [AuthorController::class, 'store'])->name('author.store');
-        Route::get('/edit/{id}', [AuthorController::class, 'edit'])->name('author.edit');
-        Route::post('/update/{id}', [AuthorController::class, 'update'])->name('author.update');
-        Route::get('/delete/{id}', [AuthorController::class, 'delete'])->name('author.delete');
-    });
+   
     /* Publisher */
     Route::prefix('publisher')->group(function () {
         Route::get('', [PublisherController::class, 'index'])->name('publisher.index');
@@ -124,6 +115,26 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', [PublisherController::class, 'update'])->name('publisher.update');
         Route::get('/delete/{id}', [PublisherController::class, 'delete'])->name('publisher.delete');
     });
+    /* News */
+    Route::prefix('news')->group(function () {
+        Route::get('', [NewsController::class, 'index'])->name('news.index');
+        Route::get('/create', [NewsController::class, 'create'])->name('news.create');
+        Route::post('/store', [NewsController::class, 'store'])->name('news.store');
+        Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('news.edit');
+        Route::post('/update/{id}', [NewsController::class, 'update'])->name('news.update');
+        Route::get('/delete/{id}', [NewsController::class, 'delete'])->name('news.delete');
+    });
+    /* Product */
+    Route::prefix('product')->group(function () {
+        Route::get('', [ProductController::class, 'index'])->name('product.index');
+        Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+        Route::post('/store', [ProductController::class, 'store'])->name('product.store');
+        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+        Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+        Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+    });
+
+});
 
 });
 

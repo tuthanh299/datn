@@ -1,5 +1,5 @@
 @extends('admin.layouts.admin') @section('title')
-    <title>Thêm Nhà Xuất Bản</title>
+    <title>Sửa Bài viết</title>
     @endsection @section('content')
 @section('css')
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
@@ -7,27 +7,23 @@
 @endsection
 @section('js')
     <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
-
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-
-    @include('admin.partials.content-header', ['name' => 'Nhà Xuất Bản', 'key' => '/ Thêm'])
-
+    @include('admin.partials.content-header', ['name' => 'Bài viết', 'key' => '/ Sửa'])
     <div class="content">
         <div class="container-fluid">
-
-            <form action="{{ route('publisher.store') }}" method="POST" enctype="multipart/form-data">
-                <div class="col-md-12 mb-3">
+            <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
+                <div class="card-footer text-sm sticky-top">
                     <button type="submit" class="btn btn-primary">Lưu</button>
                 </div>
                 @csrf
                 <div class="row col-12">
-                    <div class="form-publisher-left col-xl-8">
+                    <div class="form-news-left col-xl-8">
                         <div class="card card-primary card-outline text-sm">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    Nội dung nhà xuất bản
+                                    Nội dung bài viết
                                 </h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
@@ -36,29 +32,35 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>Tên Nhà Xuất Bản</label>
+                                    <label>Tên Bài viết</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" placeholder="Nhập tên nhà xuất bản" value="{{ old('name') }}">
+                                        name="name" placeholder="Nhập tên Bài viết" value="{{ old('name') }}">
                                     @error('name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Mô Tả Nhà Xuất Bản</label>
-                                    <textarea name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="4">{{ old('description') }}</textarea>
+                                    <label>Mô tả</label>
+                                    <textarea name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="4">{!! $news->description !!}</textarea>
                                     @error('description')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label>Nội Dung Bài viết</label>
+                                    <textarea name="content" class="form-control summernote @error('content') is-invalid @enderror" rows="4">{!! $news->content !!}</textarea>
+                                    @error('content')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <div class="form-publisher-right col-xl-4">
+                    <div class="form-news-left col-xl-4">
                         <div class="card card-primary card-outline text-sm">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    Hình ảnh nhà xuất bản
+                                    Hình ảnh bài viết
                                 </h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
@@ -70,8 +72,7 @@
                                     <label>Hình ảnh</label>
                                     <div class="photoUpload-zone">
                                         <div class="photoUpload-detail" id="photoUpload-preview">
-                                            <img class="rounded" src="{{ asset('admins/imgs/noimage.png') }}"
-                                                alt="Alt Photo">
+                                            <img class="rounded" src="{{ $news->photo_path }}" alt="Alt Photo">
                                         </div>
                                         <label class="photoUpload-file" id="photo-zone" for="file-zone">
                                             <input type="file" class=" form-control-file" name="photo_path"
@@ -94,11 +95,14 @@
                         </div>
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Lưu</button>
+                <div class="col-md-12 mb-3">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
             </form>
         </div>
     </div>
-</div> 
+
+</div>
+
 
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.admin') @section('title')
+@extends('admin.layouts.admin') @section('title')
 <title>Nhà Xuất Bản</title>
 @endsection @section('content') 
 @section('css')
@@ -9,7 +9,7 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper"> 
-    @include('partials.content-header',['name'=>'Nhà Xuất Bản','key'=>'/ Danh Sách']) 
+    @include('admin.partials.content-header',['name'=>'Nhà Xuất Bản','key'=>'/ Danh Sách']) 
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -22,7 +22,7 @@
                             <tr>
                                 
                                 <th scope="col">Tên Nhà Xuất Bản</th>
-                                <th scope="col">Mô Tả</th>
+                                 
                                 <th scope="col">Hình Ảnh</th>
                                 <th scope="col">Thao tác</th> 
                             </tr>
@@ -32,7 +32,7 @@
                             <tr>
                                 
                                 <td>{{ $publisher->name }}</td>
-                                <td>{{ $publisher->description }}</td>
+                           
                                 <td>
                                     <img class="publisher-image-thumb" src="{{ $publisher->photo_path }}" alt="">
                                 </td>

@@ -1,4 +1,4 @@
-@extends('layouts.admin') @section('title')
+@extends('admin.layouts.admin') @section('title')
     <title>Thêm Nhân Viên</title>
     @endsection @section('content')
 @section('css')
@@ -11,7 +11,7 @@
 @endsection
 <div class="content-wrapper">
 
-    @include('partials.content-header', ['name' => 'Danh Sách Nhân Viên', 'key' => ' /Thêm'])
+    @include('admin.partials.content-header', ['name' => 'Danh Sách Nhân Viên', 'key' => ' /Thêm'])
 
     <div class="content">
         <div class="container-fluid">
@@ -22,12 +22,12 @@
                         @csrf
                         <div class="form-group">
                             <label>Tên Nhân Viên</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                            <input type="text" class="text-capitalize form-control @error('name') is-invalid @enderror"
                                 name="name" placeholder="Nhập tên nhân viên" value="{{ old('name') }}">
                         </div>
                         <div class="form-group">
                             <label>Số Điện Thoại</label>
-                            <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                            <input type="number" class="form-control @error('phone') is-invalid @enderror"
                                 name="phone" placeholder="Nhập số điện thoại" value="{{ old('phone') }}">
                         </div>
                         <div class="form-group">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" class="form-control @error('email') is-invalid @enderror"
+                            <input type="email" class="text-lowercase form-control @error('email') is-invalid @enderror"
                                 name="email" placeholder="Nhập email" value="{{ old('email') }}">
                         </div>
                         <div class="form-group">
@@ -46,8 +46,7 @@
                                 name="password" placeholder="Nhập mật khẩu">
                         </div>
                         <div class="form-group">
-                            <label>Vai Trò</label>
-
+                            <label>Vai Trò</label> 
                             <select name="role_id[]" id="" class="form-control select2_option" multiple>
                                 <option value="">Admin </option>
                                 @foreach ($roles as $role)

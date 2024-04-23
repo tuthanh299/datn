@@ -20,10 +20,10 @@
   </head>
   <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-      @include('partials.header')
-      @include('partials.sidebar')
+      @include('admin.partials.header')
+      @include('admin.partials.sidebar')
       @yield('content')
-      @include('partials.footer')
+      @include('admin.partials.footer')
     </div>
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->

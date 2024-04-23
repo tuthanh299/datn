@@ -1,4 +1,4 @@
-@extends('layouts.admin') @section('title')
+@extends('admin.layouts.admin') @section('title')
     <title>Bài viết giới thiệu</title>
     @endsection @section('content')
 
@@ -12,7 +12,7 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-    @include('partials.content-header', ['name' => 'Bài viết giới thiệu', 'key' => ''])
+    @include('admin.partials.content-header', ['name' => 'Bài viết giới thiệu', 'key' => ''])
     <div class="content">
         <div class="container-fluid">
             <div class="row">
