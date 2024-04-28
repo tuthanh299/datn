@@ -176,9 +176,7 @@
                                                 <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
                                                     (.jpg|.png|.jpeg)</div>
                                             </div>
-                                            @error('product_photo_path')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                             
                                         </div>
                                         <div class="form-group">
                                             <label>Hình Ảnh Chi Tiết</label>

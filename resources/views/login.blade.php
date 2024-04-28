@@ -10,76 +10,107 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
     <?php
-$cssFiles = glob('vendors/mdblogin/css/*.css');
-foreach ($cssFiles as $file) {
-    echo '<link rel="stylesheet" type="text/css" href="' . $file . '">';
-}
-?>
+    
+    $cssFiles = glob('adminlte/dist/css/*.css');
+    foreach ($cssFiles as $file) {
+        echo '<link rel="stylesheet" type="text/css" href="' . $file . '">';
+    }
+    ?>
+    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
     <?php
-$jsFiles = glob(public_path('vendors/mdblogin/js/*.js'));
-foreach ($jsFiles as $file) {
-    $file = str_replace(public_path(), '', $file);
-    echo '<script src="' . $file . '"></script>';
-}
-?>
+    $jsFiles = glob(public_path('adminlte/dist/js/*.js'));
+    foreach ($jsFiles as $file) {
+        $file = str_replace(public_path(), '', $file);
+        echo '<script src="' . $file . '"></script>';
+    }
+    ?>
 </head>
 
-<body>
-
-    <section class="vh-100">
-        <div class="container-fluid h-custom">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                        class="img-fluid" alt="Sample image">
-                </div>
-                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form id="login-form" class="form" action="" method="post">
-                        @csrf
-                        <div class="divider d-flex align-items-center my-4">
-                            <p class="text-center fw-bold mx-3 mb-0">Sign in</p>
-                        </div>
-                        <!-- Email input -->
-                        <div class="form-outline mb-4">
-                            <input type="text" name="email" id="username" value="{{ old('email') }}"
-                                class="form-control form-control-lg" placeholder="Enter a valid email address" />
-                        </div>
-                        <!-- Password input -->
-                        <div class="form-outline mb-3 form-admin-login-pasword">
-                            <input type="password" name="password" id="password" class="form-control form-control-lg"
-                                placeholder="Enter password" />
-                            <span toggle="#password" class="admin-login-pasword-show-hide fa fa-fw fa-eye field-icon toggle-password"></span>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="form-check mb-0">
-                                <div class="form-group">
-                                    <label for="remember-me" class="text-info"><span>Remember me</span> <span><input
-                                                id="remember-me" name="remember_me" type="checkbox"></span></label><br>
+<body class="sidebar-mini text-sm login-page">
+    <div class="login-view-website text-sm"><a href="" target="_blank" title="Xem website"><i
+                class="fas fa-reply mr-2"></i>Xem website</a></div>
+    <div class="login-box">
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Đăng nhập hệ thống</p>
+                <form id="login-form" class="form" action="" method="post">
+                    @csrf
+                    <div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-append login-input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
 
                                 </div>
                             </div>
-                            <a href="#!" class="text-body">Forgot password?</a>
+                            <input type="text" name="email" id="username" value="{{ old('email') }}"
+                                class="form-control text-sm text-lowercase" placeholder="Nhập email"
+                                autocomplete="off" />
                         </div>
-                        <div class="text-center text-lg-start mt-4 pt-2">
-                            <input type="submit" id="remember-me" name="remember_me" class="btn btn-primary btn-lg"
-                                value="Login" style="padding-left: 2.5rem; padding-right: 2.5rem;">
-                            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
-                                    class="link-danger">Register</a></p>
+                        <label class="emailMember-error error" for="emailMember" style=""></label>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append login-input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
                         </div>
-                        @if ($errors->has('login_error'))
+                        <input type="password" name="password" id="password" class="form-control text-sm"
+                            placeholder="Nhập mật khẩu" />
+                        <div class="input-group-append">
+                            <div class="input-group-text show-password">
+                                <span class="fas fa-eye"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="form-check form-check-login mb-0">
+                            <label for="remember-me" class="text-info"><span>Ghi nhớ đăng nhập</span>
+                                <span class="align-middle">
+                                    <input id="remember-me" name="remember_me" type="checkbox"></span></label><br>
+                        </div>
+                    </div>
+                    <div class="text-center text-lg-start mt-3">
+                        <input type="submit" id="remember-me" name="remember_me"
+                            class="btn-lg btn btn-sm bg-gradient-danger btn-block btn-login" value="Đăng Nhập">
+                    </div>
+                    @if ($errors->has('login_error'))
                         <div class="alert alert-danger">
                             {{ $errors->first('login_error') }}
                         </div>
-                        @endif
-                    </form>
-                </div>
+                    @endif
+                </form>
             </div>
         </div>
-         
-    </section>
-
+    </div>
+    <div class="login-copyright text-sm">Powered by TL Bookstore</div>
 
 </body>
+<script>
+    /* Validate Email */
+    document.addEventListener('DOMContentLoaded', function() {
+        var emailInputs = document.querySelectorAll('input[name="email"]');
+        var emailRegex = /^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        emailInputs.forEach(function(emailInput) {
+            emailInput.addEventListener('input', function() {
+                var emailErrorLabel = document.querySelector('.emailMember-error');
+                if (emailErrorLabel) {
+                    if (!emailInput.value) {
+                        emailErrorLabel.textContent = 'Vui lòng nhập email.';
+                        emailErrorLabel.style.display = 'block';
+                    } else if (!emailRegex.test(emailInput.value)) {
+                        emailErrorLabel.textContent = 'Vui lòng nhập email đúng định dạng.';
+                        emailErrorLabel.style.display = 'block';
+                    } else {
+                        emailErrorLabel.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 </html>

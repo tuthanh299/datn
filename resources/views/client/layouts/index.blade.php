@@ -19,6 +19,7 @@
 
         <!-- Footer -->
         @include('client.partials.footer')
+        @include('client.partials.modal')
         @include('client.partials.support')
         @include('client.partials.anticopy')
         @include('client.partials.js')

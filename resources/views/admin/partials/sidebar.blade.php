@@ -6,7 +6,6 @@
               class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">AdminLTE 3</span>
       </a>
-
       <!-- Sidebar -->
       <div class="sidebar">
           <!-- Sidebar user panel (optional) -->
@@ -19,7 +18,6 @@
                   <a href="#" class="d-block">Alexander Pierce</a>
               </div>
           </div>
-
           <!-- SidebarSearch Form -->
           <div class="form-inline">
               <div class="input-group" data-widget="sidebar-search">
@@ -33,14 +31,13 @@
               </div>
           </div>
 
-
           <nav class="mt-2">
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                   data-accordion="false">
-                  <li class="nav-item menu-open">
-                      <a href="#" class="nav-link active">
+                  <li class="nav-item ">
+                      <a href="#" class="nav-link ">
                           <i class="nav-icon fas fa-tachometer-alt"></i>
-                          <p>
+                          <p class="text-capitalize">
                               Bảng điều khiển
                               <i class="right fas fa-angle-left"></i>
                           </p>
@@ -48,84 +45,110 @@
                       <ul class="nav nav-treeview">
                           <li class="nav-item">
                               <a href="{{ route('dashboard') }}" class="nav-link">
-                                  <i class="far fa-circle nav-icon"></i>
-                                  <p>Thống kê</p>
+                                <i class="nav-icon fas fa-chart-pie"></i>
+                                  <p class="text-capitalize">Thống kê</p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item ">
+                      <a href="#" class="nav-link ">
+                        <i class="nav-icon text-sm fas fa-layer-group"></i>
+                          <p class="text-capitalize">
+                              Group Sản Phẩm
+                              <i class="right fas fa-angle-left"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="{{ route('categories.index') }}" class="nav-link">
+                                <i class="nav-icon text-sm fas fa-boxes"></i>
+                                  <p class="text-capitalize">
+                                      Danh Mục Sản Phẩm
+                                  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('product.index') }}" class="nav-link">
+                                  <i class="nav-icon fas fa-th"></i>
+                                  <p class="text-capitalize">
+                                      Danh Sách sản phẩm
+                                  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('publisher.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i> 
+                                  <p class="text-capitalize">
+                                      Nhà Xuất Bản
+                                  </p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item ">
+                      <a href="#" class="nav-link ">
+                        <i class="nav-icon text-sm far fa-newspaper"></i>
+                          <p class="text-capitalize">
+                              Group Bài Viết
+                              <i class="right fas fa-angle-left"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="{{ route('staticnews.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i> 
+                                  <p class="text-capitalize">
+                                      Bài viết giới thiệu
+                                  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('news.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                  <p class="text-capitalize">
+                                      Bài Viết tin tức
+                                  </p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item ">
+                      <a href="#" class="nav-link ">
+                        <i class="nav-icon text-sm fas fa-users"></i>
+                          <p class="text-capitalize">
+                              Quản lý users
+                              <i class="right fas fa-angle-left"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="{{ route('users.index') }}" class="nav-link">
+                                  <i class="nav-icon fas fa-th"></i>
+                                  <p class="text-capitalize">
+                                      Danh Sách Nhân Viên
+                                  </p>
                               </a>
                           </li>
                       </ul>
                   </li>
                   <li class="nav-item">
-                      <a href="{{ route('categories.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-th"></i>
-                          <p>
-                              Danh Mục Sản Phẩm
-
-                          </p>
-                      </a>
-
-                  </li>
-
-                  <li class="nav-item">
                       <a href="{{ route('slider.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-th"></i>
-                          <p>
+                        <i class="nav-icon far fa-image"></i>
+                          <p class="text-capitalize">
                               Slider
-                          </p>
-                      </a>
-                  </li>
-                  
-                  <li class="nav-item">
-                      <a href="{{ route('publisher.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-th"></i>
-                          <p>
-                              Nhà Xuất Bản
                           </p>
                       </a>
                   </li>
                   <li class="nav-item">
                       <a href="{{ route('setting.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-th"></i>
-                          <p>
+                        <i class="nav-icon text-sm fas fa-cogs"></i>
+                          <p class="text-capitalize">
                               Cấu Hình Chung
                           </p>
                       </a>
                   </li>
-                  <li class="nav-item">
-                      <a href="{{ route('staticnews.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-th"></i>
-                          <p>
-                              Bài viết giới thiệu
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('users.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-th"></i>
-                          <p>
-                              Danh Sách Nhân Viên
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('news.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-th"></i>
-                          <p>
-                              Danh Sách Bài Viết
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('product.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-th"></i>
-                          <p>
-                              Danh Sách sản phẩm
-                          </p>
-                      </a>
-                  </li>
-
               </ul>
           </nav>
-
       </div>
-
   </aside>

@@ -13,7 +13,7 @@
     @include('admin.partials.content-header', ['name' => 'Bài viết', 'key' => '/ Sửa'])
     <div class="content">
         <div class="container-fluid">
-            <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('news.update', ['id' => $news->id]) }} " method="POST" enctype="multipart/form-data">
                 <div class="card-footer text-sm sticky-top">
                     <button type="submit" class="btn btn-primary">Lưu</button>
                 </div>
@@ -34,7 +34,7 @@
                                 <div class="form-group">
                                     <label>Tên Bài viết</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" placeholder="Nhập tên Bài viết" value="{{ old('name') }}">
+                                        name="name" placeholder="Nhập tên Bài viết" value="{!! $news->name !!}">
                                     @error('name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror

@@ -13,7 +13,9 @@
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="index/js/jquery.pixelentity.shiner.min.js"></script>
 
-<script type="text/javascript" src="index/slick/slick.js"></script>
-<script type="text/javascript" src="index/js/app.js"></script>
+<script src="{{ asset('index/js/flags.js') }}"></script>
+<script src="{{ asset('index/js/jquery.pixelentity.shiner.min.js') }}"></script>
+<script src="{{ asset('index/slick/slick.js') }}"></script>
+<script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script>
+<script src="{{ asset('index/js/app.js') }}"></script>

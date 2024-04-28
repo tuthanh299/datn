@@ -10,8 +10,8 @@ use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\IndexController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Clients\IndexController;
+ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
 Route::post('/login', [AdminController::class, 'postLoginAdmin']);

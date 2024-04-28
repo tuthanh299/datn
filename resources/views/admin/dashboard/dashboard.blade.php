@@ -1,7 +1,6 @@
 @extends('admin.layouts.admin') @section('title')
     <title>Thống kê</title>
-    @endsection @section('content')
-@section('css')
+    @endsection @section('content')@section('css')
     <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
     

@@ -1,3 +1,6 @@
+<?php
+use App\Http\Controllers\Clients\IndexController;
+?>
 <div class="header">
     <div class="header-top">
         <div class="wrap-content">
@@ -12,22 +15,22 @@
                 <div class="header-top-social">
                     <div class="flex-social">
                         <div class="social-item hvr-float-shadow">
-                            <a href target="_blank">
+                            <a href="" target="_blank">
                                 <i class="fa-brands fa-facebook"></i>
                             </a>
                         </div>
                         <div class="social-item hvr-float-shadow">
-                            <a href target="_blank">
+                            <a href="" target="_blank">
                                 <i class="fa-brands fa-instagram"></i>
                             </a>
                         </div>
                         <div class="social-item hvr-float-shadow">
-                            <a href target="_blank">
+                            <a href="" target="_blank">
                                 <i class="fa-brands fa-x-twitter"></i>
                             </a>
                         </div>
                         <div class="social-item hvr-float-shadow">
-                            <a href target="_blank">
+                            <a href="" target="_blank">
                                 <i class="fa-brands fa-youtube"></i>
                             </a>
                         </div>
@@ -40,9 +43,9 @@
         <div class="wrap-content">
             <div class="flex-header-bottom">
                 <div class="header-bottom-logo peShiner" width="">
-                    <img src="index/imgs/logo3rev.png"  alt>
+                    <img src="{{ IndexController::settings()->logo_path }}" alt>
                 </div>
-                <div class="header-bottom-banner">
+                <div class="header-bottom-banner ">
                     <img src="index/imgs/banner.jpg" alt>
                 </div>
                 <div class="header-bottom-contact">
@@ -56,11 +59,9 @@
                                 Hotline liên hệ:
                             </div>
                             <div class="header-bottom-contact-num">
-                                <a href="tel:0768848015">0768848015</a>
+                                <a href="tel:{{ IndexController::settings()->phone }}">{{ IndexController::settings()->phone }}</a>
                             </div>
-                            <div class="header-bottom-contact-num">
-                                <a href="tel:0768848015">0768848015</a>
-                            </div>
+                             
                         </div>
                     </div>
                 </div>
