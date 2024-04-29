@@ -265,6 +265,7 @@ function SlickPage() {
         focusOnSelect: true,
         autoplaySpeed: 3000,
     });
+    
 }
 
 function AllRun() {
