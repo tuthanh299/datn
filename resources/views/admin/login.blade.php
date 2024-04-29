@@ -29,10 +29,11 @@
 </head>
 
 <body class="sidebar-mini text-sm login-page">
-    <div class="login-view-website text-sm"><a href="" target="_blank" title="Xem website"><i
+    <div class="login-view-website text-sm"><a href="http://127.0.0.1:8000/" target="_blank" title="Xem website"><i
                 class="fas fa-reply mr-2"></i>Xem website</a></div>
     <div class="login-box">
         <div class="card">
+ 
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Đăng nhập hệ thống</p>
                 <form id="login-form" class="form" action="" method="post">

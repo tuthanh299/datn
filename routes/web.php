@@ -1,35 +1,54 @@
 <?php
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PublisherController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SettingController;
+/* Clients */
 use App\Http\Controllers\Clients\IndexController;
- use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Clients\CAboutusController;
+use App\Http\Controllers\Clients\CNewsController;
+use App\Http\Controllers\Clients\CProductController;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
 Route::post('/login', [AdminController::class, 'postLoginAdmin']);
 
 Route::get('/admin', function () {
-    return view('admin');
+    return view('admin.admin');
 })->middleware('auth');
 
-Route::get('/', function () {
-    return view('index');
+Route::prefix('/')->group(function () {
+    /* Index */
+    Route::controller(IndexController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/news/{id}', [CNewsController::class, 'detail'])->name('news.detail');
+    });
+    /* About Us */
+    Route::controller(CAboutusController::class)->group(function () {
+        Route::get('/aboutus', 'index')->name('aboutus');
+    });
+    /* News */
+    Route::controller(CNewsController::class)->group(function () {
+        Route::get('/news', 'index')->name('news');
+        Route::get('/news/{id}', [CNewsController::class, 'detail'])->name('news.detail');
+    });
+    /* Product */
+    Route::controller(CProductController::class)->group(function () {
+        Route::get('/product', 'index')->name('product');
+        Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
+    });
+
 });
-Route::get('/', [IndexController::class, 'index'])->name('index');
 
 Route::prefix('admin')->group(function () {
-    /* Dashboard */ 
-    
+    /* Dashboard */
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-      
     /* User */
     Route::prefix('users')->group(function () {
         Route::get('', [UserController::class, 'index'])->name('users.index');
@@ -39,14 +58,13 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
     });
-    /* Setting */    
-        Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
-        Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
-        /* Staticnews */    
-        Route::get('staticnews', [StaticNewsController::class, 'index'])->name('staticnews.index');
-        Route::post('staticnews/update', [StaticNewsController::class, 'update'])->name('staticnews.update');
+    /* Setting */
+    Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
+    /* Staticnews */
+    Route::get('staticnews', [StaticNewsController::class, 'index'])->name('staticnews.index');
+    Route::post('staticnews/update', [StaticNewsController::class, 'update'])->name('staticnews.update');
 
-   
     /* Category */
     Route::prefix('categories')->group(function () {
         Route::get('', [CategoryController::class, 'index'])->name('categories.index');
@@ -65,7 +83,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', [SliderController::class, 'update'])->name('slider.update');
         Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('slider.delete');
     });
-   
+
     /* Publisher */
     Route::prefix('publisher')->group(function () {
         Route::get('', [PublisherController::class, 'index'])->name('publisher.index');

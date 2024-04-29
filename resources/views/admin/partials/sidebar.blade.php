@@ -69,6 +69,14 @@
                               </a>
                           </li>
                           <li class="nav-item">
+                            <a href="{{ route('publisher.index') }}" class="nav-link">
+                              <i class="nav-icon fas fa-book"></i> 
+                                <p class="text-capitalize">
+                                    Nhà Xuất Bản
+                                </p>
+                            </a>
+                        </li>
+                          <li class="nav-item">
                               <a href="{{ route('product.index') }}" class="nav-link">
                                   <i class="nav-icon fas fa-th"></i>
                                   <p class="text-capitalize">
@@ -76,14 +84,7 @@
                                   </p>
                               </a>
                           </li>
-                          <li class="nav-item">
-                              <a href="{{ route('publisher.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i> 
-                                  <p class="text-capitalize">
-                                      Nhà Xuất Bản
-                                  </p>
-                              </a>
-                          </li>
+                          
                       </ul>
                   </li>
                   <li class="nav-item ">

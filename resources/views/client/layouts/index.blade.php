@@ -8,21 +8,20 @@
 
 <body>
     <div class="wrap-container">
-        <!-- Header -->
-        @include('client.partials.header')
-        <!-- Menu -->
-        @include('client.partials.menu')
-        <!-- Slider -->
-        @include('client.partials.slider')
-        <!-- Content -->
-        @include('client.partials.content')
-
-        <!-- Footer -->
-        @include('client.partials.footer')
-        @include('client.partials.modal')
-        @include('client.partials.support')
-        @include('client.partials.anticopy')
-        @include('client.partials.js')
+        <div class="{{ Request::route()->getName() == 'index' ? 'external-page' : 'internal-page' }}"">
+            @include('client.partials.header')
+            @include('client.partials.menu')
+            @include('client.partials.slider')
+            <div class="{{ Request::route()->getName() == 'index' ? 'external-content' : 'internal-content py50' }}">
+                @yield('content')
+                @include('client.partials.content')
+            </div>
+            @include('client.partials.footer')
+            @include('client.partials.modal')
+            @include('client.partials.support')
+            @include('client.partials.anticopy')
+            @include('client.partials.js')
+        </div>
     </div>
 </body>
 

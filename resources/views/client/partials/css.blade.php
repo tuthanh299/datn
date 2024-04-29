@@ -4,9 +4,11 @@ use App\Http\Controllers\Clients\IndexController;
 <link href="{{ IndexController::settings()->favicon_path }}" rel="icon" type="image/x-icon">
  
 <link href="{{ asset('index/css/effect.css') }}" rel="stylesheet">
+<link href="{{ asset('index/css/animate.min.css') }}" rel="stylesheet">
 <link href="{{ asset('index/slick/slick.css') }}" rel="stylesheet">
 <link href="{{ asset('index/slick/slick-theme.css') }}" rel="stylesheet">
 <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('vendors/aos/aos.css') }}" rel="stylesheet">
 
 <link href="https://cdn.jsdelivr.net/gh/eliyantosarage/font-awesome-pro@main/fontawesome-pro-6.5.1-web/css/all.min.css"
 rel="stylesheet">

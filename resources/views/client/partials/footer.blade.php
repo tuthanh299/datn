@@ -25,12 +25,11 @@ use App\Http\Controllers\Clients\IndexController;
                                 đồ</a></span>
                     </div>
                 </div>
-
                 <div class="footer-news">
-
                 </div>
                 <div class="footer-news">
                     <div class="footer-fanpage">
+                        <div id="fb-root"></div>
                         <div class="fb-page" data-href="https://www.facebook.com/facebook" data-tabs="timeline"
                             data-width="" data-height="" data-small-header="false" data-adapt-container-width="true"
                             data-hide-cover="false" data-show-facepile="true">
@@ -53,14 +52,12 @@ use App\Http\Controllers\Clients\IndexController;
             {!! IndexController::settings()->iframe_map !!}
         </div>
     </div>
-    <div class="scrollToTop cursor-pointer active-progress">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
-                style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 0;">
-            </path>
-        </svg>
-    </div>
+</div>
 
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v19.0"
-        nonce="3a98StDB"></script>
+<div class="scrollToTop cursor-pointer active-progress">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+            style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 0;">
+        </path>
+    </svg>
+</div>

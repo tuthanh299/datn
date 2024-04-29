@@ -205,22 +205,79 @@ function SlickPage() {
         dots: false,
         infinite: true,
         autoplaySpeed: 3500,
-        slidesToShow: 4,
+        slidesToShow: 5,
         slidesToScroll: 1,
         adaptiveHeight: false,
         autoplay: true,
         arrows: false,
         fade: false,
     });
+    initializeSlick(".slick-other-news-internal", {
+        dots: false,
+        infinite: true,
+        autoplaySpeed: 5000,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        adaptiveHeight: true,
+        vertical: true,
+        verticalSwiping: true,
+        autoplay: true,
+        infinite: true,
+        arrows: false,
+    });
+    initializeSlick(".slick-product-image-core", {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: ".slick-product-image-detail",
+    });
+    initializeSlick(".slick-product-image-core", {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: ".slick-product-image-detail",
+        dots: false,
+        autoplay: true,
+        centerMode: true,
+        infinite: true,
+        arrows: false,
+        centerPadding: "0px",
+        focusOnSelect: true,
+        autoplaySpeed: 3000,
+    });
 }
 
-function AllRun() {}
+function AllRun() {
+    $(window).scroll(function () {
+        var cach_top = $(window).scrollTop();
+        var height_header = $(".header").height() + $(".menu").height();
+
+        if (cach_top >= height_header) {
+            if (
+                !$(".menu").hasClass(
+                    "fix-menu animate__animated animate__fadeIn"
+                )
+            ) {
+                $(".menu").addClass(
+                    "fix-menu animate__animated animate__fadeIn"
+                );
+            }
+        } else {
+            $(".menu").removeClass(
+                "fix-menu animate__animated animate__fadeIn"
+            );
+        }
+    });
+}
+AOS.init({
+    once: false,
+});
 $(document).ready(function () {
     PeShiner();
     TranslateClick();
     setupBackToTop();
     CartBtnClick();
     ProductTnteract();
-    SlickPage(); 
+    SlickPage();
     AllRun();
 });

@@ -1,19 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
+  
 class AdminController extends Controller
 {
+
     public function loginAdmin()
     {
+
         if (auth()->check()) {
             return redirect()->to('admin');
         }
-        return view('login');
-       
-
-       
+        return view('admin.login');
     }
 
     public function postLoginAdmin(Request $request)
@@ -26,5 +26,6 @@ class AdminController extends Controller
                 'login_error' => 'Email hoặc mật khẩu không đúng.',
             ]);
         }
+
     }
 }

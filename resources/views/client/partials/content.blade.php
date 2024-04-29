@@ -1,7 +1,6 @@
 <?php
 use App\Http\Controllers\Clients\IndexController;
 ?>
-
 @isset($productOutstanding)
     @if (!$productOutstanding->isEmpty())
         {{-- Product Oustanding --}}
@@ -13,19 +12,19 @@ use App\Http\Controllers\Clients\IndexController;
                 <div class="slick-product-outstanding-cover">
                     <div class="slick-product-outstanding">
                         @foreach ($productOutstanding as $v)
-                            <div class="product-outstanding-item">
+                            <div class="product-outstanding-item" data-aos="fade-up" data-aos-duration="1000">
                                 <div class="product" data-aos="zoom-in-up">
                                     <div class="box-product text-decoration-none">
                                         <div class="position-relative overflow-hidden  ">
-                                            <a class="pic-product " href="{{ $v->id }}" title="Sản phẩm">
-                                                <div class="pic-product-img">
+                                            <a class="pic-product " href="{{ route('product.detail', ['id' => $v->id]) }}" title="Sản phẩm">
+                                                <div class="pic-product-img scale-img hover_light">
                                                     <img class="w-100" src="{{ $v->product_photo_path }}"
                                                         alt="{{ $v->name }}">
                                                 </div>
                                             </a>
                                         </div>
                                         <div class="info-product">
-                                            <div class="name-product"><a class="text-split-2" href="{{ $v->id }}"
+                                            <div class="name-product"><a class="text-split-2" href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                     title="{{ $v->name }}">{{ $v->name }}</a>
                                             </div>
                                             <div class="-cart">
@@ -39,14 +38,15 @@ use App\Http\Controllers\Clients\IndexController;
                                             </div>
                                             <div class="flex-price-cart-product">
                                                 <div class="price-product">
-                                                    <div class="price-old">
-                                                        {{ $v->regular_price }}
-                                                    </div>
                                                     <div class="price-new">
-                                                        {{ $v->sale_price }}
+
+                                                        @formatmoney($v->sale_price)
+                                                    </div>
+                                                    <div class="price-old">
+                                                        @formatmoney($v->regular_price)
                                                     </div>
                                                     <div class="discount">
-                                                        {{ $v->discount }}
+                                                        {{ $v->discount }}%
                                                     </div>
                                                 </div>
                                                 <div class="cart-product-add">
@@ -86,9 +86,9 @@ use App\Http\Controllers\Clients\IndexController;
                 </div>
                 <div class="slick-news-ex">
                     @foreach ($news as $v)
-                        <div class="news-box-ex">
-                            <a href=" {{ $v->id }}">
-                                <div class="news-box-ex-img">
+                        <div class="news-box-ex" data-aos="fade-up" data-aos-duration="1000">
+                            <a href="{{ route('news.detail', ['id' => $v->id]) }}">
+                                <div class="news-box-ex-img scale-img hover_light">
                                     <img src="{{ $v->photo_path }}" alt="{{ $v->name }}" class="w-100">
                                 </div>
                                 <div class="news-box-ex-info">
