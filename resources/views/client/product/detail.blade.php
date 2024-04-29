@@ -9,12 +9,16 @@
                         <img class="w-100" src="{{ $productDetail->product_photo_path }}" alt="{{ $productDetail->name }}">
                     </div>
                     <div class="slick-product-image-detail">
-
+                        @foreach ($productDetail->productGallery as $galleryItem)
+                            <div class="product-image-detail-item">
+                                <div class="product-image-detail">
+                                    <img src="{{ $galleryItem->photo_path }}"> 
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-            
-
             <div class="right-product-detail col-md-6 col-lg-7 mb-4">
                 <h1 class="name-product-detail">
                     {{ $productDetail->name }}
@@ -38,7 +42,17 @@
                     Giá: <span class="price-new-product-detail">@formatmoney($productDetail->sale_price)</span> <span
                         class="price-old-product-detail">@formatmoney($productDetail->regular_price)</span>
                 </div>
+                <div class="desc-product-detail">
+                    {!! $productDetail->description !!}
+                </div>
             </div>
+        </div>
+        <div class="tab-product-detail">
+            <div class="tab-product-title">
+                Nội dung
+            </div>
+            {!! $productDetail->content !!}
+
         </div>
     </div>
 @endsection

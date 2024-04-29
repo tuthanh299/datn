@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Publisher;
+use App\Models\ProductGallery;
 
 class CProductController extends Controller
 {
@@ -16,8 +17,7 @@ class CProductController extends Controller
 
     public function detail($id)
     {
-        $productDetail = Product::with('publisher')->find($id); 
-        
+        $productDetail = Product::find($id);  
         return view('client.product.detail', compact('productDetail'));
     }
 

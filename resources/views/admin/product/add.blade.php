@@ -114,7 +114,7 @@
                                         </div>
                                         <div class="form-group ">
                                             <label>Nhà xuất bản:</label>
-                                            <select class="form-control" name="publisher">
+                                            <select class="form-control" name="publisher_id">
                                                 <option value="">Chọn nhà xuất bản</option>
                                                 @foreach ($publishers as $publisher)
                                                     <option value="{{ $publisher->id }}">{{ $publisher->name }}</option>

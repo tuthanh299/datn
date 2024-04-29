@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use function Laravel\Prompts\error;
 use App\Components\Recusive;
 use App\Http\Requests\ProductAddRequest;
+use App\Http\Controllers\PublisherController;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductGallery;
+use App\Models\Publisher;
 use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
-use function Laravel\Prompts\error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\PublisherController;
-use App\Models\Publisher;
 
 class ProductController extends Controller
 {
@@ -60,7 +60,7 @@ class ProductController extends Controller
                 'regular_price' => $request->regular_price,
                 'sale_price' => $request->sale_price,
                 'discount' => $request->discount,
-                'publisher' => $request->publisher,
+                'publisher_id' => $request->publisher_id,
                 'author' => $request->author,
                 'code' => $request->code,
                 'publishing_year' => $request->publishing_year,
@@ -74,6 +74,7 @@ class ProductController extends Controller
                 $dataProductCreate['product_photo_path'] = $dataUploadProductImage['file_path'];
             }
             $product = $this->product->create($dataProductCreate);
+            
             /* Sub img */
             if ($request->hasFile('photo_path')) {
                 foreach ($request->photo_path as $fileItem) {
@@ -96,11 +97,12 @@ class ProductController extends Controller
     public function edit($id)
     { 
         $product = $this->product->find($id);
-         $publishers = Publisher::all();
+        $publishers = Publisher::all();
         $htmlOption = $this->getCategory($product->category_id);
         return view('admin.product.edit', compact('htmlOption', 'product','publishers'));
     }
-
+     
+    
     public function update(Request $request, $id)
     {
 
@@ -113,7 +115,7 @@ class ProductController extends Controller
                 'regular_price' => $request->regular_price,
                 'sale_price' => $request->sale_price,
                 'discount' => $request->discount,
-                'publisher' => $request->publisher,
+                'publisher_id' => $request->publisher_id,
                 'author' => $request->author,
                 'code' => $request->code,
                 'publishing_year' => $request->publishing_year,

@@ -31,7 +31,9 @@ class Product extends Model
         'status' => false,
         'outstanding' => false,
     ];
-   
+    public function images(){
+        return $this->hasMany(ProductGallery::class, 'product_id');
+    }
     
     public function category()
     {
@@ -39,7 +41,7 @@ class Product extends Model
     }
     public function publisher()
     {
-        return $this->belongsTo(Publisher::class, 'publisher_id');
+        return $this->belongsTo(Publisher::class, 'publisher_id');        
     }
    
     public function productGallery()

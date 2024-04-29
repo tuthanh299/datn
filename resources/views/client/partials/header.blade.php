@@ -46,7 +46,7 @@ use App\Http\Controllers\Clients\IndexController;
                     <img src="{{ IndexController::settings()->logo_path }}" alt>
                 </div>
                 <div class="header-bottom-banner ">
-                    <img src="index/imgs/banner.jpg" alt>
+                    <img src="{{ asset('index/imgs/banner.jpg') }}" alt>
                 </div>
                 <div class="header-bottom-contact">
                     <div class="flex-header-bottom-contact">
@@ -59,9 +59,10 @@ use App\Http\Controllers\Clients\IndexController;
                                 Hotline liên hệ:
                             </div>
                             <div class="header-bottom-contact-num">
-                                <a href="tel:{{ IndexController::settings()->phone }}">{{ IndexController::settings()->phone }}</a>
+                                <a
+                                    href="tel:{{ IndexController::settings()->phone }}">{{ IndexController::settings()->phone }}</a>
                             </div>
-                             
+
                         </div>
                     </div>
                 </div>

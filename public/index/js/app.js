@@ -225,17 +225,37 @@ function SlickPage() {
         infinite: true,
         arrows: false,
     });
-    initializeSlick(".slick-product-image-core", {
+    initializeSlick(".slick-other-news-internal", {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: ".slick-video-small",
+    });
+    initializeSlick(".slick-other-news-internal", {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: ".slick-video-large",
+        dots: false,
+        autoplay: true,
+        centerMode: true,
+        infinite: true,
+        arrows: false,
+        centerPadding: "0px",
+        focusOnSelect: true,
+        autoplaySpeed: 3000,
+    });
+    $(".slick-product-image-core").slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
         fade: true,
         asNavFor: ".slick-product-image-detail",
     });
-    initializeSlick(".slick-product-image-core", {
-        slidesToShow: 3,
+    $(".slick-product-image-detail").slick({
+        slidesToShow: 5,
         slidesToScroll: 1,
-        asNavFor: ".slick-product-image-detail",
+        asNavFor: ".slick-product-image-core",
         dots: false,
         autoplay: true,
         centerMode: true,

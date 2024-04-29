@@ -84,11 +84,11 @@
                                         </div>
                                         <div class="form-group ">
                                             <label>Nhà xuất bản:</label>
-                                            <select class="form-control" name="publisher">
+                                            <select class="form-control" name="publisher_id">
                                                 <option value="">Chọn Nhà xuất bản</option>
                                                 @foreach ($publishers as $publisher)
                                                     <option value="{{ $publisher->id }}"
-                                                        @if ($product->publisher == $publisher->id) selected @endif>
+                                                        @if ($product->publisher_id == $publisher->id) selected @endif>
                                                         {{ $publisher->name }}</option>
                                                 @endforeach
                                             </select>
