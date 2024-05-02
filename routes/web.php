@@ -15,6 +15,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IndexController;
+use App\Models\Slider;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
@@ -37,6 +38,7 @@ Route::get('/admin', function () {
 })->middleware('auth');
 
 Route::get('/', function () {
+    $sliders = Slider::all();
     $cart1s = [
         [
             'id' => 1,
@@ -55,12 +57,12 @@ Route::get('/', function () {
     if (Auth::check()) 
     {
         $user = Auth::user();
-        return view('homepage', compact('user', 'cart1s'));
+        return view('index', compact('user', 'cart1s', 'sliders'));
     }
     else 
     {
         $user = null;
-        return view('homepage', compact('user', 'cart1s'));
+        return view('index', compact('user', 'cart1s', 'sliders'));
     }
 
 })->name('homepage');
@@ -133,8 +135,6 @@ Route::prefix('admin')->group(function () {
         Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
     });
-
-});
 
 });
 
