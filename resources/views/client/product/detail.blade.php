@@ -6,13 +6,14 @@
             <div class="left-product-detail col-md-6 col-lg-5 mb-4">
                 <div class="group-product-image">
                     <div class="slick-product-image-core">
-                        {{-- <img class="w-100" src="{{ $productDetail->product_photo_path }}" alt="{{ $productDetail->name }}"> --}}
+                        <img class="w-100" src="{{ $productDetail->product_photo_path }}" alt="{{ $productDetail->name }}">
                         @foreach ($productDetail->productGallery as $galleryItem)
                             <img src="{{ $galleryItem->photo_path }}">
                         @endforeach
 
                     </div>
                     <div class="slick-product-image-detail">
+                        <img class="w-100" src="{{ $productDetail->product_photo_path }}" alt="{{ $productDetail->name }}">
                         @foreach ($productDetail->productGallery as $galleryItem)
                             <div class="product-image-detail-item">
                                 <div class="product-image-detail">
