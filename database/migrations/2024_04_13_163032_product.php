@@ -22,7 +22,7 @@ return new class extends Migration
             $table->double('regular_price');
             $table->double('sale_price');           
             $table->string('discount');
-            $table->integer('publisher');
+            $table->integer('publisher_id');
             $table->string('author');
             $table->string('code');
             $table->string('publishing_year');

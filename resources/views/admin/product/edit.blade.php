@@ -84,11 +84,11 @@
                                         </div>
                                         <div class="form-group ">
                                             <label>Nhà xuất bản:</label>
-                                            <select class="form-control" name="publisher">
+                                            <select class="form-control" name="publisher_id">
                                                 <option value="">Chọn Nhà xuất bản</option>
                                                 @foreach ($publishers as $publisher)
                                                     <option value="{{ $publisher->id }}"
-                                                        @if ($product->publisher == $publisher->id) selected @endif>
+                                                        @if ($product->publisher_id == $publisher->id) selected @endif>
                                                         {{ $publisher->name }}</option>
                                                 @endforeach
                                             </select>
@@ -176,9 +176,7 @@
                                                 <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
                                                     (.jpg|.png|.jpeg)</div>
                                             </div>
-                                            @error('product_photo_path')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                             
                                         </div>
                                         <div class="form-group">
                                             <label>Hình Ảnh Chi Tiết</label>

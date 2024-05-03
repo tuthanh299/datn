@@ -1,5 +1,5 @@
-function isExist(ele) {
-	return ele.length;
+function isExist(className) {
+    return document.getElementsByClassName(className).length > 0;
 }
 
 /* PreviewImage */
@@ -7,17 +7,23 @@ function previewImage(inputId, previewId) {
     const fileInput = document.getElementById(inputId);
     const output = document.getElementById(previewId);
 
-    fileInput.addEventListener('change', function(event) {
+    fileInput.addEventListener("change", function (event) {
         const reader = new FileReader();
-        reader.onload = function() {
-            output.innerHTML = '<img class="rounded" src="' + reader.result + '" alt="Preview Photo">';
+        reader.onload = function () {
+            output.innerHTML =
+                '<img class="rounded" src="' +
+                reader.result +
+                '" alt="Preview Photo">';
         };
         reader.readAsDataURL(event.target.files[0]);
     });
 }
+
 /* Action delete */
 function actionDelete(event) {
     event.preventDefault();
+    if (!isExist("action_delete")) return;
+
     let urlRequest = $(this).data("url");
     let that = $(this);
     Swal.fire({
@@ -48,25 +54,34 @@ function actionDelete(event) {
         }
     });
 }
+
 $(function () {
-    $(document).on("click", ".action_delete", actionDelete);
+    if (isExist("action_delete")) {
+        $(document).on("click", ".action_delete", actionDelete);
+    }
 });
+
 /* Select  Roles User */
 function initializeSelect2() {
+    if (!isExist("select2_option")) return;
+
     $(".select2_option").select2({
         placeholder: "Chọn vai trò",
     });
 }
+
 /* Call */
-$(document).ready(function() {
-    previewImage('file-zone', 'photoUpload-preview'); // Cho Favicon
-    previewImage('file-zone2', 'photoUpload-preview2'); // Cho Logo
+$(document).ready(function () {
+    previewImage("file-zone", "photoUpload-preview"); // Cho Favicon
+    previewImage("file-zone2", "photoUpload-preview2"); // Cho Logo
 });
+
 $(document).ready(function () {
     initializeSelect2();
 });
-$(document).ready(function () {
-    $(".summernote").summernote();
-});
 
- 
+$(document).ready(function () {
+    if (isExist("summernote")) {
+        $(".summernote").summernote();
+    }
+});

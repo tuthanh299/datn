@@ -1,4 +1,21 @@
 /* Admin CSS */
+/* Login */
+.login-box{width:320px;}
+.login-box .card .login-card-body{padding:30px 20px;border-radius:0.25rem;}
+.login-box .card .login-card-body .login-box-msg{color:#686f75;font-size:16px;padding-bottom:1rem;text-transform:capitalize;}
+.login-box .card .login-card-body .input-group .form-control{border-right:1px solid #ced4da;}
+.login-box .card .login-card-body .input-group .form-control:focus{border-color:#80bdff!important;}
+.login-box .card .login-card-body .input-group .login-input-group-append .input-group-text{border:1px solid #ced4da!important;border-right:0px!important;border-top-left-radius:.25rem!important;border-bottom-left-radius:.25rem!important;}
+.login-view-website{position:absolute;background-color:#1c1f22;width:100%;left:0px;top:0px;text-align:center;color:#fff;padding:.5rem .5rem;font-size:13px!important;}
+.login-view-website a{color:#fff;opacity:0.8;}
+.login-view-website a:hover{opacity:1;}
+.login-view-website a i{font-size:11px;}
+.login-copyright{position:absolute;width:100%;left:0px;bottom:0px;text-align:center;padding:.5rem .5rem;font-size:13px!important;}
+.show-password{cursor:pointer;width:45px;border-color:#ced4da!important;padding:.375rem;justify-content:center;}
+.show-password.disabled{pointer-events:none;background-color:#e9ecef!important;}
+.form-check-login{padding-left:0px;}
+.form-check-login label{margin-bottom:0px;}
+.emailMember-error{font-size:12px !important;padding-bottom:0px;font-weight:normal !important;}
 /* Placeholder */
 ::placeholder{text-transform:none;font-size:14px;}
 ::-webkit-input-placeholder{/* Chrome/Opera/Safari */
@@ -15,14 +32,14 @@
 .alert-danger{margin-top:10px;padding:3px 5px;}
 .slider-image-thumb{width:100%;height:100px;object-fit:cover;}
 /* Product gallery */
-.box-gallery{margin-top:20px;display: grid;grid-template-columns: repeat(4,minmax(0,1fr));gap: 5px;} 
-.box-gallery-item{border: solid 1px #ccc;}
+.box-gallery{margin-top:20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;}
+.box-gallery-item{border:solid 1px #ccc;}
 /* Publisher */
 .publisher-image-thumb{width:50px;height:50px;object-fit:cover;}
 /* News */
 .news-image-thumb{width:100px;height:100px;object-fit:cover;}
 /* Product */
-.adm-product-img{max-width:72px;max-height:87px;} 
+.adm-product-img{max-width:72px;max-height:87px;}
 .card-footer.sticky-top{background-color:rgb(236,238,241);position:sticky;top:0px;z-index:11;}
 .note-editable{height:220px !important;}
 /* Preview Img */
