@@ -11,7 +11,7 @@ class CProductController extends Controller
 {
     public function index()
     {
-        $productInternal = Product::select('id', 'name', 'product_photo_path', 'regular_price', 'sale_price', 'discount')->get();
+        $productInternal = Product::select('id', 'name', 'product_photo_path', 'regular_price', 'sale_price', 'discount')->latest()->paginate(10);
         return view('client.product.index', compact('productInternal'));
     }   
 

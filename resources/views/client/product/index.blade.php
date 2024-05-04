@@ -71,6 +71,9 @@
                         </div>
                         @endforeach
                     </div>
+                    <div class="col-md-12 mt-3 text-center">
+                        {{ $productInternal->links('pagination::bootstrap-5') }}
+                    </div>
                 @else
                     <div class="alert alert-warning w-100">
                         <strong>Dữ liệu đang được cập nhật.</strong>
