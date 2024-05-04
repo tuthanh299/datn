@@ -293,6 +293,15 @@ function AllRun() {
 AOS.init({
     once: false,
 });
+document.addEventListener("DOMContentLoaded", function(event) {
+    setTimeout(initThirdParty, 2000);
+
+    function initThirdParty() {
+        $('body').on('click', '.show-btn-wrapper', function(e) {
+            $('.show-btn-wrapper').toggleClass('toggle');
+        });
+    }
+});
 $(document).ready(function () {
     PeShiner();
     TranslateClick();
@@ -301,4 +310,5 @@ $(document).ready(function () {
     ProductTnteract();
     SlickPage();
     AllRun();
+    
 });
