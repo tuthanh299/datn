@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
         ]);*/
 
         $this->call([
-            UserSeeder::class,
             CategorySeeder::class,
-            AuthorSeeder::class,
+            //AuthorSeeder::class,
             PublisherSeeder::class,
+            ProductsSeeder::class,
             RoleSeeder::class,
             SettingSeeder::class,
             StaticNewsSeeder::class,

@@ -19,6 +19,7 @@ use App\Http\Controllers\Clients\CAboutusController;
 use App\Models\Slider;
 use App\Http\Controllers\Clients\CNewsController;
 use App\Http\Controllers\Clients\CProductController;
+use App\Http\Controllers\CartController;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
 Route::post('/login', [AdminController::class, 'postLoginAdmin'])->name('adminlogin.post');
@@ -39,7 +40,9 @@ Route::get('/admin', function () {
     return view('admin.admin');
 })->middleware('auth');
 
-Route::get('/', function () {
+//Me
+
+/*Route::get('/', function () {
     $sliders = Slider::all();
     $cart1s = [
         [
@@ -67,7 +70,10 @@ Route::get('/', function () {
         return view('index', compact('user', 'cart1s', 'sliders'));
     }
 
-})->name('homepage');
+})->name('homepage');*/
+
+//Tú
+
 Route::prefix('/')->group(function () {
     /* Index */
     Route::controller(IndexController::class)->group(function () {

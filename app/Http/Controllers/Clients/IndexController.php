@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Slider;
 use App\Models\StaticNews;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -26,6 +27,12 @@ class IndexController extends Controller
             ->where('status', 1)
             ->where('outstanding',1)
             ->get();
+
+        if (Auth::check())
+        {
+            $user = Auth::user();
+            return view('client.index', compact('user','sliders', 'news', 'productOutstanding', 'aboutus'));
+        }
 
         return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus'));
     }

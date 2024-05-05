@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
+            //$table->id();
+            $table->string('id')->primary();
             $table->string('name');
-            $table->integer('category_id');
+            $table->string('category_id');
             $table->mediumText('description');
             $table->mediumText('content');
             $table->string('product_photo_name')->nullable();
@@ -30,7 +31,9 @@ return new class extends Migration
             $table->boolean('outstanding')->default(false);        
             $table->timestamps();
             $table->softDeletes();
-           
+
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('restrict');
         });
     }
 
