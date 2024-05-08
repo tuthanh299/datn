@@ -265,7 +265,6 @@ function SlickPage() {
         focusOnSelect: true,
         autoplaySpeed: 3000,
     });
-    
 }
 
 function AllRun() {
@@ -289,26 +288,135 @@ function AllRun() {
             );
         }
     });
-}
-AOS.init({
-    once: false,
-});
-document.addEventListener("DOMContentLoaded", function(event) {
-    setTimeout(initThirdParty, 2000);
-
-    function initThirdParty() {
-        $('body').on('click', '.show-btn-wrapper', function(e) {
-            $('.show-btn-wrapper').toggleClass('toggle');
+    function ShowHideSocial() {
+        $("body").on("click", ".show-btn-wrapper", function (e) {
+            $(".show-btn-wrapper").toggleClass("toggle");
         });
     }
-});
+    setTimeout(ShowHideSocial, 2000);
+
+    $(document).ready(function () {
+        $(".flex-categorysecond").on(
+            "click",
+            ".categorysecond",
+            function (event) {
+                event.preventDefault();
+
+                var categoryParentId = $(this).data("idf");
+                var categoryId = $(this).data("ids");
+
+                $(this)
+                    .closest(".wrap-content")
+                    .find(".flex-categorysecond .categorysecond")
+                    .removeClass("active");
+                $(this).addClass("active");
+
+                $.ajax({
+                    url: $(this).data("url"),
+                    type: "GET",
+                    data: { categoryId: categoryId },
+                    success: function (response) {
+                        if (response.products) {
+                            var products = response.products;
+                            var productHtml = "";
+
+                            $.each(products, function (index, product) {
+                                productHtml +=
+                                    '<div class="product-item" data-aos="fade-up" data-aos-duration="1000">' +
+                                    '<div class="product" data-aos="zoom-in-up">' +
+                                    '<div class="box-product text-decoration-none">' +
+                                    '<div class="position-relative overflow-hidden">' +
+                                    '<a class="pic-product" href="/product/detail/' +
+                                    product.id +
+                                    '" title="' +
+                                    product.name +
+                                    '">' +
+                                    '<div class="pic-product-img scale-img hover_light">' +
+                                    '<img class="w-100" src="' +
+                                    product.product_photo_path +
+                                    '" alt="' +
+                                    product.name +
+                                    '">' +
+                                    "</div>" +
+                                    "</a>" +
+                                    "</div>" +
+                                    '<div class="info-product">' +
+                                    '<div class="name-product"><a class="text-split-2" href="/product/detail/' +
+                                    product.id +
+                                    '" title="' +
+                                    product.name +
+                                    '">' +
+                                    product.name +
+                                    "</a></div>" +
+                                    '<div class="-cart">' +
+                                    '<div class="product-quantity">' +
+                                    '<span class="product-quantity-text">Còn hàng:</span>' +
+                                    '<span class="product-quantity-num-sub-text">' +
+                                    '<span class="product-quantity-num">4</span>' +
+                                    '<span class="product-quantity-num-sub-text">sản phẩm</span>' +
+                                    "</span>" +
+                                    "</div>" +
+                                    "</div>" +
+                                    '<div class="flex-price-cart-product">' +
+                                    '<div class="price-product">' +
+                                    '<div class="price-new">' +
+                                    product.sale_price +
+                                    "</div>" +
+                                    '<div class="price-old">' +
+                                    product.regular_price +
+                                    "</div>" +
+                                    '<div class="discount">' +
+                                    product.discount +
+                                    "%</div>" +
+                                    "</div>" +
+                                    '<div class="cart-product-add">' +
+                                    '<div class="flex-cart-product-add-quantity">' +
+                                    '<div class="product-quantity-cart">' +
+                                    '<div class="product-quantity-cart-flex">' +
+                                    '<button class="decrement-cart">-</button>' +
+                                    '<input type="number" class="quantity-input" value="0" min="0">' +
+                                    '<button class="increment-cart">+</button>' +
+                                    "</div>" +
+                                    "</div>" +
+                                    '<div class="cart-product-add-btn">' +
+                                    '<i class="fa-solid fa-cart-shopping"></i>' +
+                                    "</div>" +
+                                    "</div>" +
+                                    "</div>" +
+                                    "</div>" +
+                                    "</div>" +
+                                    "</div>" +
+                                    "</div>";
+                            });
+
+                            $(
+                                ".paging-product-category-" + categoryParentId
+                            ).html(productHtml);
+                        } else {
+                            console.log(
+                                "Không có sản phẩm nào trong danh mục này."
+                            );
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    },
+                });
+            }
+        );
+    });
+}
+
 $(document).ready(function () {
+    AOS.init({
+        once: false,
+    });
     PeShiner();
     TranslateClick();
     setupBackToTop();
     CartBtnClick();
     ProductTnteract();
     SlickPage();
+
     AllRun();
-    
 });

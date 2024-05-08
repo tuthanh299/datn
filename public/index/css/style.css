@@ -168,6 +168,15 @@ input[type=number]{-moz-appearance:textfield;}
 .slick-product-image-detail{margin-right:-5px;}
 .product-image-detail-item{padding-right:5px;}
 .slick-product-image-detail{padding:5px;border:solid 1px #ccc;border-radius:5px;}
+/* Product list cat */
+.wrap-product-list-cat{padding:50px 0px;}
+.flex-categorysecond{display: flex;justify-content: center;align-items: center;gap: 10px;flex-wrap: wrap;}
+.categorysecond{padding: 10px;border-radius: 5px;background: blue;}
+.categorysecond a{color: #fff !important;}
+.categorysecond.active{background: red;}
+ 
+.grid-product-external{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;}
+
 /* Footer */
 .footer-news:nth-child(1){width:35%;}
 .footer-news:nth-child(2){width:25%;}

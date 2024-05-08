@@ -1,6 +1,34 @@
 <?php
 use App\Http\Controllers\Clients\IndexController;
+
 ?>
+
+@foreach (json_decode(\App\Http\Controllers\Clients\IndexController::loadCategory()->getContent())->categories as $categoryFirst)
+    <div class="wrap-product-list-cat">
+        <div class="wrap-content">
+            <div class="title-main categoryfirst">
+                <span >{{ $categoryFirst->name }}</span>
+            </div>
+            <div class="flex-categorysecond">
+                @foreach ($categoryFirst->children as $key => $categorySecond)
+                    <div class="categorysecond {{ $key === 0 ? ' active' : '' }}" data-idf="{{ $categoryFirst->id }}" data-ids="{{ $categorySecond->id }}" data-url="{{ route('get-category-data', ['categoryId' => $categorySecond->id, 'categoryParentId' => $categoryFirst->id]) }}">
+                        <a>{{ $categorySecond->name }}</a>
+                    </div>
+                @endforeach
+                 
+            </div>
+            <div class="paging-product-category-{{ $categoryFirst->id }} grid-product-external"> 
+                 
+            </div>
+        </div>
+    </div>
+@endforeach
+
+
+
+
+
+
 @isset($productOutstanding)
     @if (!$productOutstanding->isEmpty())
         {{-- Product Oustanding --}}
@@ -16,7 +44,8 @@ use App\Http\Controllers\Clients\IndexController;
                                 <div class="product" data-aos="zoom-in-up">
                                     <div class="box-product text-decoration-none">
                                         <div class="position-relative overflow-hidden  ">
-                                            <a class="pic-product " href="{{ route('product.detail', ['id' => $v->id]) }}" title="Sản phẩm">
+                                            <a class="pic-product " href="{{ route('product.detail', ['id' => $v->id]) }}"
+                                                title="Sản phẩm">
                                                 <div class="pic-product-img scale-img hover_light">
                                                     <img class="w-100" src="{{ $v->product_photo_path }}"
                                                         alt="{{ $v->name }}">
@@ -24,7 +53,8 @@ use App\Http\Controllers\Clients\IndexController;
                                             </a>
                                         </div>
                                         <div class="info-product">
-                                            <div class="name-product"><a class="text-split-2" href="{{ route('product.detail', ['id' => $v->id]) }}"
+                                            <div class="name-product"><a class="text-split-2"
+                                                    href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                     title="{{ $v->name }}">{{ $v->name }}</a>
                                             </div>
                                             <div class="-cart">
