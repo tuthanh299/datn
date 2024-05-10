@@ -1,20 +1,20 @@
 <?php
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Clients\CAboutusController;
+use App\Http\Controllers\Clients\CNewsController;
+use App\Http\Controllers\Clients\CProductController;
+use App\Http\Controllers\Clients\IndexController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\SettingController;
+/* Clients */
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\UserController;
-/* Clients */
-use App\Http\Controllers\Clients\CAboutusController;
-use App\Http\Controllers\Clients\CNewsController;
-use App\Http\Controllers\Clients\CProductController;
-use App\Http\Controllers\Clients\IndexController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
 Route::post('/login', [AdminController::class, 'postLoginAdmin']);
@@ -27,14 +27,12 @@ Route::prefix('/')->group(function () {
     /* Index */
     Route::controller(IndexController::class)->group(function () {
         Route::get('/', 'index')->name('index');
-      
-        Route::get('/load-categories', 'IndexController@loadCategory')->name('load-categories');
         
         Route::get('/get-category-data/{categoryId}', [IndexController::class, 'getCategoryData'])->name('get-category-data');
+
+        Route::get('/publisher/{id}', [IndexController::class, 'publisherproduct'])->name('publisher.publisherproduct');
     });
-      
-     
-  
+
     /* About Us */
     Route::controller(CAboutusController::class)->group(function () {
         Route::get('/aboutus', 'index')->name('aboutus');
@@ -48,7 +46,7 @@ Route::prefix('/')->group(function () {
     Route::controller(CProductController::class)->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
-    });  
+    });
 });
 
 Route::prefix('admin')->group(function () {

@@ -76,7 +76,7 @@
                     </div>
                 @else
                     <div class="alert alert-warning w-100">
-                        <strong>Dữ liệu đang được cập nhật.</strong>
+                        <strong>Thông tin đang được cập nhật. Vui lòng kiểm tra lại sau để không bỏ lỡ bất kỳ nội dung mới nào!</strong>
                     </div>
                 @endif
             @endisset
