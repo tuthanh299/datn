@@ -61,10 +61,32 @@ class IndexController extends Controller
     }
     public function publisherproduct($id)
     {
+        $user = Auth::user();
         $publisher = Publisher::where('id', $id)->firstOrFail();
         $pagename = $publisher->name;
-        $publisherproduct = Product::where('publisher_id', $id)->latest()->paginate(10);;  
-        return view('client.product.publisher_product', compact('publisherproduct','pagename'));
+        $publisherproduct = Product::where('publisher_id', $id)->latest()->paginate(10);
+        $cart1s = [
+            [
+                'id' => 1,
+                'name' => 'Product 1',
+                'price' => 1000,
+                'quantity' => 1
+            ],
+            [
+                'id' => 2,
+                'name' => 'Product 2',
+                'price' => 1000,
+                'quantity' => 1
+            ],
+        ];
+
+        if ($user != null) 
+        {
+            $user = Auth::user();
+            return view('client.product.publisher_product', compact('publisherproduct','pagename', 'user', 'cart1s'));
+        }
+
+        return view('client.product.publisher_product', compact('publisherproduct','pagename', 'user', 'cart1s'));
     } 
     
     public function getCategoryData(Request $request)
