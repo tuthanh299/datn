@@ -8,15 +8,15 @@ class CNewsController extends Controller
 {
     public function index()
     {
-        $newsInternal = News::select('id', 'name', 'description', 'photo_path')->get();
+        $newsInternal = News::select('id', 'name', 'description', 'photo_path')->latest()->paginate(8);
         return view('client.news.index', compact('newsInternal'));
     }
 
     public function detail($id)
     {
-        $newsDetail = News::find($id); 
+        $newsDetail = News::find($id);
         $newsInternal = News::select('id', 'name', 'description', 'photo_path')->get();
-        return view('client.news.detail', compact('newsDetail','newsInternal'));
+        return view('client.news.detail', compact('newsDetail', 'newsInternal'));
     }
 
 }

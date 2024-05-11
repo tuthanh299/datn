@@ -212,6 +212,17 @@ function SlickPage() {
         arrows: false,
         fade: false,
     });
+    initializeSlick(".slick-publisher-ex", {
+        dots: false,
+        infinite: true,
+        autoplaySpeed: 3500,
+        slidesToShow: 8,
+        slidesToScroll: 1,
+        adaptiveHeight: false,
+        autoplay: true,
+        arrows: false,
+        fade: false,
+    });
     initializeSlick(".slick-other-news-internal", {
         dots: false,
         infinite: true,
@@ -265,7 +276,6 @@ function SlickPage() {
         focusOnSelect: true,
         autoplaySpeed: 3000,
     });
-    
 }
 
 function AllRun() {
@@ -289,16 +299,238 @@ function AllRun() {
             );
         }
     });
+    function ShowHideSocial() {
+        $("body").on("click", ".show-btn-wrapper", function (e) {
+            $(".show-btn-wrapper").toggleClass("toggle");
+        });
+    }
+    setTimeout(ShowHideSocial, 2000);
+
+    $(document).ready(function () {
+        $(".flex-categorysecond").on(
+            "click",
+            ".categorysecond",
+            function (event) {
+                event.preventDefault();
+                var categoryParentId = $(this).data("idf");
+                var categoryId = $(this).data("ids");
+
+                $(this)
+                    .closest(".wrap-content")
+                    .find(".flex-categorysecond .categorysecond")
+                    .removeClass("active");
+                $(this).addClass("active");
+
+                $.ajax({
+                    url: $(this).data("url"),
+                    type: "GET",
+                    data: { categoryId: categoryId },
+                    success: function (response) {
+                        $(".paging-product-category-" + categoryParentId).html(
+                            ""
+                        );
+                        var productHtml = "";
+                        if (response.products && response.products.length > 0) {
+                            response.products.forEach(function (product) {
+                                productHtml += 
+                                '<div class="product-item" data-aos="fade-up" data-aos-duration="1000">' +
+                                '<div class="product" data-aos="zoom-in-up">' +
+                                '<div class="box-product text-decoration-none">' +
+                                '<div class="position-relative overflow-hidden">' +
+                                '<a class="pic-product" href="/product/' +
+                                product.id +
+                                '" title="' +
+                                product.name +
+                                '">' +
+                                '<div class="pic-product-img scale-img hover_light">' +
+                                '<img class="w-100" src="' +
+                                product.product_photo_path +
+                                '" alt="' +
+                                product.name +
+                                '">' +
+                                "</div>" +
+                                "</a>" +
+                                "</div>" +
+                                '<div class="info-product">' +
+                                '<div class="name-product"><a class="text-split-2" href="/product/' +
+                                product.id +
+                                '" title="' +
+                                product.name +
+                                '">' +
+                                product.name +
+                                "</a></div>" +
+                                '<div class="-cart">' +
+                                '<div class="product-quantity">' +
+                                '<span class="product-quantity-text">Còn hàng:</span>' +
+                                '<span class="product-quantity-num-sub-text">' +
+                                '<span class="product-quantity-num">4</span>' +
+                                '<span class="product-quantity-num-sub-text">sản phẩm</span>' +
+                                "</span>" +
+                                "</div>" +
+                                "</div>" +
+                                '<div class="flex-price-cart-product">' +
+                                '<div class="price-product">' +
+                                '<div class="price-new">' +
+                                product.sale_price +
+                                "</div>" +
+                                '<div class="price-old">' +
+                                product.regular_price +
+                                "</div>" +
+                                '<div class="discount">' +
+                                product.discount +
+                                "%</div>" +
+                                "</div>" +
+                                '<div class="cart-product-add">' +
+                                '<div class="flex-cart-product-add-quantity">' +
+                                '<div class="product-quantity-cart">' +
+                                '<div class="product-quantity-cart-flex">' +
+                                '<button class="decrement-cart">-</button>' +
+                                '<input type="number" class="quantity-input" value="0" min="0">' +
+                                '<button class="increment-cart">+</button>' +
+                                "</div>" +
+                                "</div>" +
+                                '<div class="cart-product-add-btn">' +
+                                '<i class="fa-solid fa-cart-shopping"></i>' +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" + 
+                                "</div>";
+                            });
+
+                            $(
+                                ".paging-product-category-" + categoryParentId
+                            ).html(productHtml);
+                        } else {
+                            productHtml =
+                                '<div class="alert alert-warning w-100 gr-100">' +
+                                "<strong>Thông tin đang được cập nhật. Vui lòng kiểm tra lại sau để không bỏ lỡ bất kỳ nội dung mới nào!</strong>" +
+                                "</div>";
+                            $(
+                                ".paging-product-category-" + categoryParentId
+                            ).html(productHtml);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    },
+                });
+            }
+        );
+        $(".categorysecond.active").each(function (event) {            
+            var categoryParentId = $(this).data("idf");
+            var categoryId = $(this).data("ids"); 
+            $.ajax({
+                url: $(this).data("url"),
+                type: "GET",
+                data: { categoryId: categoryId },
+                success: function (response) {
+                    $(".paging-product-category-" + categoryParentId).html("");
+                    var productHtml = "";
+                    if (response.products && response.products.length > 0) {
+                        response.products.forEach(function (product) {
+                            productHtml += 
+                                '<div class="product-item" data-aos="fade-up" data-aos-duration="1000">' +
+                                '<div class="product" data-aos="zoom-in-up">' +
+                                '<div class="box-product text-decoration-none">' +
+                                '<div class="position-relative overflow-hidden">' +
+                                '<a class="pic-product" href="/product/' +
+                                product.id +
+                                '" title="' +
+                                product.name +
+                                '">' +
+                                '<div class="pic-product-img scale-img hover_light">' +
+                                '<img class="w-100" src="' +
+                                product.product_photo_path +
+                                '" alt="' +
+                                product.name +
+                                '">' +
+                                "</div>" +
+                                "</a>" +
+                                "</div>" +
+                                '<div class="info-product">' +
+                                '<div class="name-product"><a class="text-split-2" href="/product/' +
+                                product.id +
+                                '" title="' +
+                                product.name +
+                                '">' +
+                                product.name +
+                                "</a></div>" +
+                                '<div class="-cart">' +
+                                '<div class="product-quantity">' +
+                                '<span class="product-quantity-text">Còn hàng:</span>' +
+                                '<span class="product-quantity-num-sub-text">' +
+                                '<span class="product-quantity-num">4</span>' +
+                                '<span class="product-quantity-num-sub-text">sản phẩm</span>' +
+                                "</span>" +
+                                "</div>" +
+                                "</div>" +
+                                '<div class="flex-price-cart-product">' +
+                                '<div class="price-product">' +
+                                '<div class="price-new">' +
+                                product.sale_price +
+                                "</div>" +
+                                '<div class="price-old">' +
+                                product.regular_price +
+                                "</div>" +
+                                '<div class="discount">' +
+                                product.discount +
+                                "%</div>" +
+                                "</div>" +
+                                '<div class="cart-product-add">' +
+                                '<div class="flex-cart-product-add-quantity">' +
+                                '<div class="product-quantity-cart">' +
+                                '<div class="product-quantity-cart-flex">' +
+                                '<button class="decrement-cart">-</button>' +
+                                '<input type="number" class="quantity-input" value="0" min="0">' +
+                                '<button class="increment-cart">+</button>' +
+                                "</div>" +
+                                "</div>" +
+                                '<div class="cart-product-add-btn">' +
+                                '<i class="fa-solid fa-cart-shopping"></i>' +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" + 
+                                "</div>";
+                        }); 
+                        $(".paging-product-category-" + categoryParentId).html(
+                            productHtml
+                        );
+                    } else {
+                        productHtml =
+                            '<div class="alert alert-warning w-100 gr-100">' +
+                            "<strong>Thông tin đang được cập nhật. Vui lòng kiểm tra lại sau để không bỏ lỡ bất kỳ nội dung mới nào!</strong>" +
+                            "</div>";
+                        $(".paging-product-category-" + categoryParentId).html(
+                            productHtml
+                        );
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                },
+            });
+        });
+    });
 }
-AOS.init({
-    once: false,
-});
+
 $(document).ready(function () {
+    AOS.init({
+        once: false,
+    });
     PeShiner();
     TranslateClick();
     setupBackToTop();
     CartBtnClick();
     ProductTnteract();
     SlickPage();
+
     AllRun();
 });

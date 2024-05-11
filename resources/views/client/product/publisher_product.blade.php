@@ -1,78 +1,18 @@
-<?php
-use App\Http\Controllers\Clients\IndexController;
+@extends('client.layouts.index')
 
-?>
-
-@isset($category_first)
-    @if (!$category_first->isEmpty())
-        @foreach ($category_first as $v)
-            <div class="wrap-product-list-cat">
-                <div class="wrap-content">
-                    <div class="title-main categoryfirst">
-                        <span>{{ $v->name }}</span>
-                    </div>
-                    <div class="flex-categorysecond">
-                        @foreach ($v->children as $key => $category_second)
-                            <div class="categorysecond {{ $key === 0 ? ' active' : '' }}"
-                            data-idf="{{ $v->id }}" data-ids="{{ $category_second->id }}" 
-                                data-url="{{ route('get-category-data', ['categoryId' => $category_second->id]) }}">
-                                {{ $category_second->name }}
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="paging-product-category-style paging-product-category-{{ $v->id }} grid-product-external">
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    @endif
-@endisset
-
-
-@isset($publisher)
-    @if (!$publisher->isEmpty())
-        {{-- Publisher --}}
-        <div class="wrap-publisher">
-            <div class="wrap-content">
-                <div class="title-main">
-                    <span>
-                        Đối tác của chúng tôi
-                    </span>
-                </div>
-                <div class="slick-publisher-ex">
-                    @foreach ($publisher as $v)
-                        <div class="publisher-box-ex">
-                            <a href="{{ route('publisher.publisherproduct', ['id' => $v->id]) }}"
-                                title="{{ $v->name }}">
-                                <div class="publisher-ex-img">
-                                    <img class="w-100" src="{{ $v->photo_path }}" alt="{{ $v->name }}">
-                                </div>
-                                <div class="publisher-ex-name text-split-2">
-                                    {{ $v->name }}
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-
-                </div>
-            </div>
+@section('content')
+    <div class="wrap-content">
+        <div class="title-main">
+            <span>
+                <?= $pagename ?>
+            </span>
         </div>
-    @endif
-@endisset
-
-
-@isset($productOutstanding)
-    @if (!$productOutstanding->isEmpty())
-        {{-- Product Oustanding --}}
-        <div class="wrap-product-outstanding py50">
-            <div class="wrap-content">
-                <div class="title-main">
-                    <span>Sản phẩm nổi bật</span>
-                </div>
-                <div class="slick-product-outstanding-cover">
-                    <div class="slick-product-outstanding">
-                        @foreach ($productOutstanding as $v)
-                            <div class="product-outstanding-item" data-aos="fade-up" data-aos-duration="1000">
+        <div class="content-main">
+            @isset($publisherproduct)
+                @if (!$publisherproduct->isEmpty())
+                    <div class="grid-product-internal">
+                        @foreach ($publisherproduct as $v)
+                            <div class="product-item" data-aos="fade-up" data-aos-duration="1000">
                                 <div class="product" data-aos="zoom-in-up">
                                     <div class="box-product text-decoration-none">
                                         <div class="position-relative overflow-hidden  ">
@@ -133,35 +73,15 @@ use App\Http\Controllers\Clients\IndexController;
                             </div>
                         @endforeach
                     </div>
-                </div>
-            </div>
+                    <div class="col-md-12 mt-3 text-center">
+                        {{ $publisherproduct->links('pagination::bootstrap-5') }}
+                    </div>
+                @else
+                    <div class="alert alert-warning w-100">
+                        <strong>Thông tin đang được cập nhật. Vui lòng kiểm tra lại sau để không bỏ lỡ bất kỳ nội dung mới nào!</strong>
+                    </div>
+                @endif
+            @endisset
         </div>
-    @endif
-@endisset
-@isset($news)
-    @if (!$news->isEmpty())
-        {{-- News --}}
-        <div class="wrap-news-ex py50">
-            <div class="wrap-content">
-                <div class="title-main">
-                    <span>Tin tức</span>
-                </div>
-                <div class="slick-news-ex">
-                    @foreach ($news as $v)
-                        <div class="news-box-ex" data-aos="fade-up" data-aos-duration="1000">
-                            <a href="{{ route('news.detail', ['id' => $v->id]) }}">
-                                <div class="news-box-ex-img scale-img hover_light">
-                                    <img src="{{ $v->photo_path }}" alt="{{ $v->name }}" class="w-100">
-                                </div>
-                                <div class="news-box-ex-info">
-                                    <div class="news-box-ex-name text-split-2"> {{ $v->name }}</div>
-                                    <div class="news-box-ex-desc text-split-3">{!! $v->description !!}</div>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    @endif
-@endisset
+    </div>
+@endsection
