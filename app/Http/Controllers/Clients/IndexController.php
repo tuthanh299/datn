@@ -28,19 +28,36 @@ class IndexController extends Controller
         $aboutus = StaticNews::select('name', 'description', )->get();
         $publisher= Publisher::select('id','name','photo_path')->get();
         $category_first = Category::with('children')->where('parent_id', 0)->get();
+        $user = Auth::user();
+        $cart1s = [
+            [
+                'id' => 1,
+                'name' => 'Product 1',
+                'price' => 1000,
+                'quantity' => 1
+            ],
+            [
+                'id' => 2,
+                'name' => 'Product 2',
+                'price' => 1000,
+                'quantity' => 1
+            ],
+        ];
 
         $productOutstanding = Product::select('id', 'name', 'product_photo_path', 'regular_price', 'sale_price', 'discount',)
             ->where('status', 1)
             ->where('outstanding', 1)
             ->get();
 
-        if (Auth::check())
+        if ($user != null)
         {
             $user = Auth::user();
-            return view('client.index', compact('user','sliders', 'news', 'productOutstanding', 'aboutus'));
+            return view('client.index', compact('user','sliders', 'news', 'productOutstanding', 'aboutus', 'cart1s'));
+            //dd($sliders, $news, $aboutus, $productOutstanding, $publisher, $category_first, $user);
         }
 
-        return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus','publisher','category_first'));
+        return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus','publisher','category_first', 'user', 'cart1s'));
+        //dd($sliders, $news, $aboutus, $productOutstanding, $publisher, $category_first);
     }
     public function publisherproduct($id)
     {

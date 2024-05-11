@@ -1,20 +1,13 @@
 <?php
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Clients\CAboutusController;
-use App\Http\Controllers\Clients\CNewsController;
-use App\Http\Controllers\Clients\CProductController;
-use App\Http\Controllers\Clients\IndexController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\NewsController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
-use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\Auth\ProviderController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\SliderController;
 use App\Http\Controllers\SettingController;
 /* Clients */
 use App\Http\Controllers\SliderController;

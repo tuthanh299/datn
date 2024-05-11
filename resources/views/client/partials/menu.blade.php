@@ -2,7 +2,7 @@
     <div class="wrap-content">
         <ul class="menu-main">
             <li>
-                <a href="{{route('homepage')}}" title="Trang chủ" title="Trang chủ">
+                <a href="{{route('index')}}" title="Trang chủ" title="Trang chủ">
                     Trang chủ
                 </a>
             </li>
