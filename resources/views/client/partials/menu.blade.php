@@ -54,40 +54,18 @@
                         <div class="menu-bottom-personalized">
                             <div class="flex-menu-bottom-personalized">
                                 @if ($user == null)
-                                <div class="menu-bottom-account-positon">
-                                    <div id="open-user-btn" class="menu-bottom-account">
-                                        <div class="menu-bottom-account-icon">
-                                            <i class="fa-solid fa-user"></i>
-                                        </div>
-                                        <div class="menu-bottom-account-text">
-                                            Tài khoản
-                                        </div>
+                                <div class="menu-bottom-account-positon" data-bs-toggle="modal"
+                                data-bs-target="#account-modal">
+                                <div class="menu-bottom-account">
+                                    <div class="menu-bottom-account-icon">
+                                        <i class="fa-solid fa-user"></i>
                                     </div>
-                                    <div class="menu-bottom-account-hidden">
-                                        <div class="menu-bottom-account-hidden-cover">
-                                            <div class="flex-menu-bottom-account-hidden-cover">
-                                                <div class="menu-bottom-account-hidden-cover-text">
-                                                </div>
-                                                <div id="close-user-btn"
-                                                    class="menu-bottom-account-hidden-cover-close-btn">
-                                                    <i class="fa-solid fa-circle-xmark"></i>
-                                                </div>
-                                            </div>
-                                            <div class="menu-bottom-account-hidden-btn">
-                                                <div class="flex-menu-bottom-account-hidden-btn">
-                                                    <div class="menu-bottom-account-hidden-login">
-                                                        <a href="{{route('user.login')}}">Đăng
-                                                            nhập</a>
-                                                    </div>
-                                                    <div class="menu-bottom-account-hidden-register">
-                                                        <a href="register">Đăng
-                                                            ký</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="menu-bottom-account-text">
+                                        Tài khoản
                                     </div>
                                 </div>
+
+                            </div>
                                 @else
                                 <div class="menu-bottom-account-positon">
                                     <div id="open-user-btn" class="menu-bottom-account">

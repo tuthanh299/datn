@@ -22,7 +22,7 @@ use App\Http\Controllers\Clients\CProductController;
 use App\Http\Controllers\CartController;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
-Route::post('/login', [AdminController::class, 'postLoginAdmin'])->name('adminlogin.post');
+Route::post('/login', [AdminController::class, 'postLoginAdmin'])->name('login.post');
 
 Route::get('logout', [AdminController::class, 'logoutAdmin'])->name('logout');
 
