@@ -53,5 +53,5 @@ class IndexController extends Controller
     
         return response()->json(['products' => $products]);
     }
-    s
+    
 }
