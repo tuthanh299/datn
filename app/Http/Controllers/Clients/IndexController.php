@@ -49,11 +49,9 @@ class IndexController extends Controller
     
         $products = Product::where('category_id', $categoryId)->get();
     
-        // if ($products->isEmpty()) {
-        //     return response()->json(['error' => 'This category currently has no products'], 404);
-        // }
+         
     
         return response()->json(['products' => $products]);
     }
-    
+    s
 }
