@@ -14,6 +14,7 @@
    
     <script src="{{ asset('/adminlte/dist/js/demo.js') }}"></script>
     <script src="{{ asset('/adminlte/dist/js/pages/dashboard2.js') }}"></script>
+    <script src="{{ asset('/adminlte/plugins/chart.js/Chart.min.js') }}"></script>
      <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">

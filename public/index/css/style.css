@@ -98,6 +98,7 @@ a{color:#000;text-decoration:unset !important;}
 .flex-menu-partials{display:flex;align-items:center;gap:10px;}
 /* Slider */
 .slideshow{position:relative;}
+.slider-style{object-fit:fill;}
 /* EXTERNAL PAGE */
 /* News */
 .size-news-img-ex{width:300px;height:200px;object-fit:cover;}
@@ -109,6 +110,7 @@ a{color:#000;text-decoration:unset !important;}
 .news-box-ex-desc{text-align:justify;color:var(--5,#161616);font-size:14px;font-style:normal;font-weight:400;}
 .news-box-ex-img img{height:200px !important;object-fit:cover;}
 /* Product outstanding */
+.title-left{text-align:left;}
 .wrap-product-outstanding{padding:40px 0px;}
 .name-product a{color:var(--5,#161616);font-size:14px;font-style:normal;font-weight:bold;text-transform:uppercase;text-align:center;}
 .name-product a:hover{color:#0063B6;}
@@ -129,7 +131,6 @@ a{color:#000;text-decoration:unset !important;}
 .quantity-input{text-align:center;}
 .quantity-input:focus{outline:none;border:none;}
 .product-quantity-cart-flex{display:flex;align-items:center;justify-content:center;}
-.cart-product-add:hover{}
 .product{border:solid 1px #ccc;}
 .product:hover{border:solid 1px #0982E8;}
 .product-outstanding-item{padding-right:20px;}
@@ -138,6 +139,29 @@ a{color:#000;text-decoration:unset !important;}
 }
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
 input[type=number]{-moz-appearance:textfield;}
+/* Product List Cat */
+.categoryfirst{background:url('../imgs/bannerfirst.png');background-size:100% 100%;height:200px;display:flex;align-items:center;justify-content:center;}
+.categoryfirst span{font-size:60px;color:#fff;}
+/* Criteria */
+.wrap-criteria{padding: 30px 0px;}
+ .criteria-box{padding-right:20px;}
+.slick-criteria{margin-right:-20px;}
+.criteria-name{font-size:15px;text-transform:uppercase;display:flex;align-items:center;padding-left:25px;text-align:center;background:#F0F0F0;color:#000;height: 55px;border-radius: 0px 5px 5px 0px;font-weight: bold;}
+.criteria-box:hover .criteria-img img{transform:rotateY(360deg);transition:2s;}
+.criteria-img img{transition:2s;}
+.criteria-img{width: 65px;background: #8576FF;height: 65px;display:flex;align-items:center;justify-content:center;border-radius:5px;position:relative;}
+.criteria-img:after{content:"";position:absolute;background: #8576FF;width:16px;height:16px;left:87.5%;top:0px;bottom:0px;margin:auto;transform:rotate(45deg);border-radius:3px;z-index:1;}
+.criteria-info{width:calc(100% - 66px);}
+.criteria-img img{position:relative;z-index:2;width: 44px;height: 44px;filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7490%) hue-rotate(29deg) brightness(100%) contrast(100%);}
+.group-criteria-prouduct .criteria-name{font-size: 12px;padding-left: 20px;height: 40px;}
+.group-criteria-prouduct .criteria-img img {width: 30px;height: 30px;}
+.group-criteria-prouduct .criteria-img {width: 50px;height: 50px;}
+.group-criteria-prouduct .criteria-img:after{
+    width: 10px;
+    height: 10px;
+}
+/* Publisher */
+.wrap-publisher{padding: 30px 0px;}
 /* INTERNAL PAGE */
 /* News */
 .grid-news-internal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;}
@@ -170,21 +194,20 @@ input[type=number]{-moz-appearance:textfield;}
 .slick-product-image-detail{padding:5px;border:solid 1px #ccc;border-radius:5px;}
 /* Product list cat */
 .wrap-product-list-cat{padding:50px 0px;}
-.flex-categorysecond{display: flex;justify-content: center;align-items: center;gap: 10px;flex-wrap: wrap;}
-.categorysecond{padding: 10px;border-radius: 5px;background: blue;}
-.categorysecond {color: #fff !important;}
-.categorysecond.active{background: red;}
-.gr-100 {
-    grid-column: 5 span !important;
-}
+.flex-categorysecond{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;}
+.categorysecond{padding:10px;border-radius:5px;background:#8576FF;}
+.categorysecond{color:#fff !important;}
+.categorysecond.active,.categorysecond:hover{background:#4942E4;cursor:pointer;}
+.gr-100{grid-column:5 span !important;}
 .grid-product-external{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;}
-.paging-product-category-style{margin: 20px 0px;}
+.paging-product-category-style{margin:20px 0px;}
+.product-slick-item{padding-right:20px;}
+.slick-product-category{margin-right:-20px;}
 /* Publisher */
 .publisher-ex-img img{height:150px !important;object-fit:cover;}
-.publisher-box-ex{padding-right: 15px;}
-.slick-publisher-ex{margin-right: -15px;}
-.publisher-ex-name{text-align: center;margin-top: 10px;font-weight: bold;text-transform: uppercase;}
- 
+.publisher-box-ex{padding-right:15px;}
+.slick-publisher-ex{margin-right:-15px;}
+.publisher-ex-name{text-align:center;margin-top:10px;font-weight:bold;text-transform:uppercase;}
 /* Footer */
 .footer-news:nth-child(1){width:35%;}
 .footer-news:nth-child(2){width:25%;}

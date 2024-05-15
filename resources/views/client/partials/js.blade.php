@@ -16,6 +16,7 @@
     nonce="3a98StDB"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
 
 <script src="{{ asset('index/js/flags.js') }}"></script>
 <script src="{{ asset('index/js/jquery.pixelentity.shiner.min.js') }}"></script>

@@ -2,71 +2,12 @@
 use App\Http\Controllers\Clients\IndexController;
 
 ?>
-
-@isset($category_first)
-    @if (!$category_first->isEmpty())
-        @foreach ($category_first as $v)
-            <div class="wrap-product-list-cat">
-                <div class="wrap-content">
-                    <div class="title-main categoryfirst">
-                        <span>{{ $v->name }}</span>
-                    </div>
-                    <div class="flex-categorysecond">
-                        @foreach ($v->children as $key => $category_second)
-                            <div class="categorysecond {{ $key === 0 ? ' active' : '' }}"
-                            data-idf="{{ $v->id }}" data-ids="{{ $category_second->id }}" 
-                                data-url="{{ route('get-category-data', ['categoryId' => $category_second->id]) }}">
-                                {{ $category_second->name }}
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="paging-product-category-style paging-product-category-{{ $v->id }} grid-product-external">
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    @endif
-@endisset
-
-
-@isset($publisher)
-    @if (!$publisher->isEmpty())
-        {{-- Publisher --}}
-        <div class="wrap-publisher">
-            <div class="wrap-content">
-                <div class="title-main">
-                    <span>
-                        Đối tác của chúng tôi
-                    </span>
-                </div>
-                <div class="slick-publisher-ex">
-                    @foreach ($publisher as $v)
-                        <div class="publisher-box-ex">
-                            <a href="{{ route('publisher.publisherproduct', ['id' => $v->id]) }}"
-                                title="{{ $v->name }}">
-                                <div class="publisher-ex-img">
-                                    <img class="w-100" src="{{ $v->photo_path }}" alt="{{ $v->name }}">
-                                </div>
-                                <div class="publisher-ex-name text-split-2">
-                                    {{ $v->name }}
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-
-                </div>
-            </div>
-        </div>
-    @endif
-@endisset
-
-
 @isset($productOutstanding)
     @if (!$productOutstanding->isEmpty())
         {{-- Product Oustanding --}}
         <div class="wrap-product-outstanding py50">
             <div class="wrap-content">
-                <div class="title-main">
+                <div class="title-main title-left">
                     <span>Sản phẩm nổi bật</span>
                 </div>
                 <div class="slick-product-outstanding-cover">
@@ -138,13 +79,66 @@ use App\Http\Controllers\Clients\IndexController;
         </div>
     @endif
 @endisset
+@isset($category_first)
+    @if (!$category_first->isEmpty())
+        @foreach ($category_first as $v)
+            <div class="wrap-product-list-cat">
+                <div class="wrap-content">
+                    <div class="title-main categoryfirst">
+                        <span>{{ $v->name }}</span>
+                    </div>
+                    <div class="flex-categorysecond">
+                        @foreach ($v->children as $category_second)
+                            <div class="categorysecond" data-idf="{{ $v->id }}" data-ids="{{ $category_second->id }}"
+                                data-url="{{ route('get-category-data', ['categoryId' => $category_second->id]) }}">
+                                {{ $category_second->name }}
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="paging-product-category-style paging-product-category-{{ $v->id }}  ">
+
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endif
+@endisset
+@isset($publisher)
+    @if (!$publisher->isEmpty())
+        {{-- Publisher --}}
+        <div class="wrap-publisher">
+            <div class="wrap-content">
+                <div class="title-main title-left">
+                    <span>
+                        Thương hiệu sản phẩm
+                    </span>
+                </div>
+                <div class="slick-publisher-ex">
+                    @foreach ($publisher as $v)
+                        <div class="publisher-box-ex">
+                            <a href="{{ route('publisher.publisherproduct', ['id' => $v->id]) }}"
+                                title="{{ $v->name }}">
+                                <div class="publisher-ex-img">
+                                    <img class="w-100" src="{{ $v->photo_path }}" alt="{{ $v->name }}">
+                                </div>
+                                <div class="publisher-ex-name text-split-2">
+                                    {{ $v->name }}
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @endif
+@endisset
 @isset($news)
     @if (!$news->isEmpty())
         {{-- News --}}
         <div class="wrap-news-ex py50">
             <div class="wrap-content">
-                <div class="title-main">
-                    <span>Tin tức</span>
+                <div class="title-main title-left">
+                    <span>Tin tức & sự kiện</span>
                 </div>
                 <div class="slick-news-ex">
                     @foreach ($news as $v)
@@ -165,3 +159,61 @@ use App\Http\Controllers\Clients\IndexController;
         </div>
     @endif
 @endisset
+@if (Request::route()->getName() == 'index')
+    <div class="wrap-criteria">
+        <div class="wrap-content">
+            <div class="slick-criteria">
+                <div class="criteria-box d-flex align-items-center">
+                    <div class="criteria-img">
+                        <img src="{{ asset('index/imgs/tuvan.png') }}" alt="">
+                    </div>
+                    <div class="criteria-info">
+                        <div class="criteria-name ">
+                            Tư vấn nhiệt tình
+                        </div>
+                    </div>
+                </div>
+                <div class="criteria-box d-flex align-items-center">
+                    <div class="criteria-img">
+                        <img src="{{ asset('index/imgs/chatluong.png') }}" alt="">
+                    </div>
+                    <div class="criteria-info">
+                        <div class="criteria-name ">
+                            Sản phẩm chất lượng
+                        </div>
+                    </div>
+                </div>
+                <div class="criteria-box d-flex align-items-center">
+                    <div class="criteria-img">
+                        <img src="{{ asset('index/imgs/giaca.png') }}" alt="">
+                    </div>
+                    <div class="criteria-info">
+                        <div class="criteria-name ">
+                            Giá cả cạnh tranh
+                        </div>
+                    </div>
+                </div>
+                <div class="criteria-box d-flex align-items-center">
+                    <div class="criteria-img">
+                        <img src="{{ asset('index/imgs/khuyenmai.png') }}" alt="">
+                    </div>
+                    <div class="criteria-info">
+                        <div class="criteria-name ">
+                            Khuyến mãi ngập tràn
+                        </div>
+                    </div>
+                </div>
+                <div class="criteria-box d-flex align-items-center">
+                    <div class="criteria-img">
+                        <img src="{{ asset('index/imgs/giaohang.png') }}" alt="">
+                    </div>
+                    <div class="criteria-info">
+                        <div class="criteria-name ">
+                            Giao hàng tận nơi
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif

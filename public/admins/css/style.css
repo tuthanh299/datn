@@ -30,7 +30,7 @@
 .name-category{text-transform:capitalize;}
 /* Slider */
 .alert-danger{margin-top:10px;padding:3px 5px;}
-.slider-image-thumb{width:100%;height:100px;object-fit:cover;}
+.slider-image-thumb{width:100%;height:100px;object-fit: c;}
 /* Product gallery */
 .box-gallery{margin-top:20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;}
 .box-gallery-item{border:solid 1px #ccc;}

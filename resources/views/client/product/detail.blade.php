@@ -6,10 +6,10 @@
             <div class="left-product-detail col-md-6 col-lg-5 mb-4">
                 <div class="group-product-image">
                     <div class="slick-product-image-core">
-                        <div class="product-image-core"> 
+                        <div class="product-image-core">
                             <img class="w-100" src="{{ $productDetail->product_photo_path }}"
                                 alt="{{ $productDetail->name }}">
-                        </div> 
+                        </div>
                         @foreach ($productDetail->productGallery as $galleryItem)
                             <div class="product-image-core">
                                 <img class="w-100" src="{{ $galleryItem->photo_path }}">
@@ -35,30 +35,94 @@
                 </div>
             </div>
             <div class="right-product-detail col-md-6 col-lg-7 mb-4">
-                <h1 class="name-product-detail">
-                    {{ $productDetail->name }}
-                </h1>
-                <div class="attribute-product-detail">
-                    Mã sách: <span class="attribute-product-detail-text text-danger">{{ $productDetail->code }}</span>
-                </div>
-                <div class="attribute-product-detail">
-                    Danh mục: <a class="attribute-product-detail-text-link">{{ $productDetail->category->name }}</a>
-                </div>
-                <div class="attribute-product-detail">
-                    Tác giả: <a class="attribute-product-detail-text-link">{{ $productDetail->author }}</a>
-                </div>
-                <div class="attribute-product-detail">
-                    Nhà xuất bản: <a class="attribute-product-detail-text-link">{{ $productDetail->publisher->name }}</a>
-                </div>
-                <div class="attribute-product-detail">
-                    Năm xuất bản: <span class="attribute-product-detail-text">{{ $productDetail->publishing_year }}</span>
-                </div>
-                <div class="price-product-detail">
-                    Giá: <span class="price-new-product-detail">@formatmoney($productDetail->sale_price)</span> <span
-                        class="price-old-product-detail">@formatmoney($productDetail->regular_price)</span>
-                </div>
-                <div class="desc-product-detail">
-                    {!! $productDetail->description !!}
+                <div class="row">
+                    <div class="col-7">
+                        <h1 class="name-product-detail">
+                            {{ $productDetail->name }}
+                        </h1>
+                        <div class="attribute-product-detail">
+                            Mã sách: <span
+                                class="attribute-product-detail-text text-danger">{{ $productDetail->code }}</span>
+                        </div>
+                        <div class="attribute-product-detail">
+                            Danh mục: <a class="attribute-product-detail-text-link">{{ $productDetail->category->name }}</a>
+                        </div>
+                        <div class="attribute-product-detail">
+                            Tác giả: <a class="attribute-product-detail-text-link">{{ $productDetail->author }}</a>
+                        </div>
+                        <div class="attribute-product-detail">
+                            Nhà xuất bản: <a class="attribute-product-detail-text-link"
+                                href="{{ route('publisher.publisherproduct', ['id' => $productDetail->publisher->id]) }}">
+                                {{ $productDetail->publisher->name }}</a>
+                        </div>
+                        <div class="attribute-product-detail">
+                            Năm xuất bản: <span
+                                class="attribute-product-detail-text">{{ $productDetail->publishing_year }}</span>
+                        </div>
+                        <div class="price-product-detail">
+                            Giá: <span class="price-new-product-detail">@formatmoney($productDetail->sale_price)</span> <span
+                                class="price-old-product-detail">@formatmoney($productDetail->regular_price)</span>
+                        </div>
+                        <div class="desc-product-detail">
+                            {!! $productDetail->description !!}
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="group-criteria-prouduct">
+                            <div class="criteria-prouduct-item">
+                                <div class="criteria-box d-flex align-items-center mb-3">
+                                    <div class="criteria-img">
+                                        <img src="{{ asset('index/imgs/tuvan.png') }}" alt="">
+                                    </div>
+                                    <div class="criteria-info">
+                                        <div class="criteria-name text-split1">
+                                            Tư vấn nhiệt tình
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="criteria-box d-flex align-items-center mb-3">
+                                    <div class="criteria-img">
+                                        <img src="{{ asset('index/imgs/chatluong.png') }}" alt="">
+                                    </div>
+                                    <div class="criteria-info">
+                                        <div class="criteria-name text-split1">
+                                            Sản phẩm chất lượng
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="criteria-box d-flex align-items-center mb-3">
+                                    <div class="criteria-img">
+                                        <img src="{{ asset('index/imgs/giaca.png') }}" alt="">
+                                    </div>
+                                    <div class="criteria-info">
+                                        <div class="criteria-name text-split1">
+                                            Giá cả cạnh tranh
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="criteria-box d-flex align-items-center mb-3">
+                                    <div class="criteria-img">
+                                        <img src="{{ asset('index/imgs/khuyenmai.png') }}" alt="">
+                                    </div>
+                                    <div class="criteria-info">
+                                        <div class="criteria-name text-split1">
+                                            Khuyến mãi ngập tràn
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="criteria-box d-flex align-items-center mb-3">
+                                    <div class="criteria-img">
+                                        <img src="{{ asset('index/imgs/giaohang.png') }}" alt="">
+                                    </div>
+                                    <div class="criteria-info">
+                                        <div class="criteria-name text-split1">
+                                            Giao hàng tận nơi
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

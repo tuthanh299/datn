@@ -189,8 +189,20 @@ function SlickPage() {
         arrows: false,
         fade: true,
     });
+     
 
     initializeSlick(".slick-news-ex", {
+        dots: false,
+        infinite: true,
+        autoplaySpeed: 3500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        adaptiveHeight: false,
+        autoplay: true,
+        arrows: false,
+        fade: false,
+    });
+    initializeSlick(".slick-criteria", {
         dots: false,
         infinite: true,
         autoplaySpeed: 3500,
@@ -223,6 +235,8 @@ function SlickPage() {
         arrows: false,
         fade: false,
     });
+    
+    
     initializeSlick(".slick-other-news-internal", {
         dots: false,
         infinite: true,
@@ -277,8 +291,16 @@ function SlickPage() {
         autoplaySpeed: 3000,
     });
 }
-
+function formatMoney(money) {
+    return new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+    })
+        .format(money)
+        .replace(/\s/g, "");
+}
 function AllRun() {
+    /* Menu Fixed */
     $(window).scroll(function () {
         var cach_top = $(window).scrollTop();
         var height_header = $(".header").height() + $(".menu").height();
@@ -299,17 +321,22 @@ function AllRun() {
             );
         }
     });
+    /* Show Contact */
     function ShowHideSocial() {
         $("body").on("click", ".show-btn-wrapper", function (e) {
             $(".show-btn-wrapper").toggleClass("toggle");
         });
     }
     setTimeout(ShowHideSocial, 2000);
+    /* FormatMoney */
+    
 
+    /* Ajax product first second */
     $(document).ready(function () {
         $(".flex-categorysecond").on(
             "click",
             ".categorysecond",
+
             function (event) {
                 event.preventDefault();
                 var categoryParentId = $(this).data("idf");
@@ -329,81 +356,88 @@ function AllRun() {
                         $(".paging-product-category-" + categoryParentId).html(
                             ""
                         );
-                        var productHtml = "";
+
+                        var productHtml = `<div class="slick-product-category">`;
                         if (response.products && response.products.length > 0) {
                             response.products.forEach(function (product) {
-                                productHtml += 
-                                '<div class="product-item" data-aos="fade-up" data-aos-duration="1000">' +
-                                '<div class="product" data-aos="zoom-in-up">' +
-                                '<div class="box-product text-decoration-none">' +
-                                '<div class="position-relative overflow-hidden">' +
-                                '<a class="pic-product" href="/product/' +
-                                product.id +
-                                '" title="' +
-                                product.name +
-                                '">' +
-                                '<div class="pic-product-img scale-img hover_light">' +
-                                '<img class="w-100" src="' +
-                                product.product_photo_path +
-                                '" alt="' +
-                                product.name +
-                                '">' +
-                                "</div>" +
-                                "</a>" +
-                                "</div>" +
-                                '<div class="info-product">' +
-                                '<div class="name-product"><a class="text-split-2" href="/product/' +
-                                product.id +
-                                '" title="' +
-                                product.name +
-                                '">' +
-                                product.name +
-                                "</a></div>" +
-                                '<div class="-cart">' +
-                                '<div class="product-quantity">' +
-                                '<span class="product-quantity-text">Còn hàng:</span>' +
-                                '<span class="product-quantity-num-sub-text">' +
-                                '<span class="product-quantity-num">4</span>' +
-                                '<span class="product-quantity-num-sub-text">sản phẩm</span>' +
-                                "</span>" +
-                                "</div>" +
-                                "</div>" +
-                                '<div class="flex-price-cart-product">' +
-                                '<div class="price-product">' +
-                                '<div class="price-new">' +
-                                product.sale_price +
-                                "</div>" +
-                                '<div class="price-old">' +
-                                product.regular_price +
-                                "</div>" +
-                                '<div class="discount">' +
-                                product.discount +
-                                "%</div>" +
-                                "</div>" +
-                                '<div class="cart-product-add">' +
-                                '<div class="flex-cart-product-add-quantity">' +
-                                '<div class="product-quantity-cart">' +
-                                '<div class="product-quantity-cart-flex">' +
-                                '<button class="decrement-cart">-</button>' +
-                                '<input type="number" class="quantity-input" value="0" min="0">' +
-                                '<button class="increment-cart">+</button>' +
-                                "</div>" +
-                                "</div>" +
-                                '<div class="cart-product-add-btn">' +
-                                '<i class="fa-solid fa-cart-shopping"></i>' +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" + 
-                                "</div>";
+                                var sale_price = formatMoney(
+                                    product.sale_price
+                                );
+                                var regular_price = formatMoney(
+                                    product.regular_price
+                                );
+                                productHtml += `
+                                <div class="product-item product-slick-item" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="product" data-aos="zoom-in-up">
+                                    <div class="box-product text-decoration-none">
+                                        <div class="position-relative overflow-hidden  ">
+                                            <a class="pic-product " href="/product/${product.id}" title="${product.name}">
+                                                <div class="pic-product-img scale-img hover_light">
+                                                    <img class="w-100" src="${product.product_photo_path}"
+                                                        alt="${product.name}">
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="info-product">
+                                            <div class="name-product"><a class="text-split-2" href="/product/${product.id}"
+                                                    title="${product.name}">${product.name}</a>
+                                            </div>
+                                            <div class="-cart">
+                                                <div class="product-quantity">
+                                                    <span class="product-quantity-text">Còn hàng:</span>
+                                                    <span class="product-quantity-num-sub-text">
+                                                        <span class="product-quantity-num">4</span>
+                                                        <span class="product-quantity-num-sub-text">sản phẩm</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="flex-price-cart-product">
+                                                <div class="price-product">
+                                                    <div class="price-new"> 
+                                                    ${sale_price}
+                                                    </div>
+                                                    <div class="price-old">
+                                                    ${regular_price} 
+                                                    </div>
+                                                    <div class="discount">
+                                                    ${product.discount}% 
+                                                    </div>
+                                                </div>
+                                                <div class="cart-product-add">
+                                                    <div class="flex-cart-product-add-quantity">
+                                                        <div class="product-quantity-cart">
+                                                            <div class="product-quantity-cart-flex">
+                                                                <button class="decrement-cart">-</button>
+                                                                <input type="number" class="quantity-input" value="0"
+                                                                    min="0">
+                                                                <button class="increment-cart">+</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="cart-product-add-btn">
+                                                            <i class="fa-solid fa-cart-shopping"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
                             });
-
                             $(
                                 ".paging-product-category-" + categoryParentId
                             ).html(productHtml);
+                            initializeSlick('.slick-product-category', {
+                                dots: false,
+                                infinite: true,
+                                autoplaySpeed: 3500,
+                                slidesToShow: 5,
+                                slidesToScroll: 1,
+                                adaptiveHeight: false,
+                                autoplay: true,
+                                arrows: true,
+                                fade: false,
+                            });
                         } else {
                             productHtml =
                                 '<div class="alert alert-warning w-100 gr-100">' +
@@ -420,103 +454,11 @@ function AllRun() {
                 });
             }
         );
-        $(".categorysecond.active").each(function (event) {            
-            var categoryParentId = $(this).data("idf");
-            var categoryId = $(this).data("ids"); 
-            $.ajax({
-                url: $(this).data("url"),
-                type: "GET",
-                data: { categoryId: categoryId },
-                success: function (response) {
-                    $(".paging-product-category-" + categoryParentId).html("");
-                    var productHtml = "";
-                    if (response.products && response.products.length > 0) {
-                        response.products.forEach(function (product) {
-                            productHtml += 
-                                '<div class="product-item" data-aos="fade-up" data-aos-duration="1000">' +
-                                '<div class="product" data-aos="zoom-in-up">' +
-                                '<div class="box-product text-decoration-none">' +
-                                '<div class="position-relative overflow-hidden">' +
-                                '<a class="pic-product" href="/product/' +
-                                product.id +
-                                '" title="' +
-                                product.name +
-                                '">' +
-                                '<div class="pic-product-img scale-img hover_light">' +
-                                '<img class="w-100" src="' +
-                                product.product_photo_path +
-                                '" alt="' +
-                                product.name +
-                                '">' +
-                                "</div>" +
-                                "</a>" +
-                                "</div>" +
-                                '<div class="info-product">' +
-                                '<div class="name-product"><a class="text-split-2" href="/product/' +
-                                product.id +
-                                '" title="' +
-                                product.name +
-                                '">' +
-                                product.name +
-                                "</a></div>" +
-                                '<div class="-cart">' +
-                                '<div class="product-quantity">' +
-                                '<span class="product-quantity-text">Còn hàng:</span>' +
-                                '<span class="product-quantity-num-sub-text">' +
-                                '<span class="product-quantity-num">4</span>' +
-                                '<span class="product-quantity-num-sub-text">sản phẩm</span>' +
-                                "</span>" +
-                                "</div>" +
-                                "</div>" +
-                                '<div class="flex-price-cart-product">' +
-                                '<div class="price-product">' +
-                                '<div class="price-new">' +
-                                product.sale_price +
-                                "</div>" +
-                                '<div class="price-old">' +
-                                product.regular_price +
-                                "</div>" +
-                                '<div class="discount">' +
-                                product.discount +
-                                "%</div>" +
-                                "</div>" +
-                                '<div class="cart-product-add">' +
-                                '<div class="flex-cart-product-add-quantity">' +
-                                '<div class="product-quantity-cart">' +
-                                '<div class="product-quantity-cart-flex">' +
-                                '<button class="decrement-cart">-</button>' +
-                                '<input type="number" class="quantity-input" value="0" min="0">' +
-                                '<button class="increment-cart">+</button>' +
-                                "</div>" +
-                                "</div>" +
-                                '<div class="cart-product-add-btn">' +
-                                '<i class="fa-solid fa-cart-shopping"></i>' +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" + 
-                                "</div>";
-                        }); 
-                        $(".paging-product-category-" + categoryParentId).html(
-                            productHtml
-                        );
-                    } else {
-                        productHtml =
-                            '<div class="alert alert-warning w-100 gr-100">' +
-                            "<strong>Thông tin đang được cập nhật. Vui lòng kiểm tra lại sau để không bỏ lỡ bất kỳ nội dung mới nào!</strong>" +
-                            "</div>";
-                        $(".paging-product-category-" + categoryParentId).html(
-                            productHtml
-                        );
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                },
-            });
+        /* Click first */
+        $(".flex-categorysecond").each(function () {
+            var firstItem = $(this).find(".categorysecond").first();
+            firstItem.trigger("click");
+            firstItem.addClass("active");
         });
     });
 }

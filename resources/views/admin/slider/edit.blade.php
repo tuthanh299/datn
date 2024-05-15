@@ -75,7 +75,7 @@
                                                 hình
                                             </p>
                                         </label>
-                                        <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
+                                        <div class="photoUpload-dimension">Width: 1920 px - Height: 775 px
                                             (.jpg|.png|.jpeg)</div>
                                     </div>
                                     @error('photo_path')
