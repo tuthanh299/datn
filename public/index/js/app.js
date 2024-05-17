@@ -171,126 +171,113 @@ function ProductTnteract() {
     }
 }
 
-function initializeSlick(selector, options) {
-    if (!isExist($(selector))) {
-        $(selector).slick(options);
+function SlickPage() {
+    if (isExist("slick-slideshow")) {
+        $(".slick-slideshow").slick({
+            dots: true,
+            infinite: true,
+            autoplaySpeed: 3000,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            adaptiveHeight: false,
+            autoplay: true,
+            arrows: false,
+            fade: true,
+        });
+    }
+    if (isExist("slick-news-ex")) {
+        $(".slick-news-ex").slick({
+            dots: false,
+            infinite: true,
+            autoplaySpeed: 3500,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            adaptiveHeight: false,
+            autoplay: true,
+            arrows: false,
+            fade: false,
+        });
+    }
+    if (isExist("slick-criteria")) {
+        $(".slick-criteria").slick({
+            dots: false,
+            infinite: true,
+            autoplaySpeed: 3500,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            adaptiveHeight: false,
+            autoplay: true,
+            arrows: false,
+            fade: false,
+        });
+    }
+    if (isExist("slick-product-outstanding")) {
+        $(".slick-product-outstanding").slick({
+            dots: false,
+            infinite: true,
+            autoplaySpeed: 3500,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            adaptiveHeight: false,
+            autoplay: true,
+            arrows: false,
+            fade: false,
+        });
+    }
+    if (isExist("slick-publisher-ex")) {
+        $(".slick-publisher-ex").slick({
+            dots: false,
+            infinite: true,
+            autoplaySpeed: 3500,
+            slidesToShow: 8,
+            slidesToScroll: 1,
+            adaptiveHeight: false,
+            autoplay: true,
+            arrows: false,
+            fade: false,
+        });
+    }
+    if (isExist("slick-other-news-internal")) {
+        $(".slick-other-news-internal").slick({
+            dots: false,
+            infinite: true,
+            autoplaySpeed: 5000,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            adaptiveHeight: true,
+            vertical: true,
+            verticalSwiping: true,
+            autoplay: true,
+            infinite: true,
+            arrows: false,
+        });
+    }
+    if (isExist("slick-product-image-core")) {
+        $(".slick-product-image-core").slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: ".slick-product-image-detail",
+        });
+    }
+    if (isExist("slick-product-image-detail")) {
+        $(".slick-product-image-detail").slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            asNavFor: ".slick-product-image-core",
+            dots: false,
+            autoplay: true,
+            centerMode: true,
+            infinite: true,
+            arrows: false,
+            centerPadding: "0px",
+            focusOnSelect: true,
+            autoplaySpeed: 3000,
+        });
     }
 }
 
-function SlickPage() {
-    initializeSlick(".slick-slideshow", {
-        dots: false,
-        infinite: true,
-        autoplaySpeed: 3000,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        adaptiveHeight: false,
-        autoplay: true,
-        arrows: false,
-        fade: true,
-    });
-     
-
-    initializeSlick(".slick-news-ex", {
-        dots: false,
-        infinite: true,
-        autoplaySpeed: 3500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        adaptiveHeight: false,
-        autoplay: true,
-        arrows: false,
-        fade: false,
-    });
-    initializeSlick(".slick-criteria", {
-        dots: false,
-        infinite: true,
-        autoplaySpeed: 3500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        adaptiveHeight: false,
-        autoplay: true,
-        arrows: false,
-        fade: false,
-    });
-    initializeSlick(".slick-product-outstanding", {
-        dots: false,
-        infinite: true,
-        autoplaySpeed: 3500,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        adaptiveHeight: false,
-        autoplay: true,
-        arrows: false,
-        fade: false,
-    });
-    initializeSlick(".slick-publisher-ex", {
-        dots: false,
-        infinite: true,
-        autoplaySpeed: 3500,
-        slidesToShow: 8,
-        slidesToScroll: 1,
-        adaptiveHeight: false,
-        autoplay: true,
-        arrows: false,
-        fade: false,
-    });
-    
-    
-    initializeSlick(".slick-other-news-internal", {
-        dots: false,
-        infinite: true,
-        autoplaySpeed: 5000,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        adaptiveHeight: true,
-        vertical: true,
-        verticalSwiping: true,
-        autoplay: true,
-        infinite: true,
-        arrows: false,
-    });
-    initializeSlick(".slick-other-news-internal", {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: ".slick-video-small",
-    });
-    initializeSlick(".slick-other-news-internal", {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        asNavFor: ".slick-video-large",
-        dots: false,
-        autoplay: true,
-        centerMode: true,
-        infinite: true,
-        arrows: false,
-        centerPadding: "0px",
-        focusOnSelect: true,
-        autoplaySpeed: 3000,
-    });
-    $(".slick-product-image-core").slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        fade: true,
-        asNavFor: ".slick-product-image-detail",
-    });
-    $(".slick-product-image-detail").slick({
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        asNavFor: ".slick-product-image-core",
-        dots: false,
-        autoplay: true,
-        centerMode: true,
-        infinite: true,
-        arrows: false,
-        centerPadding: "0px",
-        focusOnSelect: true,
-        autoplaySpeed: 3000,
-    });
-}
 function formatMoney(money) {
     return new Intl.NumberFormat("vi-VN", {
         style: "currency",
@@ -299,6 +286,7 @@ function formatMoney(money) {
         .format(money)
         .replace(/\s/g, "");
 }
+
 function AllRun() {
     /* Menu Fixed */
     $(window).scroll(function () {
@@ -321,6 +309,38 @@ function AllRun() {
             );
         }
     });
+    $(document).ready(function () {
+        $(".dropdown").hover(
+            function () {
+                $(".dropdown-menu", this).stop(true, true).slideDown("slow");
+                $(this).toggleClass("open");
+            },
+            function () {
+                $(".dropdown-menu", this).stop(true, true).slideUp("slow");
+                $(this).toggleClass("open");
+            }
+        );
+        $(
+            ".nav-tabs li:first-child, .tab-content .tab-pane:first-child"
+        ).addClass("active");
+
+        $(".nav-tabs a").click(function (e) {
+            e.preventDefault();
+            $(".nav-tabs li, .tab-content .tab-pane").removeClass("active");
+            var id = $(this).attr("href");
+            $(this).parent().addClass("active");
+            $(id).addClass("active");
+            $(this).tab("show");
+        });
+        $("ul.nav-tabs > li > a").on("shown.bs.tab", function (e) {
+            var id = $(e.target).attr("href").substr(1);
+            window.location.hash = id;
+        });
+        var hash = window.location.hash;
+        $('#nav-tabs a[href="' + hash + '"]').tab("show");
+        $(".dropdown-menu").hide();
+    });
+
     /* Show Contact */
     function ShowHideSocial() {
         $("body").on("click", ".show-btn-wrapper", function (e) {
@@ -329,7 +349,6 @@ function AllRun() {
     }
     setTimeout(ShowHideSocial, 2000);
     /* FormatMoney */
-    
 
     /* Ajax product first second */
     $(document).ready(function () {
@@ -427,17 +446,19 @@ function AllRun() {
                             $(
                                 ".paging-product-category-" + categoryParentId
                             ).html(productHtml);
-                            initializeSlick('.slick-product-category', {
-                                dots: false,
-                                infinite: true,
-                                autoplaySpeed: 3500,
-                                slidesToShow: 5,
-                                slidesToScroll: 1,
-                                adaptiveHeight: false,
-                                autoplay: true,
-                                arrows: true,
-                                fade: false,
-                            });
+                            if (isExist("slick-product-category")) {
+                                $(".slick-product-category").slick({
+                                    dots: false,
+                                    infinite: true,
+                                    autoplaySpeed: 3500,
+                                    slidesToShow: 5,
+                                    slidesToScroll: 1,
+                                    adaptiveHeight: false,
+                                    autoplay: true,
+                                    arrows: true,
+                                    fade: false,
+                                });
+                            }
                         } else {
                             productHtml =
                                 '<div class="alert alert-warning w-100 gr-100">' +

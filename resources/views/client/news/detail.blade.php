@@ -1,5 +1,4 @@
-@extends('client.layouts.index')
-
+@extends('client.layouts.index')  
 @section('content')
     <div class="wrap-content">
         <div class="flex-news-internal row">

@@ -696,7 +696,7 @@ textarea.form-control-lg{min-height:calc(1.5em + (1rem + 2px))}
 @media (prefers-reduced-motion:reduce){.fade{transition:none}
 }
 .fade:not(.show){opacity:0}
-.collapse:not(.show){display:none}
+.collapse:not(.show){display:none;}
 .collapsing{height:0;overflow:hidden;transition:height .35s ease}
 @media (prefers-reduced-motion:reduce){.collapsing{transition:none}
 }
@@ -782,7 +782,7 @@ textarea.form-control-lg{min-height:calc(1.5em + (1rem + 2px))}
 .btn-group-vertical>.btn-group:not(:first-child),.btn-group-vertical>.btn:not(:first-child){margin-top:-1px}
 .btn-group-vertical>.btn-group:not(:last-child)>.btn,.btn-group-vertical>.btn:not(:last-child):not(.dropdown-toggle){border-bottom-right-radius:0;border-bottom-left-radius:0}
 .btn-group-vertical>.btn-group:not(:first-child)>.btn,.btn-group-vertical>.btn~.btn{border-top-left-radius:0;border-top-right-radius:0}
-.nav{display:flex;flex-wrap:wrap;padding-left:0;margin-bottom:0;list-style:none}
+.nav{display:flex;flex-wrap:wrap;padding-left:0;margin-bottom:0;list-style:none;}
 .nav-link{display:block;padding:.5rem 1rem;color:#0d6efd;text-decoration:none;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out}
 @media (prefers-reduced-motion:reduce){.nav-link{transition:none}
 }
@@ -804,7 +804,7 @@ textarea.form-control-lg{min-height:calc(1.5em + (1rem + 2px))}
 .navbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-top:.5rem;padding-bottom:.5rem}
 .navbar>.container,.navbar>.container-fluid,.navbar>.container-lg,.navbar>.container-md,.navbar>.container-sm,.navbar>.container-xl,.navbar>.container-xxl{display:flex;flex-wrap:inherit;align-items:center;justify-content:space-between}
 .navbar-brand{padding-top:.3125rem;padding-bottom:.3125rem;margin-right:1rem;font-size:1.25rem;text-decoration:none;white-space:nowrap}
-.navbar-nav{display:flex;flex-direction:column;padding-left:0;margin-bottom:0;list-style:none}
+.navbar-nav{display:flex;/* flex-direction:column; */padding-left:0;margin-bottom:0;list-style:none}
 .navbar-nav .nav-link{padding-right:0;padding-left:0}
 .navbar-nav .dropdown-menu{position:static}
 .navbar-text{padding-top:.5rem;padding-bottom:.5rem}

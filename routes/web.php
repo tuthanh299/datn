@@ -26,11 +26,10 @@ Route::get('/admin', function () {
 Route::prefix('/')->group(function () {
     /* Index */
     Route::controller(IndexController::class)->group(function () {
-        Route::get('/', 'index')->name('index');
-        
+        Route::get('/', 'index')->name('index');        
         Route::get('/get-category-data/{categoryId}', [IndexController::class, 'getCategoryData'])->name('get-category-data');
-
         Route::get('/publisher/{id}', [IndexController::class, 'publisherproduct'])->name('publisher.publisherproduct');
+        Route::get('/categoryid/{id}', [IndexController::class, 'categoryidproduct'])->name('categoryid.categoryidproduct');
     });
 
     /* About Us */

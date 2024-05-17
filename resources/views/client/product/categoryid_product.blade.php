@@ -8,10 +8,10 @@
             </span>
         </div>
         <div class="content-main">
-            @isset($publisherproduct)
-                @if (!$publisherproduct->isEmpty())
+            @isset($categoryidproduct)
+                @if (!$categoryidproduct->isEmpty())
                     <div class="grid-product-internal">
-                        @foreach ($publisherproduct as $v)
+                        @foreach ($categoryidproduct as $v)
                             <div class="product-item" data-aos="fade-up" data-aos-duration="1000">
                                 <div class="product" data-aos="zoom-in-up">
                                     <div class="box-product text-decoration-none">
@@ -74,12 +74,11 @@
                         @endforeach
                     </div>
                     <div class="col-md-12 mt-3 text-center">
-                        {{ $publisherproduct->links('pagination::bootstrap-5') }}
+                        {{ $categoryidproduct->links('pagination::bootstrap-5') }}
                     </div>
                 @else
                     <div class="alert alert-warning w-100">
-                        <strong>Thông tin đang được cập nhật. Vui lòng kiểm tra lại sau để không bỏ lỡ bất kỳ nội dung mới
-                            nào!</strong>
+                        <strong>Thông tin đang được cập nhật. Vui lòng kiểm tra lại sau để không bỏ lỡ bất kỳ nội dung mới nào!</strong>
                     </div>
                 @endif
             @endisset
