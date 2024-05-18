@@ -30,3 +30,10 @@
 100%{opacity:1;}
 }
 .blink{-webkit-animation-name:blink;-webkit-animation-duration:1s;-webkit-animation-timing-function:linear;-webkit-animation-iteration-count:infinite;-moz-animation-name:blink;-moz-animation-duration:1s;-moz-animation-timing-function:linear;-moz-animation-iteration-count:infinite;animation-name:blink;animation-duration:1s;animation-timing-function:linear;animation-iteration-count:infinite;}
+
+/*password*/
+.password-toggle-icon {position: absolute;top: 7px;cursor: pointer;}
+  
+.password-toggle-icon i {font-size: 18px;line-height: 1;color: #333;transition: color 0.3s ease-in-out;margin-bottom: 20px;}
+  
+.password-toggle-icon i:hover {color: #000;}

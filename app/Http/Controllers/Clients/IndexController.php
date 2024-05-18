@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Member;
 use App\Models\News;
 use App\Models\Product;
 use App\Models\Setting;
@@ -22,13 +23,16 @@ class IndexController extends Controller
     }
     public function index()
     {
+        if(!isset($_COOKIE['is_logged'])) {
+            setcookie('is_logged', 0, time() + 360000, '/');
+        }
 
         $sliders = Slider::select('name', 'description', 'photo_path')->get();
         $news = News::select('id', 'name', 'description', 'photo_path')->get();
         $aboutus = StaticNews::select('name', 'description', )->get();
         $publisher= Publisher::select('id','name','photo_path')->get();
         $category_first = Category::with('children')->where('parent_id', 0)->get();
-        $user = Auth::user();
+        $user = null;
         $cart1s = [
             [
                 'id' => 1,
@@ -49,15 +53,22 @@ class IndexController extends Controller
             ->where('outstanding', 1)
             ->get();
 
-        if ($user != null)
+        /*if ($user != null)
         {
-            $user = Auth::user();
+            $user = Auth::guard('member')->user();
             return view('client.index', compact('user','sliders', 'news', 'productOutstanding', 'aboutus', 'cart1s'));
             //dd($sliders, $news, $aboutus, $productOutstanding, $publisher, $category_first, $user);
+        }*/
+
+        if($_COOKIE['is_logged']==1) {
+            $user = Member::where('id', $_COOKIE['id'])->get();
+            //return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus','publisher','category_first', 'user', 'cart1s'));
+            dd($sliders, $news, $aboutus, $productOutstanding, $publisher, $category_first, $user);
         }
 
         return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus','publisher','category_first', 'user', 'cart1s'));
         //dd($sliders, $news, $aboutus, $productOutstanding, $publisher, $category_first);
+        //dd($_COOKIE['is_logged']);
     }
     public function publisherproduct($id)
     {

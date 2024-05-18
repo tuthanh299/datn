@@ -12,7 +12,7 @@
                     <div class="tab-account-button" onclick="openCity(event, 'tab-signup')">Đăng ký</div>
                 </div>
                 <div id="tab-login" class="tabcontent">
-                    <form id="login-form-member" class="form" action="" method="post">
+                    <form id="login-form-member" class="form" action="{{ route('userlogin.post') }}" method="post">
                         @csrf
                         <div>
                             <div class="input-group mb-2">
@@ -36,7 +36,7 @@
                                 placeholder="Nhập mật khẩu" />
                             <div class="input-group-append">
                                 <div class="input-group-text show-password">
-                                    <span class="fas fa-eye"></span>
+                                    <span class="password-toggle-icon"> <i class="fas fa-eye"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                 </div>
 
                 <div id="tab-signup" class="tabcontent">
-                    <form id="login-form-member" class="form" action="" method="post">
+                    <form id="register-form-member" class="form" action="{{route('userregister.post')}}" method="post">
                         @csrf
                         <div>
                             <label class="mb-1">Họ tên:</label>
@@ -121,11 +121,12 @@
                                     placeholder="Nhập mật khẩu" />
                                 <div class="input-group-append">
                                     <div class="input-group-text show-password">
-                                        <span class="fas fa-eye"></span>
+                                        <span class="password-toggle-icon"> <i class="fas fa-eye"> </i></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div>
                             <label class="mb-1">Nhập lại mật khẩu:</label>
                             <div class="input-group mb-3">
@@ -138,7 +139,7 @@
                                     class="form-control text-sm" placeholder="Nhập lại mật khẩu" />
                                 <div class="input-group-append">
                                     <div class="input-group-text show-password">
-                                        <span class="fas fa-eye"></span>
+                                        <span class="password-toggle-icon"> <i class="fas fa-eye"> </i></span>
                                     </div>
                                 </div>
                             </div>

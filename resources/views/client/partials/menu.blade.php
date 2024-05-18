@@ -7,7 +7,7 @@
                 </a>
             </li>
             <li>
-                <a href="danh-muc-san-pham" title="Danh mục" title="Danh mục sản phẩm">
+                <a href="{{route('product')}}" title="Danh mục" title="Danh mục sản phẩm">
                     Danh mục sản phẩm
                 </a>
             </li>

@@ -102,10 +102,10 @@ use App\Http\Controllers\Clients\IndexController;
                                                 <div class="price-product">
                                                     <div class="price-new">
 
-                                                        @formatmoney($v->sale_price)
+                                                        @formatmoney($v->sale_price) đ
                                                     </div>
                                                     <div class="price-old">
-                                                        @formatmoney($v->regular_price)
+                                                        @formatmoney($v->regular_price) đ
                                                     </div>
                                                     <div class="discount">
                                                         {{ $v->discount }}%

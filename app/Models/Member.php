@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 
 class Member extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, AuthenticableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +21,18 @@ class Member extends Authenticatable
      *
      * @var array<int, string>
      */
+
+     protected $fillable = [
+        'name',
+        'phone',
+        'address',
+        'email',
+        'password',
+        'provider',
+        'provider_id',
+        'provider_token',
+    ];
+
     protected $hidden = [
         'password',
         'remember_token',

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('provider_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('mem_password_reset_tokens', function (Blueprint $table) {

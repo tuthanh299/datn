@@ -22,19 +22,32 @@ use App\Http\Controllers\Clients\CProductController;
 use App\Http\Controllers\CartController;
 
 Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
-Route::post('/login', [AdminController::class, 'postLoginAdmin'])->name('login.post');
+Route::post('loginpost', [AdminController::class, 'postLoginAdmin'])->name('login.post');
 
 Route::get('logout', [AdminController::class, 'logoutAdmin'])->name('logout');
 
-Route::get('/login', [HomePageController::class, 'login'])->name('user.login');
-Route::post('login', [HomePageController::class, 'postLogin'])->name('userlogin.post');
-Route::get('/register', [HomePageController::class, 'register'])->name('user.register');
-Route::post('register', [HomePageController::class, 'postRegister'])->name('userregister.post');
+//Route::get('/login', [HomePageController::class, 'login'])->name('user.login');
+//new
+//Route::post('login', [HomePageController::class, 'postLogin'])->name('userlogin.post');
+//old
+Route::post('login', [HomePageController::class, 'oldlogin'])->name('userlogin.post');
+//Route::get('/register', [HomePageController::class, 'register'])->name('user.register');
+//new
+//Route::post('register', [HomePageController::class, 'postRegister'])->name('userregister.post');
+//old
+Route::post('register', [HomePageController::class, 'oldregister'])->name('userregister.post');
 
-Route::get('logout', function() {
+/*Route::get('logout', function() {
     Auth::logout();
     return redirect('/');
-})->name('userlogout');
+})->name('userlogout1');*/
+
+Route::get('logout', [HomePageController::class, 'oldlogout'])->name('userlogout1');
+
+/*Route::get('logout', function() {
+    Auth::guard('member')->logout();
+    return redirect('/');
+})->name('userlogout');*/
 
 Route::get('/admin', function () {
     return view('admin.admin');
