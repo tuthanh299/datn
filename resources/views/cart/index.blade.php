@@ -1,4 +1,4 @@
-@extends('layoutshome.index') 
+@extends('client.layouts.index') 
 @section('title')
 <title>Giỏ hàng</title>
 @endsection 

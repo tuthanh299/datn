@@ -13,7 +13,7 @@ class HomePageController extends Controller
 {
     public function login()
     {
-        return view('userlogin');
+        return view('client.login');
     }
 
     public function postLogin(Request $request) 
@@ -72,17 +72,19 @@ class HomePageController extends Controller
         ])->get();
 
         if ($user) {
+            $logged = 1;
             $id = Member::where([
                 'email' => $name,
                 'password' => $pass
             ])->get('id');
-            setcookie('is_logged', 1, time() + 360000, '/');
+            setcookie('is_logged', $logged, time() + 360000, '/');    
             setcookie('id', $id, time() + 360000, '/');
             //Auth::guard('member')->login($user);
-            return redirect()->route('index');
-            //dd('user', 'id');
+            //return redirect()->route('index');
+            dd('user', 'id');
         } else {
-            return back()->withErrors(['login_error' => 'Tài khoản hoặc mật khẩu không đúng']);
+            //return back()->withErrors(['login_error' => 'Tài khoản hoặc mật khẩu không đúng']);
+            dd('sai');
         }
 
     }

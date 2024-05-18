@@ -12,7 +12,7 @@
                     <div class="tab-account-button" onclick="openCity(event, 'tab-signup')">Đăng ký</div>
                 </div>
                 <div id="tab-login" class="tabcontent">
-                    <form id="login-form-member" class="form" action="{{ route('userlogin.post') }}" method="post">
+                    <form id="login-form-member" class="form" action="check-login" method="POST">
                         @csrf
                         <div>
                             <div class="input-group mb-2">
@@ -21,7 +21,7 @@
                                         <span class="fas fa-user"></span>
                                     </div>
                                 </div>
-                                <input type="text" name="email" value="{{ old('email') }}"
+                                <input type="text" name="loginemail" id="loginemail" value=""
                                     class="form-control text-sm " placeholder="Nhập email" autocomplete="off" />
                             </div>
                             <label class="emailMember-error error"  for="emailMember" style=""></label>
@@ -32,7 +32,7 @@
                                     <span class="fas fa-lock"></span>
                                 </div>
                             </div>
-                            <input type="password" name="password" id="password" class="form-control text-sm"
+                            <input type="password" name="loginpassword" id="loginpassword" class="form-control text-sm"
                                 placeholder="Nhập mật khẩu" />
                             <div class="input-group-append">
                                 <div class="input-group-text show-password">
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="text-center text-lg-start mt-3 btn-login-member">
-                            <input type="submit" id="remember-me" name="remember_me"
+                            <input type="submit" id="submit" name="submit"
                                 class="btn-lg btn btn-sm bg-danger btn-block w-100" value="Đăng Nhập">
                         </div>
                         <div class="no-account-text text-center">
@@ -102,7 +102,7 @@
                                         <span class="fas fa-envelope"></span>
                                     </div>
                                 </div>
-                                <input type="text" name="email" value="{{ old('email') }}"
+                                <input type="text" name="regemail" id="regemail" value=""
                                     class="form-control text-sm " placeholder="Nhập email" autocomplete="off" />
                             </div>
                             <label class="emailMember-error error"   for="emailMember"
@@ -117,7 +117,7 @@
                                         <span class="fas fa-lock"></span>
                                     </div>
                                 </div>
-                                <input type="password" name="password" id="password" class="form-control text-sm"
+                                <input type="password" name="regpassword" id="regpassword" class="form-control text-sm"
                                     placeholder="Nhập mật khẩu" />
                                 <div class="input-group-append">
                                     <div class="input-group-text show-password">

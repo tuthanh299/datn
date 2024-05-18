@@ -26,16 +26,16 @@ Route::post('loginpost', [AdminController::class, 'postLoginAdmin'])->name('logi
 
 Route::get('logout', [AdminController::class, 'logoutAdmin'])->name('logout');
 
-//Route::get('/login', [HomePageController::class, 'login'])->name('user.login');
+Route::get('/login', [HomePageController::class, 'login'])->name('user.login');
 //new
 //Route::post('login', [HomePageController::class, 'postLogin'])->name('userlogin.post');
 //old
-Route::post('login', [HomePageController::class, 'oldlogin'])->name('userlogin.post');
+Route::post('check-login', [HomePageController::class, 'oldlogin'])->name('userloginpost');
 //Route::get('/register', [HomePageController::class, 'register'])->name('user.register');
 //new
 //Route::post('register', [HomePageController::class, 'postRegister'])->name('userregister.post');
 //old
-Route::post('register', [HomePageController::class, 'oldregister'])->name('userregister.post');
+Route::post('check-register', [HomePageController::class, 'oldregister'])->name('userregister.post');
 
 /*Route::get('logout', function() {
     Auth::logout();

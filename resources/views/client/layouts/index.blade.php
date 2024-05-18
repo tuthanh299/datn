@@ -14,7 +14,6 @@
             @include('client.partials.slider')
             <div class="{{ Request::route()->getName() == 'index' ? 'external-content' : 'internal-content py50' }}">
                 @yield('content')
-                @include('client.partials.content')
             </div>
             @include('client.partials.footer')
             @include('client.partials.modal')
