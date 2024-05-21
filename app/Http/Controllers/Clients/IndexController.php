@@ -24,7 +24,7 @@ class IndexController extends Controller
 
         $sliders = Slider::select('name', 'description', 'photo_path')->get();
         $news = News::select('id', 'name', 'description', 'photo_path')->get();
-        $aboutus = StaticNews::select('name', 'description', )->get();
+        $aboutus = StaticNews::select('name', 'description', )->first();
         $publisher = Publisher::select('id', 'name', 'photo_path')->get();
         $category_first = Category::with('children')->where('parent_id', 0)->get();
 

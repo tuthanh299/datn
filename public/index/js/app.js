@@ -482,6 +482,12 @@ function AllRun() {
             firstItem.addClass("active");
         });
     });
+    /* Clear search */
+    window.onload = function() {
+        if (window.location.search) {
+            window.history.replaceState({}, document.title, window.location.pathname + '?search_keyword=');
+        }
+    };
 }
 
 $(document).ready(function () {

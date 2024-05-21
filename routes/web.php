@@ -4,13 +4,13 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Clients\CAboutusController;
 use App\Http\Controllers\Clients\CNewsController;
 use App\Http\Controllers\Clients\CProductController;
+use App\Http\Controllers\Clients\CSearchController;
 use App\Http\Controllers\Clients\IndexController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\SettingController;
-/* Clients */
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\UserController;
@@ -26,12 +26,16 @@ Route::get('/admin', function () {
 Route::prefix('/')->group(function () {
     /* Index */
     Route::controller(IndexController::class)->group(function () {
-        Route::get('/', 'index')->name('index');        
+        Route::get('/', 'index')->name('index');
         Route::get('/get-category-data/{categoryId}', [IndexController::class, 'getCategoryData'])->name('get-category-data');
         Route::get('/publisher/{id}', [IndexController::class, 'publisherproduct'])->name('publisher.publisherproduct');
         Route::get('/categoryid/{id}', [IndexController::class, 'categoryidproduct'])->name('categoryid.categoryidproduct');
     });
 
+    /* Search */
+    Route::controller(CSearchController::class)->group(function () {
+        Route::get('/search', 'index')->name('search');
+    });
     /* About Us */
     Route::controller(CAboutusController::class)->group(function () {
         Route::get('/aboutus', 'index')->name('aboutus');

@@ -9,8 +9,5 @@ use App\Http\Controllers\Clients\IndexController;
 <link href="{{ asset('index/slick/slick-theme.css') }}" rel="stylesheet">
 <link href="{{ asset('vendors/aos/aos.css') }}" rel="stylesheet">
 <link href="{{ asset('vendors/fontawesome640/all.css') }}" rel="stylesheet">
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css
-"crossorigin="anonymous">
 <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
 <link href="{{ asset('index/css/style.css') }}" rel="stylesheet">

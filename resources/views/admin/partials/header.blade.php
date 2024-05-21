@@ -20,7 +20,7 @@
                 href="http://127.0.0.1:8000/"
                 role="button"
             >
-            <i class="fa-solid fa-reply"></i>
+            <i class="fas fa-reply"></i>
             </a>
              
         </li>

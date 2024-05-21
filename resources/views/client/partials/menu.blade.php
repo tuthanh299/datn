@@ -13,8 +13,8 @@ use App\Http\Controllers\Clients\IndexController;
                 <a href="{{ route('product') }}" class="dropdown-toggle" title="Danh mục sản phẩm"
                     data-toggle="dropdown">Danh mục sản phẩm </a>
                 <div class="dropdown-menu mega-dropdown-menu" style="display: block !important;">
-                    <div class="">
-                        <div class="col-md-2 col-sm-2 ht-tab">
+                    <div class="flex-menu-mega">
+                        <div class="menu-mega-left ht-tab">
                             <ul class="nav nav-tabs" role="tablist">
                                 @if (!IndexController::MenuCategory()->isEmpty())
                                     @foreach (IndexController::MenuCategory() as $v)
@@ -26,13 +26,12 @@ use App\Http\Controllers\Clients\IndexController;
                                 @endif
                             </ul>
                         </div>
-                        <div class="col-md-10 col-sm-10 ht-tab">
+                        <div class="menu-mega-right ht-tab">
                             <div class="tab-content">
                                 @foreach (IndexController::MenuCategory() as $v)
-                                    <div class="tab-pane"
-                                        id="tab-id-{{ $v->id }}">
+                                    <div class="tab-pane" id="tab-id-{{ $v->id }}">
                                         @foreach ($v->children as $menucategorysecond)
-                                            <div class="col-md-4 ht-ul">
+                                            <div class="menucategory-second-tab ht-ul">
                                                 <div class="menucategory-second-title">
                                                     <a
                                                         href="{{ route('categoryid.categoryidproduct', ['id' => $menucategorysecond->id]) }}">{{ $menucategorysecond->name }}</a>
@@ -64,8 +63,8 @@ use App\Http\Controllers\Clients\IndexController;
                 </a>
             </li>
             <li class="menu-main-li">
-                <a href=" " title="Tìm kiếm">
-                    Tìm kiếm <i class="fa-brands fa-searchengin"></i>
+                <a href="{{ route('search') }} " title="Tìm kiếm">
+                    Tìm kiếm
                 </a>
             </li>
             <li class="menu-partials ">
