@@ -6,6 +6,7 @@ use App\Http\Controllers\Clients\CNewsController;
 use App\Http\Controllers\Clients\CProductController;
 use App\Http\Controllers\Clients\IndexController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
@@ -16,8 +17,11 @@ use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
+Route::get('/login', [AdminController::class, 'loginAdmin'])->name('admin.login');
 Route::post('/login', [AdminController::class, 'postLoginAdmin']);
+
+Route::get('/login', [HomePageController::class, 'clientlogin'])->name('client.login');
+Route::post('/check-login', [HomePageController::class, 'postclientlogin'])->name('client.postlogin');
 
 Route::get('/admin', function () {
     return view('admin.admin');

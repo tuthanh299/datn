@@ -9,6 +9,7 @@ use App\Models\Publisher;
 use App\Models\Setting;
 use App\Models\Slider;
 use App\Models\StaticNews;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -21,6 +22,9 @@ class IndexController extends Controller
     }
     public function index()
     {
+        if(!isset($_COOKIE['is_logged'])) {
+            setcookie('is_logged', 0, time() + 360000, '/');
+        }
 
         $sliders = Slider::select('name', 'description', 'photo_path')->get();
         $news = News::select('id', 'name', 'description', 'photo_path')->get();
@@ -32,6 +36,13 @@ class IndexController extends Controller
             ->where('status', 1)
             ->where('outstanding', 1)
             ->get();
+
+        if(($_COOKIE['is_logged']) == 1) {
+            $user = User::where('id', $_COOKIE['id'])->get();
+
+            return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user'));
+        }
+        
         return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first'));
     }
     public function PublisherProduct($id)
