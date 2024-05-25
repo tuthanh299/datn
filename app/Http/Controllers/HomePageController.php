@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class HomePageController extends Controller
 {
@@ -12,26 +15,73 @@ class HomePageController extends Controller
         return view('client.login');
     }
 
-    public function oldpostlogin(Request $request) 
+    public function clientregister()
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
+        return view('client.register');
+    }
 
-        $check = [
+    public function postlogin(Request $request) 
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if(Auth::guard('member')->attempt($credentials))
+        {
+            return redirect()->route('index');
+        }
+        //$email = $request->input('email');
+        //$password = $request->input('password');
+
+        /*$check = [
             ['email', '=', $email], 
-            ['password', '=', $password]
+            //['password', '=', $password]
         ];
 
-        $user = User::where($check)->get();
+        $user = Member::where($check)->get();
 
-        if($user) 
+        if(Hash::check($password, $user[0]->password)){
+            return redirect()->route('index');
+        }*/
+
+        /*if($user) 
         {
             $is_logged = 1;
-            $id = $user[0]->id;
+            $id = $user->id;
             setcookie('is_logged', $is_logged, time() + 360000, '/');
             setcookie('id', $id, time() + 360000, '/');
             return redirect()->route('index');
+        }*/
+        return redirect()->route('client.login')->with('fail', 'Tài khoản hoặc mật khẩu không chính xác.');
+
+        //dd($user);
+        //dd(Hash::make('123456'));
+    }
+
+    public function postregister(Request $request) 
+    {
+        $cre = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+            'confirm-password' => ['required'], 
+            'address' => ['required'],
+            'phone' => ['required']
+        ]);
+
+        if($cre)
+        {
+            /*Member::create([
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'address' => $request->address,
+                'phone' => $request->phone,
+            ]);*/
+
+            //return redirect()->route('client.login');
+            dd($cre, 'true');
         }
-        return redirect()->route('dangnhap')->with('fail', 'Tài khoản hoặc mật khẩu không chính xác.');
+        //return redirect()->route('client.register')->with('fail', 'Đã có lỗi xảy ra');
+        dd($cre, 'false');
     }
 }

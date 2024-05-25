@@ -17,17 +17,19 @@ use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', [AdminController::class, 'loginAdmin'])->name('admin.login');
-Route::post('/login', [AdminController::class, 'postLoginAdmin']);
-
-Route::get('/login', [HomePageController::class, 'clientlogin'])->name('client.login');
-Route::post('/check-login', [HomePageController::class, 'postclientlogin'])->name('client.postlogin');
-
 Route::get('/admin', function () {
     return view('admin.admin');
 })->middleware('auth');
 
 Route::prefix('/')->group(function () {
+    /* Login */
+    Route::get('login', [HomePageController::class, 'clientlogin'])->name('client.login');
+    Route::post('check-login', [HomePageController::class, 'postlogin'])->name('client.postlogin');
+
+    /* Register */
+    Route::get('register', [HomePageController::class, 'clientregister'])->name('client.register');
+    Route::post('register', [HomePageController::class, 'postregister'])->name('client.postregister');
+
     /* Index */
     Route::controller(IndexController::class)->group(function () {
         Route::get('/', 'index')->name('index');        
@@ -53,8 +55,14 @@ Route::prefix('/')->group(function () {
 });
 
 Route::prefix('admin')->group(function () {
+    /* Login */
+    Route::get('login', [AdminController::class, 'loginAdmin'])->name('admin.login');
+    Route::post('check-login', [AdminController::class, 'postLoginAdmin'])->name('admin.postlogin');
+
+    Route::get('logout', [AdminController::class, 'logout'])->name('admin.logout');
+
     /* Dashboard */
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     /* User */
     Route::prefix('users')->group(function () {
         Route::get('', [UserController::class, 'index'])->name('users.index');
