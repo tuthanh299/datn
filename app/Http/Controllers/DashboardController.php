@@ -10,10 +10,10 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if($user != null) {
-            return view('admin.dashboard.dashboard');
+        if($user == null) {
+            return redirect()->route('admin.login');
         }
-        return redirect()->route('admin.login');
+        return view('admin.dashboard.dashboard');
     }
 
 }
