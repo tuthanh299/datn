@@ -23,10 +23,18 @@
 						<input type="text" placeholder="Email" class="form-control" id="email" name="email">
 						<i class="zmdi zmdi-email"></i>
 					</div>
+					@error('email')
+						<div style="color: #dd0505;
+						font-size: 1em;font-weight: bold;">{{ $message }}</div>
+					@enderror
 					<div class="form-wrapper">
 						<input type="password" placeholder="Mật khẩu" class="form-control" id="password" name="password">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
+					@error('password')
+						<div style="color: #dd0505;
+						font-size: 1em;font-weight: bold;">{{ $message }}</div>
+					@enderror
 					<input type="submit" class="btn1" value="Đăng nhập">
 					<!--<button class="btn1">Đăng nhập
 						<i class="zmdi zmdi-arrow-right"></i>

@@ -113,14 +113,25 @@ use App\Http\Controllers\Clients\IndexController;
                                 </div>
                                 <div class="menu-bottom-account-positon" data-bs-toggle="modal"
                                     data-bs-target="#account-modal">
-                                    <div class="menu-bottom-account">
-                                        <div class="menu-bottom-account-icon">
-                                            <i class="fa-solid fa-user"></i>
+                                    @if (Auth::guard('member')->check())
+                                        <div class="menu-bottom-account">
+                                            <div class="menu-bottom-account-icon">
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                            <div class="menu-bottom-account-text">
+                                                Xin chào: {{ $user->name }}
+                                            </div>
                                         </div>
-                                        <div class="menu-bottom-account-text">
-                                            Tài khoản
+                                    @else
+                                        <div class="menu-bottom-account">
+                                            <div class="menu-bottom-account-icon">
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                            <div class="menu-bottom-account-text">
+                                                Đăng nhập / Đăng kí
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
                                 </div>
                             </div>

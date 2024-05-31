@@ -26,9 +26,11 @@ Route::prefix('/')->group(function () {
     Route::get('login', [HomePageController::class, 'clientlogin'])->name('client.login');
     Route::post('check-login', [HomePageController::class, 'postlogin'])->name('client.postlogin');
 
+    Route::get('logout', [HomePageController::class, 'logout'])->name('client.logout');
+
     /* Register */
     Route::get('register', [HomePageController::class, 'clientregister'])->name('client.register');
-    Route::post('register', [HomePageController::class, 'postregister'])->name('client.postregister');
+    Route::post('check-register', [HomePageController::class, 'postregister'])->name('client.postregister');
 
     /* Index */
     Route::controller(IndexController::class)->group(function () {
