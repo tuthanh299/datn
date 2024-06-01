@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Clients\CAboutusController;
 use App\Http\Controllers\Clients\CNewsController;
@@ -58,6 +59,12 @@ Route::prefix('/')->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
     });
+
+    /* Cart */
+    Route::controller(CartController::class)->group(function () {
+        Route::get('/cart', 'index')->name('cart');
+    })->middleware('auth');
+
 });
 
 Route::prefix('admin')->group(function () {

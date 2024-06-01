@@ -7,4 +7,5 @@ use App\Http\Controllers\Clients\IndexController;
     <title>{{ IndexController::settings()->name }}</title>
 @endsection
 @section('content')
+    @include('client.partials.content')
 @endsection
