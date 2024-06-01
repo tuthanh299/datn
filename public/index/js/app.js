@@ -94,82 +94,8 @@ function setupBackToTop() {
         return false;
     });
 }
-
-function CartBtnClick() {
-    if (!isExist($(".menu-bottom-cart-icon-hidden"))) {
-        var openCartBtn = document.getElementById("open-cart-list");
-        var closeCartBtn = document.getElementById("close-cart-btn");
-        var cartIcon = document.querySelector(".menu-bottom-cart-icon-hidden");
-
-        openCartBtn.addEventListener("click", toggleCartIcon);
-        closeCartBtn.addEventListener("click", toggleCartIcon);
-
-        function toggleCartIcon() {
-            if (cartIcon.style.display === "none") {
-                cartIcon.style.display = "block";
-            } else {
-                cartIcon.style.display = "none";
-            }
-        }
-    }
-}
-
-function ProductTnteract() {
-    if (!isExist($(".cart-product-add"))) {
-        $(document).ready(function () {
-            $(".increment-cart").click(function () {
-                var value = parseInt($(this).prev(".quantity-input").val());
-                $(this)
-                    .prev(".quantity-input")
-                    .val(value + 1);
-            });
-
-            $(".decrement-cart").click(function () {
-                var value = parseInt($(this).next(".quantity-input").val());
-                if (value > 0) {
-                    $(this)
-                        .next(".quantity-input")
-                        .val(value - 1);
-                }
-            });
-
-            $(".cart-product-add").each(function () {
-                let productQuantityCart = $(this).find(
-                    ".product-quantity-cart"
-                );
-                let quantityInput = $(this).find(".quantity-input");
-                productQuantityCart.hide();
-                $(this).hover(
-                    function () {
-                        productQuantityCart.show();
-                        $(this).css("border", "solid 1px #ccc");
-                    },
-                    function () {
-                        if (quantityInput.val() == 0) {
-                            productQuantityCart.hide();
-                            $(this).css("border", "");
-                        }
-                    }
-                );
-                quantityInput.on("input", function () {
-                    if (quantityInput.val() != 0) {
-                        productQuantityCart.show();
-                        $(this).parent().css("border", "solid 1px #ccc");
-                    } else {
-                        productQuantityCart.hide();
-                        $(this).parent().css("border", "");
-                    }
-                });
-            });
-        });
-
-        $("input[type=number]").on("keydown", function (e) {
-            if (e.key == "ArrowUp" || e.key == "ArrowDown") {
-                e.preventDefault();
-            }
-        });
-    }
-}
+ 
+ 
 
 function SlickPage() {
     if (isExist("slick-slideshow")) {
@@ -401,17 +327,7 @@ function AllRun() {
                                             <div class="name-product"><a class="text-split-2" href="/product/${product.id}"
                                                     title="${product.name}">${product.name}</a>
                                             </div>
-                                            <div class="-cart">
-                                                <div class="product-quantity">
-                                                    <span class="product-quantity-text">Còn hàng:</span>
-                                                    <span class="product-quantity-num-sub-text">
-                                                        <span class="product-quantity-num">4</span>
-                                                        <span class="product-quantity-num-sub-text">sản phẩm</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="flex-price-cart-product">
-                                                <div class="price-product">
+                                            <div class="price-product">
                                                     <div class="price-new"> 
                                                     ${sale_price}
                                                     </div>
@@ -422,20 +338,14 @@ function AllRun() {
                                                     ${product.discount}% 
                                                     </div>
                                                 </div>
-                                                <div class="cart-product-add">
-                                                    <div class="flex-cart-product-add-quantity">
-                                                        <div class="product-quantity-cart">
-                                                            <div class="product-quantity-cart-flex">
-                                                                <button class="decrement-cart">-</button>
-                                                                <input type="number" class="quantity-input" value="0"
-                                                                    min="0">
-                                                                <button class="increment-cart">+</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="cart-product-add-btn">
-                                                            <i class="fa-solid fa-cart-shopping"></i>
-                                                        </div>
-                                                    </div>
+                                                <div class="product-button text-center">
+                                                <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
+                                                    <a href="" class="product-button-cart-action button-addnow text-light"><i
+                                                            class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
+                                                </div>
+                                                <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
+                                                    <a href="" class="product-button-cart-action button-buynow text-light"><i
+                                                            class="fa-solid fa-basket-shopping-simple me-1"></i>Mua ngay</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -447,17 +357,22 @@ function AllRun() {
                                 ".paging-product-category-" + categoryParentId
                             ).html(productHtml);
                             if (isExist("slick-product-category")) {
-                                $(".slick-product-category").slick({
-                                    dots: false,
-                                    infinite: true,
-                                    autoplaySpeed: 3500,
-                                    slidesToShow: 5,
-                                    slidesToScroll: 1,
-                                    adaptiveHeight: false,
-                                    autoplay: true,
-                                    arrows: true,
-                                    fade: false,
-                                });
+                                $(
+                                    ".paging-product-category-" +
+                                        categoryParentId
+                                )
+                                    .find(".slick-product-category")
+                                    .slick({
+                                        dots: false,
+                                        infinite: true,
+                                        autoplaySpeed: 3500,
+                                        slidesToShow: 5,
+                                        slidesToScroll: 1,
+                                        adaptiveHeight: false,
+                                        autoplay: true,
+                                        arrows: true,
+                                        fade: false,
+                                    });
                             }
                         } else {
                             productHtml =
@@ -483,9 +398,13 @@ function AllRun() {
         });
     });
     /* Clear search */
-    window.onload = function() {
+    window.onload = function () {
         if (window.location.search) {
-            window.history.replaceState({}, document.title, window.location.pathname + '?search_keyword=');
+            window.history.replaceState(
+                {},
+                document.title,
+                window.location.pathname + "?search_keyword="
+            );
         }
     };
 }
@@ -496,10 +415,7 @@ $(document).ready(function () {
     });
     PeShiner();
     TranslateClick();
-    setupBackToTop();
-    CartBtnClick();
-    ProductTnteract();
+    setupBackToTop(); 
     SlickPage();
-
     AllRun();
 });

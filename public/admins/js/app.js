@@ -69,19 +69,31 @@ function initializeSelect2() {
         placeholder: "Chọn vai trò",
     });
 }
-
-/* Call */
-$(document).ready(function () {
-    previewImage("file-zone", "photoUpload-preview"); // Cho Favicon
-    previewImage("file-zone2", "photoUpload-preview2"); // Cho Logo
-});
-
-$(document).ready(function () {
-    initializeSelect2();
-});
-
-$(document).ready(function () {
+function CheckRole() {
+    /* Role */
+    $(".checkbox_parent").on("click", function () {
+        $(this)
+            .parents(".checkbox-role")
+            .find(".checkbox_children")
+            .prop("checked", $(this).prop("checked"));
+    });
+    $(".checkbox_all").on("click", function () {
+        $(this)
+            .parents()
+            .find(".checkbox_parent,.checkbox_children")
+            .prop("checked", $(this).prop("checked"));
+    });
+}
+function JsAdmin() {
     if (isExist("summernote")) {
         $(".summernote").summernote();
     }
+}
+
+$(document).ready(function () {
+    JsAdmin();
+    CheckRole();
+    initializeSelect2();
+    previewImage("file-zone", "photoUpload-preview"); // Cho Favicon
+    previewImage("file-zone2", "photoUpload-preview2"); // Cho Logo
 });

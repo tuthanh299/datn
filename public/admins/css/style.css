@@ -1,4 +1,10 @@
 /* Admin CSS */
+label{text-transform: capitalize !important;}
+/* Role */
+.role-style .card-header-role{
+    background: #4942E4;
+}
+textarea.form-control{text-transform: unset !important;}
 /* Login */
 .login-box{width:320px;}
 .login-box .card .login-card-body{padding:30px 20px;border-radius:0.25rem;}
