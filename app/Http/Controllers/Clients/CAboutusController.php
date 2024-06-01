@@ -12,12 +12,12 @@ class CAboutusController extends Controller
         $firstRecord = StaticNews::select('name', 'content')->first();
         if ($firstRecord) {
             $pageName = $firstRecord->name;
-            $aboutus = $firstRecord->content;
+            $aboutusin = $firstRecord->content;
         } else {
             $pageName = 'Về chúng tôi';
-            $aboutus = 'Nội dung đang cập nhật';
+            $aboutusin = 'Nội dung đang cập nhật';
         }   
        
-        return view('client.aboutus.index', compact('pageName', 'aboutus'));
+        return view('client.aboutus.index', compact('pageName', 'aboutusin'));
     }
 }

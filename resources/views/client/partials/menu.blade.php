@@ -76,50 +76,32 @@ use App\Http\Controllers\Clients\IndexController;
 
 
                                 <div class="menu-bottom-cart-icon-position">
-                                    <div id="open-cart-list" class="menu-bottom-cart">
-                                        <div class="menu-bottom-cart-icon">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                            <div class="menu-bottom-cart-num">
-                                                0
+                                    <a href="{{ route('user.cart') }}">
+                                        <div class="menu-bottom-cart">
+                                            <div class="menu-bottom-cart-icon">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                                <div class="menu-bottom-cart-num">
+                                                    0
+                                                </div>
+                                            </div>
+                                            <div class="menu-bottom-cart-text">
+                                                Giỏ hàng
                                             </div>
                                         </div>
-                                        <div class="menu-bottom-cart-text">
-                                            Giỏ hàng
-                                        </div>
-                                    </div>
-                                    <div class="menu-bottom-cart-icon-hidden">
-                                        <div class="flex-menu-bottom-cart-icon-hidden-cover">
-                                            <div class="menu-bottom-cart-icon-hidden-cover-text">
-                                                Sản phẩm trong giỏ hàng
-                                            </div>
-                                            <div id="close-cart-btn"
-                                                class="menu-bottom-cart-icon-hidden-cover-close-btn">
-                                                <i class="fa-solid fa-circle-xmark"></i>
-                                            </div>
-                                        </div>
-                                        <div class="menu-bottom-cart-list">
-                                            <!-- If here -->
-                                            <div class="menu-bottom-cart-list-scroll">
+                                    </a>
 
-                                            </div>
-
-                                            <div class="menu-bottom-cart-list-none">
-                                                Bạn chưa có sản phẩm nào
-                                                trong giỏ hàng!
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="menu-bottom-account-positon" data-bs-toggle="modal"
-                                    data-bs-target="#account-modal">
-                                    <div class="menu-bottom-account">
-                                        <div class="menu-bottom-account-icon">
-                                            <i class="fa-solid fa-user"></i>
+                                <div class="menu-bottom-account-positon">
+                                    <a href="{{ route('user.login') }}">
+                                        <div class="menu-bottom-account">
+                                            <div class="menu-bottom-account-icon">
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                            <div class="menu-bottom-account-text">
+                                                Tài khoản
+                                            </div>
                                         </div>
-                                        <div class="menu-bottom-account-text">
-                                            Tài khoản
-                                        </div>
-                                    </div>
+                                    </a>
 
                                 </div>
                             </div>

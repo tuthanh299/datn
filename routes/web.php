@@ -5,20 +5,31 @@ use App\Http\Controllers\Clients\CAboutusController;
 use App\Http\Controllers\Clients\CNewsController;
 use App\Http\Controllers\Clients\CProductController;
 use App\Http\Controllers\Clients\CSearchController;
+use App\Http\Controllers\Clients\CUserController;
+use App\Http\Controllers\Clients\CCartController;
 use App\Http\Controllers\Clients\IndexController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
-Route::post('/login', [AdminController::class, 'postLoginAdmin']);
+/* Cart */
+Route::get('/gio-hang', [CCartController::class, 'cartUser'])->name('user.cart');
 
+/* Client */
+Route::get('/dang-nhap', [CUserController::class, 'loginUser'])->name('user.login');
+Route::get('/dang-ky', [CUserController::class, 'registerUser'])->name('user.register');
+
+/* Admin */
+Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
+Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('logout');
+Route::post('/login', [AdminController::class, 'postLoginAdmin']);
 Route::get('/admin', function () {
     return view('admin.admin');
 })->middleware('auth');
@@ -31,7 +42,6 @@ Route::prefix('/')->group(function () {
         Route::get('/publisher/{id}', [IndexController::class, 'publisherproduct'])->name('publisher.publisherproduct');
         Route::get('/categoryid/{id}', [IndexController::class, 'categoryidproduct'])->name('categoryid.categoryidproduct');
     });
-
     /* Search */
     Route::controller(CSearchController::class)->group(function () {
         Route::get('/search', 'index')->name('search');
@@ -63,6 +73,14 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
         Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+    });
+    Route::prefix('roles')->group(function () {
+        Route::get('', [RoleController::class, 'index'])->name('roles.index');
+        Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
+        Route::post('/store', [RoleController::class, 'store'])->name('roles.store');
+        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
+        Route::post('/update/{id}', [RoleController::class, 'update'])->name('roles.update');
+        Route::get('/delete/{id}', [RoleController::class, 'delete'])->name('roles.delete');
     });
     /* Setting */
     Route::get('setting', [SettingController::class, 'index'])->name('setting.index');

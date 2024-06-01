@@ -8,7 +8,7 @@
             </span>
         </div>
         <div class="content-main">
-            {!! $aboutus !!}
+            {!! $aboutusin !!}
         </div>
     </div>
 @endsection

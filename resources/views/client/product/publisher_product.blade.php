@@ -29,42 +29,27 @@
                                                     href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                     title="{{ $v->name }}">{{ $v->name }}</a>
                                             </div>
-                                            <div class="-cart">
-                                                <div class="product-quantity">
-                                                    <span class="product-quantity-text">Còn hàng:</span>
-                                                    <span class="product-quantity-num-sub-text">
-                                                        <span class="product-quantity-num">4</span>
-                                                        <span class="product-quantity-num-sub-text">sản phẩm</span>
-                                                    </span>
+                                             
+                                            <div class="price-product ">
+                                                <div class="price-new">
+
+                                                    @formatmoney($v->sale_price)
+                                                </div>
+                                                <div class="price-old">
+                                                    @formatmoney($v->regular_price)
+                                                </div>
+                                                <div class="discount">
+                                                    {{ $v->discount }}%
                                                 </div>
                                             </div>
-                                            <div class="flex-price-cart-product">
-                                                <div class="price-product">
-                                                    <div class="price-new">
-
-                                                        @formatmoney($v->sale_price)
-                                                    </div>
-                                                    <div class="price-old">
-                                                        @formatmoney($v->regular_price)
-                                                    </div>
-                                                    <div class="discount">
-                                                        {{ $v->discount }}%
-                                                    </div>
+                                            <div class="product-button text-center">
+                                                <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
+                                                    <a href="" class="product-button-cart-action button-addnow text-light"><i
+                                                            class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
                                                 </div>
-                                                <div class="cart-product-add">
-                                                    <div class="flex-cart-product-add-quantity">
-                                                        <div class="product-quantity-cart">
-                                                            <div class="product-quantity-cart-flex">
-                                                                <button class="decrement-cart">-</button>
-                                                                <input type="number" class="quantity-input" value="0"
-                                                                    min="0">
-                                                                <button class="increment-cart">+</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="cart-product-add-btn">
-                                                            <i class="fa-solid fa-cart-shopping"></i>
-                                                        </div>
-                                                    </div>
+                                                <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
+                                                    <a href="" class="product-button-cart-action button-buynow text-light"><i
+                                                            class="fa-solid fa-basket-shopping-simple me-1"></i>Mua ngay</a>
                                                 </div>
                                             </div>
                                         </div>
