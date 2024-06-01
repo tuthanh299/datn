@@ -2,6 +2,26 @@
 use App\Http\Controllers\Clients\IndexController;
 
 ?>
+
+
+@isset($aboutus)
+    <div class="wrap-intro py50">
+        <div class="wrap-content">
+            <div class="intro-title">
+                <div class="intro-sub-name">
+                    Đôi nét về
+                </div>
+                <div class="intro-name">
+                    {{ $aboutus->name }}
+                </div>
+            </div>
+            <div class="intro-desc">
+                {!! $aboutus->description !!}
+            </div>
+        </div>
+    </div>
+@endisset
+
 @isset($productOutstanding)
     @if (!$productOutstanding->isEmpty())
         {{-- Product Oustanding --}}
@@ -89,7 +109,8 @@ use App\Http\Controllers\Clients\IndexController;
                     </div>
                     <div class="flex-categorysecond">
                         @foreach ($v->children as $category_second)
-                            <div class="categorysecond" data-idf="{{ $v->id }}" data-ids="{{ $category_second->id }}"
+                            <div class="categorysecond" data-idf="{{ $v->id }}"
+                                data-ids="{{ $category_second->id }}"
                                 data-url="{{ route('get-category-data', ['categoryId' => $category_second->id]) }}">
                                 {{ $category_second->name }}
                             </div>

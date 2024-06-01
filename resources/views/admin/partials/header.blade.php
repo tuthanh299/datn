@@ -20,7 +20,7 @@
                 href="{{route('index')}}"
                 role="button"
             >
-            <i class="fa-solid fa-reply"></i>
+            <i class="fas fa-reply"></i>
             </a>
              
         </li>
