@@ -5,7 +5,7 @@ use App\Http\Controllers\Clients\IndexController;
     <div class="wrap-content">
         <ul class="menu-main">
             <li class="menu-main-li">
-                <a href="http://127.0.0.1:8000/" title="Trang chủ">
+                <a href="{{route('index')}}" title="Trang chủ">
                     Trang chủ
                 </a>
             </li>
@@ -92,7 +92,7 @@ use App\Http\Controllers\Clients\IndexController;
 
                                 </div>
                                 <div class="menu-bottom-account-positon">
-                                    <a href="{{ route('user.login') }}">
+                                    <a href="{{ route('client.login') }}">
                                         <div class="menu-bottom-account">
                                             <div class="menu-bottom-account-icon">
                                                 <i class="fa-solid fa-user"></i>

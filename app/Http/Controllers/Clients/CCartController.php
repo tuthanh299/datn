@@ -9,7 +9,16 @@ class CCartController extends Controller
 {
     public function cartUser()
     {
-       
-        return view('client.order.cart');
+        //đổi giao diện lại, tách giỏ hàng và thanh toán riêng
+        //client.cart.index
+        /*$user = auth()->user();
+        if($user) {
+            return view('client.order.cart');
+        }
+
+        return view('client.login');*/
+        $carts = 1;
+
+        return view('client.order.cart', compact('carts'));
     }
 }

@@ -1,5 +1,11 @@
-@extends('client.layouts.index')
+<?php
+use App\Http\Controllers\Clients\IndexController;
+?>
 
+@extends('client.layouts.index')
+@section('title')
+    <title>{{ IndexController::settings()->name }}</title>
+@endsection
 @section('content')
     <div class="wrap-content">
         <div class="title-main">
@@ -17,7 +23,7 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        <input type="text" name="email" value="{{ old('email') }}" class="form-control text-sm "
+                        <input type="email" name="email" value="{{ old('email') }}" class="form-control text-sm "
                             placeholder="Nhập email" autocomplete="off" />
                     </div>
                     <label class="emailMember-error error" for="emailMember" style=""></label>
@@ -53,10 +59,10 @@
                 </div>
                 <div class="no-account-text text-center">
                     <div>
-                        Chưa có tài khoản? <a href="{{ route('user.register') }}">Đăng ký</a>
+                        Chưa có tài khoản? <a href="{{ route('client.register') }}">Đăng ký</a>
                     </div>
                     <div>
-                        <div>Hoặc đăng nhập với: <a href=""><i class="fa-brands fa-google"></i></a>
+                        <div>Hoặc đăng nhập với: <a href="#"><i class="fa-brands fa-google"></i></a>
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@
 
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link">
+            <a href="{{ route('admin.logout') }}" class="nav-link">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </a>
         </li>

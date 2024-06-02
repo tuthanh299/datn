@@ -20,7 +20,7 @@
 					@csrf
 					<h3>Đăng nhập</h3>
 					<div class="form-wrapper">
-						<input type="text" placeholder="Email" class="form-control" id="email" name="email">
+						<input type="email" placeholder="Email" class="form-control" id="email" name="email">
 						<i class="zmdi zmdi-email"></i>
 					</div>
 					@error('email')

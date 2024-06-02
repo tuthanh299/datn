@@ -1,6 +1,9 @@
 @extends('client.layouts.index')
-
+@section('title')
+    <title> Giỏ hàng </title>
+@endsection
 @section('content')
+    @if ($carts > 0)
     <div class="wrap-content">
         <div class="wrap-cart">
             <div class="row">
@@ -265,4 +268,10 @@
             </div>
         </div>
     </div>
+    @else
+
+    <div>Không có sản phẩm trong giỏ hàng</div>
+    <a href="{{route('index')}}">Quay lại trang chủ</a>
+
+    @endif
 @endsection
