@@ -13,7 +13,7 @@ class CartController extends Controller
         {
             $user = Auth::guard('member')->user();
             $carts = 1;
-            return view('client.cart', compact('carts', 'user'));
+            return view('client.order.cart', compact('carts', 'user'));
         }
 
         return redirect()->route('client.login');

@@ -1,8 +1,13 @@
 @extends('client.layouts.index')
 
+@section('title')
+    <title>Giỏ hàng</title>
+@endsection
+
 @section('content')
     <div class="wrap-content">
         <div class="wrap-cart">
+            @if ($carts > 0)
             <div class="row">
                 <div class="top-cart col-12 col-lg-7">
                     <p class="title-cart">Giỏ hàng của bạn:</p>
@@ -18,6 +23,7 @@
                                 <div class="price-procart col-3 col-md-3 mg-col-10">Thành tiền</div>
                             </div>
                         </div>
+                        <!--thẻ sản phẩm giỏ hàng-->
                         <div class="procart procart">
                             <div class="row row-10">
                                 <div class="pic-procart col-3 col-md-2 mg-col-10"> <a class="text-decoration-none"
@@ -50,6 +56,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- end -->
                         <div class="procart procart">
                             <div class="row row-10">
                                 <div class="pic-procart col-3 col-md-2 mg-col-10"> <a class="text-decoration-none"
@@ -257,12 +264,20 @@
                             value="Thanh toán" disabled />
                     </div>
                 </div>
-                {{-- Empty --}}
-                <a href="http://127.0.0.1:8000/" class="empty-cart text-decoration-none d-block"> <i
-                        class="fa-duotone fa-cart-xmark"></i>
-                    <p>Không tồn tại sản phẩm nào trong giỏ hàng</p> <span class="btn btn-back-to-home">Về trang chủ</span>
-                </a>
+                
             </div>
+            @else
+            {{-- Empty --}}
+            <a href="http://127.0.0.1:8000/" class="empty-cart text-decoration-none d-block">
+                <i class="fa-duotone fa-cart-xmark"></i>
+                <p>Không tồn tại sản phẩm nào trong giỏ hàng</p> 
+                <a href="{{route('index')}}">
+                    <span class="btn btn-back-to-home">
+                        Về trang chủ
+                    </span>
+                </a>
+            </a>
+            @endif
         </div>
     </div>
 @endsection
