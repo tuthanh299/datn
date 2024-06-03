@@ -27,14 +27,18 @@ Route::get('/admin', function () {
 
 Route::prefix('/')->group(function () {
     /* Login */
-    Route::get('login', [HomePageController::class, 'clientlogin'])->name('client.login');
-    Route::post('check-login', [HomePageController::class, 'postlogin'])->name('client.postlogin');
-
-    Route::get('logout', [HomePageController::class, 'logout'])->name('client.logout');
+    //Route::get('login', [HomePageController::class, 'clientlogin'])->name('client.login');
+    Route::get('login', [CUserController::class, 'clientLogin'])->name('client.login');
+    //Route::post('check-login', [HomePageController::class, 'postlogin'])->name('client.postlogin');
+    Route::post('check-login', [CUserController::class, 'postlogin'])->name('client.postlogin');
 
     /* Register */
-    Route::get('register', [HomePageController::class, 'clientregister'])->name('client.register');
-    Route::post('check-register', [HomePageController::class, 'postregister'])->name('client.postregister');
+    //Route::get('register', [HomePageController::class, 'clientregister'])->name('client.register');
+    Route::get('register', [CUserController::class, 'clientRegister'])->name('client.register');
+    //Route::post('check-register', [HomePageController::class, 'postregister'])->name('client.postregister');
+    Route::post('check-register', [CUserController::class, 'postregister'])->name('client.postregister');
+
+    Route::get('logout', [HomePageController::class, 'logout'])->name('client.logout');
 
     /* Index */
     Route::controller(IndexController::class)->group(function () {
@@ -64,8 +68,14 @@ Route::prefix('/')->group(function () {
 
     /* Cart */
     Route::controller(CartController::class)->group(function () {
-        Route::get('/cart', 'index')->name('cart');
-    })->middleware('auth');
+        Route::get('/cart', 'index')->name('client.cart');
+    });
+
+    /* Info */
+
+    Route::controller(IndexController::class)->group(function () {
+        Route::get('/info', 'userinfo')->name('client.info');
+    });
 
 });
 

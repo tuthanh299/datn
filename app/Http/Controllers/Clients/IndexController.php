@@ -83,4 +83,14 @@ class IndexController extends Controller
         return $menufisrt;
     }
 
+    public function userinfo() 
+    {
+        if(Auth::guard('member')->check()) {
+            $user = Auth::guard('member')->user();
+            return view('client.user.info', compact('user'));
+        }
+
+        return redirect()->route('client.login');    
+    }
+
 }
