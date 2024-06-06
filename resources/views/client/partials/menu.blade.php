@@ -102,43 +102,46 @@
                                 </div>
                                 @endif
 
-                                <a href="{{route('cart.index')}}">
-                                    <div class="menu-bottom-cart-icon-position">
-                                        <div id="open-cart-list" class="menu-bottom-cart">
-                                            <div class="menu-bottom-cart-icon">
-                                                <i class="fa-solid fa-cart-shopping"></i>
-                                                <div class="menu-bottom-cart-num">
-                                                    {{count($cart1s)}}
-                                                </div>
-                                            </div>
-                                            <div class="menu-bottom-cart-text">
-                                                Giỏ hàng
+                                <!--<a href="{{route('cart.index')}}">
+                                </a>-->
+
+                                <div class="menu-bottom-cart-icon-position">
+                                    <div id="open-cart-list" class="menu-bottom-cart">
+                                        <div class="menu-bottom-cart-icon">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                            <div class="menu-bottom-cart-num">
+                                                {{count($cart1s)}}
                                             </div>
                                         </div>
-                                        <div class="menu-bottom-cart-icon-hidden">
-                                            <div class="flex-menu-bottom-cart-icon-hidden-cover">
-                                                <div class="menu-bottom-cart-icon-hidden-cover-text">
-                                                    Sản phẩm trong giỏ hàng
-                                                </div>
-                                                <div id="close-cart-btn"
-                                                    class="menu-bottom-cart-icon-hidden-cover-close-btn">
-                                                    <i class="fa-solid fa-circle-xmark"></i>
-                                                </div>
+                                        <div class="menu-bottom-cart-text">
+                                            Giỏ hàng
+                                        </div>
+                                    </div>
+                                    <div class="menu-bottom-cart-icon-hidden">
+                                        <div class="flex-menu-bottom-cart-icon-hidden-cover">
+                                            <div class="menu-bottom-cart-icon-hidden-cover-text">
+                                                Sản phẩm trong giỏ hàng
                                             </div>
-                                            <div class="menu-bottom-cart-list">
-                                                <!-- If here -->
-                                                <div class="menu-bottom-cart-list-scroll">
-    
-                                                </div>
-    
-                                                <div class="menu-bottom-cart-list-none">
-                                                    Bạn chưa có sản phẩm nào
-                                                    trong giỏ hàng!
-                                                </div>
+                                            <div id="close-cart-btn"
+                                                class="menu-bottom-cart-icon-hidden-cover-close-btn">
+                                                <i class="fa-solid fa-circle-xmark"></i>
+                                            </div>
+                                        </div>
+                                        <div class="menu-bottom-cart-list">
+                                            <!-- If here -->
+                                            <div class="menu-bottom-cart-list-scroll">
+
+                                            </div>
+
+                                            <div class="menu-bottom-cart-list-none">
+                                                Bạn chưa có sản phẩm nào
+                                                trong giỏ hàng!
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </div>
+
+
 
                             </div>
                         </div>
