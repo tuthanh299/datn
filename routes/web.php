@@ -2,13 +2,14 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Clients\CAboutusController;
+use App\Http\Controllers\Clients\CCartController;
 use App\Http\Controllers\Clients\CNewsController;
 use App\Http\Controllers\Clients\CProductController;
 use App\Http\Controllers\Clients\CSearchController;
 use App\Http\Controllers\Clients\CUserController;
-use App\Http\Controllers\Clients\CCartController;
 use App\Http\Controllers\Clients\IndexController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
@@ -17,22 +18,16 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StaticNewsController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Auth::routes();
 /* Cart */
 Route::get('/gio-hang', [CCartController::class, 'cartUser'])->name('user.cart');
 
 /* Client */
 Route::get('/dang-nhap', [CUserController::class, 'loginUser'])->name('user.login');
 Route::get('/dang-ky', [CUserController::class, 'registerUser'])->name('user.register');
-
-/* Admin */
-Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
-Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('logout');
-Route::post('/login', [AdminController::class, 'postLoginAdmin']);
-Route::get('/admin', function () {
-    return view('admin.admin');
-})->middleware('auth');
 
 Route::prefix('/')->group(function () {
     /* Index */
@@ -62,78 +57,105 @@ Route::prefix('/')->group(function () {
     });
 });
 
-Route::prefix('admin')->group(function () {
-    /* Dashboard */
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    /* User */
-    Route::prefix('users')->group(function () {
-        Route::get('', [UserController::class, 'index'])->name('users.index');
-        Route::get('/create', [UserController::class, 'create'])->name('users.create');
-        Route::post('/store', [UserController::class, 'store'])->name('users.store');
-        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-        Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
-        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
-    });
-    Route::prefix('roles')->group(function () {
-        Route::get('', [RoleController::class, 'index'])->name('roles.index');
-        Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
-        Route::post('/store', [RoleController::class, 'store'])->name('roles.store');
-        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
-        Route::post('/update/{id}', [RoleController::class, 'update'])->name('roles.update');
-        Route::get('/delete/{id}', [RoleController::class, 'delete'])->name('roles.delete');
-    });
-    /* Setting */
-    Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
-    Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
-    /* Staticnews */
-    Route::get('staticnews', [StaticNewsController::class, 'index'])->name('staticnews.index');
-    Route::post('staticnews/update', [StaticNewsController::class, 'update'])->name('staticnews.update');
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
 
-    /* Category */
-    Route::prefix('categories')->group(function () {
-        Route::get('', [CategoryController::class, 'index'])->name('categories.index');
-        Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
-        Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
-        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
-        Route::post('/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
-        Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
-    });
-    /* Slider */
-    Route::prefix('slider')->group(function () {
-        Route::get('', [SliderController::class, 'index'])->name('slider.index');
-        Route::get('/create', [SliderController::class, 'create'])->name('slider.create');
-        Route::post('/store', [SliderController::class, 'store'])->name('slider.store');
-        Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
-        Route::post('/update/{id}', [SliderController::class, 'update'])->name('slider.update');
-        Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('slider.delete');
-    });
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('logout');
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::prefix('admin')->group(function () {
+        /* Dashboard */
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    /* Publisher */
-    Route::prefix('publisher')->group(function () {
-        Route::get('', [PublisherController::class, 'index'])->name('publisher.index');
-        Route::get('/create', [PublisherController::class, 'create'])->name('publisher.create');
-        Route::post('/store', [PublisherController::class, 'store'])->name('publisher.store');
-        Route::get('/edit/{id}', [PublisherController::class, 'edit'])->name('publisher.edit');
-        Route::post('/update/{id}', [PublisherController::class, 'update'])->name('publisher.update');
-        Route::get('/delete/{id}', [PublisherController::class, 'delete'])->name('publisher.delete');
-    });
-    /* News */
-    Route::prefix('news')->group(function () {
-        Route::get('', [NewsController::class, 'index'])->name('news.index');
-        Route::get('/create', [NewsController::class, 'create'])->name('news.create');
-        Route::post('/store', [NewsController::class, 'store'])->name('news.store');
-        Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('news.edit');
-        Route::post('/update/{id}', [NewsController::class, 'update'])->name('news.update');
-        Route::get('/delete/{id}', [NewsController::class, 'delete'])->name('news.delete');
-    });
-    /* Product */
-    Route::prefix('product')->group(function () {
-        Route::get('', [ProductController::class, 'index'])->name('product.index');
-        Route::get('/create', [ProductController::class, 'create'])->name('product.create');
-        Route::post('/store', [ProductController::class, 'store'])->name('product.store');
-        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
-        Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
-        Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
-    });
+        /* User */
+        Route::prefix('users')->group(function () {
+            Route::get('', [UserController::class, 'index'])->name('users.index')->middleware('can:users-list');
+            Route::get('/create', [UserController::class, 'create'])->name('users.create')->middleware('can:users-add');
+            Route::post('/store', [UserController::class, 'store'])->name('users.store');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+            Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update')->middleware('can:users-edit');
+            Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete')->middleware('can:users-delete');
+        });
 
+        /* Role */
+        Route::prefix('roles')->group(function () {
+            Route::get('', [RoleController::class, 'index'])->name('roles.index')->middleware('can:roles-list');
+            Route::get('/create', [RoleController::class, 'create'])->name('roles.create')->middleware('can:roles-add');
+            Route::post('/store', [RoleController::class, 'store'])->name('roles.store');
+            Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit')->middleware('can:roles-edit');
+            Route::post('/update/{id}', [RoleController::class, 'update'])->name('roles.update');
+            Route::get('/delete/{id}', [RoleController::class, 'delete'])->name('roles.delete')->middleware('can:roles-delete');
+        });
+
+        /* Setting */
+        Route::get('setting', [SettingController::class, 'index'])->name('setting.index')->middleware('can:setting-list');
+        Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update')->middleware('can:setting-edit');
+
+        /* Staticnews */
+        Route::get('staticnews', [StaticNewsController::class, 'index'])->name('staticnews.index')->middleware('can:staticnews-list');
+        Route::post('staticnews/update', [StaticNewsController::class, 'update'])->name('staticnews.update')->middleware('can:staticnews-edit');
+
+        /* Category */
+        Route::prefix('categories')->group(function () {
+            Route::get('', [CategoryController::class, 'index'])->name('categories.index')->middleware('can:category-list');
+            Route::get('/create', [CategoryController::class, 'create'])->name('categories.create')->middleware('can:category-add');
+            Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
+            Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit')->middleware('can:category-edit');
+            Route::post('/update/{id}', [CategoryController::class, 'update'])->name('categories.update');
+            Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete')->middleware('can:category-delete');
+        });
+
+        /* Slider */
+        Route::prefix('slider')->group(function () {
+            Route::get('', [SliderController::class, 'index'])->name('slider.index')->middleware('can:slider-list');
+            Route::get('/create', [SliderController::class, 'create'])->name('slider.create')->middleware('can:slider-add');
+            Route::post('/store', [SliderController::class, 'store'])->name('slider.store');
+            Route::get('/edit/{id}', [SliderController::class, 'edit'])->name('slider.edit')->middleware('can:slider-edit');
+            Route::post('/update/{id}', [SliderController::class, 'update'])->name('slider.update');
+            Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('slider.delete')->middleware('can:slider-delete');
+        });
+
+        /* Publisher */
+        Route::prefix('publisher')->group(function () {
+            Route::get('', [PublisherController::class, 'index'])->name('publisher.index')->middleware('can:publisher-list');
+            Route::get('/create', [PublisherController::class, 'create'])->name('publisher.create')->middleware('can:publisher-add');
+            Route::post('/store', [PublisherController::class, 'store'])->name('publisher.store');
+            Route::get('/edit/{id}', [PublisherController::class, 'edit'])->name('publisher.edit')->middleware('can:publisher-edit');
+            Route::post('/update/{id}', [PublisherController::class, 'update'])->name('publisher.update');
+            Route::get('/delete/{id}', [PublisherController::class, 'delete'])->name('publisher.delete')->middleware('can:publisher-delete');
+        });
+
+        /* News */
+        Route::prefix('news')->group(function () {
+            Route::get('', [NewsController::class, 'index'])->name('news.index')->middleware('can:news-list');
+            Route::get('/create', [NewsController::class, 'create'])->name('news.create')->middleware('can:news-add');
+            Route::post('/store', [NewsController::class, 'store'])->name('news.store');
+            Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('news.edit')->middleware('can:news-edit');
+            Route::post('/update/{id}', [NewsController::class, 'update'])->name('news.update');
+            Route::get('/delete/{id}', [NewsController::class, 'delete'])->name('news.delete')->middleware('can:news-delete');
+        });
+
+        /* Product */
+        Route::prefix('product')->group(function () {
+            Route::get('', [ProductController::class, 'index'])->name('product.index')->middleware('can:product-list');
+            Route::get('/create', [ProductController::class, 'create'])->name('product.create')->middleware('can:product-add');
+            Route::post('/store', [ProductController::class, 'store'])->name('product.store');
+            Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit')->middleware('can:product-edit');
+            Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+            Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete')->middleware('can:product-delete');
+        });
+
+    });
+});
+
+/*------------------------------------------
+--------------------------------------------
+All Admin Routes List
+--------------------------------------------
+--------------------------------------------*/
+Route::middleware(['auth', 'user-access:manager'])->group(function () {
+
+    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
 });

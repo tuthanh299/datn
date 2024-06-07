@@ -35,7 +35,8 @@
 
                                     <td>
                                         <a href="{{ route('roles.edit', ['id' => $role->id]) }}" class="btn btn-default">Sửa</a>
-                                        <a href=" " data-url=" " class="btn btn-danger action_delete">Xóa</a>
+                                        <a href=" " data-url="{{ route('roles.delete', ['id' => $role->id]) }} " class="btn btn-danger action_delete">Xóa</a>
+                                        
                                     </td>
                                 </tr>
                             @endforeach

@@ -57,7 +57,7 @@
                                 </label>
                             </div>
                             @foreach ($permissionsParent as $permissionsParentItem)
-                                <div class="checkbox-role card border-primary mb-3 col-md-12">
+                                <div class="checkbox-role card border-primary mb-3 col-md-3">
                                     <div class="card-header card-header-role">
                                         <label for="">
                                             <input type="checkbox" value="{{ $permissionsParentItem->id }}"
@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="row">
                                         @foreach ($permissionsParentItem->PermissionChildren as $permissionsChildrenItem)
-                                            <div class="card-body text-primary col-md-3">
+                                            <div class="card-body text-primary col-md-12">
                                                 <h5 class="card-title">
                                                     <label for="">
                                                         <input type="checkbox"
