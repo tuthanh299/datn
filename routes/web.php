@@ -23,11 +23,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 /* Cart */
-Route::get('/gio-hang', [CCartController::class, 'cartUser'])->name('user.cart');
+Route::get('/cart', [CCartController::class, 'cartUser'])->name('user.cart');
+Route::get('/payment', [CCartController::class, 'paymentUser'])->name('user.payment');
 
 /* Client */
-Route::get('/dang-nhap', [CUserController::class, 'loginUser'])->name('user.login');
-Route::get('/dang-ky', [CUserController::class, 'registerUser'])->name('user.register');
+Route::get('/sign-in', [CUserController::class, 'loginUser'])->name('user.login');
+Route::get('/register', [CUserController::class, 'registerUser'])->name('user.register');
 
 Route::prefix('/')->group(function () {
     /* Index */

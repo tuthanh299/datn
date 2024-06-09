@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="wrap-content">
-        <div class="wrap-cart">
+        <div class="wrap-pay">
             <div class="row">
-                <div class="top-cart col-md-12">
+                <div class="top-cart col-12 col-lg-7">
                     <p class="title-cart">Giỏ hàng của bạn:</p>
                     <div class="list-procart">
                         <div class="procart procart-label">
@@ -147,24 +147,118 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
-                <div class="btn-wrap-cart d-flex justify-content-end align-items-center mt-4">
-                    <div class="btn btn-success  btn-cart-back-to-home me-2">
-                        <a class="text-light" href=""> Về trang chủ</a>
+                    <div class="money-procart">
+                        <div class="total-procart">
+                            <p>Tạm tính:</p>
+                            <p class="total-price load-price-temp"></p>
+                        </div>
+                        <div class="total-procart">
+                            <p>Phí vận chuyển:</p>
+                            <p class="total-price load-price-ship">0đ</p>
+                        </div>
+                        <div class="total-procart">
+                            <p>Tổng tiền:</p>
+                            <p class="total-price load-price-total"></p>
+                        </div>
                     </div>
-                    <div class="btn btn-success  btn-cart-next-to-payment">
-                        <a class="text-light" href="{{ route('user.payment') }}">Thanh toán</a>
-                    </div>
-
                 </div>
-                {{-- Empty --}}
+                <div class="bottom-cart col-12 col-lg-5">
+                    <div class="section-cart">
+                        <p class="title-cart">Hình thức thanh toán:</p>
+                        <div class="information-cart">
+                            <div class="payments-cart form-check"> <input type="radio" class="form-check-input"
+                                    id="payments-" name="dataOrder[payments]" value="" required> <label
+                                    class="payments-label form-check-label" for="payments-" data-payments="">
+                                    Thanh toán qua hình thức COD</label>
+                                <div class="payments-info payments-info- transition">
+                                    Khách hàng thanh toán cho shipper khi nhận được hàng.
+                                </div>
+                            </div>
+                            <div class="payments-cart form-check"> <input type="radio" class="form-check-input"
+                                    id="payments-" name="dataOrder[payments]" value="" required> <label
+                                    class="payments-label form-check-label" for="payments-" data-payments="">
+                                    Thanh toán trực tuyến qua Momo</label>
+                                <div class="payments-info payments-info- transition">
 
+                                </div>
+                            </div>
+                            <div class="payments-cart form-check"> <input type="radio" class="form-check-input"
+                                    id="payments-" name="dataOrder[payments]" value="" required> <label
+                                    class="payments-label form-check-label" for="payments-" data-payments="">
+                                    Thanh toán trực tuyến qua VNPAY</label>
+                                <div class="payments-info payments-info- transition">
+
+                                </div>
+                            </div>
+                        </div>
+                        <p class="title-cart">Thông tin giao hàng:</p>
+                        <div class="information-cart">
+                            <div class="row row-10">
+                                <div class="input-cart col-md-6 mg-col-10">
+                                    <div class="form-floating form-floating-cus"> <input type="text"
+                                            class="form-control text-sm" id="fullname" name="dataOrder[fullname]"
+                                            placeholder="Họ tên" value="" required /> <label for="fullname">Họ
+                                            tên</label> </div>
+                                    <div class="invalid-feedback">Vui lòng nhập họ tên</div>
+                                </div>
+                                <div class="input-cart col-md-6 mg-col-10">
+                                    <div class="form-floating form-floating-cus"> <input type="number"
+                                            class="form-control text-sm" id="phone" name="dataOrder[phone]"
+                                            placeholder="Điện thoại" value="" required /> <label
+                                            for="phone">Điện thoại</label> </div>
+                                    <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
+                                </div>
+                            </div>
+                            <div class="input-cart">
+                                <div class="form-floating form-floating-cus"> <input type="email"
+                                        class="form-control text-sm" id="email" name="dataOrder[email]"
+                                        placeholder="Email" value="" required /> <label
+                                        for="email">Email</label> </div>
+                                <div class="invalid-feedback">Vui lòng nhập email</div>
+                            </div>
+                            <div class="row row-10">
+                                <div class="input-cart col-md-4 mg-col-10 form-floating-cus"> <select
+                                        class="select-city-cart form-select form-control text-sm" required id="city"
+                                        name="dataOrder[city]">
+                                        <option value="">Tỉnh thành</option>
+                                        <option value=""></option>
+                                    </select>
+                                    <div class="invalid-feedback">Vui lòng chọn tỉnh thành</div>
+                                </div>
+                                <div class="input-cart col-md-4 mg-col-10 form-floating-cus"> <select
+                                        class="select-district-cart select-district form-select form-control text-sm"
+                                        required id="district" name="dataOrder[district]">
+                                        <option value="">Quận huyện</option>
+                                    </select>
+                                    <div class="invalid-feedback">Vui lòng chọn quận huyện</div>
+                                </div>
+                                <div class="input-cart col-md-4 mg-col-10 form-floating-cus"> <select
+                                        class="select-ward-cart select-ward form-select form-control text-sm" required
+                                        id="ward" name="dataOrder[ward]">
+                                        <option value="">Phường xã</option>
+                                    </select>
+                                    <div class="invalid-feedback">Vui lòng chọn phường xã</div>
+                                </div>
+                            </div>
+                            <div class="input-cart">
+                                <div class="form-floating form-floating-cus"> <input type="text"
+                                        class="form-control text-sm" id="address" name="dataOrder[address]"
+                                        placeholder="Địa chỉ" value=" " required /> <label for="address">Địa
+                                        chỉ</label> </div>
+                                <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
+                            </div>
+                            <div class="input-cart">
+                                <div class="form-floating form-floating-cus">
+                                    <textarea class="form-control text-sm" id="requirements" name="dataOrder[requirements]"
+                                        placeholder="Yêu cầu khác" /> </textarea> <label for="requirements">Yêu cầu khác</label>
+                                </div>
+                            </div>
+                        </div> <input type="submit" class="btn btn-primary btn-cart w-100" name="thanhtoan"
+                            value="Thanh toán" disabled />
+                    </div>
+                </div>
+                 
             </div>
-            <a href="http://127.0.0.1:8000/" class="empty-cart text-decoration-none d-block"> <i
-                    class="fa-duotone fa-cart-xmark"></i>
-                <p>Không tồn tại sản phẩm nào trong giỏ hàng</p> <span class="btn btn-back-to-home">Về trang chủ</span>
-            </a>
         </div>
     </div>
 @endsection

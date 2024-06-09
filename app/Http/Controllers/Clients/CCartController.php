@@ -12,4 +12,9 @@ class CCartController extends Controller
        
         return view('client.order.cart');
     }
+    public function paymentUser()
+    {
+       
+        return view('client.order.payment');
+    }
 }
