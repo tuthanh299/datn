@@ -12,7 +12,11 @@ class CartController extends Controller
         if(Auth::guard('member')->check()) 
         {
             $user = Auth::guard('member')->user();
-            $carts = 1;
+            $carts = [
+                'name',
+                'name1',
+                'name2',
+            ];
             return view('client.order.cart', compact('carts', 'user'));
         }
 

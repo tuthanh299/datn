@@ -7,9 +7,9 @@
 @section('content')
     <div class="wrap-content">
         <div class="wrap-cart">
-            @if ($carts > 0)
+            @if (count($carts) > 0)
             <div class="row">
-                <div class="top-cart col-12 col-lg-7">
+                <div class="top-cart col-md-6">
                     <p class="title-cart">Giỏ hàng của bạn:</p>
                     <div class="list-procart">
                         <div class="procart procart-label">
@@ -24,6 +24,8 @@
                             </div>
                         </div>
                         <!--thẻ sản phẩm giỏ hàng-->
+
+                        @foreach ($carts as $cart)
                         <div class="procart procart">
                             <div class="row row-10">
                                 <div class="pic-procart col-3 col-md-2 mg-col-10"> <a class="text-decoration-none"
@@ -56,104 +58,9 @@
                                 </div>
                             </div>
                         </div>
+                        @endforeach
+
                         <!-- end -->
-                        <div class="procart procart">
-                            <div class="row row-10">
-                                <div class="pic-procart col-3 col-md-2 mg-col-10"> <a class="text-decoration-none"
-                                        href="" target="_blank" title=""> <img width="85px" height="85px"
-                                            src="{{ asset('index/imgs/sp.jpg') }}" alt=""> </a> <a
-                                        class="del-procart text-decoration-none" data-code="""> <i
-                                            class="fa                                       fa-times-circle"></i>
-                                        <span>Xóa</span> </a> </div>
-                                <div class="info-procart col-6 col-md-5 mg-col-10">
-                                    <h3 class="name-procart"><a class="text-decoration-none" href="" target="_blank"
-                                            title=""> Nhà Giả Kim (Tái Bản 2020) </a></h3>
-                                </div>
-                                <div class="quantity-procart col-3 col-md-2 mg-col-10">
-                                    <div class="price-procart price-procart-rp">
-                                        <p class="price-new-cart load-price-new"> </p>
-                                        <p class="price-old-cart load-price"> </p>
-                                        <p class="price-new-cart load-price"> </p>
-                                    </div>
-                                    <div class="quantity-counter-procart quantity-counter-procart"> <span
-                                            class="counter-procart-minus counter-procart">-</span> <input type="number"
-                                            class="quantity-procart" min="1" value="1" data-pid=""
-                                            data-code=" " /> <span
-                                            class="counter-procart-plus                                           counter-procart">+</span>
-                                    </div>
-                                </div>
-                                <div class="price-procart col-3 col-md-3 mg-col-10">
-                                    <p class="price-new-cart load-price-new"> 22.500.000₫ </p>
-                                    <p class="price-old-cart load-price"> 25.000.000₫ </p>
-                                    <p class="price-new-cart load-price"> 25.000.000₫ </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="procart procart">
-                            <div class="row row-10">
-                                <div class="pic-procart col-3 col-md-2 mg-col-10"> <a class="text-decoration-none"
-                                        href="" target="_blank" title=""> <img width="85px" height="85px"
-                                            src="{{ asset('index/imgs/sp.jpg') }}" alt=""> </a> <a
-                                        class="del-procart text-decoration-none" data-code="""> <i
-                                            class="fa                                       fa-times-circle"></i>
-                                        <span>Xóa</span> </a> </div>
-                                <div class="info-procart col-6 col-md-5 mg-col-10">
-                                    <h3 class="name-procart"><a class="text-decoration-none" href=""
-                                            target="_blank" title=""> Nhà Giả Kim (Tái Bản 2020) </a></h3>
-                                </div>
-                                <div class="quantity-procart col-3 col-md-2 mg-col-10">
-                                    <div class="price-procart price-procart-rp">
-                                        <p class="price-new-cart load-price-new"> </p>
-                                        <p class="price-old-cart load-price"> </p>
-                                        <p class="price-new-cart load-price"> </p>
-                                    </div>
-                                    <div class="quantity-counter-procart quantity-counter-procart"> <span
-                                            class="counter-procart-minus counter-procart">-</span> <input type="number"
-                                            class="quantity-procart" min="1" value="1" data-pid=""
-                                            data-code=" " /> <span
-                                            class="counter-procart-plus                                           counter-procart">+</span>
-                                    </div>
-                                </div>
-                                <div class="price-procart col-3 col-md-3 mg-col-10">
-                                    <p class="price-new-cart load-price-new"> 22.500.000₫ </p>
-                                    <p class="price-old-cart load-price"> 25.000.000₫ </p>
-                                    <p class="price-new-cart load-price"> 25.000.000₫ </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="procart procart">
-                            <div class="row row-10">
-                                <div class="pic-procart col-3 col-md-2 mg-col-10"> <a class="text-decoration-none"
-                                        href="" target="_blank" title=""> <img width="85px"
-                                            height="85px" src="{{ asset('index/imgs/sp.jpg') }}" alt=""> </a> <a
-                                        class="del-procart text-decoration-none" data-code="""> <i
-                                            class="fa                                       fa-times-circle"></i>
-                                        <span>Xóa</span> </a> </div>
-                                <div class="info-procart col-6 col-md-5 mg-col-10">
-                                    <h3 class="name-procart"><a class="text-decoration-none" href=""
-                                            target="_blank" title=""> Nhà Giả Kim (Tái Bản 2020) </a></h3>
-                                </div>
-                                <div class="quantity-procart col-3 col-md-2 mg-col-10">
-                                    <div class="price-procart price-procart-rp">
-                                        <p class="price-new-cart load-price-new"> </p>
-                                        <p class="price-old-cart load-price"> </p>
-                                        <p class="price-new-cart load-price"> </p>
-                                    </div>
-                                    <div class="quantity-counter-procart quantity-counter-procart"> <span
-                                            class="counter-procart-minus counter-procart">-</span> <input type="number"
-                                            class="quantity-procart" min="1" value="1" data-pid=""
-                                            data-code=" " /> <span
-                                            class="counter-procart-plus                                           counter-procart">+</span>
-                                    </div>
-                                </div>
-                                <div class="price-procart col-3 col-md-3 mg-col-10">
-                                    <p class="price-new-cart load-price-new"> 22.500.000₫ </p>
-                                    <p class="price-old-cart load-price"> 25.000.000₫ </p>
-                                    <p class="price-new-cart load-price"> 25.000.000₫ </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="money-procart">
                         <div class="total-procart">
                             <p>Tạm tính:</p>
@@ -169,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bottom-cart col-12 col-lg-5">
+                <div class="bottom-cart col-md-6">
                     <div class="section-cart">
                         <p class="title-cart">Hình thức thanh toán:</p>
                         <div class="information-cart">
