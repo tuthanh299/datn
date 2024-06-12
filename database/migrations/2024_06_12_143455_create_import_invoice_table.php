@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::table('users',function(Blueprint $table){
-          $table->softDeletes(); 
-       });
+        Schema::create('import_invoices', function (Blueprint $table) {
+            $table->id();
+            $table->string('staff_id');
+            $table->string('import_invoice_total');
+            //$table->boolean('status');
+            $table->timestamps();
+        });
     }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
-    { 
-         Schema::table('users', function (Blueprint $table) {
-            $table ->dropColumn('deleted_at');
-        });
+    {
+        Schema::dropIfExists('import_invoice');
     }
 };

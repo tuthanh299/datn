@@ -26,11 +26,12 @@ return new class extends Migration
             $table->string('author');
             $table->string('code');
             $table->string('publishing_year');
-            $table->boolean('status')->default(false);
+            //$table->boolean('status')->default(false);
             $table->boolean('outstanding')->default(false);        
             $table->timestamps();
             $table->softDeletes();
-           
+
+            //$table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('restrict');
         });
     }
 

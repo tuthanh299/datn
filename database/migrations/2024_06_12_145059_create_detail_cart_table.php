@@ -11,7 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('roles', function (Blueprint $table) {
+        Schema::create('detail_carts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('cart_id')->constrained();
+            $table->foreignId('product_id')->constrained();
+            $table->integer('quantity');
+            $table->integer('price');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -21,8 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('roles', function (Blueprint $table) {
-            $table ->dropColumn('deleted_at');
-        });
+        Schema::dropIfExists('detail_cart');
     }
 };

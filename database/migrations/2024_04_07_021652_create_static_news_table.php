@@ -17,6 +17,7 @@ return new class extends Migration
             $table->mediumText('description');
             $table->mediumText('content');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

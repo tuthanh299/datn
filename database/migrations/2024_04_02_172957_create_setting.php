@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('favicon_path');
             $table->string('favicon_name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

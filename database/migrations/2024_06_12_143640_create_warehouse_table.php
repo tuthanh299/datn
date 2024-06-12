@@ -11,7 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('publishers', function (Blueprint $table) {
+        Schema::create('warehouses', function (Blueprint $table) {
+            $table->string('id');
+            $table->string('product_id');
+            $table->string('quantity');
+            $table->boolean('status');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('publishers', function (Blueprint $table) {
-            $table ->dropColumn('deleted_at');
-        });
+        Schema::dropIfExists('warehouse');
     }
 };
