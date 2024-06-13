@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('warehouses', function (Blueprint $table) {
             $table->string('id');
-            $table->string('product_id');
+            //$table->string('product_id');
             $table->string('quantity');
             $table->boolean('status');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreignId('product_id')->constrained();
         });
     }
 

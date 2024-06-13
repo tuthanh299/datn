@@ -13,13 +13,19 @@ return new class extends Migration
     {
         Schema::create('sale_invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('staff_id');
-            $table->string('customer_id');
-            $table->string('total_price');
+            //$table->bigInteger('staff_id');
+            //$table->bigInteger('customer_id');
+            $table->integer('total_price');
             $table->integer('paid_status');
             $table->integer('shipping_status');
             //$table->boolean('status');
             $table->timestamps();
+
+            //$table->foreign('staff_id')->references('id')->on('user');
+            //$table->foreign('customer_id')->references('id')->on('member');
+
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('member_id')->constrained();
         });
     }
 

@@ -13,10 +13,17 @@ return new class extends Migration
     {
         Schema::create('import_invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('staff_id');
-            $table->string('import_invoice_total');
+            //$table->bigInteger('staff_id');
+            $table->integer('import_invoice_total');
             //$table->boolean('status');
             $table->timestamps();
+
+            $table->foreignId('user_id')->constrained();
+
+            //$table->foreign('staff_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('restrict');
+            //$table->foreignId('user_id')->constrained();
+
+            //$table->foreign('staff_id')->references('id')->on('user')->onDelete('restrict')->onUpdate('restrict');
         });
     }
 

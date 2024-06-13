@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Setting;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,14 +23,35 @@ class DatabaseSeeder extends Seeder
         ]);*/
         /*ProductSeeder::class;*/
 
-        $this->call([
+        /*$this->call([
             UserSeeder::class,
-            ProductSeeder::class,
+            ProductsTableSeeder::class,
             CategorySeeder::class,
             PublisherSeeder::class,
             RoleSeeder::class,
             SettingSeeder::class,
             StaticNewsSeeder::class,
+        ]);
+        $this->call(PublishersTableSeeder::class);
+        $this->call(ProductGalleriesTableSeeder::class);
+        $this->call(RoleUserTableSeeder::class);
+        $this->call(SlidersTableSeeder::class);
+        $this->call(StaticNewsTableSeeder::class);*/
+
+        $this->call([
+            NewsTableSeeder::class,//
+            SettingSeeder::class,//
+            SlidersTableSeeder::class,//
+            StaticNewsTableSeeder::class,//
+            UserSeeder::class,//
+            CategoriesTableSeeder::class,//
+            PublishersTableSeeder::class,//
+            MemberSeeder::class,//
+            ProductsTableSeeder::class,//
+            ProductGalleriesTableSeeder::class,//
+            RolesTableSeeder::class,//
+            PermissionsTableSeeder::class,//
+            PermissionRoleTableSeeder::class,//
         ]);
     }
 }

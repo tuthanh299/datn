@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('product_galleries', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
+            //$table->integer('product_id');
             $table->string('photo_path')->nullable();
             $table->string('photo_name');
             $table->timestamps();
             $table->softDeletes();
+
+            //$table->foreign('product_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('restrict');
+
+            $table->foreignId('product_id')->constrained();
         });
     }
 

@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('detail_import_invoices', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('import_invoice_id')->constrained();
+            //$table->bigInteger('detail_import_id')->unique();
+            $table->foreignId('product_id')->constrained();
+            $table->integer('quantity');
+            $table->integer('price');
             $table->timestamps();
+            $table->softDeletes();
+
+            //$table->foreign('detail_import_id')->references('id')->on('import_invoice');
         });
     }
 

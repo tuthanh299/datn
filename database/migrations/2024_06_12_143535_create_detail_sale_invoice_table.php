@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_sale_imports', function (Blueprint $table) {
+        Schema::create('detail_sale_invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sale_import_id')->constrained();
+            $table->foreignId('sale_invoice_id')->constrained();
+            //$table->bigInteger('sale_invoice_id')->unique();
             $table->foreignId('product_id')->constrained();
             $table->integer('quantity');
             $table->integer('price');
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_sale_import');
+        Schema::dropIfExists('detail_import_invoice');
     }
 };

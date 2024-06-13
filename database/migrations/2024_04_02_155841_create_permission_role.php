@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('permission_roles', function (Blueprint $table) {
             $table->id();
-            $table->integer('role_id');
-            $table->integer('permission_id');
+            //$table->integer('role_id');
+            //$table->integer('permission_id');
             $table->timestamps();
             $table->softDeletes();
+
+            //$table->foreign('role_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('role_id')->constrained();
+            $table->foreignId('permission_id')->constrained();
         });
     }
 
