@@ -1,6 +1,8 @@
-
-
 @extends('client.layouts.index')
+
+@section('title')
+    <title>Đăng ký</title>
+@endsection
 
 @section('content')
     <div class="wrap-content">
@@ -10,17 +12,29 @@
             </span>
         </div>
         <div class="content-main account-user">
-            <form id="login-form-member" class="form" action="" method="post">
+            <form id="login-form-member" class="form" action="{{}}" method="post">
                 @csrf
                 <div>
-                    <label class="mb-1">Họ tên:</label>
+                    <label class="mb-1">Họ:</label>
                     <div class="input-group mb-2">
                         <div class="input-group-append login-input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        <input type="text" name="" class="form-control text-sm "
+                        <input type="text" name="lastname" id="lastname" class="form-control text-sm "
+                            placeholder="Nhập họ" autocomplete="off" />
+                    </div>
+                </div>
+                <div>
+                    <label class="mb-1">Tên:</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append login-input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        <input type="text" name="firstname" class="form-control text-sm "
                             placeholder="Nhập họ tên" autocomplete="off" />
                     </div>
                 </div>

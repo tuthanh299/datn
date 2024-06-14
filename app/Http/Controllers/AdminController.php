@@ -7,36 +7,32 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function logoutAdmin(Request $request)
+
+    public function loginAdmin()
     {
-        $request->session()->forget('type');
-        $request->session()->flush();
-        Auth::logout();
-        
-        
-        return redirect('/login');
+
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        } else {
+            return view('admin.login');
+        }
     }
-    // public function loginAdmin()
-    // {
 
-    //     if (auth()->check()) {
-    //         return redirect()->to('admin');
-    //     }
-    //     return view('admin.login');
-    // }
+    public function postLoginAdmin(Request $request)
+    {
+        $remember = $request->has('remember_me') ? true : false;
+        if (auth()->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+            return redirect()->to('admin');
+        } else {
+            return redirect()->back()->withInput($request->only('email', 'remember_me'))->withErrors([
+                'login_error' => 'Email hoặc mật khẩu không đúng.',
+            ]);
+        }
 
-    // public function postLoginAdmin(Request $request)
-    // {
-    //     $remember = $request->has('remember_me') ? true : false;
-    //     if (auth()->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
-    //         return redirect()->to('admin');
-    //     } else {
-    //         return redirect()->back()->withInput($request->only('email', 'remember_me'))->withErrors([
-    //             'login_error' => 'Email hoặc mật khẩu không đúng.',
-    //         ]);
-    //     }
-
-    // }
-
-   
+    }
+    public function logoutAdmin()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
 }

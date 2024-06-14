@@ -8,13 +8,12 @@
 
 <body>
     <div class="wrap-container">
-        <div class="{{ Request::route()->getName() == 'index' ? 'external-page' : 'internal-page' }}"">
+        <div class="{{ Request::route()->getName() == 'index' ? 'external-page' : 'internal-page' }}">
             @include('client.partials.header')
             @include('client.partials.menu')
             @include('client.partials.slider')
             <div class="{{ Request::route()->getName() == 'index' ? 'external-content' : 'internal-content py50' }}">
                 @yield('content')
-                @include('client.partials.content')
             </div>
             @include('client.partials.footer')
             @include('client.partials.modal')

@@ -9,7 +9,9 @@ use App\Models\Publisher;
 use App\Models\Setting;
 use App\Models\Slider;
 use App\Models\StaticNews;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -19,8 +21,11 @@ class IndexController extends Controller
         $settings = Setting::first();
         return $settings;
     }
-    public function index()
+    public function index(Request $request)
     {
+        /*if(!isset($_COOKIE['is_logged'])) {
+            setcookie('is_logged', 0, time() + 360000, '/');
+        }*/
 
         $sliders = Slider::select('name', 'description', 'photo_path')->get();
         $news = News::select('id', 'name', 'description', 'photo_path')->get();
@@ -32,6 +37,22 @@ class IndexController extends Controller
             ->where('status', 1)
             ->where('outstanding', 1)
             ->get();
+
+        if(Auth::guard('member')->user()) 
+        {
+            $user = Auth::guard('member')->user();
+
+            return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user'));
+        }
+
+        /*if(($_COOKIE['is_logged']) == 1) {
+            $user = User::where('id', $_COOKIE['id'])->get();
+
+            return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user'));
+        }*/
+
+        //$request->session()->flush();
+        
         return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first'));
     }
     public function PublisherProduct($id)
@@ -60,6 +81,16 @@ class IndexController extends Controller
     {
         $menufisrt = Category::with('children')->where('parent_id', 0)->get();
         return $menufisrt;
+    }
+
+    public function userinfo() 
+    {
+        if(Auth::guard('member')->check()) {
+            $user = Auth::guard('member')->user();
+            return view('client.user.info', compact('user'));
+        }
+
+        return redirect()->route('client.login');    
     }
 
 }

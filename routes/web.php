@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Clients\CAboutusController;
 use App\Http\Controllers\Clients\CCartController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Clients\CUserController;
 use App\Http\Controllers\Clients\IndexController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
@@ -31,6 +33,20 @@ Route::get('/sign-in', [CUserController::class, 'loginUser'])->name('user.login'
 Route::get('/register', [CUserController::class, 'registerUser'])->name('user.register');
 
 Route::prefix('/')->group(function () {
+    /* Login */
+    //Route::get('login', [HomePageController::class, 'clientlogin'])->name('client.login');
+    Route::get('login', [CUserController::class, 'clientLogin'])->name('client.login');
+    //Route::post('check-login', [HomePageController::class, 'postlogin'])->name('client.postlogin');
+    Route::post('check-login', [CUserController::class, 'postlogin'])->name('client.postlogin');
+
+    /* Register */
+    //Route::get('register', [HomePageController::class, 'clientregister'])->name('client.register');
+    Route::get('register', [CUserController::class, 'clientRegister'])->name('client.register');
+    //Route::post('check-register', [HomePageController::class, 'postregister'])->name('client.postregister');
+    Route::post('check-register', [CUserController::class, 'postregister'])->name('client.postregister');
+
+    Route::get('logout', [HomePageController::class, 'logout'])->name('client.logout');
+
     /* Index */
     Route::controller(IndexController::class)->group(function () {
         Route::get('/', 'index')->name('index');
@@ -56,6 +72,18 @@ Route::prefix('/')->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
     });
+
+    /* Cart */
+    Route::controller(CartController::class)->group(function () {
+        Route::get('/cart', 'index')->name('client.cart');
+    });
+
+    /* Info */
+
+    Route::controller(IndexController::class)->group(function () {
+        Route::get('/info', 'userinfo')->name('client.info');
+    });
+
 });
 
 Route::middleware(['auth', 'user-access:user'])->group(function () {

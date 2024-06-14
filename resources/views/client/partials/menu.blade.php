@@ -5,7 +5,7 @@ use App\Http\Controllers\Clients\IndexController;
     <div class="wrap-content">
         <ul class="menu-main">
             <li class="menu-main-li">
-                <a href="http://127.0.0.1:8000/" title="Trang chủ">
+                <a href="{{route('index')}}" title="Trang chủ">
                     Trang chủ
                 </a>
             </li>
@@ -76,7 +76,7 @@ use App\Http\Controllers\Clients\IndexController;
 
 
                                 <div class="menu-bottom-cart-icon-position">
-                                    <a href="{{ route('user.cart') }}">
+                                    <a href="{{ route('client.cart') }}">
                                         <div class="menu-bottom-cart">
                                             <div class="menu-bottom-cart-icon">
                                                 <i class="fa-solid fa-cart-shopping"></i>
@@ -91,8 +91,9 @@ use App\Http\Controllers\Clients\IndexController;
                                     </a>
 
                                 </div>
+                                @if (Auth::guard('member')->check())
                                 <div class="menu-bottom-account-positon">
-                                    <a href="{{ route('user.login') }}">
+                                    <a href="{{route('client.info')}}">
                                         <div class="menu-bottom-account">
                                             <div class="menu-bottom-account-icon">
                                                 <i class="fa-solid fa-user"></i>
@@ -102,8 +103,22 @@ use App\Http\Controllers\Clients\IndexController;
                                             </div>
                                         </div>
                                     </a>
-
                                 </div>
+                                @else
+                                    <div class="menu-bottom-account-positon">
+                                        <a href="{{route('client.login')}}">
+                                            <div class="menu-bottom-account">
+                                                <div class="menu-bottom-account-icon">
+                                                    <i class="fa-solid fa-user"></i>
+                                                </div>
+                                                <div class="menu-bottom-account-text">
+                                                    Đăng nhập / Đăng ký
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

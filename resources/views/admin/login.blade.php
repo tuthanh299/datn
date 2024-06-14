@@ -10,21 +10,25 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="{{asset('/admin/adminlte/dist/css/adminlte.css')}}">
+
+    <link rel="stylesheet" href="{{asset('/admin/adminlte/dist/js/adminlte.js')}}">
+    <link rel="stylesheet" href="{{asset('/admin/adminlte/dist/js/demo.js')}}">
 
     <?php
-    
-    $cssFiles = glob('adminlte/dist/css/*.css');
+    /*$cssFiles = glob('admin/adminlte/dist/css/*.css');
     foreach ($cssFiles as $file) {
         echo '<link rel="stylesheet" type="text/css" href="' . $file . '">';
-    }
+    }*/
     ?>
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
     <?php
-    $jsFiles = glob(public_path('adminlte/dist/js/*.js'));
+    //$jsFiles = glob(public_path('admin/adminlte/dist/js/*.js'));
+    /*$jsFiles = glob('admin/adminlte/dist/js/*.js');
     foreach ($jsFiles as $file) {
         $file = str_replace(public_path(), '', $file);
         echo '<script src="' . $file . '"></script>';
-    }
+    }*/
     ?>
 </head>
 
@@ -36,7 +40,7 @@
  
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Đăng nhập hệ thống</p>
-                <form id="login-form" class="form" action="" method="post">
+                <form id="login-form" class="form" action="{{route('admin.postlogin')}}" method="post">
                     @csrf
                     <div>
                         <div class="input-group mb-2">
