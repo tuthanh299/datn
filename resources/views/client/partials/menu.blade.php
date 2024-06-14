@@ -99,7 +99,7 @@ use App\Http\Controllers\Clients\IndexController;
                                                 <i class="fa-solid fa-user"></i>
                                             </div>
                                             <div class="menu-bottom-account-text">
-                                                Tài khoản
+                                                Xin chào {{ $user->first_name }}
                                             </div>
                                         </div>
                                     </a>
