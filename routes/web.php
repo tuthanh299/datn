@@ -144,14 +144,14 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::get('/delete/{id}', [SliderController::class, 'delete'])->name('slider.delete');
     });
     /* Author */
-    Route::prefix('author')->group(function () {
+    /*Route::prefix('author')->group(function () {
         Route::get('', [AuthorController::class, 'index'])->name('author.index');
         Route::get('/create', [AuthorController::class, 'create'])->name('author.create');
         Route::post('/store', [AuthorController::class, 'store'])->name('author.store');
         Route::get('/edit/{id}', [AuthorController::class, 'edit'])->name('author.edit');
         Route::post('/update/{id}', [AuthorController::class, 'update'])->name('author.update');
         Route::get('/delete/{id}', [AuthorController::class, 'delete'])->name('author.delete');
-    });
+    });*/
     /* Publisher */
     Route::prefix('publisher')->group(function () {
         Route::get('', [PublisherController::class, 'index'])->name('publisher.index');
@@ -161,12 +161,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         Route::post('/update/{id}', [PublisherController::class, 'update'])->name('publisher.update');
         Route::get('/delete/{id}', [PublisherController::class, 'delete'])->name('publisher.delete');
     });
-
+});
 });
 
-Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect'])->name('redirect');
-Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback'])->name('callback');
+/*Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect'])->name('redirect');
+Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback'])->name('callback');*/
 
-Route::get('cart', [CartController::class, 'index'])->name('cart.index');
-
-
+Route::get('cart', [CartController::class, 'index'])->name('cart.index'); 
