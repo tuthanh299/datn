@@ -59,12 +59,8 @@ Route::prefix('/')->group(function () {
     });
 });
 
-Route::middleware(['auth', 'user-access:user'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-});
-
 Route::get('/admin', [HomeController::class, 'index'])->name('home');
-Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('logout');
+Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('logout.admin');
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
@@ -162,12 +158,3 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     });
 });
 
-/*------------------------------------------
---------------------------------------------
-All Admin Routes List
---------------------------------------------
---------------------------------------------*/
-Route::middleware(['auth', 'user-access:manager'])->group(function () {
-
-    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
-});

@@ -36,8 +36,8 @@
  
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Đăng nhập hệ thống</p>
-                <form id="login-form" class="form" action="" method="post">
-                    @csrf
+                <form id="login-form" class="form" action="{{route('login')}}" method="post">
+                    {{ csrf_field() }}
                     <div>
                         <div class="input-group mb-2">
                             <div class="input-group-append login-input-group-append">
