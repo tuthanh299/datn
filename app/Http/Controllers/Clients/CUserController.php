@@ -97,8 +97,9 @@ class CUserController extends Controller
                 'phone' => $request->phone,
             ]);
 
-            return redirect()->route('client.login')->with('success', 'Đăng ký thành công');
-            //dd($cre, 'true');
+            //return redirect()->route('client.login')->with('success', 'Đăng ký thành công');
+            dd($cre, 'true');
+
         }
         return redirect()->route('client.register')->with('fail', 'Đã có lỗi xảy ra');
         //dd($cre, 'false');
