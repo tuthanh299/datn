@@ -14,7 +14,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     <link href="{{ asset('vendors/fontawesome640/all.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendors/awesome/all.css') }}" rel="stylesheet">
+ 
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">

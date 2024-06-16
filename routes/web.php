@@ -10,6 +10,7 @@ use App\Http\Controllers\Clients\CUserController;
 use App\Http\Controllers\Clients\IndexController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImportInvoiceController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
@@ -67,11 +68,19 @@ Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('logout');
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
-    
+
     Route::prefix('admin')->group(function () {
         /* Dashboard */
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+        /* Import_invoice */
+        Route::prefix('import_invoice')->group(function () {
+            Route::get('', [ImportInvoiceController::class, 'index'])->name('import_invoice.index');
+            Route::get('/create', [ImportInvoiceController::class, 'create'])->name('import_invoice.create');
+            Route::post('/store', [ImportInvoiceController::class, 'store'])->name('import_invoice.store');
+            Route::get('/view/{id}', [ImportInvoiceController::class, 'view'])->name('import_invoice.view');
+            Route::get('/get-product-id', [ImportInvoiceController::class, 'getProductId'])->name('get-product-id]');
+        });
         /* User */
         Route::prefix('users')->group(function () {
             Route::get('', [UserController::class, 'index'])->name('users.index')->middleware('can:users-list');
