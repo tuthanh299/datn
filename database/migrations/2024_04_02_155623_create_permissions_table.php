@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('display_name');
+            $table->integer('parent_id')->default(0);
+            $table->string('key_permissions');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -11,11 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_user', function (Blueprint $table) {
+        Schema::create('role_users', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('role_id');
+            //$table->integer('user_id');
+            //$table->integer('role_id');
             $table->timestamps();
+            $table->softDeletes();
+
+            //$table->foreign('user_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('role_id')->constrained();
         });
     }
 

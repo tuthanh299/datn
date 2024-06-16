@@ -1,67 +1,104 @@
 <?php
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Clients\CAboutusController;
+use App\Http\Controllers\Clients\CCartController;
+use App\Http\Controllers\Clients\CNewsController;
+use App\Http\Controllers\Clients\CProductController;
+use App\Http\Controllers\Clients\CSearchController;
+use App\Http\Controllers\Clients\CUserController;
+use App\Http\Controllers\Clients\IndexController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\StaticNewsController;
-use App\Http\Controllers\Auth\ProviderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', [AdminController::class, 'loginAdmin'])->name('login');
-Route::post('/login', [AdminController::class, 'postLoginAdmin'])->name('adminlogin.post');
+Auth::routes();
+/* Cart */
+Route::get('/cart', [CCartController::class, 'cartUser'])->name('user.cart');
+Route::get('/payment', [CCartController::class, 'paymentUser'])->name('user.payment');
 
-Route::get('logout', [AdminController::class, 'logoutAdmin'])->name('logout');
+/* Client */
+Route::get('/sign-in', [CUserController::class, 'loginUser'])->name('user.login');
+Route::get('/register', [CUserController::class, 'registerUser'])->name('user.register');
 
-Route::get('/login', [HomePageController::class, 'login'])->name('user.login');
-Route::post('login', [HomePageController::class, 'postLogin'])->name('userlogin.post');
-Route::get('/register', [HomePageController::class, 'register'])->name('user.register');
-Route::post('register', [HomePageController::class, 'postRegister'])->name('userregister.post');
+Route::prefix('/')->group(function () {
+    /* Login */
+    //Route::get('login', [HomePageController::class, 'clientlogin'])->name('client.login');
+    Route::get('login', [CUserController::class, 'clientLogin'])->name('client.login');
+    //Route::post('check-login', [HomePageController::class, 'postlogin'])->name('client.postlogin');
+    Route::post('check-login', [CUserController::class, 'postlogin'])->name('client.postlogin');
 
-Route::get('logout', function() {
-    Auth::logout();
-    return redirect('/');
-})->name('userlogout');
+    /* Register */
+    //Route::get('register', [HomePageController::class, 'clientregister'])->name('client.register');
+    Route::get('register', [CUserController::class, 'clientRegister'])->name('client.register');
+    //Route::post('check-register', [HomePageController::class, 'postregister'])->name('client.postregister');
+    Route::post('check-register', [CUserController::class, 'postregister'])->name('client.postregister');
 
-Route::get('/home', function () {
-    return view('home');
-})->middleware('auth');
+    Route::get('logout', [HomePageController::class, 'logout'])->name('client.logout');
 
-Route::get('/', function () {
-    $cart1s = [
-        [
-            'id' => 1,
-            'name' => 'Product 1',
-            'price' => 1000,
-            'quantity' => 1
-        ],
-        [
-            'id' => 2,
-            'name' => 'Product 2',
-            'price' => 1000,
-            'quantity' => 1
-        ],
-    ];
+    /* Index */
+    Route::controller(IndexController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/get-category-data/{categoryId}', [IndexController::class, 'getCategoryData'])->name('get-category-data');
+        Route::get('/publisher/{id}', [IndexController::class, 'publisherproduct'])->name('publisher.publisherproduct');
+        Route::get('/categoryid/{id}', [IndexController::class, 'categoryidproduct'])->name('categoryid.categoryidproduct');
+    });
+    /* Search */
+    Route::controller(CSearchController::class)->group(function () {
+        Route::get('/search', 'index')->name('search');
+    });
+    /* About Us */
+    Route::controller(CAboutusController::class)->group(function () {
+        Route::get('/aboutus', 'index')->name('aboutus');
+    });
+    /* News */
+    Route::controller(CNewsController::class)->group(function () {
+        Route::get('/news', 'index')->name('news');
+        Route::get('/news/{id}', [CNewsController::class, 'detail'])->name('news.detail');
+    });
+    /* Product */
+    Route::controller(CProductController::class)->group(function () {
+        Route::get('/product', 'index')->name('product');
+        Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
+    });
 
-    if (Auth::check()) 
-    {
-        $user = Auth::user();
-        return view('homepage', compact('user', 'cart1s'));
-    }
-    else 
-    {
-        $user = null;
-        return view('homepage', compact('user', 'cart1s'));
-    }
+    /* Cart */
+    Route::controller(CartController::class)->group(function () {
+        Route::get('/cart', 'index')->name('client.cart');
+    });
 
-})->name('homepage');
+    /* Info */
 
-Route::prefix('admin')->group(function () {
+    Route::controller(IndexController::class)->group(function () {
+        Route::get('/info', 'userinfo')->name('client.info');
+    });
+
+});
+
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
+
+Route::get('/admin', [HomeController::class, 'index'])->name('home');
+Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('logout');
+
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+    Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    
+    Route::prefix('admin')->group(function () {
+        /* Dashboard */
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     /* User */
     Route::prefix('users')->group(function () {

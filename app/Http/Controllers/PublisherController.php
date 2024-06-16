@@ -20,9 +20,13 @@ class PublisherController extends Controller
     {
         $this->publisher = $publisher;
     }
+    public function getPublishers()
+    {
+        return Publisher::all();  
+    }
     public function index()
     { 
-        $publishers = $this->publisher->latest()->paginate(5);
+        $publishers = $this->publisher->latest()->paginate(10);
         return view('admin.publisher.index', compact('publishers'));
     }
     public function create()

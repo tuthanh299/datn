@@ -17,8 +17,7 @@ return new class extends Migration
             $table ->string('parent_id');
             $table ->string('slug');
             $table->timestamps();
-
-            $table->primary('id');
+            $table->softDeletes();
         });
     }
 

@@ -1,6 +1,29 @@
+function isExist(className) {
+    return document.getElementsByClassName(className).length > 0;
+}
+
+/* PreviewImage */
+function previewImage(inputId, previewId) {
+    const fileInput = document.getElementById(inputId);
+    const output = document.getElementById(previewId);
+
+    fileInput.addEventListener("change", function (event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            output.innerHTML =
+                '<img class="rounded" src="' +
+                reader.result +
+                '" alt="Preview Photo">';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    });
+}
+
 /* Action delete */
 function actionDelete(event) {
     event.preventDefault();
+    if (!isExist("action_delete")) return;
+
     let urlRequest = $(this).data("url");
     let that = $(this);
     Swal.fire({
@@ -33,52 +56,44 @@ function actionDelete(event) {
 }
 
 $(function () {
-    $(document).on("click", ".action_delete", actionDelete);
+    if (isExist("action_delete")) {
+        $(document).on("click", ".action_delete", actionDelete);
+    }
 });
 
-/* Preview Photo */
-function previewImage(event) {
-    var reader = new FileReader();
-    reader.onload = function () {
-        var output = document.getElementById("preview");
-        output.src = reader.result;
-        output.style.display = "block";
-    };
-    reader.readAsDataURL(event.target.files[0]);
+/* Select  Roles User */
+function initializeSelect2() {
+    if (!isExist("select2_option")) return;
+
+    $(".select2_option").select2({
+        placeholder: "Chọn vai trò",
+    });
 }
-class ImagePreviewer {
-    constructor(previewElementId) {
-        this.previewElement = document.getElementById(previewElementId);
-    }
-
-    previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = () => {
-            this.previewElement.src = reader.result;
-            this.previewElement.style.display = "block";
-        };
-        reader.readAsDataURL(event.target.files[0]);
+function CheckRole() {
+    /* Role */
+    $(".checkbox_parent").on("click", function () {
+        $(this)
+            .parents(".checkbox-role")
+            .find(".checkbox_children")
+            .prop("checked", $(this).prop("checked"));
+    });
+    $(".checkbox_all").on("click", function () {
+        $(this)
+            .parents()
+            .find(".checkbox_parent,.checkbox_children")
+            .prop("checked", $(this).prop("checked"));
+    });
+}
+function JsAdmin() {
+    if (isExist("summernote")) {
+        $(".summernote").summernote();
     }
 }
 
-var previewer1 = new ImagePreviewer('preview1');
-var previewer2 = new ImagePreviewer('preview2');
-
-// $(".select2_option").select2({
-//     placeholder: "Chọn vai trò",
-// });
-
-
- 
-$(document).ready(function() {
-    $('.summernote').summernote();
-  });
-
-
-/* Validate name input */
-// document.querySelector('input[name="name"]').addEventListener('input', function (e) {
-//     e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s]/g, '');
-// });
-
-/* Select2 */
-/* Admin select roles */
+$(document).ready(function () {
+    JsAdmin();
+    CheckRole();
+    initializeSelect2();
+    previewImage("file-zone", "photoUpload-preview"); // Cho Favicon
+    previewImage("file-zone2", "photoUpload-preview2"); // Cho Logo
+});

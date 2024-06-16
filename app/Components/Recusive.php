@@ -5,7 +5,8 @@ class Recusive
 {
     private $data;
     private $categoryselect = '';
-    private $categorylist = '';
+ 
+     
     public function __construct($data)
     {
         $this->data = $data;
@@ -26,20 +27,7 @@ class Recusive
             }
         }
         return $this->categoryselect;
-    }
-    // public function categorylistRecusive($parentId, $id = 0, $text = '-')
-    // {
-
-    //     foreach ($this->data as $value) {
-    //         if ($value['parent_id'] == $id) {
-                
-    //                 $this->categorylist .= "<option value='" . $value['id'] . "'>" . $text . $value['name'] . "</option>";
-                
-    //             $this->categoryRecusive($parentId, $value['id'], $text . '-');
-
-    //         }
-    //     }
-    //     return $this->categorylist;
-    // } 
-
+    } 
+    
+     
 }

@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Setting;
 use App\Models\User;
 use Hamcrest\Core\Set;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use PhpParser\Node\Expr\Print_;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,16 +22,37 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);*/
+        /*ProductSeeder::class;*/
 
-        $this->call([
+        /*$this->call([
             UserSeeder::class,
+            ProductsTableSeeder::class,
             CategorySeeder::class,
-            AuthorSeeder::class,
             PublisherSeeder::class,
             RoleSeeder::class,
             SettingSeeder::class,
             StaticNewsSeeder::class,
-            UserSeeder::class,
+        ]);
+        $this->call(PublishersTableSeeder::class);
+        $this->call(ProductGalleriesTableSeeder::class);
+        $this->call(RoleUserTableSeeder::class);
+        $this->call(SlidersTableSeeder::class);
+        $this->call(StaticNewsTableSeeder::class);*/
+
+        $this->call([
+            NewsTableSeeder::class,//
+            SettingSeeder::class,//
+            SlidersTableSeeder::class,//
+            StaticNewsTableSeeder::class,//
+            UserSeeder::class,//
+            CategoriesTableSeeder::class,//
+            PublishersTableSeeder::class,//
+            MemberSeeder::class,//
+            ProductsTableSeeder::class,//
+            ProductGalleriesTableSeeder::class,//
+            RolesTableSeeder::class,//
+            PermissionsTableSeeder::class,//
+            PermissionRoleTableSeeder::class,//
         ]);
     }
 }
