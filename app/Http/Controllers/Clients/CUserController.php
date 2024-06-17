@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UserAddRequest;
+use App\Models\Cart;
 use App\Models\Member;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -73,7 +74,7 @@ class CUserController extends Controller
     }
 
     public function postregister(UserAddRequest $request) 
-    {   
+    {
         /*$cre = $request->validate([
             'firstname' => ['required', 'string', 'max:20'],
             'lastname' => ['required', 'string', 'max:100'],
@@ -88,17 +89,24 @@ class CUserController extends Controller
 
         if($cre)
         {
-            Member::create([
-                'firstname' => $request->firstname,
-                'lastname' => $request->lastname,
+            /*Member::create([
+                'first_name' => $request->firstname,
+                'last_name' => $request->lastname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'address' => $request->address,
                 'phone' => $request->phone,
             ]);
 
-            return redirect()->route('client.login')->with('success', 'Đăng ký thành công');
-            //dd($cre, 'true');
+            $member = Member::where('email', $request->email)->first();
+
+            Cart::create([
+                'member_id' => $member->id,
+                'cart_total' => 0,
+            ]);*/
+
+            //return redirect()->route('client.login')->with('success', 'Đăng ký thành công');
+            dd($cre, 'true');
         }
         return redirect()->route('client.register')->with('fail', 'Đã có lỗi xảy ra');
         //dd($cre, 'false');

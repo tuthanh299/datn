@@ -93,7 +93,7 @@ use App\Http\Controllers\Clients\IndexController;
                                 </div>
                                 @if (Auth::guard('member')->check())
                                 <div class="menu-bottom-account-positon">
-                                    <a href="{{route('client.info')}}">
+                                    <a href="#">
                                         <div class="menu-bottom-account">
                                             <div class="menu-bottom-account-icon">
                                                 <i class="fa-solid fa-user"></i>

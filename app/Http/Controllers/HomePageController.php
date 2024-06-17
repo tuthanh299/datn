@@ -10,17 +10,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UserAddRequest;
 use App\Http\Requests\LoginRequest;
+use App\Models\Cart;
 
 class HomePageController extends Controller
 {
     public function clientlogin(Request $request)
     {
-        return view('client.login');
+        //return view('client.login');
+        return view('client.user.login');
     }
 
     public function clientregister()
     {
-        return view('client.register');
+        //return view('client.register');
+        return view('client.user.register');
     }
 
     public function postlogin(LoginRequest $request) 
@@ -89,15 +92,23 @@ class HomePageController extends Controller
         if($cre)
         {
             Member::create([
-                'name' => $request->firstname,
+                'first_name' => $request->firstname,
+                'last_name' => $request->lastname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'address' => $request->address,
                 'phone' => $request->phone,
             ]);
 
+            $member = Member::where('email', $request->email)->first();
+
+            Cart::create([
+                'member_id' => $member->id,
+                'cart_total' => 0,
+            ]);
+
             return redirect()->route('client.login')->with('success', 'Đăng ký thành công');
-            //dd($cre, 'true');
+            //dd($cre, 'true', $member->id);
         }
         return redirect()->route('client.register')->with('fail', 'Đã có lỗi xảy ra');
         //dd($cre, 'false');

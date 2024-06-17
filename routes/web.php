@@ -11,6 +11,7 @@ use App\Http\Controllers\Clients\CUserController;
 use App\Http\Controllers\Clients\IndexController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ImportInvoiceController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProductController;
@@ -29,13 +30,13 @@ Route::get('/cart', [CCartController::class, 'cartUser'])->name('user.cart');
 Route::get('/payment', [CCartController::class, 'paymentUser'])->name('user.payment');
 
 /* Client */
-Route::get('/sign-in', [CUserController::class, 'loginUser'])->name('user.login');
-Route::get('/register', [CUserController::class, 'registerUser'])->name('user.register');
+//Route::get('/sign-in', [CUserController::class, 'loginUser'])->name('user.login');
+//Route::get('/register', [CUserController::class, 'registerUser'])->name('user.register');
 
 Route::prefix('/')->group(function () {
     /* Login */
     //Route::get('login', [HomePageController::class, 'clientlogin'])->name('client.login');
-    Route::get('login', [CUserController::class, 'clientLogin'])->name('client.login');
+    Route::get('sign-in', [CUserController::class, 'clientLogin'])->name('client.login');
     //Route::post('check-login', [HomePageController::class, 'postlogin'])->name('client.postlogin');
     Route::post('check-login', [CUserController::class, 'postlogin'])->name('client.postlogin');
 
@@ -72,14 +73,24 @@ Route::prefix('/')->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
     });
+
+    Route::controller(CartController::class)->group(function () {
+        Route::get('/cart', 'index')->name('client.cart');
+    });
+
+
 });
+
+
+//ADMIN
+
 
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
 Route::get('/admin', [HomeController::class, 'index'])->name('home');
-Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('logout.admin');
+Route::get('/admin/logout', [AdminController::class, 'logoutAdmin'])->name('logout.admin');
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');

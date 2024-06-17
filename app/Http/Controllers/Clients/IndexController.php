@@ -67,6 +67,14 @@ class IndexController extends Controller
         $category = Category::where('id', $id)->firstOrFail();
         $pagename = $category->name;
         $categoryidproduct = Product::where('category_id', $id)->latest()->paginate(10);
+
+        if(Auth::guard('member')->user()) 
+        {
+            $user = Auth::guard('member')->user();
+
+            return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename', 'user'));
+        }
+
         return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename'));
     }
 
