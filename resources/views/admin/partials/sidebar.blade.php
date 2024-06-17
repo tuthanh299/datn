@@ -45,7 +45,7 @@
                       <ul class="nav nav-treeview">
                           <li class="nav-item">
                               <a href="{{ route('dashboard') }}" class="nav-link">
-                                <i class="nav-icon fas fa-chart-pie"></i>
+                                  <i class="nav-icon fas fa-chart-pie"></i>
                                   <p class="text-capitalize">Thống kê</p>
                               </a>
                           </li>
@@ -53,7 +53,7 @@
                   </li>
                   <li class="nav-item ">
                       <a href="#" class="nav-link ">
-                        <i class="nav-icon text-sm fas fa-layer-group"></i>
+                          <i class="nav-icon text-sm fas fa-layer-group"></i>
                           <p class="text-capitalize">
                               Group Sản Phẩm
                               <i class="right fas fa-angle-left"></i>
@@ -62,20 +62,20 @@
                       <ul class="nav nav-treeview">
                           <li class="nav-item">
                               <a href="{{ route('categories.index') }}" class="nav-link">
-                                <i class="nav-icon text-sm fas fa-boxes"></i>
+                                  <i class="nav-icon text-sm fas fa-boxes"></i>
                                   <p class="text-capitalize">
                                       Danh Mục Sản Phẩm
                                   </p>
                               </a>
                           </li>
                           <li class="nav-item">
-                            <a href="{{ route('publisher.index') }}" class="nav-link">
-                              <i class="nav-icon fas fa-book"></i> 
-                                <p class="text-capitalize">
-                                    Nhà Xuất Bản
-                                </p>
-                            </a>
-                        </li>
+                              <a href="{{ route('publisher.index') }}" class="nav-link">
+                                  <i class="nav-icon fas fa-book"></i>
+                                  <p class="text-capitalize">
+                                      Nhà Xuất Bản
+                                  </p>
+                              </a>
+                          </li>
                           <li class="nav-item">
                               <a href="{{ route('product.index') }}" class="nav-link">
                                   <i class="nav-icon fas fa-th"></i>
@@ -84,12 +84,39 @@
                                   </p>
                               </a>
                           </li>
-                          
+
                       </ul>
                   </li>
                   <li class="nav-item ">
                       <a href="#" class="nav-link ">
-                        <i class="nav-icon text-sm far fa-newspaper"></i>
+                          <i class="nav-icon text-sm fas fa-layer-group"></i>
+                          <p class="text-capitalize">
+                              Group Hóa Đơn
+                              <i class="right fas fa-angle-left"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                              <a href="{{ route('import_invoice.index') }}" class="nav-link">
+                                  <i class="nav-icon text-sm fas fa-boxes"></i>
+                                  <p class="text-capitalize">
+                                      Hóa Đơn Nhập
+                                  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="" class="nav-link">
+                                  <i class="nav-icon fas fa-book"></i>
+                                  <p class="text-capitalize">
+                                      Hóa Đơn Bán
+                                  </p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="nav-item ">
+                      <a href="#" class="nav-link ">
+                          <i class="nav-icon text-sm far fa-newspaper"></i>
                           <p class="text-capitalize">
                               Group Bài Viết
                               <i class="right fas fa-angle-left"></i>
@@ -98,7 +125,7 @@
                       <ul class="nav nav-treeview">
                           <li class="nav-item">
                               <a href="{{ route('staticnews.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-file"></i> 
+                                  <i class="nav-icon fas fa-file"></i>
                                   <p class="text-capitalize">
                                       Bài viết giới thiệu
                                   </p>
@@ -106,7 +133,7 @@
                           </li>
                           <li class="nav-item">
                               <a href="{{ route('news.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
+                                  <i class="nav-icon fas fa-copy"></i>
                                   <p class="text-capitalize">
                                       Bài Viết tin tức
                                   </p>
@@ -116,7 +143,7 @@
                   </li>
                   <li class="nav-item ">
                       <a href="#" class="nav-link ">
-                        <i class="nav-icon text-sm fas fa-users"></i>
+                          <i class="nav-icon text-sm fas fa-users"></i>
                           <p class="text-capitalize">
                               Quản lý users
                               <i class="right fas fa-angle-left"></i>
@@ -135,7 +162,7 @@
                               <a href="{{ route('roles.index') }}" class="nav-link">
                                   <i class="nav-icon fas fa-th"></i>
                                   <p class="text-capitalize">
-                                     Danh sách vai trò
+                                      Danh sách vai trò
                                   </p>
                               </a>
                           </li>
@@ -143,7 +170,7 @@
                   </li>
                   <li class="nav-item">
                       <a href="{{ route('slider.index') }}" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                          <i class="nav-icon far fa-image"></i>
                           <p class="text-capitalize">
                               Slider
                           </p>
@@ -151,7 +178,7 @@
                   </li>
                   <li class="nav-item">
                       <a href="{{ route('setting.index') }}" class="nav-link">
-                        <i class="nav-icon text-sm fas fa-cogs"></i>
+                          <i class="nav-icon text-sm fas fa-cogs"></i>
                           <p class="text-capitalize">
                               Cấu Hình Chung
                           </p>
