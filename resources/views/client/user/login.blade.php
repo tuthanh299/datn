@@ -1,5 +1,7 @@
 @extends('client.layouts.index')
-
+@section('title')
+    <title>Đăng nhập</title>
+@endsection
 @section('content')
     <div class="wrap-content">
         <div class="title-main">
@@ -8,7 +10,7 @@
             </span>
         </div>
         <div class="content-main account-user">
-            <form id="login-form-member" class="form" action="" method="post">
+            <form id="login-form-member" class="form" action="{{route('user.postlogin')}}" method="POST">
                 @csrf
                 <div>
                     <div class="input-group mb-2">
@@ -56,7 +58,7 @@
                         Chưa có tài khoản? <a href="{{ route('user.register') }}">Đăng ký</a>
                     </div>
                     <div>
-                        <div>Hoặc đăng nhập với: <a href=""><i class="fa-brands fa-google"></i></a>
+                        <div>Hoặc đăng nhập với: <a href="#"><i class="fa-brands fa-google"></i></a>
                         </div>
                     </div>
                 </div>

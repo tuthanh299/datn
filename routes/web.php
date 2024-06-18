@@ -28,8 +28,10 @@ Route::get('/cart', [CCartController::class, 'cartUser'])->name('user.cart');
 Route::get('/payment', [CCartController::class, 'paymentUser'])->name('user.payment');
 
 /* Client */
-Route::get('/sign-in', [CUserController::class, 'loginUser'])->name('user.login');
-Route::get('/register', [CUserController::class, 'registerUser'])->name('user.register');
+Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.login');
+Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
+Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
+Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
 
 Route::prefix('/')->group(function () {
     /* Index */
@@ -57,6 +59,11 @@ Route::prefix('/')->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
     });
+
+    Route::controller(CCartController::class)->group(function () {
+        Route::get('/cart', 'index')->name('user.cart');
+    });
+
 });
 
 Route::get('/admin', [HomeController::class, 'index'])->name('home');
