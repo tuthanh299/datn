@@ -10,6 +10,7 @@ use App\Models\Setting;
 use App\Models\Slider;
 use App\Models\StaticNews;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -32,7 +33,18 @@ class IndexController extends Controller
             ->where('status', 1)
             ->where('outstanding', 1)
             ->get();
+
+
+        if(Auth::guard('member')->user())
+        {
+            $user = Auth::guard('member')->user();
+
+            return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user'));
+        }
+
+        
         return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first'));
+        //dd('false');
     }
     public function PublisherProduct($id)
     {

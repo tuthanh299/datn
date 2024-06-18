@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
+        Schema::create('discount_vouncher', function (Blueprint $table) {
+            $table->id();
+            $table->string('code');
+            $table->integer('value');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table ->dropColumn('deleted_at');
-        });
+        Schema::dropIfExists('discount_vouncher');
     }
 };

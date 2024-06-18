@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permission_roles', function (Blueprint $table) {
+        Schema::create('detail_sale_invoices', function (Blueprint $table) {
             $table->id();
-            //$table->integer('role_id');
-            //$table->integer('permission_id');
+            $table->foreignId('sale_invoice_id')->constrained();
+            //$table->bigInteger('sale_invoice_id')->unique();
+            $table->foreignId('product_id')->constrained();
+            $table->integer('quantity');
+            $table->integer('price');
             $table->timestamps();
             $table->softDeletes();
-
-            //$table->foreign('role_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('role_id')->constrained();
-            $table->foreignId('permission_id')->constrained();
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permission_role');
+        Schema::dropIfExists('detail_import_invoice');
     }
 };

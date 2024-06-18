@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('news', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('member_id')->constrained();
+            $table->integer('cart_total');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('news', function (Blueprint $table) {
-            $table ->dropColumn('deleted_at');
-        });
+        Schema::dropIfExists('cart');
     }
 };
