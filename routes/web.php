@@ -30,8 +30,10 @@ Route::get('/cart', [CCartController::class, 'cartUser'])->name('user.cart');
 Route::get('/payment', [CCartController::class, 'paymentUser'])->name('user.payment');
 
 /* Client */
-//Route::get('/sign-in', [CUserController::class, 'loginUser'])->name('user.login');
-//Route::get('/register', [CUserController::class, 'registerUser'])->name('user.register');
+Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.login');
+Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
+Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
+Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
 
 Route::prefix('/')->group(function () {
     /* Login */
@@ -74,19 +76,13 @@ Route::prefix('/')->group(function () {
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
     });
 
-    Route::controller(CartController::class)->group(function () {
-        Route::get('/cart', 'index')->name('client.cart');
+    /* Cart */
+    Route::controller(CCartController::class)->group(function () {
+        Route::get('/cart', 'index')->name('user.cart');
+        Route::get('/cart/add/{id}', 'add_index')->name('add_index.cart');
+        Route::get('/product/add/{id}/{count}', 'add')->name('add.cart');
     });
 
-
-});
-
-
-//ADMIN
-
-
-Route::middleware(['auth', 'user-access:user'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
 Route::get('/admin', [HomeController::class, 'index'])->name('home');

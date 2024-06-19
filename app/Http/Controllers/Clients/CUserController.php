@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UserAddRequest;
 use App\Models\Cart;
 use App\Models\Member;
@@ -13,12 +14,12 @@ class CUserController extends Controller
 {
     public function clientLogin()
     {
-
+        //return view('client.login');
         return view('client.user.login');
     }
     public function clientRegister()
     {
-
+        //return view('client.register');
         return view('client.user.register');
     }
 
@@ -63,7 +64,7 @@ class CUserController extends Controller
             setcookie('id', $id, time() + 360000, '/');
             return redirect()->route('index');
         }*/
-        return redirect()->route('client.login')->with('fail', 'Tài khoản hoặc mật khẩu không chính xác.');
+        return redirect()->route('user.login')->with('fail', 'Tài khoản hoặc mật khẩu không chính xác.');
 
         //dd(Auth::guard('member')->attempt($credentials));
 
@@ -73,7 +74,7 @@ class CUserController extends Controller
         //dd(Hash::make('123456'));
     }
 
-    public function postregister(UserAddRequest $request) 
+    public function postregister(RegisterRequest $request) 
     {
         /*$cre = $request->validate([
             'firstname' => ['required', 'string', 'max:20'],
@@ -89,7 +90,7 @@ class CUserController extends Controller
 
         if($cre)
         {
-            /*Member::create([
+            Member::create([
                 'first_name' => $request->firstname,
                 'last_name' => $request->lastname,
                 'email' => $request->email,
@@ -103,12 +104,12 @@ class CUserController extends Controller
             Cart::create([
                 'member_id' => $member->id,
                 'cart_total' => 0,
-            ]);*/
+            ]);
 
-            //return redirect()->route('client.login')->with('success', 'Đăng ký thành công');
-            dd($cre, 'true');
+            return redirect()->route('user.login')->with('success', 'Đăng ký thành công');
+            //dd($cre, 'true');
         }
-        return redirect()->route('client.register')->with('fail', 'Đã có lỗi xảy ra');
+        return redirect()->route('user.register')->with('fail', 'Đã có lỗi xảy ra');
         //dd($cre, 'false');
     }
 }

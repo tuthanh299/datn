@@ -10,7 +10,7 @@
             </span>
         </div>
         <div class="content-main account-user">
-            <form id="login-form-member" class="form" action="{{route('client.postlogin')}}" method="POST">
+            <form id="login-form-member" class="form" action="{{route('user.postlogin')}}" method="POST">
                 @csrf
                 <div>
                     <div class="input-group mb-2">

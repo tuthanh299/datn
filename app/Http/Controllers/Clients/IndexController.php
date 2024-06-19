@@ -2,7 +2,9 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Category;
+use App\Models\DetailCart;
 use App\Models\News;
 use App\Models\Product;
 use App\Models\Publisher;
@@ -38,22 +40,19 @@ class IndexController extends Controller
             ->where('outstanding', 1)
             ->get();
 
-        if(Auth::guard('member')->user()) 
+
+        if(Auth::guard('member')->user())
         {
             $user = Auth::guard('member')->user();
+            $carts = Cart::where('member_id', $user->id)->get();
+            $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
 
-            return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user'));
+            return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user', 'detail_cart'));
         }
 
-        /*if(($_COOKIE['is_logged']) == 1) {
-            $user = User::where('id', $_COOKIE['id'])->get();
-
-            return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user'));
-        }*/
-
-        //$request->session()->flush();
         
         return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first'));
+        //dd('false');
     }
     public function PublisherProduct($id)
     {

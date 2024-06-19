@@ -5,7 +5,7 @@ use App\Http\Controllers\Clients\IndexController;
     <div class="wrap-content">
         <ul class="menu-main">
             <li class="menu-main-li">
-                <a href="{{route('index')}}" title="Trang chủ">
+                <a href="{{ route('index') }}" title="Trang chủ">
                     Trang chủ
                 </a>
             </li>
@@ -81,7 +81,7 @@ use App\Http\Controllers\Clients\IndexController;
                                             <div class="menu-bottom-cart-icon">
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                                 <div class="menu-bottom-cart-num">
-                                                    0
+                                                    {{ $detail_cart->count() }}
                                                 </div>
                                             </div>
                                             <div class="menu-bottom-cart-text">
@@ -99,25 +99,24 @@ use App\Http\Controllers\Clients\IndexController;
                                                 <i class="fa-solid fa-user"></i>
                                             </div>
                                             <div class="menu-bottom-account-text">
-                                                Xin chào {{ $user->first_name }}
+                                                Xin chào, {{ $user->first_name }}
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 @else
-                                    <div class="menu-bottom-account-positon">
-                                        <a href="{{route('client.login')}}">
-                                            <div class="menu-bottom-account">
-                                                <div class="menu-bottom-account-icon">
-                                                    <i class="fa-solid fa-user"></i>
-                                                </div>
-                                                <div class="menu-bottom-account-text">
-                                                    Đăng nhập / Đăng ký
-                                                </div>
+                                <div class="menu-bottom-account-positon">
+                                    <a href="{{route('user.login')}}">
+                                        <div class="menu-bottom-account">
+                                            <div class="menu-bottom-account-icon">
+                                                <i class="fa-solid fa-user"></i>
                                             </div>
-                                        </a>
-
-                                    </div>
+                                            <div class="menu-bottom-account-text">
+                                                Đăng nhập / Đăng ký
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                                 @endif
                             </div>
                         </div>

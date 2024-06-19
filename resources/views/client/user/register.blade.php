@@ -12,7 +12,7 @@
             </span>
         </div>
         <div class="content-main account-user">
-            <form class="form" action="{{route('client.postregister')}}" method="POST">
+            <form class="form" action="{{route('user.postregister')}}" method="POST">
                 @csrf
                 <div>
                     <label class="mb-1">Họ:</label>

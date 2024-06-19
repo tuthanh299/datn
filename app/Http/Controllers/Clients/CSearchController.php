@@ -2,9 +2,12 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\DetailCart;
 use App\Models\News;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CSearchController extends Controller
 {
@@ -32,6 +35,14 @@ class CSearchController extends Controller
                     ->latest()
                     ->paginate(8);
             }
+        }
+
+        if(Auth::guard('member')->check()) 
+        {
+            $user = Auth::guard('member')->user();
+            $carts = Cart::where('member_id', $user->id)->get();
+            $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
+            return view('client.product.search', compact('pageName', 'searchresultproduct', 'searchresultnews', 'user'));
         }
     
         return view('client.product.search', compact('pageName', 'searchresultproduct', 'searchresultnews'));
