@@ -81,7 +81,7 @@ use App\Http\Controllers\Clients\IndexController;
                                             <div class="menu-bottom-cart-icon">
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                                 <div class="menu-bottom-cart-num">
-                                                    0
+                                                    {{ $detail_cart->count() }}
                                                 </div>
                                             </div>
                                             <div class="menu-bottom-cart-text">
