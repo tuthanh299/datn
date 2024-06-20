@@ -1,5 +1,9 @@
 @extends('client.layouts.index')
 
+@section('title')
+    <title>Về chúng tôi</title>
+@endsection
+
 @section('content')
     <div class="wrap-content">
         <div class="title-main">

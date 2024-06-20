@@ -15,11 +15,11 @@ use App\Http\Controllers\Clients\IndexController;
                 <div class="header-top-social">
                     <div class="flex-social">
                         <div class="social-item hvr-float-shadow">
-                            <a href="" target="_blank">
+                            <a href="https://www.facebook.com/profile.php?id=61561027564170" target="_blank">
                                 <i class="fa-brands fa-facebook"></i>
                             </a>
                         </div>
-                        <div class="social-item hvr-float-shadow">
+                        <!--<div class="social-item hvr-float-shadow">
                             <a href="" target="_blank">
                                 <i class="fa-brands fa-instagram"></i>
                             </a>
@@ -33,7 +33,7 @@ use App\Http\Controllers\Clients\IndexController;
                             <a href="" target="_blank">
                                 <i class="fa-brands fa-youtube"></i>
                             </a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
