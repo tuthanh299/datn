@@ -15,6 +15,6 @@ class Role extends Model
     ];
     public function Permissions()
     {
-        return $this->belongsToMany(Permission::class, table:'permission_role', foreignPivotKey: 'role_id', relatedPivotKey: 'permission_id');
+        return $this->belongsToMany(Permission::class, table:'permission_roles', foreignPivotKey: 'role_id', relatedPivotKey: 'permission_id');
     }
 }

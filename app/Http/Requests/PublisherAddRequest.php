@@ -12,7 +12,7 @@ class PublisherAddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|regex:/^[\pL0-9\s]*$/u|unique:sliders|max:255',
+            'name' => 'required|regex:/^[\pL0-9\s]*$/u|unique:publishers|max:255',
             'description' => 'required',
             'photo_path' => 'required',
         ];

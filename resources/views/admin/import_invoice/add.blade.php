@@ -31,8 +31,8 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Thời gian</label>
-                            <input type="datetime-local" min="{{ date('Y-m-d\TH:i') }}" class="form-control"
-                                name="import_date" value="{{ $TimeCreateImportInvoice->format('Y-m-d\TH:i') }}">
+                            <input type="datetime-local"  class="form-control"
+                                name="import_date" value="{{ $TimeCreateImportInvoice->format('Y-m-d\TH:i') }}" readonly>
                         </div>
                     </div>
                     <div class="col-3">

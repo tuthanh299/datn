@@ -22,38 +22,57 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
+                            <label>Họ Và Tên Đệm</label>
+                            <input type="text"
+                                class="text-capitalize form-control @error('last_name') is-invalid @enderror"
+                                name="last_name" placeholder="" value="{{ $user->last_name }}" required>
+                            @error('last_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label>Tên Nhân Viên</label>
-                            <input type="text" class="text-capitalize form-control"  name=" name" placeholder="Nhập tên nhân viên"
-                                value="{{ $user->name }}">
+                            <input type="text"
+                                class="text-capitalize form-control @error('first_name') is-invalid @enderror"
+                                name="first_name" placeholder="" value="{{ $user->first_name }}" required>
+                            @error('first_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Số Điện Thoại</label>
-                            <input type="number" class="form-control"  name="phone" placeholder="Nhập số điện thoại"
-                                value="{{ $user->phone }}">
+                            <input type="number" class="form-control @error('phone') is-invalid @enderror"
+                                name="phone" placeholder="Nhập số điện thoại" value="{{ $user->phone }}" required>
+                             
                         </div>
                         <div class="form-group">
                             <label>Địa Chỉ</label>
-                            <input type="text" class="form-control"  name="address" placeholder="Nhập địa chỉ"
-                                value="{{ $user->address }}">
+                            <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                name="address" placeholder="Nhập địa chỉ" value="{{ $user->address }}" required>
+                             
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="text-lowercase form-control"   name=" email" placeholder="Nhập email"
-                                value="{{ $user->email }}">
+                            <input type="email"
+                                class="text-lowercase form-control " name="email"
+                                placeholder="Nhập email" value="{{ $user->email }}" readonly required>
+                             
                         </div>
                         <div class="form-group">
                             <label>Mật Khẩu</label>
-                            <input type="password" class="form-control"
-                                name=" password"
-                                placeholder="Nhập mật khẩu">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                name="password" placeholder="Nhập mật khẩu" >
+                            @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Vai Trò</label>
                             <select name="role_id[]" id="" class="form-control select2_option" multiple>
                                 <option value=""> </option>
                                 @foreach ($roles as $role)
-                                    <option {{ $roleUser->contains('id', $role->id) ? 'selected' : '' }}
-                                        class="" value="{{ $role->id }}"> {{ $role->name }}</option>
+                                    <option {{ $roleUser->contains('id', $role->id) ? 'selected' : '' }} class=""
+                                        value="{{ $role->id }}"> {{ $role->name }}</option>
                                 @endforeach
                             </select>
                         </div>
