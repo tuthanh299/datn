@@ -42,7 +42,7 @@ class CSearchController extends Controller
             $user = Auth::guard('member')->user();
             $carts = Cart::where('member_id', $user->id)->get();
             $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
-            return view('client.product.search', compact('pageName', 'searchresultproduct', 'searchresultnews', 'user'));
+            return view('client.product.search', compact('pageName', 'searchresultproduct', 'searchresultnews', 'user', 'detail_cart'));
         }
     
         return view('client.product.search', compact('pageName', 'searchresultproduct', 'searchresultnews'));

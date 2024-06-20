@@ -2,6 +2,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Clients\CInfoController;
 use App\Http\Controllers\Clients\CAboutusController;
 use App\Http\Controllers\Clients\CCartController;
 use App\Http\Controllers\Clients\CNewsController;
@@ -81,6 +82,11 @@ Route::prefix('/')->group(function () {
         Route::get('/cart', 'index')->name('user.cart');
         Route::get('/cart/add/{id}', 'add_index')->name('add_index.cart');
         Route::get('/product/add/{id}/{count}', 'add')->name('add.cart');
+    });
+
+    /* Info */
+    Route::controller(CInfoController::class)->group(function(){
+        Route::get('user-info', 'index')->name('user.info');
     });
 
 });

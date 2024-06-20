@@ -1,5 +1,9 @@
 @extends('client.layouts.index')
 
+@section('title')
+    <title>Tìm kiếm</title>
+@endsection
+
 @section('content')
     <div class="wrap-content">
         <div class="title-main">

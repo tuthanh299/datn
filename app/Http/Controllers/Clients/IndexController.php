@@ -48,10 +48,11 @@ class IndexController extends Controller
             $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
 
             return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user', 'detail_cart'));
+            //dd($detail_cart);
         }
 
         
-        return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first'));
+        return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'detail_cart'));
         //dd('false');
     }
     public function PublisherProduct($id)
