@@ -1,21 +1,23 @@
+<?php
+use \App\Http\Controllers\HomeController;  
+$user = HomeController::getUser();
+?>
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
-          <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-              class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <a class="brand-link text-center">
+          <span class="brand-text font-weight-bold ">TLBookstore</span>
       </a>
       <!-- Sidebar -->
       <div class="sidebar">
           <!-- Sidebar user panel (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-              <div class="image">
-                  <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                      alt="User Image">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex text-light">
+
+              <div class="info-hello">
+                  Xin chào, 
               </div>
               <div class="info">
-                  <a href="#" class="d-block">Alexander Pierce</a>
+              {{$user->first_name}}
               </div>
           </div>
           <!-- SidebarSearch Form -->
@@ -34,8 +36,9 @@
           <nav class="mt-2">
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                   data-accordion="false">
-                  <li class="nav-item ">
-                      <a href="#" class="nav-link ">
+                  <li class="nav-item {{ Route::current()->getName() === 'dashboard.index' ? 'menu-open' : null }}">
+                      <a href="#"
+                          class="nav-link {{ Route::current()->getName() === 'dashboard.index' ? 'active' : null }}">
                           <i class="nav-icon fas fa-tachometer-alt"></i>
                           <p class="text-capitalize">
                               Bảng điều khiển
@@ -44,15 +47,18 @@
                       </a>
                       <ul class="nav nav-treeview">
                           <li class="nav-item">
-                              <a href="{{ route('dashboard') }}" class="nav-link">
+                              <a href="{{ route('dashboard') }}"
+                                  class="nav-link {{ Route::current()->getName() === 'dashboard.index' ? 'active' : null }}">
                                   <i class="nav-icon fas fa-chart-pie"></i>
                                   <p class="text-capitalize">Thống kê</p>
                               </a>
                           </li>
                       </ul>
                   </li>
-                  <li class="nav-item ">
-                      <a href="#" class="nav-link ">
+                  <li
+                      class="nav-item {{ Route::current()->getName() === 'product.index' || Route::current()->getName() === 'publisher.index' || Route::current()->getName() === 'categories.index' ? 'menu-open' : null }}">
+                      <a href="#"
+                          class="nav-link {{ Route::current()->getName() === 'product.index' || Route::current()->getName() === 'publisher.index' || Route::current()->getName() === 'categories.index' ? 'active' : null }}">
                           <i class="nav-icon text-sm fas fa-layer-group"></i>
                           <p class="text-capitalize">
                               Group Sản Phẩm
@@ -61,7 +67,8 @@
                       </a>
                       <ul class="nav nav-treeview">
                           <li class="nav-item">
-                              <a href="{{ route('categories.index') }}" class="nav-link">
+                              <a href="{{ route('categories.index') }}"
+                                  class="nav-link {{ Route::current()->getName() === 'categories.index' ? 'active' : null }}">
                                   <i class="nav-icon text-sm fas fa-boxes"></i>
                                   <p class="text-capitalize">
                                       Danh Mục Sản Phẩm
@@ -69,7 +76,8 @@
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a href="{{ route('publisher.index') }}" class="nav-link">
+                              <a href="{{ route('publisher.index') }}"
+                                  class="nav-link {{ Route::current()->getName() === 'publisher.index' ? 'active' : null }}">
                                   <i class="nav-icon fas fa-book"></i>
                                   <p class="text-capitalize">
                                       Nhà Xuất Bản
@@ -77,7 +85,8 @@
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a href="{{ route('product.index') }}" class="nav-link">
+                              <a href="{{ route('product.index') }}"
+                                  class="nav-link {{ Route::current()->getName() === 'product.index' ? 'active' : null }}">
                                   <i class="nav-icon fas fa-th"></i>
                                   <p class="text-capitalize">
                                       Danh Sách sản phẩm
@@ -87,8 +96,10 @@
 
                       </ul>
                   </li>
-                  <li class="nav-item ">
-                      <a href="#" class="nav-link ">
+                  <li
+                      class="nav-item {{ Route::current()->getName() === 'import_invoice.index' ? 'menu-open' : null }}">
+                      <a href="#"
+                          class="nav-link {{ Route::current()->getName() === 'import_invoice.index' ? 'active' : null }}">
                           <i class="nav-icon text-sm fas fa-layer-group"></i>
                           <p class="text-capitalize">
                               Group Hóa Đơn
@@ -97,7 +108,8 @@
                       </a>
                       <ul class="nav nav-treeview">
                           <li class="nav-item">
-                              <a href="{{ route('import_invoice.index') }}" class="nav-link">
+                              <a href="{{ route('import_invoice.index') }}"
+                                  class="nav-link {{ Route::current()->getName() === 'import_invoice.index' ? 'active' : null }}">
                                   <i class="nav-icon text-sm fas fa-boxes"></i>
                                   <p class="text-capitalize">
                                       Hóa Đơn Nhập

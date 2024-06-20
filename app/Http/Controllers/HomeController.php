@@ -1,9 +1,10 @@
 <?php
-  
+
 namespace App\Http\Controllers;
-  
-use Illuminate\Http\Request;
+
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,7 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-  
+
     /**
      * Show the application dashboard.
      *
@@ -24,28 +25,31 @@ class HomeController extends Controller
      */
     public function index(): View
     {
+        
         return view('admin.login');
+    }
 
-         
-    } 
-  
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function adminHome(): View
+    public function adminHome(Request $request): View
     {
         return view('admin.admin');
     }
-  
+
+    public static function getUser()
+    {
+        $user = Session::get('user');
+        $user = $user[0];
+        return $user;
+    }
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function managerHome(): View
-    {
-        return view('managerHome');
-    }
+    //
 }

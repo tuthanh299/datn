@@ -98,8 +98,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('', [UserController::class, 'index'])->name('users.index')->middleware('can:users-list');
             Route::get('/create', [UserController::class, 'create'])->name('users.create')->middleware('can:users-add');
             Route::post('/store', [UserController::class, 'store'])->name('users.store');
-            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-            Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update')->middleware('can:users-edit');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit')->middleware('can:users-edit');
+            Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
             Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete')->middleware('can:users-delete');
         });
 

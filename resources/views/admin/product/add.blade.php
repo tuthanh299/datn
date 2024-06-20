@@ -19,17 +19,7 @@
     <div class="content-wrapper">
 
         @include('admin.partials.content-header', ['name' => 'Sản phẩm', 'key' => '/ Thêm'])
-        <div class="col-md-12">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
+         
         <form action="{{ route('product.store') }} " method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-footer text-sm sticky-top">
