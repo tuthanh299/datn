@@ -17,6 +17,7 @@ class CCartController extends Controller
             $carts = Cart::where('member_id', $user->id)->get();
             //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
             $detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
+
             return view('client.order.cart', compact('detail_cart', 'user'));
         }
 
@@ -133,5 +134,28 @@ class CCartController extends Controller
                 }
             }
         }
+    }
+
+    public function paymentUser() 
+    {
+        $total = 0;
+        $user = Auth::guard('member')->user();
+        $cart = Cart::where('member_id', $user->id)->get();
+        //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
+        $detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
+
+        foreach($detail_cart as $v) {
+            if($v->discount >0) {
+                $total += $v->sale_price * $v->quantity;
+            } 
+            else {
+                $total += $v->regular_price * $v->quantity;
+            }
+        }
+
+        $cart[0]->cart_total = $total;
+
+        return view('client.order.payment', compact('detail_cart', 'user', 'cart'));
+        //dd($carts);
     }
 }
