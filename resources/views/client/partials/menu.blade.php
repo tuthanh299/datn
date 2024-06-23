@@ -82,12 +82,10 @@ use App\Http\Controllers\Clients\IndexController;
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                                 @if(Auth::guard('member')->check())
                                                 <div class="menu-bottom-cart-num">
-                                                    {{-- {{ $detail_cart->count() }} --}}
+                                                    {{ $detail_cart->count() }}
                                                 </div>
                                                 @else
-                                                <div class="menu-bottom-cart-num">
-                                                    0
-                                                </div>
+                                                <div></div>
                                                 @endif
                                             </div>
                                             <div class="menu-bottom-cart-text">

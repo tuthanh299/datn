@@ -48,7 +48,7 @@ class IndexController extends Controller
         }
 
         
-        return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'detail_cart'));
+        return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first'));
         //dd('false');
     }
     public function PublisherProduct($id)

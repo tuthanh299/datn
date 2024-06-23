@@ -21,6 +21,7 @@
             @include('client.partials.support')
             @include('client.partials.anticopy')
             @include('client.partials.js')
+            @yield('js')
         </div>
     </div>
 </body>

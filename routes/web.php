@@ -33,6 +33,8 @@ Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.logi
 Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
 Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
+Route::post('logout', [CUserController::class, 'logout'])->name('user.logout');
+
 
 Route::prefix('/')->group(function () {
     /* Index */
@@ -71,6 +73,8 @@ Route::prefix('/')->group(function () {
     /* Info */
     Route::controller(CInfoController::class)->group(function(){
         Route::get('user-info', 'index')->name('user.info');
+        Route::post('update', 'update')->name('user.info.update');
+        Route::delete('delete', 'delete')->name('user.info.delete');
     });
 
 });
