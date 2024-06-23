@@ -112,4 +112,10 @@ class CUserController extends Controller
         return redirect()->route('user.register')->with('fail', 'Đã có lỗi xảy ra');
         //dd($cre, 'false');
     }
+
+    public function logout() 
+    {
+        Auth::guard('member')->logout();
+        return redirect()->route('index');
+    }
 }

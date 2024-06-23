@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use App\Traits\DeleteModelTrait;
+use App\Traits\DeleteModelTrait; 
+use App\Http\Requests\UserAddRequest;
 
 class UserController extends Controller
 {
@@ -31,12 +32,13 @@ class UserController extends Controller
         $roles = $this->role->all();
         return view('admin.user.add', compact('roles'));
     }
-    public function store(Request $request)
+    public function store(UserAddRequest $request)
     {
         try {
             DB::beginTransaction();
             $user = $this->user->create([
-                'name' => $request->name,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
                 'phone' => $request->phone,
                 'address' => $request->address,
                 'email' => $request->email,
@@ -61,16 +63,18 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     { 
-
+        
         try {
+            $update['first_name'] = $request->first_name;
+            $update['last_name'] = $request->last_name;
+            $update['phone'] = $request->phone;
+            $update['address'] = $request->address;
+            if(!empty($request->password)){
+                $update['password'] = $request->password;
+            }
+
             DB::beginTransaction();
-            $this->user->find($id)->update([
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'address' => $request->address,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+            $this->user->find($id)->update($update);
             $user = $this->user->find($id);
             $user->roles()->sync($request->role_id);
             DB::commit();

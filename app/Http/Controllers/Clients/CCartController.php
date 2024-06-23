@@ -27,6 +27,11 @@ class CCartController extends Controller
 
     //thêm giỏ hàng từ index
     public function add_index($id) {
+        if(!Auth::guard('member')->check()) 
+        {
+            return redirect()->route('user.login');
+        }
+
         $user_id = Auth::guard('member')->user()->id;
         $cart_user = Cart::where('member_id', $user_id)->get();
         $detail_cart_user = DetailCart::where('cart_id', $cart_user[0]->id)->get();
@@ -38,7 +43,7 @@ class CCartController extends Controller
                 'cart_id' => $cart_user[0]->id,
                 'product_id' => $id,
                 'quantity' => 1,
-                'price' => $product->price,
+                //'price' => $product->regular_price,
             ]);
             if ($check) {
                 return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
@@ -66,7 +71,7 @@ class CCartController extends Controller
                 'cart_id' => $cart_user[0]->id,
                 'product_id' => $id,
                 'quantity' => 1,
-                'price' => $product->price,
+                //'price' => $product->price,
             ]);
             if ($check) {
                 return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
@@ -108,6 +113,11 @@ class CCartController extends Controller
 
     //thêm giỏ hàng từ chi tiết sản phẩm
     public function add($id, $count) {
+        if(!Auth::guard('member')->check()) 
+        {
+            return redirect()->route('user.login');
+        }
+
         $user_id = Auth::guard('member')->user()->id;
         $cart_user = Cart::where('member_id', $user_id)->get();
         $detail_cart_user = DetailCart::where('member_id', $cart_user->id)->get();
@@ -127,7 +137,7 @@ class CCartController extends Controller
                     'cart_id' => $cart_user->id,
                     'product_id' => $id,
                     'quantity' => $count,
-                    'price' => $product->price,
+                    //'price' => $product->price,
                 ]);
                 if ($check) {
                     return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
@@ -157,5 +167,10 @@ class CCartController extends Controller
 
         return view('client.order.payment', compact('detail_cart', 'user', 'cart'));
         //dd($carts);
+    }
+
+    public function increase_cart() 
+    {
+        
     }
 }

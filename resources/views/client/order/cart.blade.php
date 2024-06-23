@@ -91,6 +91,9 @@
                     <div class="btn btn-success  btn-cart-back-to-home me-2">
                         <a class="text-light" href="{{route('index')}}"> Về trang chủ</a>
                     </div>
+                    <div class="btn btn-success  btn-cart-back-to-home me-2">
+                        <a class="text-light" href="#"> Cập nhật</a>
+                    </div>
                     <div class="btn btn-success  btn-cart-next-to-payment">
                         <a class="text-light" href="{{ route('user.payment') }}">Thanh toán</a>
                     </div>

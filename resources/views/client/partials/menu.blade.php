@@ -85,9 +85,7 @@ use App\Http\Controllers\Clients\IndexController;
                                                     {{ $detail_cart->count() }}
                                                 </div>
                                                 @else
-                                                <div class="menu-bottom-cart-num">
-                                                    0
-                                                </div>
+                                                <div></div>
                                                 @endif
                                             </div>
                                             <div class="menu-bottom-cart-text">

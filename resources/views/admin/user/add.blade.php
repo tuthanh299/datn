@@ -21,39 +21,65 @@
                     <form action="{{ route('users.store') }}  " method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
+                            <label>Họ Và Tên Đệm</label>
+                            <input type="text"
+                                class="text-capitalize form-control @error('last_name') is-invalid @enderror"
+                                name="last_name" placeholder="Nhập Họ Và Tên Đệm" value="{{ old('last_name') }}">
+                            @error('last_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label>Tên Nhân Viên</label>
-                            <input type="text" class="text-capitalize form-control @error('name') is-invalid @enderror"
-                                name="name" placeholder="Nhập tên nhân viên" value="{{ old('name') }}">
+                            <input type="text"
+                                class="text-capitalize form-control @error('first_name') is-invalid @enderror"
+                                name="first_name" placeholder="Nhập tên nhân viên" value="{{ old('first_name') }}">
+                            @error('first_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Số Điện Thoại</label>
                             <input type="number" class="form-control @error('phone') is-invalid @enderror"
                                 name="phone" placeholder="Nhập số điện thoại" value="{{ old('phone') }}">
+                            @error('phone')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Địa Chỉ</label>
                             <input type="text" class="form-control @error('address') is-invalid @enderror"
                                 name="address" placeholder="Nhập địa chỉ" value="{{ old('address') }}">
+                            @error('address')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="text-lowercase form-control @error('email') is-invalid @enderror"
-                                name="email" placeholder="Nhập email" value="{{ old('email') }}">
+                            <input type="email"
+                                class="text-lowercase form-control @error('email') is-invalid @enderror" name="email"
+                                placeholder="Nhập email" value="{{ old('email') }}">
+                            @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Mật khẩu</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror"
                                 name="password" placeholder="Nhập mật khẩu">
+                            @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <label>Vai Trò</label> 
+                            <label>Vai Trò</label>
                             <select name="role_id[]" id="" class="form-control select2_option" multiple>
                                 <option value="">Admin </option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                 @endforeach
                             </select>
-                        </div> 
+                        </div>
                         <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>

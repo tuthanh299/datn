@@ -46,8 +46,7 @@
                         <div class="input-group mb-2">
                             <div class="input-group-append login-input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-
+                                    <span class="fas fa-envelope"></span> 
                                 </div>
                             </div>
                             <input type="text" name="email" id="username" value="{{ old('email') }}"
@@ -69,23 +68,12 @@
                                 <span class="fas fa-eye"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="form-check form-check-login mb-0">
-                            <label for="remember-me" class="text-info"><span>Ghi nhớ đăng nhập</span>
-                                <span class="align-middle">
-                                    <input id="remember-me" name="remember_me" type="checkbox"></span></label><br>
-                        </div>
-                    </div>
+                    </div> 
                     <div class="text-center text-lg-start mt-3">
                         <input type="submit" id="remember-me" name="remember_me"
                             class="btn-lg btn btn-sm bg-gradient-danger btn-block btn-login" value="Đăng Nhập">
                     </div>
-                    @if ($errors->has('login_error'))
-                        <div class="alert alert-danger">
-                            {{ $errors->first('login_error') }}
-                        </div>
-                    @endif
+                     
                 </form>
             </div>
         </div>

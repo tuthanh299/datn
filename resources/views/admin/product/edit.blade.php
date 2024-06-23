@@ -108,8 +108,7 @@
                                                 <label>Tác giả:</label>
                                                 <input type="text" class="text-capitalize form-control " name="author"
                                                     value="{{ $product->author }}">
-                                            </div>
-
+                                            </div> 
 
                                             <div class="form-group col-6">
                                                 <label>Giá mới</label>

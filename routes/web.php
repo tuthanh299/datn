@@ -35,6 +35,8 @@ Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.logi
 Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
 Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
+Route::post('logout', [CUserController::class, 'logout'])->name('user.logout');
+
 
 Route::prefix('/')->group(function () {
     /* Login */
@@ -87,6 +89,8 @@ Route::prefix('/')->group(function () {
     /* Info */
     Route::controller(CInfoController::class)->group(function(){
         Route::get('user-info', 'index')->name('user.info');
+        Route::post('update', 'update')->name('user.info.update');
+        Route::delete('delete', 'delete')->name('user.info.delete');
     });
 
 });
@@ -114,8 +118,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('', [UserController::class, 'index'])->name('users.index')->middleware('can:users-list');
             Route::get('/create', [UserController::class, 'create'])->name('users.create')->middleware('can:users-add');
             Route::post('/store', [UserController::class, 'store'])->name('users.store');
-            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-            Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update')->middleware('can:users-edit');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit')->middleware('can:users-edit');
+            Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
             Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete')->middleware('can:users-delete');
         });
 
