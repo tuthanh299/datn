@@ -2,15 +2,16 @@
     <title>Thêm Bài viết</title>
     @endsection @section('content')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
     <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
     <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
-<div class="content-wrapper"> 
-    @include('admin.partials.content-header', ['name' => 'Bài viết', 'key' => '/ Thêm']) 
+<div class="content-wrapper">
+    @include('admin.partials.content-header', ['name' => 'Bài viết', 'key' => '/ Thêm'])
     <div class="content">
         <div class="container-fluid">
             <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
@@ -34,7 +35,7 @@
                                 <div class="form-group">
                                     <label>Tên Bài viết</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" placeholder="Nhập tên Bài viết" value="{{ old('name') }}">
+                                        name="name" placeholder="Nhập tên bài viết" value="{{ old('name') }}">
                                     @error('name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -99,9 +100,9 @@
                 <div class="col-md-12 mb-3">
                     <button type="submit" class="btn btn-primary">Lưu</button>
                 </div>
-            </form> 
-        </div> 
-    </div> 
+            </form>
+        </div>
+    </div>
 </div>
 
 

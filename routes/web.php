@@ -88,7 +88,14 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         /* Dashboard */
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+       
+        Route::prefix('import_invoice')->group(function () {
+            Route::get('', [ImportInvoiceController::class, 'index'])->name('import_invoice.index');
+            Route::get('/create', [ImportInvoiceController::class, 'create'])->name('import_invoice.create');
+            Route::post('/store', [ImportInvoiceController::class, 'store'])->name('import_invoice.store');
+            Route::get('/view/{id}', [ImportInvoiceController::class, 'view'])->name('import_invoice.view');
+            Route::get('/get-product-id', [ImportInvoiceController::class, 'getProductId'])->name('get-product-id]');
+        }); 
         /* Import_invoice */
         Route::prefix('import_invoice')->group(function () {
             Route::get('', [ImportInvoiceController::class, 'index'])->name('import_invoice.index');
@@ -174,6 +181,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
             Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete')->middleware('can:product-delete');
         });
+         /* Warehouse */
+         Route::prefix('warehouse')->group(function () {
+            Route::get('', [ProductController::class, 'warehouse'])->name('product.warehouse'); 
+        }); 
 
     });
 });

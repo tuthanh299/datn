@@ -2,8 +2,9 @@
     <title>Thêm Nhà Xuất Bản</title>
     @endsection @section('content')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
+    <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
     <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
@@ -99,6 +100,6 @@
             </form>
         </div>
     </div>
-</div> 
+</div>
 
 @endsection

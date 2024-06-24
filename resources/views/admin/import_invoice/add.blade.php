@@ -38,7 +38,7 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Tổng tiền</label>
-                            <input type="number" class="form-control" name="total_price" value="">
+                            <input type="number" class="form-control format-price total_price" name="total_price" value="">
                         </div>
                     </div>
                 </div>

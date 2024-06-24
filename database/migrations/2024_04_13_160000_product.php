@@ -19,21 +19,16 @@ return new class extends Migration
             $table->mediumText('content');
             $table->string('product_photo_name')->nullable();
             $table->string('product_photo_path')->nullable();
-            $table->double('regular_price');
-            $table->double('sale_price');           
-            $table->string('discount');
-            //$table->integer('publisher_id');
-            $table->string('author');
-            $table->string('code');
-            $table->string('publishing_year');
+            $table->double('regular_price')->nullable();
+            $table->double('sale_price')->nullable();           
+            $table->integer('discount')->nullable(); 
+            $table->string('author')->nullable();
+            $table->string('code')->nullable();
+            $table->string('publishing_year')->nullable();
             $table->boolean('status')->default(false);
             $table->boolean('outstanding')->default(false);        
             $table->timestamps();
-            $table->softDeletes();
-
-            //$table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('restrict');
-            //$table->foreign('publisher_id')->references('id')->on('categories')->onDelete('restrict')->onUpdate('restrict');
-
+            $table->softDeletes(); 
             $table->foreignId('category_id')->constrained();
             $table->foreignId('publisher_id')->constrained();
         });

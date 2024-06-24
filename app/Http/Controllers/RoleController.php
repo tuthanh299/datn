@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use App\Http\Requests\RoleAddRequest;
+use App\Http\Requests\RoleEditRequest;
+
 use App\Traits\DeleteModelTrait;
 
 class RoleController extends Controller
@@ -28,7 +31,7 @@ class RoleController extends Controller
         $permissionsParent = $this->permission->where('parent_id', 0)->get();
         return view('admin.role.add', compact('permissionsParent'));
     }
-    public function store(Request $request)
+    public function store(RoleAddRequest $request)
     {
         $role = $this->role->create([
             'name' => $request->name,
@@ -46,7 +49,7 @@ class RoleController extends Controller
         $permissionsChecked = $role->Permissions;
         return view('admin.role.edit', compact('permissionsParent', 'role', 'permissionsChecked'));
     }
-    public function update(Request $request, $id)
+    public function update(RoleEditRequest $request, $id)
     {
         $role = $this->role->find($id);
         $role->update([

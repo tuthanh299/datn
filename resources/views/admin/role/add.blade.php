@@ -34,14 +34,18 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>Tên vai trò</label>
-                                        <input type="text"
-                                            class="form-control"  name="name"
-                                            placeholder="Nhập tên vai trò" value="{{ old('name') }}">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            name="name" placeholder="Nhập tên vai trò" value="{{ old('name') }}">
+                                        @error('name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label>Mô tả vai trò</label>
-                                        <textarea name="display_name" class="form-control   rows="4">{{ old('display_name') }}</textarea>
-
+                                        <textarea name="display_name" class="form-control @error('display_name') is-invalid @enderror" rows="4">{{ old('display_name') }}</textarea>
+                                        @error('display_name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +55,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <label for="">
-                                    <input type="checkbox" value="" name=" " id="" class="checkbox_all">
+                                    <input type="checkbox" value="" name=" " id=""
+                                        class="checkbox_all">
                                     Chọn tất cả
                                 </label>
                             </div>

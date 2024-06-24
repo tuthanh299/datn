@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use function Laravel\Prompts\error;
 use App\Http\Requests\NewsAddRequest;
+use App\Http\Requests\NewsEditRequest;
 use App\Models\News;
 use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\Log; 
@@ -53,7 +54,7 @@ class NewsController extends Controller
         $news = $this->news->find($id);
         return view('admin.news.edit', compact('news'));
     }
-    public function update(Request $request, $id)
+    public function update(NewsEditRequest $request, $id)
     {
         try {
             $dataUpdate = [

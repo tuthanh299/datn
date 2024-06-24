@@ -18,6 +18,8 @@ return new class extends Migration
             $table->mediumText('content');
             $table->string('photo_path');
             $table->string('photo_name');
+            $table->boolean('status')->default(false);
+            $table->boolean('outstanding')->default(false); 
             $table->timestamps();
             $table->softDeletes();
         });

@@ -14,11 +14,8 @@ $user = HomeController::getUser();
           <div class="user-panel mt-3 pb-3 mb-3 d-flex text-light">
 
               <div class="info-hello">
-                  Xin chào, 
-              </div>
-              <div class="info">
-              {{$user->first_name}}
-              </div>
+                  Xin chào, {{$user->first_name}}
+              </div> 
           </div>
           <!-- SidebarSearch Form -->
           <div class="form-inline">
@@ -90,6 +87,15 @@ $user = HomeController::getUser();
                                   <i class="nav-icon fas fa-th"></i>
                                   <p class="text-capitalize">
                                       Danh Sách sản phẩm
+                                  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('product.warehouse') }}"
+                                  class="nav-link {{ Route::current()->getName() === 'product.warehouse' ? 'active' : null }}">
+                                  <i class="nav-icon fas fa-th"></i>
+                                  <p class="text-capitalize">
+                                      Quản lý kho
                                   </p>
                               </a>
                           </li>

@@ -21,19 +21,29 @@
                         @csrf
                         <div class="form-group">
                             <label>Tiêu đề</label>
-                            <input type="text" value="{{ $staticnews->name }} " class="form-control" name="name"
+                            <input type="text" value="{{ $staticnews->name }} "
+                                class="form-control @error('name') is-invalid @enderror"" name="name"
                                 placeholder="Nhập tiêu đề">
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Mô tả</label>
-                            <textarea class="form-control summernote " name="description" rows="3">{{ $staticnews->description }}
+                            <textarea class="form-control summernote @error('description') is-invalid @enderror" name="description" rows="3">{{ $staticnews->description }}
                                      </textarea>
+                            @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Nội dung</label>
-                            <textarea class="form-control summernote " name="content" rows="3">{{ $staticnews->content }}
+                            <textarea class="form-control summernote @error('content') is-invalid @enderror" name="content" rows="3">{{ $staticnews->content }}
                                      </textarea>
+                            @error('content')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary">Lưu</button>

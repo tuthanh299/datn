@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use function Laravel\Prompts\error;
 use App\Http\Requests\SliderAddRequest;
+use App\Http\Requests\SliderEditRequest;
 use App\Models\Slider;
 use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\Log;
@@ -55,7 +56,7 @@ class SliderController extends Controller
         $slider = $this->slider->find($id);
         return view('admin.slider.edit', compact('slider'));
     }
-    public function update(Request $request, $id)
+    public function update(SliderEditRequest $request, $id)
     {
         try {
             $dataUpdate = [

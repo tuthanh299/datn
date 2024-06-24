@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table ->bigIncrements('id');
             $table ->string('name');
-            $table ->integer('parent_id')->default(0);
-            $table ->string('slug');
+            $table ->integer('parent_id')->default(0); 
+            $table->boolean('status')->default(false);
+            $table->boolean('outstanding')->default(false); 
             $table->timestamps();
             $table->softDeletes();
         });

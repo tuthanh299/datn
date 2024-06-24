@@ -43,28 +43,25 @@
                             <label>Số Điện Thoại</label>
                             <input type="number" class="form-control @error('phone') is-invalid @enderror"
                                 name="phone" placeholder="Nhập số điện thoại" value="{{ $user->phone }}" required>
-                             
+                                @error('phone')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Địa Chỉ</label>
                             <input type="text" class="form-control @error('address') is-invalid @enderror"
                                 name="address" placeholder="Nhập địa chỉ" value="{{ $user->address }}" required>
-                             
+
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email"
-                                class="text-lowercase form-control " name="email"
+                            <input type="email" class="text-lowercase form-control " name="email"
                                 placeholder="Nhập email" value="{{ $user->email }}" readonly required>
-                             
+
                         </div>
                         <div class="form-group">
                             <label>Mật Khẩu</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                name="password" placeholder="Nhập mật khẩu" >
-                            @error('password')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            <input type="password" class="form-control " name="password" placeholder="Nhập mật khẩu">
                         </div>
                         <div class="form-group">
                             <label>Vai Trò</label>

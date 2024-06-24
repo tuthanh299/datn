@@ -12,14 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('warehouses', function (Blueprint $table) {
-            $table->string('id');
-            //$table->string('product_id');
-            $table->string('quantity');
-            $table->boolean('status');
+            $table->id();            
+            $table->foreignId('product_id')->constrained();
+            $table->string('quantity')->nullable(); 
+            $table->double('import_price')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreignId('product_id')->constrained();
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('warehouse');
+        Schema::dropIfExists('warehouses');
     }
 };

@@ -104,12 +104,15 @@
                                         </div>
                                         <div class="form-group ">
                                             <label>Nhà xuất bản:</label>
-                                            <select class="form-control" name="publisher_id">
+                                            <select class="form-control @error('publisher_id') is-invalid @enderror" name="publisher_id">
                                                 <option value="">Chọn nhà xuất bản</option>
                                                 @foreach ($publishers as $publisher)
                                                     <option value="{{ $publisher->id }}">{{ $publisher->name }}</option>
-                                                @endforeach
+                                                @endforeach 
                                             </select>
+                                             @error('publisher_id')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-6">
@@ -118,9 +121,9 @@
                                                     placeholder="Nhập mã sách" value="{{ old('code') }}">
                                             </div>
                                             <div class="form-group col-6">
-                                                <label>Giá cũ</label>
-                                                <input type="number" class="form-control " name="regular_price"
-                                                    placeholder="Nhập giá cũ" value="{{ old('regular_price') }}">
+                                                <label>Giá bán</label>
+                                                <input type="number" class="form-control format-price regular_price" name="regular_price"
+                                                    placeholder="Nhập giá bán" value="{{ old('regular_price') }}">
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Tác giả:</label>
@@ -129,7 +132,7 @@
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Giá mới</label>
-                                                <input type="number" class="form-control " name="sale_price"
+                                                <input type="number" class="form-control format-price sale_price" name="sale_price"
                                                     placeholder="Nhập giá mới" value="{{ old('sale_price') }}">
                                             </div>
                                             <div class="form-group col-6">
@@ -138,9 +141,9 @@
                                                     placeholder="Nhập năm xuất bản" value="{{ old('publishing_year') }}">
                                             </div>
                                             <div class="form-group col-6">
-                                                <label>Giảm giá(%):</label>
-                                                <input type="number" class="form-control " name="discount"
-                                                    placeholder="Nhập Giảm giá(%)" value="{{ old('discount') }}">
+                                                <label>Chiết khấu(%):</label>
+                                                <input type="number" class="form-control discount" name="discount"
+                                                    placeholder="" value="{{ old('discount') }}">
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Hiển thị:</label>
