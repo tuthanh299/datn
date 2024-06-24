@@ -2,6 +2,7 @@
     <title>Sửa Slider</title>
     @endsection @section('content')
 @section('css')
+    <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
@@ -38,7 +39,6 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Mô tả</label>
-
                                     <textarea name="description" class="form-control @error('description') is-invalid @enderror" rows="4">{{ $slider->description }}</textarea>
                                     @error('description')
                                         <div class="alert alert-danger">{{ $message }}</div>

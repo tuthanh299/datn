@@ -20,9 +20,12 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label>Tên Danh Mục</label>
-                            <input type="text" class="form-control" value="{{ $category->name }}" name="name"
-                                placeholder="Nhập tên danh mục">
-                        </div> 
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                value="{{ $category->name }}" name="name" placeholder="Nhập tên danh mục">
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">

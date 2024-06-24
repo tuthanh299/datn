@@ -20,8 +20,8 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label>Tên Danh Mục</label>
-                            <input type="text" class="form-control" name="name"
-                                @error('name') is-invalid @enderror" placeholder="Nhập tên danh mục">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                name="name" placeholder="Nhập tên danh mục">
                             @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

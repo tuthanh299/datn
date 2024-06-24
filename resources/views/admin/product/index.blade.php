@@ -4,12 +4,12 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
     <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
-    <script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script> 
+    <script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 @section('content')
@@ -39,8 +39,8 @@
                                         <td class="text-capitalize">{{ $productItem->name }}</td>
 
                                         <td>
-                                            <img class="adm-product-img" src="{{ $productItem->product_photo_path }}"
-                                                alt="">
+                                            <img class="adm-product-img"
+                                                src="{{ asset($productItem->product_photo_path) }} " alt="">
                                         </td>
                                         <td class="text-capitalize">{{ optional($productItem->category)->name }}</td>
                                         <td>

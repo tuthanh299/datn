@@ -2,6 +2,7 @@
 <title>Slider</title>
 @endsection @section('content') 
 @section('css')
+<link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')

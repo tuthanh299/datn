@@ -3,7 +3,7 @@
     @endsection @section('content')
 @section('css')
     <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
@@ -39,15 +39,15 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên Nhà Xuất Bản</label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                                        placeholder="Nhập tên nhà xuất bản" value="{{ $publisher->name }}">
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        name="name" placeholder="Nhập tên nhà xuất bản"
+                                        value="{{ $publisher->name }}">
                                     @error('name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label>Mô tả</label>
-                
                                     <textarea name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="4">{{ $publisher->description }}</textarea>
                                     @error('description')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -73,8 +73,7 @@
                                     <label>Hình ảnh</label>
                                     <div class="photoUpload-zone">
                                         <div class="photoUpload-detail" id="photoUpload-preview">
-                                            <img class="rounded" src="{{ $publisher->photo_path }}"
-                                                alt="Alt Photo">
+                                            <img class="rounded" src="{{ $publisher->photo_path }}" alt="Alt Photo">
                                         </div>
                                         <label class="photoUpload-file" id="photo-zone" for="file-zone">
                                             <input type="file" class=" form-control-file" name="photo_path"
@@ -97,8 +96,8 @@
                         </div>
                     </div>
                 </div>
-                
-                 
+
+
                 <button type="submit" class="btn btn-primary">Lưu</button>
             </form>
 

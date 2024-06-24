@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use function Laravel\Prompts\error;
 use App\Http\Requests\PublisherAddRequest;
+use App\Http\Requests\PublisherEditRequest;
 use App\Models\Publisher;
 use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\Log;
@@ -58,7 +59,7 @@ class PublisherController extends Controller
         $publisher = $this->publisher->find($id);
         return view('admin.publisher.edit', compact('publisher'));
     }
-    public function update(Request $request, $id)
+    public function update(PublisherEditRequest $request, $id)
     {
         try {
             $dataUpdate = [

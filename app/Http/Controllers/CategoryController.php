@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Requests\CategoryAddRequest;
+use App\Http\Requests\CategoryEditRequest;
 use App\Traits\DeleteModelTrait;
 
 class CategoryController extends Controller
@@ -34,7 +35,7 @@ class CategoryController extends Controller
         $this->category->create([
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-            'slug' => Str::slug($request->name),
+            
         ]);
         return redirect()->route('categories.index');
     }
@@ -53,13 +54,13 @@ class CategoryController extends Controller
         $categoryoption = $this->getCategory($category->parent_id);
         return view('admin.category.edit', compact('category', 'categoryoption'));
     }
-    public function update($id, Request $request)
+    public function update($id, CategoryEditRequest $request)
     {
 
         $this->category->find($id)->update([
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-            'slug' => Str::slug($request->name),
+          
         ]);
         return redirect()->route('categories.index');
 

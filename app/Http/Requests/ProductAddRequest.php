@@ -22,23 +22,29 @@ class ProductAddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'bail|required|unique:products|max:255|min:10',            
+            'name' => 'bail|required|unique:products|regex:/^[\pL0-9\s]*$/u|max:255|min:10',
             'category_id' => 'required',
-            'description' => 'required' ,
-            'content' => 'required' ,
-            'product_photo_path' => 'required',
+            'publisher_id' => 'required',
+            'description' => 'required',
+            'content' => 'required',
+            'product_photo_path' => 'required|mimes:jpg,jpeg,png|max:20480',
         ];
     }
-    public function messages(){
+    public function messages()
+    {
         return [
             'name.required' => 'Tên không được để trống',
             'name.unique' => 'Tên không được phép trùng',
             'name.max' => 'Tên không vượt quá 255 ký tự',
-            'name.min' => 'Tên không dưới 10 ký tự', 
+            'name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
+            'name.min' => 'Tên không dưới 10 ký tự',
             'category_id.required' => 'Danh mục không được để trống',
-            'description.required' => 'Mô tả không được để trống', 
-            'content.required' => 'Nội dung không được để trống', 
+            'publisher_id.required' => 'Nhà xuất bản không được để trống',
+            'description.required' => 'Mô tả không được để trống',
+            'content.required' => 'Nội dung không được để trống',
             'product_photo_path.required' => 'Hình ảnh không được để trống',
+            'product_photo_path.mimes' => 'Ảnh phải có định dạng JPG, JPEG hoặc PNG',
+            'product_photo_path.max' => 'Ảnh không được quá 20MB',
         ];
     }
 }

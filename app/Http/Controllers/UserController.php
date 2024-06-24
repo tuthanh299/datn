@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use App\Traits\DeleteModelTrait; 
 use App\Http\Requests\UserAddRequest;
+use App\Http\Requests\UserEditRequest;
 
 class UserController extends Controller
 {
@@ -61,7 +62,7 @@ class UserController extends Controller
         return view('admin.user.edit', compact('roles', 'user', 'roleUser'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UserEditRequest $request, $id)
     { 
         
         try {

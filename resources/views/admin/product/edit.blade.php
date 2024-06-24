@@ -26,7 +26,7 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="row col-12"> 
+                        <div class="row col-12">
                             <div class="form-prod-left col-xl-8">
                                 <div class="card card-primary card-outline text-sm">
                                     <div class="card-header">
@@ -41,23 +41,33 @@
                                     <div class="card-body">
                                         <div class="form-group col-md-12">
                                             <label>Tên sách</label>
-                                            <input type="text" class="text-capitalize form-control   " name="name"
-                                                value="{{ $product->name }}">
+                                            <input type="text"
+                                                class="text-capitalize form-control  @error('name') is-invalid @enderror "
+                                                name="name" value="{{ $product->name }}">
+                                            @error('name')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Mô tả</label>
-                                                <textarea class="form-control summernote  " name="description" rows="3">
+                                                <textarea class="form-control summernote  @error('description') is-invalid @enderror" name="description" rows="3">
                                                     {!! $product->description !!}
                                         </textarea>
+                                                @error('description')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Nội dung</label>
-                                                <textarea class="form-control summernote  " name="content" rows="3">
+                                                <textarea class="form-control summernote @error('content') is-invalid @enderror " name="content" rows="3">
                                                     {!! $product->content !!}
                                         </textarea>
+                                                @error('content')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -77,14 +87,21 @@
                                     <div class="card-body">
                                         <div class="form-group ">
                                             <label>Chọn Danh Mục</label>
-                                            <select class="form-control select2_init" name="category_id">
-                                                <option value="0">Chọn Danh Mục</option>
+                                             
+                                            <select
+                                                class="form-control select2_init @error('category_id') is-invalid @enderror"
+                                                name="category_id">
+                                                <option value="">Chọn danh mục</option>
                                                 {!! $htmlOption !!}
                                             </select>
+                                            @error('category_id')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="form-group ">
                                             <label>Nhà xuất bản:</label>
-                                            <select class="form-control" name="publisher_id">
+                                            <select class="form-control @error('publisher_id') is-invalid @enderror"
+                                                name="publisher_id">
                                                 <option value="">Chọn Nhà xuất bản</option>
                                                 @foreach ($publishers as $publisher)
                                                     <option value="{{ $publisher->id }}"
@@ -92,6 +109,9 @@
                                                         {{ $publisher->name }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('publisher_id')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-6">
@@ -100,20 +120,20 @@
                                                     value="{{ $product->code }}">
                                             </div>
                                             <div class="form-group col-6">
-                                                <label>Giá cũ</label>
-                                                <input type="number" class="form-control   " name="regular_price"
-                                                    value="{{ $product->regular_price }}">
+                                                <label>Giá bán</label>
+                                                <input type="number" class="form-control format-price regular_price  "
+                                                    name="regular_price" value="{{ $product->regular_price }}">
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Tác giả:</label>
                                                 <input type="text" class="text-capitalize form-control " name="author"
                                                     value="{{ $product->author }}">
-                                            </div> 
+                                            </div>
 
                                             <div class="form-group col-6">
                                                 <label>Giá mới</label>
-                                                <input type="number" class="form-control   " name="sale_price"
-                                                    value="{{ $product->sale_price }}">
+                                                <input type="number" class="form-control format-price sale_price  "
+                                                    name="sale_price" value="{{ $product->sale_price }}">
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Năm xuất bản:</label>
@@ -121,9 +141,9 @@
                                                     value="{{ $product->publishing_year }}">
                                             </div>
                                             <div class="form-group col-6">
-                                                <label>Giảm giá(%):</label>
-                                                <input type="number" class="form-control   " name="discount"
-                                                    value="{{ $product->discount }}">
+                                                <label>Chiết khấu(%):</label>
+                                                <input type="number" class="form-control  discount " name="discount"
+                                                    value="{{ $product->discount }}" readonly>
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Hiển thị:</label>
@@ -175,7 +195,7 @@
                                                 <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
                                                     (.jpg|.png|.jpeg)</div>
                                             </div>
-                                             
+
                                         </div>
                                         <div class="form-group">
                                             <label>Hình Ảnh Chi Tiết</label>

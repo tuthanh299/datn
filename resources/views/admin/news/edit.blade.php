@@ -2,8 +2,9 @@
     <title>Sửa Bài viết</title>
     @endsection @section('content')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
     <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
     <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
@@ -34,14 +35,15 @@
                                 <div class="form-group">
                                     <label>Tên Bài viết</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" placeholder="Nhập tên Bài viết" value="{!! $news->name !!}">
+                                        name="name" placeholder="Nhập tên bài viết" value="{!! $news->name !!}">
                                     @error('name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Mô tả</label>
-                                    <textarea name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="4">{!! $news->description !!}</textarea>
+                                    <label>Mô Tả Bài viết</label>
+
+                                    <textarea name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="4">{{ $news->description }}</textarea>
                                     @error('description')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -53,6 +55,8 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+
+
                             </div>
                         </div>
                     </div>

@@ -24,8 +24,7 @@
                                 <label>Favicon</label>
                                 <div class="photoUpload-zone col-4">
                                     <div class="photoUpload-detail" id="photoUpload-preview">
-                                        <img class="rounded" src="{{ $settings->favicon_path }}"
-                                            alt="Alt Photo">
+                                        <img class="rounded" src="{{ $settings->favicon_path }}" alt="Alt Photo">
                                     </div>
                                     <label class="photoUpload-file" id="photo-zone" for="file-zone">
                                         <input type="file" class=" form-control-file" name="favicon_path"
@@ -45,8 +44,7 @@
                                 <label>Logo</label>
                                 <div class="photoUpload-zone col-4">
                                     <div class="photoUpload-detail" id="photoUpload-preview2">
-                                        <img class="rounded" src="{{ $settings->logo_path }}"
-                                            alt="Alt Photo">
+                                        <img class="rounded" src="{{ $settings->logo_path }}" alt="Alt Photo">
                                     </div>
                                     <label class="photoUpload-file" id="photo-zone2" for="file-zone2">
                                         <input type="file" class=" form-control-file" name="logo_path"
@@ -64,54 +62,90 @@
                             </div>
                             <div class="form-group col-6">
                                 <label>Tên doanh nghiệp</label>
-                                <input type="text" class="form-control" name="name"
-                                    placeholder="Nhập tên doanh nghiệp" value="{{ $settings->name }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    name="name" placeholder="Nhập tên doanh nghiệp" value="{{ $settings->name }}">
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label>Điện thoại</label>
-                                <input type="number" class="form-control" name="phone" placeholder="Nhập điện thoại"
-                                    value="{{ $settings->phone }}">
+                                <input type="number" class="form-control @error('phone') is-invalid @enderror"
+                                    name="phone" placeholder="Nhập điện thoại" value="{{ $settings->phone }}">
+                                @error('phone')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label>Mô tả</label>
-                                <textarea type="text" class="form-control" name="description" placeholder="Nhập mô tả" value="">{{ $settings->description }}
+                                <textarea type="text" class="form-control @error('description') is-invalid @enderror" name="description"
+                                    placeholder="Nhập mô tả" value="">{{ $settings->description }}
                                 </textarea>
+                                @error('description')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label>Zalo</label>
-                                <input type="number" class="form-control" name="zalo" placeholder="Nhập zalo"
-                                    value="{{ $settings->zalo }}">
+                                <input type="number" class="form-control @error('zalo') is-invalid @enderror"
+                                    name="zalo" placeholder="Nhập zalo" value="{{ $settings->zalo }}">
+                                @error('zalo')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label>Iframe google map</label>
-                                <textarea type="text" class="text-lowercase form-control" name="iframe_map" placeholder="Nhập iframe google map"
-                                    value="">{{ $settings->iframe_map }}
+                                <textarea type="text" class="text-lowercase form-control @error('iframe_map') is-invalid @enderror" name="iframe_map"
+                                    placeholder="Nhập iframe google map" value="">{{ $settings->iframe_map }}
                                 </textarea>
+                                @error('iframe_map')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label>Email</label>
-                                <input type="email" class="text-lowercase form-control" name="email" placeholder="Nhập email"
-                                    value="{{ $settings->email }}">
+                                <input type="email"
+                                    class="text-lowercase form-control @error('email') is-invalid @enderror"
+                                    name="email" placeholder="Nhập email" value="{{ $settings->email }}">
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label>Địa chỉ</label>
-                                <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ"
-                                    value="{{ $settings->address }}">
+                                <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                    name="address" placeholder="Nhập địa chỉ" value="{{ $settings->address }}">
+                                @error('address')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label>Fanpage</label>
-                                <input type="text" class="text-lowercase form-control" name="fanpage" placeholder="Nhập fanpage"
-                                    value="{{ $settings->fanpage }}">
+                                <input type="text"
+                                    class="text-lowercase form-control  @error('fanpage') is-invalid @enderror"
+                                    name="fanpage" placeholder="Nhập fanpage" value="{{ $settings->fanpage }}">
+                                @error('fanpage')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label>Link google map</label>
-                                <input type="text" class="text-lowercase form-control" name="link_map"
-                                    placeholder="Nhập link google map" value="{{ $settings->link_map }}">
+                                <input type="text"
+                                    class="text-lowercase form-control  @error('link_map') is-invalid @enderror"
+                                    name="link_map" placeholder="Nhập link google map"
+                                    value="{{ $settings->link_map }}">
+                                @error('link_map')
+                                    is-invalid
+                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label>Website</label>
-                                <input type="text" class="text-lowercase form-control" name="website" placeholder="Nhập website"
-                                    value="{{ $settings->website }}">
+                                <input type="text"
+                                    class="text-lowercase form-control  @error('website') is-invalid @enderror"
+                                    name="website" placeholder="Nhập website" value="{{ $settings->website }}">
+                                @error('website')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Lưu</button>

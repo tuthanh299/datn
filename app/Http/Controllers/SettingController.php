@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Setting;
 use App\Traits\StorageImageTrait;
 use function Laravel\Prompts\error;
+use App\Http\Requests\SettingRequest;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -23,7 +25,7 @@ class SettingController extends Controller
         return view('admin.setting.index', compact('settings'));
     }
 
-    public function update(Request $request)
+    public function update(SettingRequest $request)
     {
         try {
            
