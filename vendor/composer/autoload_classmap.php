@@ -38,6 +38,7 @@ return array(
     'App\\Http\\Controllers\\StaticNewsController' => $baseDir . '/app/Http/Controllers/StaticNewsController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Middleware\\UserAccess' => $baseDir . '/app/Http/Middleware/UserAccess.php',
+    'App\\Http\\Requests\\CategoryAddRequest' => $baseDir . '/app/Http/Requests/CategoryAddRequest.php',
     'App\\Http\\Requests\\CategoryEditRequest' => $baseDir . '/app/Http/Requests/CategoryEditRequest.php',
     'App\\Http\\Requests\\LoginRequest' => $baseDir . '/app/Http/Requests/LoginRequest.php',
     'App\\Http\\Requests\\NewsAddRequest' => $baseDir . '/app/Http/Requests/NewsAddRequest.php',

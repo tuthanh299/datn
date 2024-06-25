@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Components\Recusive;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str; 
 use App\Http\Requests\CategoryAddRequest;
 use App\Http\Requests\CategoryEditRequest;
 use App\Traits\DeleteModelTrait;

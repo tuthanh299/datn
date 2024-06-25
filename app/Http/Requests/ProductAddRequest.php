@@ -28,6 +28,12 @@ class ProductAddRequest extends FormRequest
             'description' => 'required',
             'content' => 'required',
             'product_photo_path' => 'required|mimes:jpg,jpeg,png|max:20480',
+            'regular_price' => 'required|numeric|min:0',
+            'sale_price' => 'min:0',
+            'discount' => 'nullable|numeric|between:1,99',
+            'publishing_year' => 'required|integer|min:1900',
+            'code' => 'required|unique:products|string|max:255',
+            'author' => 'required|regex:/^[\pL\s]*$/u|max:255',
         ];
     }
     public function messages()
@@ -45,6 +51,23 @@ class ProductAddRequest extends FormRequest
             'product_photo_path.required' => 'Hình ảnh không được để trống',
             'product_photo_path.mimes' => 'Ảnh phải có định dạng JPG, JPEG hoặc PNG',
             'product_photo_path.max' => 'Ảnh không được quá 20MB',
+            'regular_price.required' => 'Giá bán không được để trống',
+            'regular_price.numeric' => 'Giá bán phải là số',
+            'regular_price.min' => 'Giá bán không được nhỏ hơn 0', 
+            'sale_price.min' => 'Giá giảm không được nhỏ hơn 0',
+            'discount.nullable' => 'Chiết khấu có thể để trống',
+            'discount.numeric' => 'Chiết khấu (nếu có) phải là số',
+            'discount.between' => 'Chiết khấu (nếu có) phải nằm trong khoảng từ 1 đến 99%',
+            'publishing_year.required' => 'Năm xuất bản không được để trống',
+            'publishing_year.integer' => 'Năm xuất bản phải là số nguyên',
+            'publishing_year.min' => 'Năm xuất bản không được nhỏ hơn 1900',
+            'code.required' => 'Mã sách không được để trống',
+            'code.unique' => 'Mã sách này đã được sử dụng. Vui lòng chọn mã khác.',
+            'code.string' => 'Mã sách phải là chuỗi ký tự',
+            'code.max' => 'Mã sách không được dài quá 255 ký tự',  
+            'author.required' => 'Tên tác giả không được để trống.',
+            'author.regex' => 'Tên tác giả chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu) và khoảng trắng.',
+            'author.max' => 'Tên tác giả không vượt quá 255 ký tự.',
         ];
     }
 }

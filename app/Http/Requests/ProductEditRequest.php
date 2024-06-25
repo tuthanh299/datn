@@ -27,7 +27,11 @@ class ProductEditRequest extends FormRequest
             'publisher_id' => 'required',
             'description' => 'required',
             'content' => 'required',
-            'product_photo_path' => 'required|mimes:jpg,jpeg,png|max:20480',
+            'product_photo_path' => 'mimes:jpg,jpeg,png|max:20480',
+            'regular_price' => 'required|numeric|min:0', 
+            'publishing_year' => 'required|integer|min:1900',
+            'code' => 'required|string|max:255',
+            'author' => 'required|regex:/^[\pL\s]*$/u|max:255',
         ];
     }
     public function messages()
@@ -43,6 +47,18 @@ class ProductEditRequest extends FormRequest
             'content.required' => 'Nội dung không được để trống',
             'product_photo_path.mimes' => 'Ảnh phải có định dạng JPG, JPEG hoặc PNG',
             'product_photo_path.max' => 'Ảnh không được quá 20MB',
+            'regular_price.required' => 'Giá bán không được để trống',
+            'regular_price.numeric' => 'Giá bán phải là số',
+            'regular_price.min' => 'Giá bán không được nhỏ hơn 0',  
+            'publishing_year.required' => 'Năm xuất bản không được để trống',
+            'publishing_year.integer' => 'Năm xuất bản phải là số nguyên',
+            'publishing_year.min' => 'Năm xuất bản không được nhỏ hơn 1900',
+            'code.required' => 'Mã sách không được để trống', 
+            'code.string' => 'Mã sách phải là chuỗi ký tự',
+            'code.max' => 'Mã sách không được dài quá 255 ký tự',  
+            'author.required' => 'Tên tác giả không được để trống.',
+            'author.regex' => 'Tên tác giả chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu) và khoảng trắng.',
+            'author.max' => 'Tên tác giả không vượt quá 255 ký tự.'
         ];
     }
 }

@@ -601,6 +601,7 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         'App\\Http\\Controllers\\StaticNewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StaticNewsController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Middleware\\UserAccess' => __DIR__ . '/../..' . '/app/Http/Middleware/UserAccess.php',
+        'App\\Http\\Requests\\CategoryAddRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryAddRequest.php',
         'App\\Http\\Requests\\CategoryEditRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryEditRequest.php',
         'App\\Http\\Requests\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/LoginRequest.php',
         'App\\Http\\Requests\\NewsAddRequest' => __DIR__ . '/../..' . '/app/Http/Requests/NewsAddRequest.php',

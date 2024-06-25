@@ -53,9 +53,9 @@ $user = HomeController::getUser();
                       </ul>
                   </li>
                   <li
-                      class="nav-item {{ Route::current()->getName() === 'product.index' || Route::current()->getName() === 'publisher.index' || Route::current()->getName() === 'categories.index' ? 'menu-open' : null }}">
+                      class="nav-item {{ Route::current()->getName() === 'product.index' || Route::current()->getName() === 'publisher.index' || Route::current()->getName() === 'categories.index' || Route::current()->getName() === 'product.warehouse' ? 'menu-open' : null }}">
                       <a href="#"
-                          class="nav-link {{ Route::current()->getName() === 'product.index' || Route::current()->getName() === 'publisher.index' || Route::current()->getName() === 'categories.index' ? 'active' : null }}">
+                          class="nav-link {{ Route::current()->getName() === 'product.index' || Route::current()->getName() === 'publisher.index' || Route::current()->getName() === 'categories.index' || Route::current()->getName() === 'product.warehouse'? 'active' : null }}">
                           <i class="nav-icon text-sm fas fa-layer-group"></i>
                           <p class="text-capitalize">
                               Group Sản Phẩm
@@ -132,8 +132,8 @@ $user = HomeController::getUser();
                           </li>
                       </ul>
                   </li>
-                  <li class="nav-item ">
-                      <a href="#" class="nav-link ">
+                  <li class="nav-item {{ Route::current()->getName() === 'staticnews.index' || Route::current()->getName() === 'news.index' ? 'menu-open' : null }}">
+                      <a href="#" class="nav-link {{ Route::current()->getName() === 'staticnews.index' || Route::current()->getName() === 'news.index' ? 'active' : null }} ">
                           <i class="nav-icon text-sm far fa-newspaper"></i>
                           <p class="text-capitalize">
                               Group Bài Viết
@@ -142,7 +142,7 @@ $user = HomeController::getUser();
                       </a>
                       <ul class="nav nav-treeview">
                           <li class="nav-item">
-                              <a href="{{ route('staticnews.index') }}" class="nav-link">
+                              <a href="{{ route('staticnews.index') }}" class="nav-link {{ Route::current()->getName() === 'staticnews.index' ? 'active' : null }}">
                                   <i class="nav-icon fas fa-file"></i>
                                   <p class="text-capitalize">
                                       Bài viết giới thiệu
@@ -150,7 +150,7 @@ $user = HomeController::getUser();
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a href="{{ route('news.index') }}" class="nav-link">
+                              <a href="{{ route('news.index') }}" class="nav-link {{ Route::current()->getName() === 'news.index' ? 'active' : null }}">
                                   <i class="nav-icon fas fa-copy"></i>
                                   <p class="text-capitalize">
                                       Bài Viết tin tức
@@ -159,17 +159,17 @@ $user = HomeController::getUser();
                           </li>
                       </ul>
                   </li>
-                  <li class="nav-item ">
-                      <a href="#" class="nav-link ">
+                  <li class="nav-item {{ Route::current()->getName() === 'users.index' || Route::current()->getName() === 'roles.index' ? 'menu-open' : null }}">
+                      <a href="#" class="nav-link {{ Route::current()->getName() === 'users.index' || Route::current()->getName() === 'roles.index' ? 'active' : null }}">
                           <i class="nav-icon text-sm fas fa-users"></i>
                           <p class="text-capitalize">
-                              Quản lý users
+                              Group users
                               <i class="right fas fa-angle-left"></i>
                           </p>
                       </a>
                       <ul class="nav nav-treeview">
                           <li class="nav-item">
-                              <a href="{{ route('users.index') }}" class="nav-link">
+                              <a href="{{ route('users.index') }}" class="nav-link {{ Route::current()->getName() === 'users.index' ? 'active' : null }}">
                                   <i class="nav-icon fas fa-th"></i>
                                   <p class="text-capitalize">
                                       Danh Sách Nhân Viên
@@ -177,7 +177,7 @@ $user = HomeController::getUser();
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a href="{{ route('roles.index') }}" class="nav-link">
+                              <a href="{{ route('roles.index') }}" class="nav-link {{ Route::current()->getName() === 'roles.index' ? 'active' : null }}">
                                   <i class="nav-icon fas fa-th"></i>
                                   <p class="text-capitalize">
                                       Danh sách vai trò
@@ -187,7 +187,7 @@ $user = HomeController::getUser();
                       </ul>
                   </li>
                   <li class="nav-item">
-                      <a href="{{ route('slider.index') }}" class="nav-link">
+                      <a href="{{ route('slider.index') }}" class="nav-link {{ Route::current()->getName() === 'slider.index' ? 'active' : null }}">
                           <i class="nav-icon far fa-image"></i>
                           <p class="text-capitalize">
                               Slider
@@ -195,14 +195,13 @@ $user = HomeController::getUser();
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="{{ route('setting.index') }}" class="nav-link">
+                      <a href="{{ route('setting.index') }}" class="nav-link {{ Route::current()->getName() === 'setting.index' ? 'active' : null }}">
                           <i class="nav-icon text-sm fas fa-cogs"></i>
                           <p class="text-capitalize">
                               Cấu Hình Chung
                           </p>
                       </a>
-                  </li>
-
+                  </li> 
               </ul>
           </nav>
       </div>
