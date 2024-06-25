@@ -22,6 +22,8 @@ class Member extends Authenticatable
         'address',
         'email',
         'password',
+        'provider',
+        'provider_id',
     ];
 
     /**

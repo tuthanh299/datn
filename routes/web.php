@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Clients\CInfoController;
 use App\Http\Controllers\Clients\CAboutusController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImportInvoiceController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\RoleController;
@@ -34,6 +36,16 @@ Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.po
 Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
 Route::post('logout', [CUserController::class, 'logout'])->name('user.logout');
+
+/* GOOGLE LOGIN */
+//Route::get('/auth/{provider}/redirect', [GoogleLoginController::class, 'redirect'])->name('redirect');
+//Route::get('/auth/{provider}/callback', [GoogleLoginController::class, 'callback'])->name('callback');
+Route::get('/auth/google', [GoogleLoginController::class, 'redirect'])->name('redirect');
+Route::get('/auth/google/callback', [GoogleLoginController::class, 'callback'])->name('callback');
+
+
+/*VNPAY*/
+Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay');
 
 
 Route::prefix('/')->group(function () {

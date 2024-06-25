@@ -82,7 +82,7 @@
                 </div>
                 <div class="bottom-cart col-12 col-lg-5">
                     <div class="section-cart">
-                        <p class="title-cart">Hình thức thanh toán:</p>
+                        <!--<p class="title-cart">Hình thức thanh toán:</p>
                         <div class="information-cart">
                             <div class="payments-cart form-check"> <input type="radio" class="form-check-input"
                                     id="payments-" name="dataOrder[payments]" value="" required> <label
@@ -92,14 +92,14 @@
                                     Khách hàng thanh toán cho shipper khi nhận được hàng.
                                 </div>
                             </div>
-                            <!--<div class="payments-cart form-check"> <input type="radio" class="form-check-input"
+                            <div class="payments-cart form-check"> <input type="radio" class="form-check-input"
                                     id="payments-" name="dataOrder[payments]" value="" required> <label
                                     class="payments-label form-check-label" for="payments-" data-payments="">
                                     Thanh toán trực tuyến qua Momo</label>
                                 <div class="payments-info payments-info- transition">
 
                                 </div>
-                            </div>-->
+                            </div>
                             <div class="payments-cart form-check"> <input type="radio" class="form-check-input"
                                     id="payments-" name="dataOrder[payments]" value="" required> <label
                                     class="payments-label form-check-label" for="payments-" data-payments="">
@@ -108,7 +108,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <p class="title-cart">Thông tin giao hàng:</p>
                         <div class="information-cart">
                             <div class="row row-10">
@@ -172,8 +172,16 @@
                                 </div>
                             </div>
                         </div> 
-                        <input type="submit" class="btn btn-primary btn-cart w-100" name="thanhtoan"
-                            value="Thanh toán"/>
+                        <form action="" method="POST">
+                            @csrf
+                            <input type="hidden" name="total" value="{{ $cart[0]->cart_total + $shipping }}">
+                            <button type="submit" name="redirect" class="btn btn-primary">Thanh toán COD</button>
+                        </form>
+                        <form action="{{ url('/vnpay_payment') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="total" value="{{ $cart[0]->cart_total + $shipping }}">
+                            <button type="submit" name="redirect" class="btn btn-primary">Thanh toán bằng VNPAY</button>
+                        </form>
                     </div>
                 </div>
                  

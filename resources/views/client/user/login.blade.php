@@ -24,6 +24,10 @@
                     </div>
                     <label class="emailMember-error error" for="emailMember" style=""></label>
                 </div>
+                @error('email')
+                    <div style="color: #dd0505;
+                    font-size: 1em;font-weight: bold;">{{ $message }}</div>
+                @enderror
                 <div class="input-group mb-3">
                     <div class="input-group-append login-input-group-append">
                         <div class="input-group-text">
@@ -38,6 +42,10 @@
                         </div>
                     </div>
                 </div>
+                @error('password')
+                    <div style="color: #dd0505;
+                    font-size: 1em;font-weight: bold;">{{ $message }}</div>
+                @enderror
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="form-check form-check-login mb-0">
                         <label for="remember-me" class="text-info"><span>Ghi nhớ đăng nhập</span>
@@ -58,11 +66,25 @@
                         Chưa có tài khoản? <a href="{{ route('user.register') }}">Đăng ký</a>
                     </div>
                     <div>
-                        <div>Hoặc đăng nhập với: <a href="#"><i class="fa-brands fa-google"></i></a>
+                        <div>Hoặc đăng nhập với: <a href="{{route('redirect')}}"><i class="fa-brands fa-google"></i></a>
                         </div>
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="return">
+            @if ($message = Session::get('success'))
+                <div>
+                    <div style="color: #12c300;
+                font-size: 1.2em;font-weight: bold;">{{ $message }}</div>
+                </div>
+            @endif
+            @if ($message = Session::get('fail'))
+                <div>
+                    <div style="color: #dd0505;
+                font-size: 1.2em;font-weight: bold;">{{ $message }}</div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
