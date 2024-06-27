@@ -158,7 +158,15 @@ function JsAdmin() {
         $(".summernote").summernote();
     }
 }
-
+window.onload = function () {
+    if (window.location.search) {
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname + "?search_keyword="
+        );
+    }
+};
 $(document).ready(function () {
     $('input[name="quantity[]"], input[name="import_price[]"]').on(
         "change",

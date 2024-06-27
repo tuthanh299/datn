@@ -40,6 +40,7 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         'a1cfe24d14977df6878b9bf804af2d1c' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Phpunit/Autoload.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
+        '03caa379900217a3e36e67c84d0a6e6b' => __DIR__ . '/../..' . '/app/Helpers/helper_functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -601,6 +602,7 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         'App\\Http\\Controllers\\StaticNewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StaticNewsController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Middleware\\UserAccess' => __DIR__ . '/../..' . '/app/Http/Middleware/UserAccess.php',
+        'App\\Http\\Requests\\CategoryAddRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryAddRequest.php',
         'App\\Http\\Requests\\CategoryEditRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CategoryEditRequest.php',
         'App\\Http\\Requests\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/LoginRequest.php',
         'App\\Http\\Requests\\NewsAddRequest' => __DIR__ . '/../..' . '/app/Http/Requests/NewsAddRequest.php',

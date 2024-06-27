@@ -87,7 +87,7 @@
                                     <div class="card-body">
                                         <div class="form-group ">
                                             <label>Chọn Danh Mục</label>
-                                             
+
                                             <select
                                                 class="form-control select2_init @error('category_id') is-invalid @enderror"
                                                 name="category_id">
@@ -116,34 +116,54 @@
                                         <div class="row">
                                             <div class="form-group col-6">
                                                 <label>Mã sách</label>
-                                                <input type="text" class="form-control   " name="code"
-                                                    value="{{ $product->code }}">
+                                                <input type="text"
+                                                    class="form-control   @error('code') is-invalid @enderror"
+                                                    name="code" value="{{ $product->code }}">
+                                                @error('code')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Giá bán</label>
-                                                <input type="number" class="form-control format-price regular_price  "
+                                                <input type="number"
+                                                    class="form-control format-price regular_price @error('regular_price') is-invalid @enderror "
                                                     name="regular_price" value="{{ $product->regular_price }}">
+                                                @error('regular_price')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Tác giả:</label>
-                                                <input type="text" class="text-capitalize form-control " name="author"
-                                                    value="{{ $product->author }}">
+                                                <input type="text"
+                                                    class="text-capitalize form-control @error('author') is-invalid @enderror"
+                                                    name="author" value="{{ $product->author }}">
+                                                @error('author')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
-
                                             <div class="form-group col-6">
                                                 <label>Giá mới</label>
-                                                <input type="number" class="form-control format-price sale_price  "
+                                                <input type="number"
+                                                    class="form-control format-price sale_price  @error('sale_price') is-invalid @enderror"
                                                     name="sale_price" value="{{ $product->sale_price }}">
+                                                @error('sale_price')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Năm xuất bản:</label>
-                                                <input type="text" class="form-control " name="publishing_year"
-                                                    value="{{ $product->publishing_year }}">
+                                                <input type="text"
+                                                    class="form-control @error('publishing_year') is-invalid @enderror"
+                                                    name="publishing_year" value="{{ $product->publishing_year }}">
+                                                @error('publishing_year')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Chiết khấu(%):</label>
-                                                <input type="number" class="form-control  discount " name="discount"
+                                                <input type="number" class="form-control discount" name="discount"
                                                     value="{{ $product->discount }}" readonly>
+
                                             </div>
                                             <div class="form-group col-6">
                                                 <label>Hiển thị:</label>
@@ -195,7 +215,9 @@
                                                 <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
                                                     (.jpg|.png|.jpeg)</div>
                                             </div>
-
+                                            @error('product_photo_path')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label>Hình Ảnh Chi Tiết</label>
