@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -63,12 +64,12 @@ class User extends Authenticatable
     public function CheckPermissionAccess($permissionCheck)
     {
         $roles = auth()->user()->roles;
-        // foreach ($roles as $role) {
-        //     $permissions = $role->permissions;
-        //     if ($permissions->contains('key_permissions', $permissionCheck)) {
-        //         return true;
-        //     }
-        // }
+        foreach ($roles as $role) {
+            $permissions = $role->permissions;
+            if ($permissions->contains('key_permissions', $permissionCheck)) {
+                return true;
+            }
+        }
         return true;
     }
 }

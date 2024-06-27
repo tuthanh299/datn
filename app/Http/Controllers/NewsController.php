@@ -2,27 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use function Laravel\Prompts\error;
 use App\Http\Requests\NewsAddRequest;
 use App\Http\Requests\NewsEditRequest;
 use App\Models\News;
-use App\Traits\StorageImageTrait;
-use Illuminate\Support\Facades\Log; 
 use App\Traits\DeleteModelTrait;
+use App\Traits\StorageImageTrait;
+use function Laravel\Prompts\error;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class NewsController extends Controller
 {
-    use StorageImageTrait,DeleteModelTrait;
+    use StorageImageTrait, DeleteModelTrait;
     private $news;
     public function __construct(News $news)
     {
         $this->news = $news;
     }
-    public function index()
-    { 
-        $newspost = $this->news->latest()->paginate(5);
-        return view('admin.news.index', compact('newspost'));
+    public function index(Request $request)
+    {
+        $search = $request->input('search_keyword');
+        $searchresult = null;
+        $newspost = null;
+        if ($search) {
+            $search = '%' . $search . '%';
+            $searchresult = $this->news::select('id', 'name','photo_path')
+                ->where('name', 'LIKE', $search)
+                ->latest()
+                ->paginate(10);
+        } else {
+            $newspost = $this->news::latest()->paginate(10);
+        }
+
+        return view('admin.news.index', compact('newspost', 'searchresult'));
     }
     public function create()
     {
@@ -47,7 +59,7 @@ class NewsController extends Controller
             return redirect()->route('news.index');
         } catch (\Exception $exception) {
             Log::error('Lỗi:' . $exception->getMessage() . 'Line:' . $exception->getLine());
-        } 
+        }
     }
     public function edit($id)
     {
@@ -77,7 +89,7 @@ class NewsController extends Controller
     }
     public function delete($id)
     {
-        return $this->deleteModelTrait($id,$this->news);
+        return $this->deleteModelTrait($id, $this->news);
 
     }
 }

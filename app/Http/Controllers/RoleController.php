@@ -21,10 +21,22 @@ class RoleController extends Controller
         $this->permission = $permission;
 
     }
-    public function index()
+    public function index(Request $request)
     {
-        $roles = $this->role->latest()->paginate(10);
-        return view('admin.role.index', compact('roles'));
+        $search = $request->input('search_keyword');
+        $searchresult = null;
+        $roles = null;
+        if ($search) {
+            $search = '%' . $search . '%';
+            $searchresult = $this->role::select('id', 'name', 'display_name')
+                ->where('name', 'LIKE', $search)
+                ->latest()
+                ->paginate(10);
+        } else {
+            $roles = $this->role->latest()->paginate(10);
+        }
+       
+        return view('admin.role.index', compact('roles','searchresult'));
     }
     public function create()
     {

@@ -21,8 +21,7 @@
                     <div class="col-md-12">
                         <table class="table">
                             <thead>
-                                <tr>
-
+                                <tr> 
                                     <th scope="col">Tên Sản Phẩm</th>
                                     <th scope="col">Hình Ảnh</th>
                                     <th scope="col">Số lượng</th>

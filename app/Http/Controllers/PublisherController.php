@@ -25,10 +25,22 @@ class PublisherController extends Controller
     {
         return Publisher::all();  
     }
-    public function index()
+    public function index(Request $request)
     { 
-        $publishers = $this->publisher->latest()->paginate(10);
-        return view('admin.publisher.index', compact('publishers'));
+        $search = $request->input('search_keyword');
+        $searchresult = null;
+        $publishers = null;
+        if ($search) {
+            $search = '%' . $search . '%';
+            $searchresult = $this->publisher::select('id', 'name',"photo_path")
+                ->where('name', 'LIKE', $search)
+                ->latest()
+                ->paginate(10);
+        } else {
+            $publishers = $this->publisher->latest()->paginate(10);
+        }
+       
+        return view('admin.publisher.index', compact('publishers','searchresult'));
     }
     public function create()
     {

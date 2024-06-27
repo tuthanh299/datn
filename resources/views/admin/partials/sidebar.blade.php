@@ -52,6 +52,7 @@ $user = HomeController::getUser();
                           </li>
                       </ul>
                   </li>
+                  @if (CheckPermissionAdmin($user->id,'list_product,add_product,edit_product,delete_product'))
                   <li
                       class="nav-item {{ Route::current()->getName() === 'product.index' || Route::current()->getName() === 'publisher.index' || Route::current()->getName() === 'categories.index' || Route::current()->getName() === 'product.warehouse' ? 'menu-open' : null }}">
                       <a href="#"
@@ -101,7 +102,8 @@ $user = HomeController::getUser();
                           </li>
 
                       </ul>
-                  </li>
+                  @endif
+                </li>
                   <li
                       class="nav-item {{ Route::current()->getName() === 'import_invoice.index' ? 'menu-open' : null }}">
                       <a href="#"
@@ -132,6 +134,7 @@ $user = HomeController::getUser();
                           </li>
                       </ul>
                   </li>
+                  @if (CheckPermissionAdmin($user->id,'list_news,add_news,edit_news,delete_news'))
                   <li class="nav-item {{ Route::current()->getName() === 'staticnews.index' || Route::current()->getName() === 'news.index' ? 'menu-open' : null }}">
                       <a href="#" class="nav-link {{ Route::current()->getName() === 'staticnews.index' || Route::current()->getName() === 'news.index' ? 'active' : null }} ">
                           <i class="nav-icon text-sm far fa-newspaper"></i>
@@ -159,6 +162,7 @@ $user = HomeController::getUser();
                           </li>
                       </ul>
                   </li>
+                  @endif
                   <li class="nav-item {{ Route::current()->getName() === 'users.index' || Route::current()->getName() === 'roles.index' ? 'menu-open' : null }}">
                       <a href="#" class="nav-link {{ Route::current()->getName() === 'users.index' || Route::current()->getName() === 'roles.index' ? 'active' : null }}">
                           <i class="nav-icon text-sm fas fa-users"></i>

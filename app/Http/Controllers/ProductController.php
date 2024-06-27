@@ -35,13 +35,25 @@ class ProductController extends Controller
         $this->productGallery = $productGallery;
         $this->publisherController = $publisherController;
     }
-    public function index()
+    public function index(Request $request)
     {
-        $products = $this->product->latest()->paginate(10);
-        return view('admin.product.index', compact('products'));
+        $search = $request->input('search_keyword');
+        $searchresult = null;
+        $products = null;
+        if ($search) {
+            $search = '%' . $search . '%';
+            $searchresult = $this->product::select('id', 'name', 'product_photo_path')
+                ->where('name', 'LIKE', $search)
+                ->latest()
+                ->paginate(10);
+        } else {
+            $products = $this->product::latest()->paginate(10);
+        }
+
+        return view('admin.product.index', compact('products', 'searchresult'));
     }
     /* Warehouse */
-   // Trong controller của bạn
+
     public function warehouse()
     {
         $warehouse = $this->warehouse->latest()->paginate(10);
@@ -94,11 +106,11 @@ class ProductController extends Controller
                 $dataProductCreate['product_photo_path'] = $dataUploadProductImage['file_path'];
             }
             $product = $this->product->create($dataProductCreate);
-            $product_id = $product->id; 
+            $product_id = $product->id;
             $dataWarehouseCreate = [
-                'product_id' => $product_id, 
-            ]; 
-            $this->warehouse->create($dataWarehouseCreate); 
+                'product_id' => $product_id,
+            ];
+            $this->warehouse->create($dataWarehouseCreate);
             /* Sub img */
             if ($request->hasFile('photo_path')) {
                 foreach ($request->photo_path as $fileItem) {
@@ -148,7 +160,7 @@ class ProductController extends Controller
             ];
             $dataUploadProductImage = $this->storagetrait($request, 'product_photo_path', 'product');
             if (!empty($dataUploadProductImage)) {
-                 
+
                 $dataProductUpdate['product_photo_name'] = $dataUploadProductImage['file_name'];
                 $dataProductUpdate['product_photo_path'] = $dataUploadProductImage['file_path'];
             }

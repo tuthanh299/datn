@@ -2,30 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use function Laravel\Prompts\error;
 use App\Http\Requests\SliderAddRequest;
 use App\Http\Requests\SliderEditRequest;
 use App\Models\Slider;
-use App\Traits\StorageImageTrait;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
 use App\Traits\DeleteModelTrait;
-
- 
+use App\Traits\StorageImageTrait;
+use function Laravel\Prompts\error;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SliderController extends Controller
 {
-    use StorageImageTrait,DeleteModelTrait;
+    use StorageImageTrait, DeleteModelTrait;
     private $slider;
     public function __construct(Slider $slider)
     {
         $this->slider = $slider;
     }
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search_keyword');
+        $searchresult = null;
+        $sliders = null;
+        if ($search) {
+            $search = '%' . $search . '%';
+            $searchresult = $this->slider::select('id', 'name', 'description', 'photo_path')
+                ->where('name', 'LIKE', $search)
+                ->latest()
+                ->paginate(10);
+        } else {
+            $sliders = $this->slider->latest()->paginate(10);
+        }
 
-        $sliders = $this->slider->latest()->paginate(5);
-        return view('admin.slider.index', compact('sliders'));
+        return view('admin.slider.index', compact('sliders', 'searchresult'));
     }
     public function create()
     {
@@ -49,7 +58,7 @@ class SliderController extends Controller
             return redirect()->route('slider.index');
         } catch (\Exception $exception) {
             Log::error('Lỗi:' . $exception->getMessage() . 'Line:' . $exception->getLine());
-        } 
+        }
     }
     public function edit($id)
     {
@@ -78,7 +87,7 @@ class SliderController extends Controller
     }
     public function delete($id)
     {
-        return $this->deleteModelTrait($id,$this->slider);
+        return $this->deleteModelTrait($id, $this->slider);
 
     }
 }
