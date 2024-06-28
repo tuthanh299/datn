@@ -71,5 +71,4 @@ class CInfoController extends Controller
  
         return redirect()->route('user.info')->with('fail','Xoá không thành công');
     }
-
 }

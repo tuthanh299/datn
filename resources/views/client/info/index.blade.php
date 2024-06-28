@@ -21,7 +21,7 @@
         @endif
     </div>
     <div class="title-name1">Thông tin tài khoản</div>
-    <div><a href="#">Lịch sử mua hàng</a></div>
+    <div><a href="{{route('user.order')}}">Lịch sử mua hàng</a></div>
     <form class="flex-user-infor" action="{{route('user.info.update')}}" method="POST">
         @csrf
         <div class="user-infor-detail">
@@ -90,28 +90,4 @@
         </div>
     </form>
 </div>
-@endsection
-@section('js')
-const update_btn = document.querySelector('#btn')
-
-update_btn.addEventListener('click', () => {
-  new Notify ({
-    status: 'success',
-    title: 'Notify Title',
-    text: 'Notify text lorem ipsum',
-    effect: 'fade',
-    speed: 300,
-    customClass: '',
-    customIcon: '',
-    showIcon: true,
-    showCloseButton: true,
-    autoclose: true,
-    autotimeout: 3000,
-    notificationsGap: null,
-    notificationsPadding: null,
-    type: 'outline',
-    position: 'right top',
-    customWrapper: '',
-  })
-})
 @endsection
