@@ -5,7 +5,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Clients\CInfoController;
 use App\Http\Controllers\Clients\CAboutusController;
 use App\Http\Controllers\Clients\CCartController;
+use App\Http\Controllers\Clients\CChangeAddressController;
+use App\Http\Controllers\Clients\CChangePasswordController;
 use App\Http\Controllers\Clients\CNewsController;
+use App\Http\Controllers\Clients\COrderController;
 use App\Http\Controllers\Clients\CProductController;
 use App\Http\Controllers\Clients\CSearchController;
 use App\Http\Controllers\Clients\CUserController;
@@ -83,12 +86,29 @@ Route::prefix('/')->group(function () {
     });
 
     /* Info */
-    Route::controller(CInfoController::class)->group(function(){
+    Route::controller(CInfoController::class)->group(function() {
         Route::get('user-info', 'index')->name('user.info');
-        Route::post('update', 'update')->name('user.info.update');
-        Route::delete('delete', 'delete')->name('user.info.delete');
+        Route::post('user-info/update', 'update')->name('user.info.update');
+        Route::delete('user-info/delete', 'delete')->name('user.info.delete');
     });
 
+    /*Order*/
+    Route::controller(COrderController::class)->group(function() {
+        Route::get('order', 'index')->name('user.order');
+        Route::get('order/{id}', 'detail')->name('user.order.detail');
+    });
+
+    /*Address Change*/
+    Route::controller(CChangeAddressController::class)->group(function() {
+        Route::get('change-address', 'index')->name('user.changeaddress.index');
+        Route::post('change-address/update', 'update')->name('user.changeaddress.update');
+    });
+
+    /*Password Change*/
+    Route::controller(CChangePasswordController::class)->group(function() {
+        Route::get('change-password', 'index')->name('user.changepassword.index');
+        Route::post('change-password/update', 'update')->name('user.changepassword.update');
+    });
 });
 
 Route::get('/admin', [HomeController::class, 'index'])->name('home');

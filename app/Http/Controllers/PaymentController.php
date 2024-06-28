@@ -11,7 +11,8 @@ class PaymentController extends Controller
     {
         $data = $request->all();
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "https://localhost/vnpay_php/vnpay_return.php";
+        //$vnp_Returnurl = "https://localhost/vnpay_php/vnpay_return.php";
+        $vnp_Returnurl = "http://127.0.0.1:8000/vnpay_php/vnpay_return.php";
         $vnp_TmnCode = "X3G144O6";//Mã website tại VNPAY 
         $vnp_HashSecret = "BCYUDKCSUWNQTKGATYPCLZAGNRXFYUNF"; //Chuỗi bí mật
 
@@ -70,6 +71,7 @@ class PaymentController extends Controller
             if (isset($_POST['redirect'])) {
                 header('Location: ' . $vnp_Url);
                 die();
+                //dd('Thanh toan thanh cong', $vnp_Url);
             } else {
                 echo json_encode($returnData);
             }
