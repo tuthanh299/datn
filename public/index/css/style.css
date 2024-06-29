@@ -330,3 +330,4 @@ input[type=number]{-moz-appearance:textfield;}
 .btn-back-to-home{border:solid 1px #0063B6;background:linear-gradient(90deg,#0063B6 0%,#0982E8 25.5%,#0063B6 54%,#0982E8 78.47%,#0063B6 100%);color:#fff;}
 .btn-back-to-home:hover{background:#fff;color:#0063B6;}
 .empty-cart span{display:inline-block;border:1px solid #2e9ef2;border-radius:3px;padding:10px;font-size:16px;text-transform:uppercase;width:100%;max-width:325px;}
+/* Info */
