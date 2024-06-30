@@ -16,7 +16,7 @@
                     <div class="list-procart">
                         <div class="procart procart-label">
                             <div class="row row-10">
-                                <div><input type="checkbox"></div>
+                                <!--<div><input type="checkbox"></div>-->
                                 <div class="pic-procart col-3 col-md-2 mg-col-10">Hình ảnh</div>
                                 <div class="info-procart col-6 col-md-5 mg-col-10">Tên sản phẩm</div>
                                 <div class="quantity-procart col-3 col-md-2 mg-col-10">
@@ -30,7 +30,7 @@
                         @foreach ($detail_cart as $v)
                         <div class="procart procart">
                             <div class="row row-10">
-                                <div><input type="checkbox"></div>
+                                <!--<div><input type="checkbox"></div>-->
                                 <div class="pic-procart col-3 col-md-2 mg-col-10"> <a class="text-decoration-none"
                                         target="_blank" title=""> <img width="85px" height="85px"
                                             src="{{ asset($v->product_photo_path) }}" alt=""> </a> <a
@@ -172,10 +172,10 @@
                                 </div>
                             </div>
                         </div> 
-                        <form action="" method="POST">
+                        <form action="{{url('/cod_payment')}}" method="POST">
                             @csrf
                             <input type="hidden" name="total" value="{{ $cart[0]->cart_total + $shipping }}">
-                            <button type="submit" name="redirect" class="btn btn-primary">Thanh toán COD</button>
+                            <button type="submit" class="btn btn-primary">Thanh toán COD</button>
                         </form>
                         <form action="{{ url('/vnpay_payment') }}" method="POST">
                             @csrf

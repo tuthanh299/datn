@@ -81,4 +81,9 @@ class PaymentController extends Controller
     public function momo_payment(Request $request) {
         
     }
+
+    public function cod_payment(Request $request) 
+    {
+        dd($request);
+    }
 }

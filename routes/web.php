@@ -47,10 +47,6 @@ Route::get('/auth/google', [GoogleLoginController::class, 'redirect'])->name('re
 Route::get('/auth/google/callback', [GoogleLoginController::class, 'callback'])->name('callback');
 
 
-/*VNPAY*/
-Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay');
-
-
 Route::prefix('/')->group(function () {
     /* Index */
     Route::controller(IndexController::class)->group(function () {
@@ -109,6 +105,16 @@ Route::prefix('/')->group(function () {
         Route::get('change-password', 'index')->name('user.changepassword.index');
         Route::post('change-password/update', 'update')->name('user.changepassword.update');
     });
+
+    /* PAYMENT */
+
+    Route::controller(PaymentController::class)->group(function() {
+        Route::post('/cod_payment', 'cod_payment')->name('payment.cod');
+        Route::post('/vnpay_payment', 'vnpay_payment')->name('vnpay');
+    });
+
+    /*VNPAY*/
+    //Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay');
 });
 
 Route::get('/admin', [HomeController::class, 'index'])->name('home');

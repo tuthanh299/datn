@@ -12,6 +12,7 @@ function CheckPermissionAdmin($id_user, $permissionCheck)
         return true;
     } else {
         return false;
+        //return true;
     }
 
    
