@@ -13,6 +13,7 @@ use App\Http\Controllers\Clients\CProductController;
 use App\Http\Controllers\Clients\CSearchController;
 use App\Http\Controllers\Clients\CUserController;
 use App\Http\Controllers\Clients\IndexController;
+use App\Http\Controllers\Clients\CContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImportInvoiceController;
@@ -29,6 +30,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
+Route::get('/contact', [CContactController::class, 'index'])->name('contact');
 /* Cart */
 Route::get('/cart', [CCartController::class, 'cartUser'])->name('user.cart');
 Route::get('/payment', [CCartController::class, 'paymentUser'])->name('user.payment');
