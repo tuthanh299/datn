@@ -79,15 +79,14 @@
             </div> --}}
             <div class="flex-btn">
                 <button type="submit" class="btn btn-success">Cập nhật</button>
-                <button type="submit" class="btn btn-danger">Hủy</button>
+                <!--<button type="submit" class="btn btn-danger">Hủy</button>-->
             </div>
         </div> 
     </form>
-    <form action="{{route('user.info.delete')}}" method="POST">
-        @csrf
+    <!--<form action="{{route('user.info.delete')}}" method="POST">
         <div class="flex-btn">
             <button id="update_btn" type="submit" class="btn btn-danger">Xoá người dùng</button>
         </div>
-    </form>
+    </form> -->
 </div>
 @endsection

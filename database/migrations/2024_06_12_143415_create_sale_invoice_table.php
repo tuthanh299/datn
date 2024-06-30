@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             //$table->bigInteger('staff_id');
             //$table->bigInteger('customer_id');
+            $table->string('fullname');
+            $table->string('phone');
+            $table->string('address');
             $table->integer('total_price');
             $table->integer('paid_status');
             $table->integer('shipping_status');
