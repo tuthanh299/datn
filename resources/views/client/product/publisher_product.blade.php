@@ -19,8 +19,8 @@
                                             <a class="pic-product " href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                 title="Sản phẩm">
                                                 <div class="pic-product-img scale-img hover_light">
-                                                    <img class="w-100" src="{{ $v->product_photo_path }}"
-                                                        alt="{{ $v->name }}">
+                                                    <img class="w-100" src="{{ $v->product_photo_path ? $v->product_photo_path : asset('assets/noimage.jpg') }}"
+                                                                    alt="{{ $v->name }}">
                                                 </div>
                                             </a>
                                         </div>
@@ -29,7 +29,7 @@
                                                     href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                     title="{{ $v->name }}">{{ $v->name }}</a>
                                             </div>
-                                             
+
                                             <div class="price-product ">
                                                 <div class="price-new">
 
@@ -44,11 +44,13 @@
                                             </div>
                                             <div class="product-button text-center">
                                                 <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
-                                                    <a href="" class="product-button-cart-action button-addnow text-light"><i
+                                                    <a href=""
+                                                        class="product-button-cart-action button-addnow text-light"><i
                                                             class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
                                                 </div>
                                                 <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
-                                                    <a href="" class="product-button-cart-action button-buynow text-light"><i
+                                                    <a href=""
+                                                        class="product-button-cart-action button-buynow text-light"><i
                                                             class="fa-solid fa-basket-shopping-simple me-1"></i>Mua ngay</a>
                                                 </div>
                                             </div>

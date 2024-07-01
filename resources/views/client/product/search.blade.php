@@ -45,8 +45,8 @@
                                                     <a class="pic-product "
                                                         href="{{ route('product.detail', ['id' => $v->id]) }}" title="Sản phẩm">
                                                         <div class="pic-product-img scale-img hover_light">
-                                                            <img class="w-100" src="{{ $v->product_photo_path }}"
-                                                                alt="{{ $v->name }}">
+                                                            <img class="w-100" src="{{ $v->product_photo_path ? $v->product_photo_path : asset('assets/noimage.jpg') }}"
+                                                                    alt="{{ $v->name }}">
                                                         </div>
                                                     </a>
                                                 </div>
@@ -55,7 +55,7 @@
                                                             href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                             title="{{ $v->name }}">{{ $v->name }}</a>
                                                     </div>
-                                                     
+
                                                     <div class="price-product ">
                                                         <div class="price-new">
 
@@ -70,7 +70,7 @@
                                                     </div>
                                                     <div class="product-button text-center">
                                                         <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
-                                                            <a href=""
+                                                            <a href="{{ route('add_index.cart', ['id' => $v->id]) }}"
                                                                 class="product-button-cart-action button-addnow text-light"><i
                                                                     class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ
                                                                 hàng</a>

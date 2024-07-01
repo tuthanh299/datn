@@ -94,8 +94,6 @@ function setupBackToTop() {
         return false;
     });
 }
- 
- 
 
 function SlickPage() {
     if (isExist("slick-slideshow")) {
@@ -312,20 +310,32 @@ function AllRun() {
                                     product.regular_price
                                 );
                                 productHtml += `
-                                <div class="product-item product-slick-item" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="product-item product-slick-item" data-id="${
+                                    product.id
+                                }" data-aos="fade-up" data-aos-duration="1000">
                                 <div class="product" data-aos="zoom-in-up">
                                     <div class="box-product text-decoration-none">
                                         <div class="position-relative overflow-hidden  ">
-                                            <a class="pic-product " href="/product/${product.id}" title="${product.name}">
+                                            <a class="pic-product" href="/product/${
+                                                product.id
+                                            }" title="${product.name}">
                                                 <div class="pic-product-img scale-img hover_light">
-                                                    <img class="w-100" src="${product.product_photo_path}"
+                                                    <img class="w-100" src="${
+                                                        product.product_photo_path
+                                                            ? product.product_photo_path
+                                                            : "/assets/noimage.jpg"
+                                                    }"
                                                         alt="${product.name}">
                                                 </div>
                                             </a>
                                         </div>
                                         <div class="info-product">
-                                            <div class="name-product"><a class="text-split-2" href="/product/${product.id}"
-                                                    title="${product.name}">${product.name}</a>
+                                            <div class="name-product"><a class="text-split-2" href="/product/${
+                                                product.id
+                                            }"
+                                                    title="${product.name}">${
+                                    product.name
+                                }</a>
                                             </div>
                                             <div class="price-product">
                                                     <div class="price-new"> 
@@ -340,7 +350,7 @@ function AllRun() {
                                                 </div>
                                                 <div class="product-button text-center">
                                                 <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
-                                                    <a href="" class="product-button-cart-action button-addnow text-light"><i
+                                                    <a class="product-button-cart-action button-addnow text-light"><i
                                                             class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
                                                 </div>
                                                 <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
@@ -407,15 +417,37 @@ function AllRun() {
             );
         }
     };
+
+    $(document).ready(function () {
+        if ($(".product-from-ajax").length > 0) {
+            console.log("ok");
+            $("body").on("click", ".product-button-cart", function () {
+                const route = $(this).parents("[data-route]").data("route"),
+                    id = $(this).parents("[data-id]").data("id");
+
+                console.log(route, id);
+                $.ajax({
+                    url: route+'/'+id,
+                    type: "GET",
+                    success: function (response) {
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    },
+                });
+            });
+        }
+    });
 }
 
 $(document).ready(function () {
     AOS.init({
         once: false,
     });
-    PeShiner();
+    // PeShiner();
     TranslateClick();
-    setupBackToTop(); 
+    setupBackToTop();
     SlickPage();
     AllRun();
 });

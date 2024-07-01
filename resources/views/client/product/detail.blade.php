@@ -70,6 +70,22 @@
                         <div class="desc-product-detail">
                             {!! $productDetail->description !!}
                         </div>
+                        <div class="d-flex flex-wrap align-items-center mt-3 mb-3">
+                            <label class="attr-label-pro-detail d-block me-2 mb-0">Số lượng:</label>
+                            <div class="attr-content-pro-detail d-flex flex-wrap align-items-center justify-content-between">
+                                <div class="quantity-pro-detail">
+                                    <span class="quantity-minus-pro-detail">-</span>
+                                    <input type="number" class="qty-pro" min="1" value="1" readonly />
+                                    <span class="quantity-plus-pro-detail">+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="cart-pro-detail d-flex flex-wrap align-items-center justify-content-between">
+                                <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center" href="{{route('add_index.cart', ['id' => $productDetail->id])}}"><i class="bi bi-basket2"></i><span>Thêm vào giỏ hàng</span></a>
+                                <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center"  ><i class="bi bi-cart2"></i><span>Mua ngay</span></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-5">
                         <div class="group-criteria-prouduct">

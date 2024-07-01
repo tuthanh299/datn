@@ -38,4 +38,5 @@ interface User
      * @return string|null
      */
     public function getAvatar();
+    public function getRaw();
 }

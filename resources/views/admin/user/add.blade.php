@@ -40,8 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label>Số Điện Thoại</label>
-                            <input type="number" class="form-control @error('phone') is-invalid @enderror"
-                                name="phone" placeholder="Nhập số điện thoại" value="{{ old('phone') }}">
+                            <input type="tel" pattern="^0(3[0-9]|5[6789]|7[0-89]|8[1-9]|9[1-46-9])[0-9]{7}$" title="Vui lòng điền đúng các đầu số di động hiện có ở VN (03, 05, 07, 08, 09)" minlength="10" maxlength="11" class="form-control @error('phone') is-invalid @enderror" name="phone" placeholder="Nhập số điện thoại" value="{{ old('phone') }}">
                             @error('phone')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -57,7 +56,7 @@
                         <div class="form-group">
                             <label>Email</label>
                             <input type="email"
-                                class="text-lowercase form-control @error('email') is-invalid @enderror" name="email"
+                                class="text-lowercase form-control  @error('email') is-invalid @enderror" pattern="[^ @]*@[^ @]*" name="email"
                                 placeholder="Nhập email" value="{{ old('email') }}">
                             @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>

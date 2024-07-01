@@ -109,6 +109,8 @@ class ProductController extends Controller
             $product_id = $product->id;
             $dataWarehouseCreate = [
                 'product_id' => $product_id,
+                'quantity' => 0,
+                'status' => true,
             ];
             $this->warehouse->create($dataWarehouseCreate);
             /* Sub img */
@@ -194,3 +196,4 @@ class ProductController extends Controller
     }
 
 }
+

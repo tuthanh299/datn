@@ -29,7 +29,7 @@ class CCartController extends Controller
 
 
     //thêm giỏ hàng từ index
-    public function add_index($id) {
+    public function add_index($id=null) {
         if(!Auth::guard('member')->check()) 
         {
             return redirect()->route('user.login');

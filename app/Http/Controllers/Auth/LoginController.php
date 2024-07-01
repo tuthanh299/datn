@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Models\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -19,7 +19,7 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
@@ -46,34 +46,29 @@ class LoginController extends Controller
      * @return RedirectResponse
      */
     public function login(Request $request): RedirectResponse
-    {   
+    {
         $input = $request->all();
 
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-       
-
-            $account = User::where('email',$request->email)->get();
+        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+            $account = User::where('email', $request->email)->get();
             session(['user' => $account]);
-           
             if (auth()->user()->type == 'admin') {
-                return redirect()->route('admin.home');                
-            }
+                return redirect()->route('admin.home');
+            } 
             else if (auth()->user()->type == 'manager') {
                 return redirect()->route('manager.home');
-            }else{
+            } else {
                 return redirect()->route('user.login');
             }
-        }else{
+        } else {
             return redirect()->route('login')
-                ->with('error','Tài khoản email hoặc mật khẩu không đúng.');
+                ->with('error', 'Tài khoản email hoặc mật khẩu không đúng.');
         }
-          
+
     }
-    
+
 }

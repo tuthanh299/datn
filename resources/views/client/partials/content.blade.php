@@ -40,8 +40,13 @@ use App\Http\Controllers\Clients\IndexController;
                                             <a class="pic-product " href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                 title="Sản phẩm">
                                                 <div class="pic-product-img scale-img hover_light">
-                                                    <img class="w-100" src="{{ $v->product_photo_path }}"
-                                                        alt="{{ $v->name }}">
+                                                    @if ($v->product_photo_path)
+                                                        <img class="w-100" src="{{ $v->product_photo_path }}"
+                                                            alt="{{ $v->name }}">
+                                                    @else
+                                                        <img class="w-100" src="{{ asset('assets/noimage.jpg') }}"
+                                                            alt="{{ $v->name }}">
+                                                    @endif
                                                 </div>
                                             </a>
                                         </div>
@@ -73,11 +78,14 @@ use App\Http\Controllers\Clients\IndexController;
                                             </div>
                                             <div class="product-button text-center">
                                                 <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
-                                                    <a href="{{route('add_index.cart', ['id' => $v->id])}}" class="product-button-cart-action button-addnow text-light"><i
-                                                            class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
+                                                    <a href="{{ route('add_index.cart', ['id' => $v->id]) }}"
+                                                        class="product-button-cart-action button-addnow text-light"><i
+                                                            class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ
+                                                        hàng</a>
                                                 </div>
                                                 <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
-                                                    <a href="#" class="product-button-cart-action button-buynow text-light"><i
+                                                    <a href="#"
+                                                        class="product-button-cart-action button-buynow text-light"><i
                                                             class="fa-solid fa-basket-shopping-simple me-1"></i>Mua ngay</a>
                                                 </div>
                                             </div>
@@ -95,7 +103,7 @@ use App\Http\Controllers\Clients\IndexController;
 @isset($category_first)
     @if (!$category_first->isEmpty())
         @foreach ($category_first as $v)
-            <div class="wrap-product-list-cat">
+            <div class="wrap-product-list-cat product-from-ajax">
                 <div class="wrap-content">
                     <div class="title-main categoryfirst">
                         <span>{{ $v->name }}</span>
@@ -109,8 +117,7 @@ use App\Http\Controllers\Clients\IndexController;
                             </div>
                         @endforeach
                     </div>
-                    <div class="paging-product-category-style paging-product-category-{{ $v->id }}  ">
-
+                    <div class="paging-product-category-style paging-product-category-{{ $v->id }}" data-route="{{route('add_index.cart')}}">
                     </div>
                 </div>
             </div>
