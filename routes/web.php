@@ -77,7 +77,7 @@ Route::prefix('/')->group(function () {
     /* Cart */
     Route::controller(CCartController::class)->group(function () {
         Route::get('/cart', 'index')->name('user.cart');
-        Route::get('/cart/add/{id}', 'add_index')->name('add_index.cart');
+        Route::get('/cart/add/{id?}', 'add_index')->name('add_index.cart');
         Route::get('/cart/delete/{id}', 'delete')->name('delete.cart');
         //Route::patch('/cart/update/{id}', 'update_qty')->name('update.cart');
         Route::get('/product/add/{id}/{count}', 'add')->name('add.cart');

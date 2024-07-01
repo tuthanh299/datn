@@ -53,7 +53,7 @@
                                             <td class="text-capitalize">{{ $productItem->name }}</td>
                                             <td>
                                                 <img class="adm-product-img"
-                                                    src="{{ $productItem->product_photo_path }} " alt="">
+                                                    src="{{ $productItem->product_photo_path ? $productItem->product_photo_path : asset('assets/noimage.jpg') }} " alt="">
                                             </td>
                                             <td class="text-capitalize">{{ optional($productItem->category)->name }}</td>
                                             <td>
