@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sale_invoices_detail', function (Blueprint $table) {
+        Schema::create('sale_invoice_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sale_invoice_id')->constrained();
             //$table->bigInteger('sale_invoice_id')->unique();

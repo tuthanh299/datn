@@ -8,7 +8,7 @@
 <!-- Thông tin đơn hàng -->
 <div class="form-add-top">
     <div>
-        <a href="{{route('lichsumuahang')}}">Thoát</a>
+        <a href="{{route('user.order')}}">Thoát</a>
     </div>
     <div class="title-name1">Thông tin đơn hàng</div>
     <div class="title-bill">ĐƠN HÀNG: <span class="id-bill">{{$hdb[0]->id}}</span>, ĐẶT
@@ -61,21 +61,29 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>HI</th>
-                <th>HI</th>
-                <th>HI</th>
-                <th>HI</th>
+                <th>Mã Sản Phẩm</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Số Lượng</th>
+                <th>Tổng cộng</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($cthdb as $item)
             <tr>
-                <td>hi</td>
-                <td>hi</td>
-                <td>hi</td>
-                <td>hi</td>
+                <td>{{$item->product_id}}</td>
+                <td>{{$item->name}}</td>
+                <td>{{$item->quantity}}</td>
+                <td>@formatmoney($item->price)</td>
             </tr>
+            @endforeach
         </tbody>
     </table>
+
+
+    <div class="title-name2">Tạm tính: @formatmoney($hdb[0]->total_price - 30000)</div>
+    <div class="title-name2">Phí ship: @formatmoney(30000)</div>
+    <div class="title-name2">Tổng tiền: @formatmoney($hdb[0]->total_price)</div>
+
     <!--<div class="grid-product-inbill-list">
         <div class="gridspname">
             <div class="title-name2">Sản phẩm</div>
@@ -118,5 +126,4 @@
         </div>
     </div>-->
 </div>
-@include ('index_partials.js')   
 @endsection

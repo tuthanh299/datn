@@ -3,12 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\DetailCart;
+use App\Models\SaleInvoice;
+use App\Models\SaleInvoiceDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
+    public function index() 
+    {
+        if(!Auth::guard('member')->check()) 
+        {
+            return redirect()->route('user.login');
+        }
+        
+        $total = 0;
+        $user = Auth::guard('member')->user();
+        $cart = Cart::where('member_id', $user->id)->get();
+        //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
+        $detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
+
+        foreach($detail_cart as $v) {
+            if($v->discount >0) {
+                $total += $v->sale_price * $v->quantity;
+            } 
+            else {
+                $total += $v->regular_price * $v->quantity;
+            }
+        }
+
+        $cart[0]->cart_total = $total;
+
+        return view('client.order.payment', compact('detail_cart', 'user', 'cart'));
+        //dd($carts);
+    }
+
     public function vnpay_payment(Request $request) 
     {
+        if(!Auth::guard('member')->check()) 
+        {
+            return redirect()->route('user.login');
+        }
+
         $data = $request->all();
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         //$vnp_Returnurl = "https://localhost/vnpay_php/vnpay_return.php";
@@ -78,12 +116,104 @@ class PaymentController extends Controller
             // vui lòng tham khảo thêm tại code demo		
             }
 
-    public function momo_payment(Request $request) {
+    public function momo_payment(Request $request) 
+    {
+        if(!Auth::guard('member')->check()) 
+        {
+            return redirect()->route('user.login');
+        }
         
     }
 
     public function cod_payment(Request $request) 
     {
-        dd($request);
+        if(!Auth::guard('member')->check()) 
+        {
+            return redirect()->route('user.login');
+        }
+        $all = $request->all();
+        $fullname = $all['fullname'];
+        $address = $all['address'];
+        $phone = $all['phone'];
+        $note = $all['note'];
+        $total = $all['total'];
+        //dd($all, $fullname, $address, $phone, $note, $total);
+        $user = Auth::guard('member')->user();
+        $cart = Cart::where('member_id', $user->id)->get();
+        //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
+        $detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
+        
+
+        //Kiểm tra thông tin tuỳ chỉnh có hay không
+        /*if($address == null || $phone == null || $fullname == null) 
+        {
+            $full_name = $user->lastname . ' ' . $user->firstname;
+            //tạo hoá đơn rỗng lưu dữ liệu người dùng
+            $sale_invoice = SaleInvoice::create([
+                'member_id' => $user->id,
+                'user_id' => $user->id,
+                'total_price' => $total,
+                'fullname'=> $full_name,
+                'address' => $user->address,
+                'phone' => $user->phone,
+                'paid_status' => 0,
+                'shipping_status' => 0,
+                'status' => 0,
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+
+            dd($sale_invoice);
+        } 
+        else 
+        {
+            //tạo hoá đơn rỗng lưu dữ liệu người dùng
+            $sale_invoice = SaleInvoice::create([
+                'member_id' => $user->id,
+                'user_id' => $user->id,
+                'total_price' => $total,
+                'fullname'=> $fullname,
+                'address' => $address,
+                'phone' => $phone,
+                'paid_status' => 0,
+                'shipping_status' => 0,
+                'status' => 0,
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+            dd($sale_invoice);
+        }*/
+
+        $sale_invoice = SaleInvoice::create([
+            'member_id' => $user->id,
+            'user_id' => $user->id,
+            'total_price' => $total,
+            'fullname'=> $fullname,
+            'address' => $address,
+            'phone' => $phone,
+            'paid_status' => 0,
+            'shipping_status' => 0,
+            'status' => 0,
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+        //dd($sale_invoice);
+
+        $sale_invoice_id = $sale_invoice->id;
+        $detail = new SaleInvoiceDetail();
+
+        foreach($detail_cart as $v) {
+            $detail->sale_invoice_id = $sale_invoice_id;
+            $detail->product_id = $v->product_id;
+            $detail->quantity = $v->quantity;
+            $detail->price = $v->sale_price;
+            $detail->save();
+        }
+
+        if($detail) 
+        {
+            dd('success');
+        }
+
+        dd('fail');
+        
+
     }
 }

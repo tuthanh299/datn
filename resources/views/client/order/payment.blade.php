@@ -109,77 +109,88 @@
                                 </div>
                             </div>
                         </div> -->
-                        <p class="title-cart">Thông tin giao hàng:</p>
-                        <div class="information-cart">
-                            <div class="row row-10">
-                                <div class="input-cart col-md-6 mg-col-10">
-                                    <div class="form-floating form-floating-cus"> <input type="text"
-                                            class="form-control text-sm" id="fullname" name="dataOrder[fullname]"
-                                            placeholder="Họ tên" value="{{$user->last_name . ' ' . $user->first_name}}" required /> <label for="fullname">Họ
-                                            tên</label> </div>
-                                    <div class="invalid-feedback">Vui lòng nhập họ tên</div>
-                                </div>
-                                <div class="input-cart col-md-6 mg-col-10">
-                                    <div class="form-floating form-floating-cus"> <input type="number"
-                                            class="form-control text-sm" id="phone" name="dataOrder[phone]"
-                                            placeholder="Điện thoại" value="{{$user->phone}}" required /> <label
-                                            for="phone">Điện thoại</label> </div>
-                                    <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
-                                </div>
-                            </div>
-                            <!--<div class="input-cart">
-                                <div class="form-floating form-floating-cus"> <input type="email"
-                                        class="form-control text-sm" id="email" name="dataOrder[email]"
-                                        placeholder="Email" value="" required /> <label
-                                        for="email">Email</label> </div>
-                                <div class="invalid-feedback">Vui lòng nhập email</div>
-                            </div>-->
-                            <div class="row row-10">
-                                <div class="input-cart col-md-4 mg-col-10 form-floating-cus"> <select
-                                        class="select-city-cart form-select form-control text-sm" required id="city"
-                                        name="dataOrder[city]">
-                                        <option value="">Tỉnh thành</option>
-                                        <option value=""></option>
-                                    </select>
-                                    <div class="invalid-feedback">Vui lòng chọn tỉnh thành</div>
-                                </div>
-                                <div class="input-cart col-md-4 mg-col-10 form-floating-cus"> <select
-                                        class="select-district-cart select-district form-select form-control text-sm"
-                                        required id="district" name="dataOrder[district]">
-                                        <option value="">Quận / huyện</option>
-                                    </select>
-                                    <div class="invalid-feedback">Vui lòng chọn quận huyện</div>
-                                </div>
-                                <div class="input-cart col-md-4 mg-col-10 form-floating-cus"> <select
-                                        class="select-ward-cart select-ward form-select form-control text-sm" required
-                                        id="ward" name="dataOrder[ward]">
-                                        <option value="">Phường / xã</option>
-                                    </select>
-                                    <div class="invalid-feedback">Vui lòng chọn phường xã</div>
-                                </div>
-                            </div>
-                            <div class="input-cart">
-                                <div class="form-floating form-floating-cus"> <input type="text"
-                                        class="form-control text-sm" id="address" name="dataOrder[address]"
-                                        placeholder="Địa chỉ" value=" " required /> <label for="address">Địa
-                                        chỉ</label> </div>
-                                <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
-                            </div>
-                            <div class="input-cart">
-                                <div class="form-floating form-floating-cus">
-                                    <textarea class="form-control text-sm" id="requirements" name="dataOrder[requirements]"
-                                        placeholder="Yêu cầu khác"> </textarea> <label for="requirements">Yêu cầu khác</label>
-                                </div>
-                            </div>
-                        </div> 
-                        <form action="{{url('/cod_payment')}}" method="POST">
+                        <form action="{{route('cod')}}" method="POST">
                             @csrf
+                            <p class="title-cart">Thông tin giao hàng:</p>
+                            <div class="information-cart">
+                                <div class="row row-10">
+                                    <div class="input-cart col-md-6 mg-col-10">
+                                        <div class="form-floating form-floating-cus"> 
+                                            <input type="text"
+                                                class="form-control text-sm" id="fullname" name="fullname"
+                                                placeholder="Họ tên" value="{{$user->last_name . ' ' . $user->first_name}}" required /> <label for="fullname">Họ
+                                                tên</label> 
+                                        </div>
+                                        <div class="invalid-feedback">Vui lòng nhập họ tên</div>
+                                    </div>
+                                    <div class="input-cart col-md-6 mg-col-10">
+                                        <div class="form-floating form-floating-cus"> <input type="number"
+                                                class="form-control text-sm" id="phone" name="phone"
+                                                placeholder="Điện thoại" value="{{$user->phone}}" required /> <label
+                                                for="phone">Điện thoại</label> </div>
+                                        <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
+                                    </div>
+                                </div>
+                                <!--<div class="input-cart">
+                                    <div class="form-floating form-floating-cus"> <input type="email"
+                                            class="form-control text-sm" id="email" name="dataOrder[email]"
+                                            placeholder="Email" value="" required /> <label
+                                            for="email">Email</label> </div>
+                                    <div class="invalid-feedback">Vui lòng nhập email</div>
+                                </div>-->
+                                
+                                <!--Tỉnh Thành -->
+                                
+                                <!--<div class="row row-10">
+                                    <div class="input-cart col-md-4 mg-col-10 form-floating-cus"> <select
+                                            class="select-city-cart form-select form-control text-sm" required id="city"
+                                            name="dataOrder[city]">
+                                            <option value="">Tỉnh thành</option>
+                                            <option value=""></option>
+                                        </select>
+                                        <div class="invalid-feedback">Vui lòng chọn tỉnh thành</div>
+                                    </div>
+                                    <div class="input-cart col-md-4 mg-col-10 form-floating-cus"> <select
+                                            class="select-district-cart select-district form-select form-control text-sm"
+                                            required id="district" name="dataOrder[district]">
+                                            <option value="">Quận / huyện</option>
+                                        </select>
+                                        <div class="invalid-feedback">Vui lòng chọn quận huyện</div>
+                                    </div>
+                                    <div class="input-cart col-md-4 mg-col-10 form-floating-cus"> <select
+                                            class="select-ward-cart select-ward form-select form-control text-sm" required
+                                            id="ward" name="dataOrder[ward]">
+                                            <option value="">Phường / xã</option>
+                                        </select>
+                                        <div class="invalid-feedback">Vui lòng chọn phường xã</div>
+                                    </div>
+                                </div>-->
+                                <!-- Địa Chỉ -->
+                                <div class="input-cart">
+                                    <div class="form-floating form-floating-cus"> <input type="text"
+                                            class="form-control text-sm" id="address" name="address"
+                                            placeholder="Địa chỉ" value=" " required /> <label for="address">Địa
+                                            chỉ</label> </div>
+                                    <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
+                                </div>
+                                <!-- Note -->
+                                <div class="input-cart">
+                                    <div class="form-floating form-floating-cus">
+                                        <textarea class="form-control text-sm" id="note" name="note"
+                                            placeholder="Yêu cầu khác"> </textarea> <label for="note">Yêu cầu khác</label>
+                                    </div>
+                                </div>
+                            </div>
                             <input type="hidden" name="total" value="{{ $cart[0]->cart_total + $shipping }}">
                             <button type="submit" class="btn btn-primary">Thanh toán COD</button>
                         </form>
                         <form action="{{ url('/vnpay_payment') }}" method="POST">
                             @csrf
                             <input type="hidden" name="total" value="{{ $cart[0]->cart_total + $shipping }}">
+                            <input type="hidden" name="fullname" value="{{ $user->last_name . ' ' . $user->first_name }}">
+                            <input type="hidden" name="address" value="{{ $user->address }}">
+                            <input type="hidden" name="note" value="">
+                            
                             <button type="submit" name="redirect" class="btn btn-primary">Thanh toán bằng VNPAY</button>
                         </form>
                     </div>

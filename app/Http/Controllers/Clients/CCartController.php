@@ -6,6 +6,7 @@ use App\Models\DetailCart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CCartController extends Controller
 {
@@ -17,8 +18,10 @@ class CCartController extends Controller
             $carts = Cart::where('member_id', $user->id)->get();
             //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
             $detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
+            $detail_cart_1 = DB::table('detail_carts')->join('products', 'detail_carts.product_id', '=', 'products.id')->get();
 
-            return view('client.order.cart', compact('detail_cart', 'user'));
+            return view('client.order.cart', compact('detail_cart', 'detail_cart_1', 'user', 'carts'));
+            //dd($detail_cart, $detail_cart_1, $user, $carts);
         }
 
         return redirect()->route('user.login');
@@ -137,7 +140,7 @@ class CCartController extends Controller
                     'cart_id' => $cart_user->id,
                     'product_id' => $id,
                     'quantity' => $count,
-                    //'price' => $product->price,
+                    'price' => $product->price,
                 ]);
                 if ($check) {
                     return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
@@ -146,7 +149,13 @@ class CCartController extends Controller
         }
     }
 
-    public function paymentUser() 
+    public function update_qty(Request $request) 
+    {
+        $all = $request->collect();
+        dd($all); 
+    }
+
+    public function delete($id)
     {
         $total = 0;
         $user = Auth::guard('member')->user();
@@ -154,23 +163,14 @@ class CCartController extends Controller
         //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
         $detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
 
-        foreach($detail_cart as $v) {
-            if($v->discount >0) {
-                $total += $v->sale_price * $v->quantity;
-            } 
-            else {
-                $total += $v->regular_price * $v->quantity;
-            }
+        $del = DetailCart::where('product_id', $id)->delete();
+
+        //dd($del, $id);
+        if ($del) {
+            //return view('client.order.cart', compact('detail_cart', 'user', 'cart'))->with('success', 'Xoá thành công');
+            return redirect()->back()->with('success', 'Xoá thành công');
         }
-
-        $cart[0]->cart_total = $total;
-
-        return view('client.order.payment', compact('detail_cart', 'user', 'cart'));
-        //dd($carts);
-    }
-
-    public function increase_cart() 
-    {
-        
+        //return view('client.order.cart',compact('detail_cart', 'user', 'cart'))->with('fail', 'Xoá không thành công');
+        return redirect()->back()->with('fail', 'Xoá không bạn');
     }
 }
