@@ -85,7 +85,7 @@ use App\Http\Controllers\Clients\IndexController;
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                                 @if(Auth::guard('member')->check())
                                                 <div class="menu-bottom-cart-num">
-                                                    {{-- {{ $detail_cart->count() }} --}}
+                                                    {{ $detail_cart->count() }}
                                                 </div>
                                                 @else
                                                 <div></div>
@@ -106,7 +106,7 @@ use App\Http\Controllers\Clients\IndexController;
                                                 <i class="fa-solid fa-user"></i>
                                             </div>
                                             <div class="menu-bottom-account-text">
-                                                {{-- Xin chào, {{ $user->first_name }} --}}
+                                                Xin chào, {{ $user->first_name }}
                                             </div>
                                         </div>
                                     </a>

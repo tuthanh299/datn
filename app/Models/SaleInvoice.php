@@ -9,6 +9,6 @@ class SaleInvoice extends Model
 {
     use HasFactory;
 
-    protected $fillable =['id','total_price','paid_status', 'shipping_status', 'user_id', 'member_id'];
+    protected $fillable =['id', 'fullname', 'phone', 'address','total_price','paid_status', 'shipping_status', 'member_id'];
 
 }

@@ -7,7 +7,7 @@
 @section('content')
 <div class="form-add-top">
     <span class="title-name1">Tài khoản của bạn</span> 
-    @if($hdb)
+    @if(count($hdb) < 0)
     <div>Bạn chưa mua sản phẩm nào !</div>
     @else
     <table class="w-100">

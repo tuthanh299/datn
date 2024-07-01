@@ -31,9 +31,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/contact', [CContactController::class, 'index'])->name('contact');
-/* Cart */
-Route::get('/cart', [CCartController::class, 'cartUser'])->name('user.cart');
-Route::get('/payment', [CCartController::class, 'paymentUser'])->name('user.payment');
+//Route::get('/cart', [CCartController::class, 'cartUser'])->name('user.cart');
 
 /* Client */
 Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.login');
@@ -80,7 +78,10 @@ Route::prefix('/')->group(function () {
     Route::controller(CCartController::class)->group(function () {
         Route::get('/cart', 'index')->name('user.cart');
         Route::get('/cart/add/{id}', 'add_index')->name('add_index.cart');
+        Route::get('/cart/delete/{id}', 'delete')->name('delete.cart');
+        //Route::patch('/cart/update/{id}', 'update_qty')->name('update.cart');
         Route::get('/product/add/{id}/{count}', 'add')->name('add.cart');
+        
     });
 
     /* Info */
@@ -111,7 +112,8 @@ Route::prefix('/')->group(function () {
     /* PAYMENT */
 
     Route::controller(PaymentController::class)->group(function() {
-        Route::post('/cod_payment', 'cod_payment')->name('payment.cod');
+        Route::get('/payment', 'index')->name('user.payment');
+        Route::post('/cod_payment', 'cod_payment')->name('cod');
         Route::post('/vnpay_payment', 'vnpay_payment')->name('vnpay');
     });
 
