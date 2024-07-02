@@ -569,6 +569,16 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'O' => 
+        array (
+            'Orangehill\\Iseed' => 
+            array (
+                0 => __DIR__ . '/..' . '/orangehill/iseed/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'App\\Components\\Recusive' => __DIR__ . '/../..' . '/app/Components/Recusive.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
@@ -579,11 +589,16 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
+        'App\\Http\\Controllers\\CContactController' => __DIR__ . '/../..' . '/app/Http/Controllers/CContactController.php',
         'App\\Http\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryController.php',
         'App\\Http\\Controllers\\Clients\\CAboutusController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/CAboutusController.php',
         'App\\Http\\Controllers\\Clients\\CCartController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/CCartController.php',
+        'App\\Http\\Controllers\\Clients\\CChangeAddressController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/CChangeAddressController.php',
+        'App\\Http\\Controllers\\Clients\\CChangePasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/CChangePasswordController.php',
+        'App\\Http\\Controllers\\Clients\\CContactController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/CContactController.php',
         'App\\Http\\Controllers\\Clients\\CInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/CInfoController.php',
         'App\\Http\\Controllers\\Clients\\CNewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/CNewsController.php',
+        'App\\Http\\Controllers\\Clients\\COrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/COrderController.php',
         'App\\Http\\Controllers\\Clients\\CProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/CProductController.php',
         'App\\Http\\Controllers\\Clients\\CSearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/CSearchController.php',
         'App\\Http\\Controllers\\Clients\\CUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Clients/CUserController.php',
@@ -624,12 +639,9 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         'App\\Models\\Cart' => __DIR__ . '/../..' . '/app/Models/Cart.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\DetailCart' => __DIR__ . '/../..' . '/app/Models/DetailCart.php',
-        'App\\Models\\Detail_Import_Invoice' => __DIR__ . '/../..' . '/app/Models/Detail_Import_Invoice.php',
-        'App\\Models\\Detail_Sale_Invoice' => __DIR__ . '/../..' . '/app/Models/Detail_Sale_Invoice.php',
         'App\\Models\\DiscountVouncher' => __DIR__ . '/../..' . '/app/Models/DiscountVouncher.php',
         'App\\Models\\ImportInvoice' => __DIR__ . '/../..' . '/app/Models/ImportInvoice.php',
         'App\\Models\\ImportInvoiceDetail' => __DIR__ . '/../..' . '/app/Models/ImportInvoiceDetail.php',
-        'App\\Models\\Import_Invoice' => __DIR__ . '/../..' . '/app/Models/Import_Invoice.php',
         'App\\Models\\Member' => __DIR__ . '/../..' . '/app/Models/Member.php',
         'App\\Models\\News' => __DIR__ . '/../..' . '/app/Models/News.php',
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
@@ -637,7 +649,8 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         'App\\Models\\ProductGallery' => __DIR__ . '/../..' . '/app/Models/ProductGallery.php',
         'App\\Models\\Publisher' => __DIR__ . '/../..' . '/app/Models/Publisher.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
-        'App\\Models\\Sale_Invoice' => __DIR__ . '/../..' . '/app/Models/Sale_Invoice.php',
+        'App\\Models\\SaleInvoice' => __DIR__ . '/../..' . '/app/Models/SaleInvoice.php',
+        'App\\Models\\SaleInvoiceDetail' => __DIR__ . '/../..' . '/app/Models/SaleInvoiceDetail.php',
         'App\\Models\\Setting' => __DIR__ . '/../..' . '/app/Models/Setting.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\StaticNews' => __DIR__ . '/../..' . '/app/Models/StaticNews.php',
@@ -766,8 +779,8 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
+        'Database\\Seeders\\CategoriesSeeder' => __DIR__ . '/../..' . '/database/seeders/CategoriesSeeder.php',
         'Database\\Seeders\\CategoriesTableSeeder' => __DIR__ . '/../..' . '/database/seeders/CategoriesTableSeeder.php',
-        'Database\\Seeders\\CategorySeeder' => __DIR__ . '/../..' . '/database/seeders/CategorySeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\MemberSeeder' => __DIR__ . '/../..' . '/database/seeders/MemberSeeder.php',
         'Database\\Seeders\\NewsTableSeeder' => __DIR__ . '/../..' . '/database/seeders/NewsTableSeeder.php',
@@ -785,6 +798,7 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         'Database\\Seeders\\StaticNewsSeeder' => __DIR__ . '/../..' . '/database/seeders/StaticNewsSeeder.php',
         'Database\\Seeders\\StaticNewsTableSeeder' => __DIR__ . '/../..' . '/database/seeders/StaticNewsTableSeeder.php',
         'Database\\Seeders\\UserSeeder' => __DIR__ . '/../..' . '/database/seeders/UserSeeder.php',
+        'Database\\Seeders\\WarehousesTableSeeder' => __DIR__ . '/../..' . '/database/seeders/WarehousesTableSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -3737,6 +3751,11 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         'NunoMaduro\\Collision\\Provider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Provider.php',
         'NunoMaduro\\Collision\\SolutionsRepositories\\NullSolutionsRepository' => __DIR__ . '/..' . '/nunomaduro/collision/src/SolutionsRepositories/NullSolutionsRepository.php',
         'NunoMaduro\\Collision\\Writer' => __DIR__ . '/..' . '/nunomaduro/collision/src/Writer.php',
+        'Orangehill\\Iseed\\Facades\\Iseed' => __DIR__ . '/..' . '/orangehill/iseed/src/Orangehill/Iseed/Facades/Iseed.php',
+        'Orangehill\\Iseed\\Iseed' => __DIR__ . '/..' . '/orangehill/iseed/src/Orangehill/Iseed/Iseed.php',
+        'Orangehill\\Iseed\\IseedCommand' => __DIR__ . '/..' . '/orangehill/iseed/src/Orangehill/Iseed/IseedCommand.php',
+        'Orangehill\\Iseed\\IseedServiceProvider' => __DIR__ . '/..' . '/orangehill/iseed/src/Orangehill/Iseed/IseedServiceProvider.php',
+        'Orangehill\\Iseed\\TableNotFoundException' => __DIR__ . '/..' . '/orangehill/iseed/src/Orangehill/Iseed/Exceptions.php',
         'Override' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/Override.php',
         'PHPUnit\\Event\\Application\\Finished' => __DIR__ . '/..' . '/phpunit/phpunit/src/Event/Events/Application/Finished.php',
         'PHPUnit\\Event\\Application\\FinishedSubscriber' => __DIR__ . '/..' . '/phpunit/phpunit/src/Event/Events/Application/FinishedSubscriber.php',
@@ -7088,6 +7107,7 @@ class ComposerStaticInit0db1164151224de42f5f66acd8ae02c4
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit0db1164151224de42f5f66acd8ae02c4::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit0db1164151224de42f5f66acd8ae02c4::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit0db1164151224de42f5f66acd8ae02c4::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit0db1164151224de42f5f66acd8ae02c4::$classMap;
 
         }, null, ClassLoader::class);

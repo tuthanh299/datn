@@ -44,11 +44,13 @@ class DatabaseSeeder extends Seeder
             SlidersTableSeeder::class,//
             StaticNewsTableSeeder::class,//
             UserSeeder::class,//
-            CategoriesTableSeeder::class,//
+            CategoriesSeeder::class,//
             PublishersTableSeeder::class,//
             MemberSeeder::class,//
             ProductsTableSeeder::class,//
+            //ProeSeeder::class,//
             ProductGalleriesTableSeeder::class,//
+            WarehousesTableSeeder::class,//
             RolesTableSeeder::class,//
             PermissionsTableSeeder::class,//
             PermissionRoleTableSeeder::class,//
