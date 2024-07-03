@@ -26,6 +26,7 @@ class CNewsController extends Controller
     public function detail($id)
     {
         $newsDetail = News::find($id);
+        $pageName = $newsDetail->name;
         $newsInternal = News::select('id', 'name', 'description', 'photo_path')->get();
         if(Auth::guard('member')->check()) 
         {
@@ -34,7 +35,7 @@ class CNewsController extends Controller
             $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
             return view('client.news.detail', compact('newsDetail', 'newsInternal', 'user', 'detail_cart'));
         }
-        return view('client.news.detail', compact('newsDetail', 'newsInternal'));
+        return view('client.news.detail', compact('newsDetail', 'newsInternal','pageName'));
     }
 
 }

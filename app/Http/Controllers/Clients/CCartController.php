@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Clients;
+
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\DetailCart;
@@ -12,8 +13,8 @@ class CCartController extends Controller
 {
     public function index()
     {
-        if(Auth::guard('member')->check()) 
-        {
+        // dd(session()->get('cart'));
+        if (Auth::guard('member')->check()) {
             $user = Auth::guard('member')->user();
             $carts = Cart::where('member_id', $user->id)->get();
             //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
@@ -27,150 +28,46 @@ class CCartController extends Controller
         return redirect()->route('user.login');
     }
 
-
     //thêm giỏ hàng từ index
-    public function add_index($id=null) {
-        if(!Auth::guard('member')->check()) 
-        {
-            return redirect()->route('user.login');
-        }
-
-        $user_id = Auth::guard('member')->user()->id;
-        $cart_user = Cart::where('member_id', $user_id)->get();
-        $detail_cart_user = DetailCart::where('cart_id', $cart_user[0]->id)->get();
-        //$product_id = request()->product_id;
-        $product = Product::where('id', $id)->first();
-
-        if ($detail_cart_user == null) {
-            $check = DetailCart::create([    
-                'cart_id' => $cart_user[0]->id,
-                'product_id' => $id,
-                'quantity' => 1,
-                //'price' => $product->regular_price,
-            ]);
-            if ($check) {
-                return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
-            } else {
-                return redirect()->back()->with('fail', 'Lỗi');
-            }
-        } 
-        else {
-            foreach ($detail_cart_user as $product) {
-                if ($product->product_id == $id) {
-                    $check = DetailCart::where('product_id', $id)->update([
-                        'quantity' => $detail_cart_user[0]->quantity + 1,
-                    ]);
-        
-                    if ($check) {
-                        return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
-                    } else {
-                        return redirect()->back()->with('fail', 'Lỗi');
-                    }
-                }
-            }
-
-            
-            $check = DetailCart::create([    
-                'cart_id' => $cart_user[0]->id,
-                'product_id' => $id,
-                'quantity' => 1,
-                //'price' => $product->price,
-            ]);
-            if ($check) {
-                return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
-            } else {
-                return redirect()->back()->with('fail', 'Lỗi');
-            }
-        }
-
-        /*if($detail_cart_user[0]->product_id == $id) 
-        {
-            $check = DetailCart::where('product_id', $id)->update([
-                'quantity' => $detail_cart_user[0]->quantity++,
-            ]);
-
-            if ($check) {
-                return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
-            } else {
-                return redirect()->back()->with('fail', 'Lỗi');
-            }
-        }             
-        else 
-        {
-            $check = DetailCart::create([    
-                'cart_id' => $cart_user->id,
-                'product_id' => $id,
-                'quantity' => 1,
-                'price' => $product->price,
-            ]);
-            if ($check) {
-                return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
-            } else {
-                return redirect()->back()->with('fail', 'Lỗi');
-            }
-        }*/
-
-        //dd($user_id, $id, $cart_user, $detail_cart_user, $product);
-    }
-
-
-    //thêm giỏ hàng từ chi tiết sản phẩm
-    public function add($id, $count) {
-        if(!Auth::guard('member')->check()) 
-        {
-            return redirect()->route('user.login');
-        }
-
-        $user_id = Auth::guard('member')->user()->id;
-        $cart_user = Cart::where('member_id', $user_id)->get();
-        $detail_cart_user = DetailCart::where('member_id', $cart_user->id)->get();
-        //$product_id = request()->product_id;
-        $product = Product::where('id', $id)->first();
-
-        if($detail_cart_user[0]->product_id == $id) {
-            $check = DetailCart::where('product_id', $id)->update([
-                'quantity' => $detail_cart_user[0]->quantity + $count,
-            ]);
-
-            if ($check) {
-                return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
-            }
-            else {
-                $check = DetailCart::create([    
-                    'cart_id' => $cart_user->id,
-                    'product_id' => $id,
-                    'quantity' => $count,
-                    'price' => $product->price,
-                ]);
-                if ($check) {
-                    return redirect()->back()->with('success', 'Sách đã được thêm vào giỏ hàng');
-                }
-            }
-        }
-    }
-
-    public function update_qty(Request $request) 
+    public function add_index($id = null, $quantity=1)
     {
-        $all = $request->collect();
-        dd($all); 
+        if (!Auth::guard('member')->check()) {
+            return redirect()->route('user.login');
+        }
+        $product = Product::where('id', $id)->first();
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] += $quantity;
+        } else {
+            $cart[$id]['product_id'] = $id;
+            $cart[$id]['name'] = $product->name;
+            $cart[$id]['regular_price'] = $product->regular_price;
+            $cart[$id]['sale_price'] = $product->sale_price;
+            $cart[$id]['product_photo_path'] = $product->product_photo_path;
+            $cart[$id]['quantity'] = $quantity;
+        }
+        
+        session()->put('cart', $cart);
+        // dd(session()->get('cart'));
     }
 
     public function delete($id)
     {
-        $total = 0;
-        $user = Auth::guard('member')->user();
-        $cart = Cart::where('member_id', $user->id)->get();
-        //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
-        $detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
+            $total = 0;
+            if ($id) {
+            $cart = session()->get('cart');
 
-        $del = DetailCart::where('product_id', $id)->delete();
+            if (isset($cart[$id])) {
+                unset($cart[$id]);
+                session()->put('cart', $cart);
+            }
 
-        //dd($del, $id);
-        if ($del) {
-            //return view('client.order.cart', compact('detail_cart', 'user', 'cart'))->with('success', 'Xoá thành công');
-            return redirect()->back()->with('success', 'Xoá thành công');
+            foreach (session('cart') as $id => $details) {
+                $total += ($details['sale_price'] ? $details['sale_price'] : $details['regular_price']) * $details['quantity'];
+            }
         }
-        //return view('client.order.cart',compact('detail_cart', 'user', 'cart'))->with('fail', 'Xoá không thành công');
-        return redirect()->back()->with('fail', 'Xoá không bạn');
+
+        return response()->json(['is_passed' => 'true','total' => $total]);
     }
 }

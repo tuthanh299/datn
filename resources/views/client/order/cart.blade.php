@@ -26,7 +26,7 @@
             @php
                 $total = 0;
             @endphp
-            @if ($detail_cart->count() > 0)
+            @if (session('cart'))
                 @csrf
                 <div class="row">
                     <div class="top-cart col-md-12">
@@ -34,7 +34,6 @@
                         <div class="list-procart">
                             <div class="procart procart-label">
                                 <div class="row row-10">
-                                    <div class="info-procart mg-col-10"><input type="checkbox"></div>
                                     <div class="pic-procart col-3 col-md-2 mg-col-10">Hình ảnh</div>
                                     <div class=" col-6 col-md-5 mg-col-10">Tên sản phẩm</div>
                                     <div class="quantity-procart col-3 col-md-2 mg-col-10">
@@ -44,38 +43,42 @@
                                 </div>
                             </div>
                             <!--thẻ sản phẩm giỏ hàng-->
-                            @foreach ($detail_cart as $v)
-                                <div class="procart procart">
+                            @foreach (session('cart') as $k => $v)
+                                @php $total += ($v['sale_price']?$v['sale_price']:$v['regular_price']) * $v['quantity'] @endphp
+                                <div class="procart" data-route="{{ route('delete.cart', $k) }}"
+                                    data-id="{{ $k }}">
                                     <div class="row row-10">
-                                        <div><input type="checkbox"></div>
                                         <!--Hình ảnh-->
-                                        <div class="pic-procart col-3 col-md-2 mg-col-10"> <a class="text-decoration-none"
-                                                target="_blank" title=""> <img width="85px" height="85px"
-                                                    src="{{ $v->product_photo_path ? $v->product_photo_path : asset('assets/noimage.jpg') }}"
-                                                    alt=""> </a> <a class="del-procart text-decoration-none"
-                                                data-code=""> <i class="fa fa-times-circle"></i>
-                                                <span> <a href="{{ route('delete.cart', $v->id) }}"> Xóa </a> </span> </div>
+                                        <div class="pic-procart col-3 col-md-2 mg-col-10">
+                                            <a class="text-decoration-none" target="_blank" title=""> <img
+                                                    width="85px" height="85px"
+                                                    src="{{ $v['product_photo_path'] ? $v['product_photo_path'] : asset('assets/noimage.jpg') }}"
+                                                    alt="">
+                                            </a>
+                                            <a class="del-procart text-decoration-none"><i class="fa fa-times-circle"></i>
+                                                Xóa </a>
+                                        </div>
                                         <!--Tên-->
                                         <div class="info-procart col-6 col-md-5 mg-col-10">
                                             <h3 class="name-procart"><a class="text-decoration-none" target="_blank"
-                                                    title=""> {{ $v->name }} </a></h3>
+                                                    title=""> {{ $v['name'] }} </a></h3>
                                         </div>
 
                                         <!--Số lượng-->
 
                                         <!--<div class="quantity-procart col-3 col-md-2 mg-col-10">
-                                        <div class="price-procart price-procart-rp">
-                                            <p class="price-new-cart load-price-new"> </p>
-                                            <p class="price-old-cart load-price"> </p>
-                                            <p class="price-new-cart load-price"> </p>
-                                        </div>
-                                        <div class="quantity-counter-procart quantity-counter-procart"> <span
-                                                class="counter-procart-minus counter-procart">-</span> <input type="number"
-                                                class="quantity-procart" min="1" value="" data-pid=""
-                                                data-code=" " /> <span
-                                                class="counter-procart-plus counter-procart">+</span>
-                                        </div>
-                                    </div> -->
+                                                            <div class="price-procart price-procart-rp">
+                                                                <p class="price-new-cart load-price-new"> </p>
+                                                                <p class="price-old-cart load-price"> </p>
+                                                                <p class="price-new-cart load-price"> </p>
+                                                            </div>
+                                                            <div class="quantity-counter-procart quantity-counter-procart"> <span
+                                                                    class="counter-procart-minus counter-procart">-</span> <input type="number"
+                                                                    class="quantity-procart" min="1" value="" data-pid=""
+                                                                    data-code=" " /> <span
+                                                                    class="counter-procart-plus counter-procart">+</span>
+                                                            </div>
+                                                        </div> -->
 
                                         <!--Số lượng-->
                                         <div class="quantity-procart col-3 col-md-2 mg-col-10">
@@ -96,7 +99,7 @@
                                             <div class="quantity-counter-procart quantity-counter-procart-">
                                                 <span class="counter-procart-minus counter-procart">-</span>
                                                 <input type="number" class="quantity-procart" min="1"
-                                                    value="{{ $v->quantity }}" data-pid=" " data-code="" />
+                                                    value="{{ $v['quantity'] }}" data-pid=" " data-code="" />
                                                 <span class="counter-procart-plus counter-procart">+</span>
                                             </div>
                                         </div>
@@ -106,31 +109,25 @@
                                             onclick="decreaseCount(event, this)">
                                         @method('PATCH')
                                         <input type="number" aria-label="quantity" class="input-qty"
-                                            value="{{ $v->quantity }}" max="10" min="1" name="quantity">
+                                            value="{{ $v['quantity'] }}" max="10" min="1" name="quantity">
                                         <input class="plus is-form" type="button" value="+"
                                             onclick="increaseCount(event, this)">
                                     </span>
                                 </div> --}}
                                         <!--end số lượng-->
                                         <!--Thành tiền-->
-                                        @if ($v->discount > 0)
+                                        @if ($v['sale_price'])
                                             <div class="price-procart col-3 col-md-3 mg-col-10">
-                                                <p class="price-new-cart load-price-new"> @formatmoney($v->sale_price) </p>
-                                                <p class="price-old-cart load-price"> @formatmoney($v->regular_price)</p>
-                                                <p class="price-new-cart load-price"> @formatmoney($v->sale_price * $v->quantity) </p>
+                                                <p class="price-new-cart load-price-new"> @formatmoney($v['sale_price']) </p>
+                                                <p class="price-old-cart load-price"> @formatmoney($v['regular_price'])</p>
+                                                <p class="price-new-cart load-price"> @formatmoney($v['sale_price'] * $v['quantity']) </p>
                                             </div>
-                                            @php
-                                                $total += $v->sale_price * $v->quantity;
-                                            @endphp
                                         @else
                                             <div class="price-procart col-3 col-md-3 mg-col-10">
-                                                <p class="price-new-cart load-price-new"> @formatmoney($v->regular_price) </p>
-                                                <p class="price-new-cart load-price-new"> @formatmoney($v->regular_price * $v->quantity) </p>
+                                                <p class="price-new-cart load-price-new"> @formatmoney($v['regular_price']) </p>
+                                                <p class="price-new-cart load-price-new"> @formatmoney($v['regular_price'] * $v['quantity']) </p>
                                             </div>
                                             </td>
-                                            @php
-                                                $total += $v->regular_price * $v->quantity;
-                                            @endphp
                                         @endif
                                     </div>
                                 </div>
@@ -139,7 +136,7 @@
                             <div class="money-procart">
                                 <div class="total-procart">
                                     <p>Tổng tiền:</p>
-                                    <p class="total-price load-price-total"> @formatmoney($total) </p>
+                                    <p class="total-price load-price-total" id="load-total"> @formatmoney($total) </p>
                                 </div>
                             </div>
                         </div>
@@ -147,11 +144,6 @@
                     <div class="btn-wrap-cart d-flex justify-content-end align-items-center mt-4">
                         <div class="btn btn-success  btn-cart-back-to-home me-2">
                             <a class="text-light" href="{{ route('index') }}"> Về trang chủ</a>
-                        </div>
-                        <!--<button class="btn btn-success" type="submit">Cập nhật</button>-->
-
-                        <div class="btn btn-success  btn-cart-back-to-home me-2">
-                            <a class="text-light" href="#"> Cập nhật</a>
                         </div>
                         <div class="btn btn-success  btn-cart-next-to-payment">
                             <a class="text-light" href="{{ route('user.payment') }}">Thanh toán</a>
@@ -165,11 +157,9 @@
                 <a href="{{ route('index') }}" class="empty-cart text-decoration-none d-block">
                     <i class="fa-duotone fa-cart-xmark"></i>
                     <p>Không tồn tại sản phẩm nào trong giỏ hàng</p>
-                    <a href="{{ route('index') }}">
-                        <span class="btn btn-back-to-home">
-                            Về trang chủ
-                        </span>
-                    </a>
+                    <span class="btn btn-back-to-home">
+                        Về trang chủ
+                    </span>
                 </a>
             @endif
         </div>

@@ -1,4 +1,7 @@
 @extends('client.layouts.index')  
+@section('title')
+    <title> {{$pageName }}</title>
+@endsection
 @section('content')
     <div class="wrap-content">
         <div class="flex-news-internal row">

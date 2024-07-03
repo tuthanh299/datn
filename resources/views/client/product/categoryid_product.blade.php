@@ -30,17 +30,28 @@
                                                     title="{{ $v->name }}">{{ $v->name }}</a>
                                             </div>
                                             
-                                            <div class="price-product ">
-                                                <div class="price-new">
-
-                                                    @formatmoney($v->sale_price)
-                                                </div>
-                                                <div class="price-old">
-                                                    @formatmoney($v->regular_price)
-                                                </div>
-                                                <div class="discount">
-                                                    {{ $v->discount }}%
-                                                </div>
+                                            <div class="price-product">
+                                                @if ($v->discount)
+                                                    <div class="price-new">
+                                                        @formatmoney($v->sale_price)
+                                                    </div>
+                                                    <div class="price-old">
+                                                        @formatmoney($v->regular_price)
+                                                    </div>
+                                                    <div class="discount">
+                                                        {{ $v->discount }}%
+                                                    </div>
+                                                @else
+                                                    @if ($v->regular_price)
+                                                        <div class="price-new">
+                                                            @formatmoney($v->regular_price)
+                                                        </div>
+                                                    @else
+                                                        <div class="price-new">
+                                                            Liên hệ
+                                                        </div>
+                                                    @endif
+                                                @endif
                                             </div>
                                             <div class="product-button text-center">
                                                 <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
