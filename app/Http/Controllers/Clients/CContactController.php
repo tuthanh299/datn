@@ -1,15 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Clients;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
 
 class CContactController extends Controller
 {
-    public function index()
-    {
-
-        return View('client.contact.index');
-    }
+    //
 }

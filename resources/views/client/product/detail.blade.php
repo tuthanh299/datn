@@ -1,7 +1,7 @@
 @extends('client.layouts.index')
 
 @section('title')
-    <title>Tất cả sản phẩm</title>
+    <title> {{$pageName }}</title>
 @endsection
 
 @section('content')
@@ -64,8 +64,13 @@
                                 class="attribute-product-detail-text">{{ $productDetail->publishing_year }}</span>
                         </div>
                         <div class="price-product-detail">
-                            Giá: <span class="price-new-product-detail">@formatmoney($productDetail->sale_price)</span> <span
+                            Giá: 
+                            @if ($productDetail->sale_price)
+                                <span class="price-new-product-detail">@formatmoney($productDetail->sale_price)</span> <span
                                 class="price-old-product-detail">@formatmoney($productDetail->regular_price)</span>
+                            @else
+                                <span  class="price-new-product-detail">@formatmoney($productDetail->regular_price)</span>
+                            @endif
                         </div>
                         <div class="desc-product-detail">
                             {!! $productDetail->description !!}
@@ -82,7 +87,7 @@
                         </div>
                         <div>
                             <div class="cart-pro-detail d-flex flex-wrap align-items-center justify-content-between">
-                                <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center" href="{{route('add_index.cart', ['id' => $productDetail->id])}}"><i class="bi bi-basket2"></i><span>Thêm vào giỏ hàng</span></a>
+                                <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center add-to-cart" href="{{route('add_index.cart', ['id' => $productDetail->id])}}" data-route="{{ route('add_index.cart', ['id' => $productDetail->id]) }}"><i class="bi bi-basket2"></i><span>Thêm vào giỏ hàng</span></a>
                                 <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center"  ><i class="bi bi-cart2"></i><span>Mua ngay</span></a>
                             </div>
                         </div>

@@ -55,14 +55,14 @@ class IndexController extends Controller
     {
         $publisher = Publisher::where('id', $id)->firstOrFail();
         $pagename = $publisher->name;
-        $publisherproduct = Product::where('publisher_id', $id)->latest()->paginate(10);
+        $publisherproduct = Product::where('publisher_id', $id)->latest()->paginate(20);
         return view('client.product.publisher_product', compact('publisherproduct', 'pagename'));
     }
     public function CategoryIdProduct($id)
     {
         $category = Category::where('id', $id)->firstOrFail();
         $pagename = $category->name;
-        $categoryidproduct = Product::where('category_id', $id)->latest()->paginate(10);
+        $categoryidproduct = Product::where('category_id', $id)->latest()->paginate(20);
         return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename'));
     }
 

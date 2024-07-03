@@ -85,7 +85,10 @@ use App\Http\Controllers\Clients\IndexController;
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                                 @if(Auth::guard('member')->check())
                                                 <div class="menu-bottom-cart-num">
-                                                    {{ $detail_cart->count() }}
+                                                   @php
+                                                       $cart = session()->get('cart');
+                                                   @endphp
+                                                   {{ isset($cart) ? count($cart) : 0 }}
                                                 </div>
                                                 @else
                                                 <div></div>

@@ -9,6 +9,7 @@
         <div class="wrap-pay">
             @php
                 $shipping = 30000;
+                $total = 0;
             @endphp
             <div class="row">
                 <div class="top-cart col-12 col-lg-7">
@@ -27,38 +28,29 @@
                             </div>
                         </div>
                         <!--thẻ sản phẩm giỏ hàng-->
-                        @foreach ($detail_cart as $v)
+                        @foreach (session('cart') as $k => $v)
+                            @php $total += ($v['sale_price']?$v['sale_price']:$v['regular_price']) * $v['quantity'] @endphp
                         <div class="procart procart">
                             <div class="row row-10">
                                 <!--<div><input type="checkbox"></div>-->
                                 <div class="pic-procart col-3 col-md-2 mg-col-10"> <a class="text-decoration-none"
                                         target="_blank" title=""> <img width="85px" height="85px"
-                                            src="{{ asset($v->product_photo_path) }}" alt=""> </a> <a
+                                            src="{{ asset($v['product_photo_path']) }}" alt=""> </a> <a
                                         class="del-procart text-decoration-none" data-code=""> <i
                                             class="fa fa-times-circle"></i>
                                         <span>Xóa</span> </a> </div>
                                 <div class="info-procart col-6 col-md-5 mg-col-10">
                                     <h3 class="name-procart"><a class="text-decoration-none" target="_blank"
-                                            title=""> {{ $v->name }} </a></h3>
+                                            title=""> {{ $v['name'] }} </a></h3>
                                 </div>
-                                <div class="quantity-procart col-3 col-md-2 mg-col-10">
-                                    {{$v->quantity}}
-                                    <!--<div class="price-procart price-procart-rp">
-                                        <p class="price-new-cart load-price-new"> </p>
-                                        <p class="price-old-cart load-price"> </p>
-                                        <p class="price-new-cart load-price"> </p>
-                                    </div>
-                                    <div class="quantity-counter-procart quantity-counter-procart"> <span
-                                            class="counter-procart-minus counter-procart">-</span> <input type="number"
-                                            class="quantity-procart" min="1" value="" data-pid=""
-                                            data-code=" " /> <span
-                                            class="counter-procart-plus counter-procart">+</span>
-                                    </div> -->
-                                </div>
+                                <div class="quantity-procart col-3 col-md-2 mg-col-10">{{$v['quantity']}}</div>
                                 <div class="price-procart col-3 col-md-3 mg-col-10">
-                                    <p class="price-new-cart load-price-new">  @formatmoney($v->sale_price) </p>
-                                    <p class="price-old-cart load-price"> @formatmoney($v->regular_price)</p>
-                                    <p class="price-new-cart load-price"> @formatmoney($v->regular_price)  </p>
+                                    @if ($v['sale_price'])
+                                    <p class="price-new-cart load-price-new">  @formatmoney($v['sale_price'] * $v['quantity']) </p>
+                                    <p class="price-old-cart load-price"> @formatmoney($v['regular_price'] * $v['quantity'])</p>
+                                    @else
+                                    <p class="price-new-cart load-price"> @formatmoney($v['regular_price'] * $v['quantity'])  </p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -68,7 +60,7 @@
                     <div class="money-procart">
                         <div class="total-procart">
                             <p>Tạm tính:</p>
-                            <p class="total-price load-price-temp">@formatmoney($cart[0]->cart_total)</p>
+                            <p class="total-price load-price-temp">@formatmoney($total)</p>
                         </div>
                         <div class="total-procart">
                             <p>Phí vận chuyển:</p>
@@ -76,7 +68,7 @@
                         </div>
                         <div class="total-procart">
                             <p>Tổng tiền:</p>
-                            <p class="total-price load-price-total">@formatmoney($cart[0]->cart_total + $shipping)</p>
+                            <p class="total-price load-price-total">@formatmoney($total + $shipping)</p>
                         </div>
                     </div>
                 </div>
@@ -181,12 +173,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="total" value="{{ $cart[0]->cart_total + $shipping }}">
+                            <input type="hidden" name="total" value="{{ $total + $shipping }}">
                             <button type="submit" class="btn btn-primary">Thanh toán COD</button>
                         </form>
                         <form action="{{ url('/vnpay_payment') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="total" value="{{ $cart[0]->cart_total + $shipping }}">
+                            <input type="hidden" name="total" value="{{ $total + $shipping }}">
                             <input type="hidden" name="fullname" value="{{ $user->last_name . ' ' . $user->first_name }}">
                             <input type="hidden" name="address" value="{{ $user->address }}">
                             <input type="hidden" name="note" value="">
