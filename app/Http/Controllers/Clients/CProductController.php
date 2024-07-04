@@ -19,8 +19,8 @@ class CProductController extends Controller
         if(Auth::guard('member')->user()) 
         {
             $user = Auth::guard('member')->user();
-            $carts = Cart::where('member_id', $user->id)->get();
-            $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
+            //$carts = Cart::where('member_id', $user->id)->get();
+            //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
 
             return view('client.product.index', compact('productInternal', 'user', 'detail_cart','pageName'));
         }
@@ -36,8 +36,8 @@ class CProductController extends Controller
         if(Auth::guard('member')->user()) 
         {
             $user = Auth::guard('member')->user();
-            $carts = Cart::where('member_id', $user->id)->get();
-            $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
+            //$carts = Cart::where('member_id', $user->id)->get();
+            //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
 
             return view('client.product.detail', compact('productDetail', 'user', 'detail_cart','pageName'));
         }

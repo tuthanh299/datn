@@ -40,8 +40,8 @@ class IndexController extends Controller
         if(Auth::guard('member')->user())
         {
             $user = Auth::guard('member')->user();
-            $carts = Cart::where('member_id', $user->id)->get();
-            $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
+            //$carts = Cart::where('member_id', $user->id)->get();
+            //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
 
             return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user', 'detail_cart'));
             //dd($detail_cart);

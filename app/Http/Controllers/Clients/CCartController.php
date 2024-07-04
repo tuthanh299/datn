@@ -16,10 +16,10 @@ class CCartController extends Controller
         // dd(session()->get('cart'));
         if (Auth::guard('member')->check()) {
             $user = Auth::guard('member')->user();
-            $carts = Cart::where('member_id', $user->id)->get();
+            //$carts = Cart::where('member_id', $user->id)->get();
             //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
-            $detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
-            $detail_cart_1 = DB::table('detail_carts')->join('products', 'detail_carts.product_id', '=', 'products.id')->get();
+            //$detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
+            //$detail_cart_1 = DB::table('detail_carts')->join('products', 'detail_carts.product_id', '=', 'products.id')->get();
 
             return view('client.order.cart', compact('detail_cart', 'detail_cart_1', 'user', 'carts'));
             //dd($detail_cart, $detail_cart_1, $user, $carts);

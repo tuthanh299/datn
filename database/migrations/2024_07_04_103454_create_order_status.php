@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('import_orders', function (Blueprint $table) {
+        Schema::create('order_statuss', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice_code'); 
-            $table->dateTime('import_date'); 
-            $table->double('total_price'); 
+            $table->string('name');
+            $table->string('class_order');
             $table->timestamps();
-            $table->softDeletes();
         });
-
     }
 
     /**
@@ -27,7 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('import_invoices');
-
+        Schema::dropIfExists('order_status');
     }
 };

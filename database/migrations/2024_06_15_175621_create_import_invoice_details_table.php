@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('import_invoice_details', function (Blueprint $table) {
+        Schema::create('import_order_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('import_invoice_id');
-            $table->integer('product_id');
+            $table->foreignId('import_order_id')->constrained();
+            $table->foreignId('product_id')->constrained();
             $table->double('import_price');
             $table->integer('quantity');
             $table->timestamps();

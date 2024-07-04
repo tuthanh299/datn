@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sale_invoice_details', function (Blueprint $table) {
+        Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sale_invoice_id')->constrained();
+            $table->foreignId('order_id')->constrained();
             //$table->bigInteger('sale_invoice_id')->unique();
             $table->foreignId('product_id')->constrained();
             $table->integer('quantity');
-            $table->integer('price');
+            $table->integer('regular_price');
+            $table->integer('sale_price');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_import_invoice');
+        Schema::dropIfExists('order_detail');
     }
 };

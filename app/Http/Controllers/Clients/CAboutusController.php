@@ -24,8 +24,8 @@ class CAboutusController extends Controller
         if(Auth::guard('member')->check()) 
         {
             $user = Auth::guard('member')->user();
-            $carts = Cart::where('member_id', $user->id)->get();
-            $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
+            //$carts = Cart::where('member_id', $user->id)->get();
+            //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
             return view('client.aboutus.index', compact('pageName', 'aboutusin', 'user', 'detail_cart'));
         }
        

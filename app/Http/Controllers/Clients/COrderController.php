@@ -18,8 +18,8 @@ class COrderController extends Controller
         if(Auth::guard('member')->user()) 
         {
             $user = Auth::guard('member')->user();
-            $cart = Cart::where('member_id', $user->id)->get();
-            $detail_cart = DetailCart::where('cart_id', $cart[0]->id)->get();
+            //$cart = Cart::where('member_id', $user->id)->get();
+            //$detail_cart = DetailCart::where('cart_id', $cart[0]->id)->get();
             $hdb = SaleInvoice::where('member_id', $user->id)->get();
 
             return view('client.order.order', compact('user', 'detail_cart', 'hdb'));
@@ -32,8 +32,8 @@ class COrderController extends Controller
         if(Auth::guard('member')->user()) 
         {
             $user = Auth::guard('member')->user();
-            $cart = Cart::where('member_id', $user->id)->get();
-            $detail_cart = DetailCart::where('cart_id', $cart[0]->id)->get();
+            //$cart = Cart::where('member_id', $user->id)->get();
+            //$detail_cart = DetailCart::where('cart_id', $cart[0]->id)->get();
             $hdb = SaleInvoice::where('member_id', $user->id)->get();
             //$cthdb = SaleInvoiceDetail::where('sale_invoice_id', $hdb[0]->id)->get();
             $cthdb = DB::table('sale_invoice_details')->join('products', 'sale_invoice_details.product_id', '=', 'products.id')->get();

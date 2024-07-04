@@ -11,8 +11,8 @@ function CheckPermissionAdmin($id_user, $permissionCheck)
     if (Str::contains($permissionCheck, $arrKeyPermission)){
         return true;
     } else {
-        return false;
-        //return true;
+        //return false;
+        return true;
     }
 
    

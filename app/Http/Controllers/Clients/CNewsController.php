@@ -15,8 +15,8 @@ class CNewsController extends Controller
         if(Auth::guard('member')->check()) 
         {
             $user = Auth::guard('member')->user();
-            $carts = Cart::where('member_id', $user->id)->get();
-            $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
+            //$carts = Cart::where('member_id', $user->id)->get();
+            //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
 
             return view('client.news.index', compact('newsInternal', 'user', 'detail_cart'));
         }
@@ -31,8 +31,8 @@ class CNewsController extends Controller
         if(Auth::guard('member')->check()) 
         {
             $user = Auth::guard('member')->user();
-            $carts = Cart::where('member_id', $user->id)->get();
-            $detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
+            //$carts = Cart::where('member_id', $user->id)->get();
+            //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
             return view('client.news.detail', compact('newsDetail', 'newsInternal', 'user', 'detail_cart'));
         }
         return view('client.news.detail', compact('newsDetail', 'newsInternal','pageName'));
