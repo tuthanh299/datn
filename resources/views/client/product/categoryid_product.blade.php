@@ -55,7 +55,8 @@
                                             </div>
                                             <div class="product-button text-center">
                                                 <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
-                                                    <a href="" class="product-button-cart-action button-addnow text-light"><i
+                                                    <a href="{{ route('add_index.cart', ['id' => $v->id,'quantity'=>1]) }}"
+                                                        class="product-button-cart-action button-addnow text-light add-to-cart" data-route="{{ route('add_index.cart', ['id' => $v->id,'quantity'=>1]) }}"><i
                                                             class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
                                                 </div>
                                                 <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
