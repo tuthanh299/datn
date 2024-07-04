@@ -446,9 +446,9 @@ function AllRun() {
         let route = $(this).data("route");
         let quantity = 0;
 
-        if($('.qty-pro').length){
-            quantity = $('.qty-pro').val();
-            route = route  + quantity;
+        if ($(".qty-pro").length) {
+            quantity = $(".qty-pro").val();
+            route = route + quantity;
         }
 
         $.ajax({
@@ -484,32 +484,89 @@ function AllRun() {
                         parseInt(_target.previousElementSibling.value) + 1;
                     break;
                 default:
-                    alert('Không hợp lệ');
+                    alert("Không hợp lệ");
                     break;
             }
         }
     );
 
+    // Quantity with AJAX
+    $("body").on(
+        "click",
+        ".counter-procart-minus,.counter-procart-plus",
+        function (event) {
+            const _target = event.target;
+            const route = $(this)
+                    .parents(".quantity-counter-procart[data-route]")
+                    .data("route"),
+                id = $(this).parents(".procart[data-id]").data("id");
+            let method = "";
+
+            console.log(route, method);
+
+            switch (_target.classList[0]) {
+                case "counter-procart-minus":
+                    if (_target.nextElementSibling.value > 1) {
+                        _target.nextElementSibling.value =
+                            parseInt(_target.nextElementSibling.value) - 1;
+                        method = "minus";
+                    } else {
+                        _target.nextElementSibling.value = 1;
+                        alert("Số lượng không được nhỏ hơn 1");
+                        return false;
+                    }
+                    break;
+                case "counter-procart-plus":
+                    _target.previousElementSibling.value =
+                        parseInt(_target.previousElementSibling.value) + 1;
+                    method = "plus";
+                    break;
+                default:
+                    alert("Không hợp lệ");
+                    break;
+            }
+
+            $.ajax({
+                url: route + method,
+                type: "GET",
+                success: function (response) {
+                    if (response) {
+                        $(".procart[data-id=" + id + "]")
+                            .find(".load-price-total")
+                            .text(formatMoney(response.update_price));
+                        $(".list-procart")
+                            .find("#load-total")
+                            .text(formatMoney(response.total));
+                    }
+                },
+            });
+        }
+    );
+
     // Delete product from cart
-    $('body').on('click', '.del-procart', function (event) {
+    $("body").on("click", ".del-procart", function (event) {
         event.preventDefault();
 
         const route = $(this).parents(".procart[data-route]").data("route"),
-                id = $(this).parents(".procart[data-id]").data("id");
+            id = $(this).parents(".procart[data-id]").data("id");
 
         $.ajax({
             url: route,
             type: "GET",
             success: function (response) {
-                if(response){
-                    $('.list-procart').find('.procart[data-id="'+id+'"]').remove();
-                    $('.list-procart').find('#load-total').text(formatMoney(response.total));
+                if (response) {
+                    $(".list-procart")
+                        .find('.procart[data-id="' + id + '"]')
+                        .remove();
+                    $(".list-procart")
+                        .find("#load-total")
+                        .text(formatMoney(response.total));
                 }
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);
             },
-        })
+        });
     });
 }
 

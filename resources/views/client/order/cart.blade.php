@@ -96,7 +96,7 @@
                                                 </p>
 
                                             </div>
-                                            <div class="quantity-counter-procart quantity-counter-procart-">
+                                            <div class="quantity-counter-procart quantity-counter-procart-" data-route="{{ route('update_quantity.cart',['id'=>$k]) }}">
                                                 <span class="counter-procart-minus counter-procart">-</span>
                                                 <input type="number" class="quantity-procart" min="1"
                                                     value="{{ $v['quantity'] }}" data-pid=" " data-code="" />
@@ -125,7 +125,7 @@
                                         @else
                                             <div class="price-procart col-3 col-md-3 mg-col-10">
                                                 <p class="price-new-cart load-price-new"> @formatmoney($v['regular_price']) </p>
-                                                <p class="price-new-cart load-price-new"> @formatmoney($v['regular_price'] * $v['quantity']) </p>
+                                                <p class="price-new-cart load-price-new load-price-total"> @formatmoney($v['regular_price'] * $v['quantity']) </p>
                                             </div>
                                             </td>
                                         @endif

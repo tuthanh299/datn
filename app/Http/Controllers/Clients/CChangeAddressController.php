@@ -14,10 +14,7 @@ class CChangeAddressController extends Controller
     {
         if(Auth::guard('member')->user()) 
         {
-            $user = Auth::guard('member')->user();
-            //$cart = Cart::where('member_id', $user->id)->get();
-            //$detail_cart = DetailCart::where('cart_id', $cart[0]->id)->get();
-
+            $user = Auth::guard('member')->user(); 
             return view('client.info.changeaddress', compact('user', 'hdb'));
         }
         return redirect()->route('login');

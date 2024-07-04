@@ -2,8 +2,6 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cart;
-use App\Models\DetailCart;
 use App\Models\News;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -18,12 +16,12 @@ class CSearchController extends Controller
         $search = $request->input('search_keyword');
         $searchresultproduct = null;
         $searchresultnews = null;
-    
+
         if ($search_type == 'product') {
             if (!empty($search)) {
                 $search = '%' . $search . '%';
                 $searchresultproduct = Product::select('id', 'name', 'product_photo_path', 'regular_price', 'sale_price', 'discount')
-                    ->where('name', 'LIKE', $search)
+                    ->where('name', 'LIKE', $search)->where('deleted_at', null)
                     ->latest()
                     ->paginate(10);
             }
@@ -31,22 +29,18 @@ class CSearchController extends Controller
             if (!empty($search)) {
                 $search = '%' . $search . '%';
                 $searchresultnews = News::select('id', 'name', 'description', 'photo_path')
-                    ->where('name', 'LIKE', $search)
+                    ->where('name', 'LIKE', $search)->where('deleted_at', null)
                     ->latest()
                     ->paginate(8);
             }
         }
 
-        if(Auth::guard('member')->check()) 
-        {
+        if (Auth::guard('member')->check()) {
             $user = Auth::guard('member')->user();
-            //$carts = Cart::where('member_id', $user->id)->get();
-            //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
-            return view('client.product.search', compact('pageName', 'searchresultproduct', 'searchresultnews', 'user', 'detail_cart'));
+            return view('client.product.search', compact('pageName', 'searchresultproduct', 'searchresultnews', 'user'));
         }
-    
+
         return view('client.product.search', compact('pageName', 'searchresultproduct', 'searchresultnews'));
     }
-    
 
 }
