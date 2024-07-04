@@ -30,7 +30,7 @@ class PaymentController extends Controller
             }
         }
 
-        $cart[0]->cart_total = $total;
+        // $cart[0]->cart_total = $total;
 
         return view('client.order.payment', compact('detail_cart', 'user', 'cart'));
         //dd($carts);

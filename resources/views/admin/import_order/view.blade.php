@@ -25,8 +25,8 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Mã hóa đơn</label>
-                            <input type="text" class="form-control" name="invoice_code"
-                                value="{!! $importinvoice->invoice_code !!}" readonly>
+                            <input type="text" class="form-control" name="orders_code"
+                                value="{!! $ImportOrder->orders_code !!}" readonly>
                         </div>
                     </div>
                     <div class="col-3">
@@ -34,7 +34,7 @@
                             <label>Thời gian</label>
                             <input type="datetime-local" min="{{ date('Y-m-d\TH:i') }}" class="form-control"
                                 name="import_date"
-                                value="{{ \Carbon\Carbon::parse($importinvoice->import_date)->format('Y-m-d\TH:i') }}"
+                                value="{{ \Carbon\Carbon::parse($ImportOrder->import_date)->format('Y-m-d\TH:i') }}"
                                 readonly>
                         </div>
                     </div>
@@ -42,14 +42,14 @@
                         <div class="form-group">
                             <label>Tổng tiền</label>
                             <input type="number" class="form-control" name="total_price"
-                                value="{!! $importinvoice->total_price !!}" readonly>
+                                value="{!! $ImportOrder->total_price !!}" readonly>
                         </div>
                     </div>
 
                 </div>
                 <div class="row col-12 list-import-invoice-detail">
 
-                    @foreach ($importinvoice->importinvoicedetail as $v)
+                    @foreach ($ImportOrder->importinvoicedetail as $v)
                         <div class="col-3 import-invoice-detail">
                             <div class="card card-primary card-outline text-sm">
                                 <div class="card-header">

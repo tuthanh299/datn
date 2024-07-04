@@ -102,7 +102,7 @@ function SumoSelectImportInvoive() {
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="">Số lượng nhập</label>
-                                            <input type="number" name="quantity[]"  value="" class="form-control">
+                                            <input type="number" name="quantity[]"  value="" class="form-control quantity-input">
                                         </div>
                                         <div class="form-group">
                                             <label for="">Giá nhập / sản phẩm</label>
@@ -122,7 +122,6 @@ function SumoSelectImportInvoive() {
         });
     }
 }
-
 
 function calculateTotalPrice() {
     var totalPrice = 0;
@@ -158,6 +157,28 @@ function JsAdmin() {
         $(".summernote").summernote();
     }
 }
+
+function calculate() {
+    
+
+    $("body").on("change", "input.import_price, input.quantity-input", function () {
+        let _total = 0;
+
+        $("body")
+            .find(".product-call-by-ajax")
+            .each(function () {
+                const currentPrice = $(this).find("input.import_price").val()?parseInt($(this).find("input.import_price").val()):0;
+                const quantity = $(this).find('input[name="quantity[]"]').val()?parseInt($(this).find('input[name="quantity[]"]').val()):0;
+
+                let tempTotal = 0;
+                tempTotal += currentPrice * quantity;
+
+                _total += tempTotal;
+                $('input[name="total_price"]').val(_total);
+            });
+    });
+}
+
 window.onload = function () {
     if (window.location.search) {
         window.history.replaceState(
@@ -172,7 +193,7 @@ $(document).ready(function () {
         "change",
         calculateTotalPrice
     );
-
+    calculate();
     JsAdmin();
     CheckRole();
     initializeSelect2();

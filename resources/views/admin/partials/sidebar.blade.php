@@ -112,9 +112,9 @@ $user = HomeController::getUser();
                 </li>
                 @if (CheckPermissionAdmin($user->id, 'list_product,list_category,list_publisher,list_warehouse'))
                     <li
-                        class="nav-item {{ Route::current()->getName() === 'import_invoice.index' ? 'menu-open' : null }}">
+                        class="nav-item {{ Route::current()->getName() === 'import_order.index' ? 'menu-open' : null }}">
                         <a href="#"
-                            class="nav-link {{ Route::current()->getName() === 'import_invoice.index' ? 'active' : null }}">
+                            class="nav-link {{ Route::current()->getName() === 'import_order.index' ? 'active' : null }}">
                             <i class="nav-icon text-sm fas fa-layer-group"></i>
                             <p class="text-capitalize">
                                 Group Hóa Đơn
@@ -123,8 +123,8 @@ $user = HomeController::getUser();
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('import_invoice.index') }}"
-                                    class="nav-link {{ Route::current()->getName() === 'import_invoice.index' ? 'active' : null }}">
+                                <a href="{{ route('import_order.index') }}"
+                                    class="nav-link {{ Route::current()->getName() === 'import_order.index' ? 'active' : null }}">
                                     <i class="nav-icon text-sm fas fa-boxes"></i>
                                     <p class="text-capitalize">
                                         Hóa Đơn Nhập

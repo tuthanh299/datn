@@ -65,7 +65,7 @@
                                         <td>
                                             <a href="{{ route('news.edit', ['id' => $news->id]) }}"
                                                 class="btn btn-default">Sửa</a>
-                                            <a href=" "data-url="{{ route('news.delete', ['id' => $news->id]) }}"
+                                            <a href=" " data-url="{{ route('news.delete', ['id' => $news->id]) }}"
                                                 class="btn btn-danger action_delete">Xóa</a>
                                         </td>
                                     </tr>

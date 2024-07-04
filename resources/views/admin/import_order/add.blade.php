@@ -15,7 +15,7 @@
 
     <div class="content">
         <div class="container-fluid">
-            <form action="{{ route('import_invoice.store') }}" method="POST">
+            <form action="{{ route('import_order.store') }}" method="POST">
                 @csrf
                 <div class="card-footer text-sm sticky-top">
                     <button type="submit" class="btn btn-primary">Lưu</button>
@@ -24,15 +24,15 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Mã hóa đơn</label>
-                            <input type="text" class="form-control" name="invoice_code"
-                                value="{{ $ImportInvoiceCode }}" readonly>
+                            <input type="text" class="form-control" name="orders_code"
+                                value="{{ $ImportOrderCode }}" readonly>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
                             <label>Thời gian</label>
                             <input type="datetime-local"  class="form-control"
-                                name="import_date" value="{{ $TimeCreateImportInvoice->format('Y-m-d\TH:i') }}" readonly>
+                                name="import_date" value="{{ $TimeCreateImportOrder->format('Y-m-d\TH:i') }}" readonly>
                         </div>
                     </div>
                     <div class="col-3">

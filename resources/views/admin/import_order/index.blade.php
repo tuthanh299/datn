@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ route('import_invoice.create') }}" class="btn btn-success float-right m-2">Thêm</a>
+                    <a href="{{ route('import_order.create') }}" class="btn btn-success float-right m-2">Thêm</a>
                 </div>
                 <div class="col-md-12">
                     <table class="table">
@@ -28,15 +28,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($importinvoice as $v)
+                            @foreach ($ImportOrder as $v)
                                 <tr>
-                                    <td class="">{{ $v->invoice_code }}</td>
+                                    <td class="">{{ $v->orders_code }}</td>
                                     <td class="">{{ $v->import_date }}</td>
                                     <td class="">{{ $v->total_price }}</td>
                                     <td>
-                                        <a href="{{ route('import_invoice.view', ['id' => $v->id]) }}"
+                                        <a href="{{ route('import_order.view', ['id' => $v->id]) }}"
                                             class="btn btn-default">Xem</a>
-                                        <a data-url="" class="action_delete btn btn-danger">Xóa</a>
+                                        <a data-url="{{ route('import_order.delete', ['id' => $v->id]) }}" class="action_delete btn btn-danger">Xóa</a>
                                     </td> 
                                 </tr>
                             @endforeach

@@ -16,7 +16,7 @@ use App\Http\Controllers\Clients\IndexController;
 use App\Http\Controllers\Clients\CContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ImportInvoiceController;
+use App\Http\Controllers\ImportOrderController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
@@ -78,6 +78,7 @@ Route::prefix('/')->group(function () {
     Route::controller(CCartController::class)->group(function () {
         Route::get('/cart', 'index')->name('user.cart');
         Route::get('/cart/add/{id?}&{quantity?}', 'add_index')->name('add_index.cart');
+        Route::get('/cart/update_quantity/{id?}&{method?}', 'changeQuantity')->name('update_quantity.cart');
         Route::get('/cart/delete/{id}', 'delete')->name('delete.cart');
         //Route::patch('/cart/update/{id}', 'update_qty')->name('update.cart');
         Route::get('/product/add/{id}/{count}', 'add')->name('add.cart');
@@ -131,20 +132,21 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         /* Dashboard */
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
        
-        Route::prefix('import_invoice')->group(function () {
-            Route::get('', [ImportInvoiceController::class, 'index'])->name('import_invoice.index');
-            Route::get('/create', [ImportInvoiceController::class, 'create'])->name('import_invoice.create');
-            Route::post('/store', [ImportInvoiceController::class, 'store'])->name('import_invoice.store');
-            Route::get('/view/{id}', [ImportInvoiceController::class, 'view'])->name('import_invoice.view');
-            Route::get('/get-product-id', [ImportInvoiceController::class, 'getProductId'])->name('get-product-id]');
+        Route::prefix('import_order')->group(function () {
+            Route::get('', [ImportOrderController::class, 'index'])->name('import_order.index');
+            Route::get('/create', [ImportOrderController::class, 'create'])->name('import_order.create');
+            Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store');
+            Route::get('/view/{id}', [ImportOrderController::class, 'view'])->name('import_order.view');
+            Route::get('/get-product-id', [ImportOrderController::class, 'getProductId'])->name('get-product-id]');
         }); 
-        /* Import_invoice */
-        Route::prefix('import_invoice')->group(function () {
-            Route::get('', [ImportInvoiceController::class, 'index'])->name('import_invoice.index');
-            Route::get('/create', [ImportInvoiceController::class, 'create'])->name('import_invoice.create');
-            Route::post('/store', [ImportInvoiceController::class, 'store'])->name('import_invoice.store');
-            Route::get('/view/{id}', [ImportInvoiceController::class, 'view'])->name('import_invoice.view');
-            Route::get('/get-product-id', [ImportInvoiceController::class, 'getProductId'])->name('get-product-id]');
+        /* Import_order */
+        Route::prefix('import_order')->group(function () {
+            Route::get('', [ImportOrderController::class, 'index'])->name('import_order.index');
+            Route::get('/create', [ImportOrderController::class, 'create'])->name('import_order.create');
+            Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store');
+            Route::get('/delete/{id}', [ImportOrderController::class, 'delete'])->name('import_order.delete');
+            Route::get('/view/{id}', [ImportOrderController::class, 'view'])->name('import_order.view');
+            Route::get('/get-product-id', [ImportOrderController::class, 'getProductId'])->name('get-product-id]');
         });
         /* User */
         Route::prefix('users')->group(function () {

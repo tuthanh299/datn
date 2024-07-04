@@ -16,11 +16,8 @@ class CInfoController extends Controller
     {
         if(Auth::guard('member')->user()) 
         {
-            $user = Auth::guard('member')->user();
-            $cart = Cart::where('member_id', $user->id)->get();
-            $detail_cart = DetailCart::where('cart_id', $cart[0]->id)->get();
-
-            return view('client.info.index', compact('user', 'detail_cart'));
+            $user = Auth::guard('member')->user(); 
+            return view('client.info.index', compact('user'));
         }
 
         return redirect()->route('user.login');

@@ -2,9 +2,7 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cart;
 use App\Models\Category;
-use App\Models\DetailCart;
 use App\Models\News;
 use App\Models\Product;
 use App\Models\Publisher;
@@ -34,42 +32,36 @@ class IndexController extends Controller
         $productOutstanding = Product::select('id', 'name', 'product_photo_path', 'regular_price', 'sale_price', 'discount', )
             ->where('status', 1)
             ->where('outstanding', 1)
-            ->get();
-
-
-        if(Auth::guard('member')->user())
-        {
+            ->where('deleted_at', null)
+            ->get(); 
+        if (Auth::guard('member')->user()) {
             $user = Auth::guard('member')->user();
-            //$carts = Cart::where('member_id', $user->id)->get();
-            //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
 
-            return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user', 'detail_cart'));
-            //dd($detail_cart);
+            return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user'));
+
         }
-
-        
         return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first'));
-        //dd('false');
+
     }
     public function PublisherProduct($id)
     {
         $publisher = Publisher::where('id', $id)->firstOrFail();
         $pagename = $publisher->name;
-        $publisherproduct = Product::where('publisher_id', $id)->latest()->paginate(20);
+        $publisherproduct = Product::where('publisher_id', $id)->where('deleted_at', null)->latest()->paginate(20);
         return view('client.product.publisher_product', compact('publisherproduct', 'pagename'));
     }
     public function CategoryIdProduct($id)
     {
         $category = Category::where('id', $id)->firstOrFail();
         $pagename = $category->name;
-        $categoryidproduct = Product::where('category_id', $id)->latest()->paginate(20);
+        $categoryidproduct = Product::where('category_id', $id)->where('deleted_at', null)->latest()->paginate(20);
         return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename'));
     }
 
     public function getCategoryData(Request $request)
     {
-        $categoryId = $request->input('categoryId'); 
-        $products = Product::where('category_id', $categoryId)->get(); 
+        $categoryId = $request->input('categoryId');
+        $products = Product::where('category_id', $categoryId)->get();
         return response()->json(['products' => $products]);
     }
 
