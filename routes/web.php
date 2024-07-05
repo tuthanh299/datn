@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImportOrderController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PublisherController;
@@ -139,6 +140,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/view/{id}', [ImportOrderController::class, 'view'])->name('import_order.view');
             Route::get('/get-product-id', [ImportOrderController::class, 'getProductId'])->name('get-product-id]');
         }); 
+        Route::prefix('order')->group(function () {
+            Route::get('', [OrderController::class, 'index'])->name('order.index');
+            Route::get('/view/{id}', [OrderController::class, 'view'])->name('import_order.view');
+        });
         /* Import_order */
         Route::prefix('import_order')->group(function () {
             Route::get('', [ImportOrderController::class, 'index'])->name('import_order.index');
