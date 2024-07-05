@@ -161,7 +161,7 @@
                                 <div class="input-cart">
                                     <div class="form-floating form-floating-cus"> <input type="text"
                                             class="form-control text-sm" id="address" name="address"
-                                            placeholder="Địa chỉ" value=" " required /> <label for="address">Địa
+                                            placeholder="Địa chỉ" value="{{ $user->address }}" required /> <label for="address">Địa
                                             chỉ</label> </div>
                                     <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
                                 </div>
@@ -173,7 +173,7 @@
                                 </div>
                             </div>
                             <input type="hidden" name="total" value="{{ $total + $shipping }}">
-                            <button type="submit" class="btn btn-primary">Thanh toán COD</button>
+                            <button type="submit" class="btn btn-primary">Thanh toán</button>
                         </form>
                         <form action="{{ url('/vnpay_payment') }}" method="POST">
                             @csrf

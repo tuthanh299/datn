@@ -17,8 +17,8 @@ return new class extends Migration
             //$table->bigInteger('sale_invoice_id')->unique();
             $table->foreignId('product_id')->constrained();
             $table->integer('quantity');
-            $table->integer('regular_price');
-            $table->integer('sale_price');
+            $table->double('regular_price');
+            $table->double('sale_price');
             $table->timestamps();
             $table->softDeletes();
         });

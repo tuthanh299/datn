@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             //ProeSeeder::class,//
             ProductGalleriesTableSeeder::class,//
             WarehousesTableSeeder::class,//
-            //RolesTableSeeder::class,//
+            RolesTableSeeder::class,//
             PermissionsTableSeeder::class,//
             ImportInvoicesTableSeeder::class,
             ImportInvoiceDetailsTableSeeder::class,

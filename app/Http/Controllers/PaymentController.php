@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\DetailCart;
+use App\Models\Member;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,21 +21,21 @@ class PaymentController extends Controller
 
         $total = 0;
         $user = Auth::guard('member')->user();
-        $cart = Cart::where('member_id', $user->id)->get();
+        //$cart = Cart::where('member_id', $user->id)->get();
         //$detail_cart = DetailCart::where('cart_id', $carts[0]->id)->get();
-        $detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
+        //$detail_cart = DetailCart::join('products', 'detail_carts.product_id', '=', 'products.id')->get();
 
-        foreach ($detail_cart as $v) {
+        /*oreach ($detail_cart as $v) {
             if ($v->discount > 0) {
                 $total += $v->sale_price * $v->quantity;
             } else {
                 $total += $v->regular_price * $v->quantity;
             }
-        }
+        }*/
 
         // $cart[0]->cart_total = $total;
 
-        return view('client.order.payment', compact('detail_cart', 'user', 'cart'));
+        return view('client.order.payment', compact('user'));
         //dd($carts);
     }
 
@@ -55,7 +58,8 @@ class PaymentController extends Controller
         $vnp_TmnCode = "X3G144O6"; //Mã website tại VNPAY
         $vnp_HashSecret = "BCYUDKCSUWNQTKGATYPCLZAGNRXFYUNF"; //Chuỗi bí mật
 
-        $vnp_TxnRef = "111001"; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        //$vnp_TxnRef = "111001"; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_TxnRef = $this->generateOrderCode(); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toán hoá đơn";
         $vnp_OrderType = "Bookstore";
         $vnp_Amount = $total * 100;
@@ -130,31 +134,43 @@ class PaymentController extends Controller
         if (!Auth::guard('member')->check()) {
             return redirect()->route('user.login');
         }
-        $orderInfo = new Cart;
+        $orderInfo = new Order;
         $total = 30000;
+        $order_code = $this->generateOrderCode();
 
         foreach (session('cart') as $id => $details) {
             $total += ($details['sale_price'] ? $details['sale_price'] : $details['regular_price']) * $details['quantity'];
         }
 
+        //$member = Member::where('id', Auth::guard('member')->user()->id);
+        $orderInfo->order_code = $order_code;
         $orderInfo->member_id = Auth::guard('member')->user()->id;
-        // $orderInfo->name = $request->name;
-        // $orderInfo->phone = $request->phone;
-        // $orderInfo->address = $request->address;
-        $orderInfo->cart_total = $total;
+        $orderInfo->fullname = $request->fullname;
+        $orderInfo->phone = $request->phone;
+        $orderInfo->address = $request->address;
+        $orderInfo->note = $request->note;
+        $orderInfo->total_price = $total;
+        $orderInfo->status = 0;
         $orderInfo->save();
 
         foreach (session('cart') as $id => $details) {
-            $orderDetail = new DetailCart;
+            $orderDetail = new OrderDetail;
 
-            $orderDetail->cart_id = $orderInfo->id;
+            $orderDetail->order_id = $orderInfo->id;
             $orderDetail->product_id = $details['product_id'];
             $orderDetail->quantity = $details['quantity'];
+            $orderDetail->regular_price = $details['regular_price'];
+            $orderDetail->sale_price = $details['sale_price'];
             $orderDetail->save();
         }
 
         session()->forget('cart');
 
         return redirect()->route('user.cart');
+    }
+
+    public function generateOrderCode()
+    {
+        return substr(str_shuffle(str_repeat($x = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(20 / strlen($x)))), 1, 20);
     }
 }
