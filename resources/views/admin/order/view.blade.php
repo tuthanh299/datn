@@ -11,7 +11,7 @@
 @endsection
 <div class="content-wrapper">
 
-    @include('admin.partials.content-header', ['name' => 'Hóa Đơn Nhập', 'key' => '/ Chi Tiết'])
+    @include('admin.partials.content-header', ['name' => 'Hóa Đơn Bán', 'key' => '/ Chi Tiết'])
 
     <div class="content">
         <div class="container-fluid">
@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label>Mã hóa đơn</label>
                             <input type="text" class="form-control" name="orders_code"
-                                value="{!! $ImportOrder->orders_code !!}" readonly>
+                                value="{!! $ImportOrder->order_code !!}" readonly>
                         </div>
                     </div>
                     <div class="col-3">
@@ -34,7 +34,7 @@
                             <label>Thời gian</label>
                             <input type="datetime-local" min="{{ date('Y-m-d\TH:i') }}" class="form-control"
                                 name="import_date"
-                                value="{{ \Carbon\Carbon::parse($ImportOrder->import_date)->format('Y-m-d\TH:i') }}"
+                                value="{{ \Carbon\Carbon::parse($ImportOrder->created_at)->format('Y-m-d\TH:i') }}"
                                 readonly>
                         </div>
                     </div>
@@ -45,36 +45,6 @@
                                 value="{!! $ImportOrder->total_price !!}" readonly>
                         </div>
                     </div>
-
-                </div>
-                <div class="row col-12 list-import-invoice-detail">
-
-                    @foreach ($ImportOrder->importinvoicedetail as $v)
-                        <div class="col-3 import-invoice-detail">
-                            <div class="card card-primary card-outline text-sm">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        <strong>{!! $v->product->name !!}
-                                        </strong>
-                                    </h3>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="">Số lượng nhập</label>
-                                        <input type="number" value="{!! $v->quantity !!}" class="form-control"
-                                            readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Giá nhập(Cho một sản phẩm)</label>
-                                        <input type="number" value="{!! $v->import_price !!}" class="form-control"
-                                            readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-
-
 
                 </div>
                 <button type="button" class="btn btn-primary" onclick="history.back()">Thoát</button>

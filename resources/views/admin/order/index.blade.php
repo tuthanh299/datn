@@ -9,7 +9,7 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-    @include('admin.partials.content-header', ['name' => 'Hóa Đơn Nhập', 'key' => '/ Danh Sách'])
+    @include('admin.partials.content-header', ['name' => 'Hóa Đơn Bán', 'key' => '/ Danh Sách'])
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -18,8 +18,10 @@
                         <thead>
                             <tr>
                                 <th scope="col">Mã Hóa Đơn</th>
-                                <th scope="col">Ngày Nhập</th>
+                                <th scope="col">Tên Khách Hàng</th>
                                 <th scope="col">Tổng Tiền</th>
+                                <th scope="col">Ngày Đặt</th>
+                                <th scope="col">Trạng Thái</th>
                                 <th scope="col">Thao tác</th>
                             </tr>
                         </thead>
@@ -28,6 +30,7 @@
                                 <tr>
                                     <td class="">{{ $v->order_code }}</td>
                                     <td class="">{{ $v->fullname }}</td>
+                                    <td class="">@formatmoney($v->total_price)</td>
                                     <td class="">{{ $v->created_at }}</td>
                                     @switch($v->status)
                                         @case(1)
@@ -47,7 +50,7 @@
                                             @break
                                     @endswitch
                                     <td>
-                                        <a href="{{ route('import_order.view', ['id' => $v->id]) }}"
+                                        <a href="{{ route('order.view', ['id' => $v->id]) }}"
                                             class="btn btn-default">Xem</a>
                                     </td> 
                                 </tr>

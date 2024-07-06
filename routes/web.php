@@ -117,10 +117,11 @@ Route::prefix('/')->group(function () {
         Route::get('/payment', 'index')->name('user.payment');
         Route::post('/cod_payment', 'cod_payment')->name('cod');
         Route::post('/vnpay_payment', 'vnpay_payment')->name('vnpay');
+        Route::get('/vnpay_return', 'return')->name('vnpay.return');
     });
 
     /*VNPAY*/
-    //Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay');
+    Route::post('/vnpay_return', [PaymentController::class, 'return'])->name('vnpay.return');
 });
 
 Route::get('/admin', [HomeController::class, 'index'])->name('home');
@@ -142,7 +143,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         }); 
         Route::prefix('order')->group(function () {
             Route::get('', [OrderController::class, 'index'])->name('order.index');
-            Route::get('/view/{id}', [OrderController::class, 'view'])->name('import_order.view');
+            Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store');
+            Route::get('/view/{id}', [OrderController::class, 'view'])->name('order.view');
         });
         /* Import_order */
         Route::prefix('import_order')->group(function () {
