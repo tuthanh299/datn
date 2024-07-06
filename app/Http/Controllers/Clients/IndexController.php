@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Member;
 use App\Models\News;
 use App\Models\Product;
 use App\Models\Publisher;
@@ -69,6 +70,18 @@ class IndexController extends Controller
     {
         $menufisrt = Category::with('children')->where('parent_id', 0)->get();
         return $menufisrt;
+    }
+    public static function getUserInfo()
+    {
+        $id = session()->get('user_id');
+
+        if($id){
+            $user = Member::where('id', session()->get('user_id'))->first();
+        } else {
+            $user = Auth::guard('member')->user();
+        }
+        
+        return $user;
     }
 
 }

@@ -20,8 +20,9 @@
                         <input class="search-keyword form-control border-end-0 border"
                             value="{{ request()->get('search_keyword') }}" type="search" name="search_keyword"
                             placeholder="Nhập từ khóa để tìm kiếm">
+                        <input type="hidden" id="search_route" value="{{ route('news.index') }}">
                         <div class="input-group-append bg-primary rounded-right">
-                            <button class="btn btn-navbar text-white" type="button">
+                            <button class="btn btn-navbar text-white" onclick="onSearch()" type="button">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -40,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($newspost)
+                            @if (!$newspost->isEmpty())
                                 @foreach ($newspost as $news)
                                     <tr>
                                         <td>{{ $news->name }}</td>
@@ -54,34 +55,16 @@
                                                 class="btn btn-danger action_delete">Xóa</a>
                                         </td>
                                     </tr>
-                                @endforeach
-                            @elseif ($searchresult !== null && $searchresult->total() > 0)
-                                @foreach ($searchresult as $news)
-                                    <tr>
-                                        <td>{{ $news->name }}</td>
-                                        <td>
-                                            <img class="news-image-thumb" src="{{ $news->photo_path }}" alt="">
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('news.edit', ['id' => $news->id]) }}"
-                                                class="btn btn-default">Sửa</a>
-                                            <a href=" " data-url="{{ route('news.delete', ['id' => $news->id]) }}"
-                                                class="btn btn-danger action_delete">Xóa</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @endforeach 
                             @else
-                                <td colspan="2">Không tìm thấy kết quả nào cho từ khóa của bạn.</td>
+                                <td colspan="2">Không tìm thấy kết quả!</td>
                             @endif
-
                         </tbody>
                     </table>
                 </div>
-                @if ($searchresult || $newspost->hasMorePages())
-                    <div class="col-md-12">
-                        {{ $searchresult ?? $newspost->links('pagination::bootstrap-5') }}
-                    </div>
-                @endif
+                <div class="col-md-12">
+                    {{ $newspost->links('pagination::bootstrap-5') }}
+                </div>
                  
             </div>
         </div>

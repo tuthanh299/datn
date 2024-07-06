@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\ImportOrder;
 use App\Models\ImportOrderDetail;
 use App\Models\Product;
+use App\Models\Warehouse;
+use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Traits\DeleteModelTrait;
 
 class ImportOrderController extends Controller
 {
@@ -21,9 +22,20 @@ class ImportOrderController extends Controller
         $this->ImportOrderdetail = $ImportOrderdetail;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $ImportOrder = $this->ImportOrder->latest()->paginate(15);
+        $search = $request->input('search_keyword');
+        $ImportOrder = null;
+        if ($search) {
+            $searchUnicode = '%' . $search . '%';
+            $ImportOrder = $this->ImportOrder::select('*')
+                ->where('order_code', 'LIKE', $searchUnicode)
+                ->latest()
+                ->paginate(10);
+            $ImportOrder->setPath('import_order?search_keyword=' . $search);
+        } else {
+            $ImportOrder = $this->ImportOrder::latest()->paginate(15);
+        }
         return view('admin.import_order.index', compact('ImportOrder'));
     }
 
@@ -38,13 +50,14 @@ class ImportOrderController extends Controller
     {
         try {
             $dataCreate = [
-                'orders_code' => $request->orders_code,
+                'order_code' => $request->order_code,
                 'import_date' => $request->import_date,
                 'total_price' => $request->total_price,
-            ]; 
+            ];
             $ImportOrder = $this->ImportOrder->create($dataCreate);
             $import_order_id = $ImportOrder->id;
             $details = count($request->product_id);
+
             for ($i = 0; $i < $details; $i++) {
                 $dataCreateImportOrderDetail = [
                     'import_order_id' => $import_order_id,
@@ -53,6 +66,11 @@ class ImportOrderController extends Controller
                     'quantity' => $request->quantity[$i],
                 ];
                 $this->ImportOrderdetail->create($dataCreateImportOrderDetail);
+
+                $product = Warehouse::find($request->product_id[$i]);
+                $product->quantity = $product->quantity + $request->quantity[$i];
+                $product->import_price = $request->import_price[$i];
+                $product->save();
             }
 
             return redirect()->route('import_order.index');
@@ -69,6 +87,13 @@ class ImportOrderController extends Controller
     }
     public function delete($id)
     {
+        $ImportOrderDetail = ImportOrderDetail::where('import_order_id', $id)->get();
+        $details = count($ImportOrderDetail);
+        for ($i = 0; $i < $details; $i++) {
+            $product = Warehouse::find($ImportOrderDetail[$i]->product_id);
+            $product->quantity = $product->quantity - $ImportOrderDetail[$i]->quantity;
+        $product->save();
+        }
         return $this->deleteModelTrait($id, $this->ImportOrder);
 
     }

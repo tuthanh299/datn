@@ -31,16 +31,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
-Route::get('/contact', [CContactController::class, 'index'])->name('contact');
-//Route::get('/cart', [CCartController::class, 'cartUser'])->name('user.cart');
-
+ 
 /* Client */
 Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.login');
 Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
 Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
-Route::post('logout', [CUserController::class, 'logout'])->name('user.logout');
-
+Route::get('logout-user', [CUserController::class, 'logout'])->name('user.logout');
+ 
 /* GOOGLE LOGIN */
 //Route::get('/auth/{provider}/redirect', [GoogleLoginController::class, 'redirect'])->name('redirect');
 //Route::get('/auth/{provider}/callback', [GoogleLoginController::class, 'callback'])->name('callback');

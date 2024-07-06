@@ -64,7 +64,7 @@
                                                 </div>
                                                 <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
                                                     <a href="#"
-                                                        class="product-button-cart-action button-buynow text-light"><i
+                                                        class="product-button-cart-action add-to-cart text-light" data-route="{{ route('add_index.cart', ['id' => $v->id,'quantity'=>1]) }}" data-act="buynow" data-direct="{{route('user.cart')}}"><i
                                                             class="fa-solid fa-basket-shopping-simple me-1"></i>Mua ngay</a>
                                                 </div>
                                             </div>

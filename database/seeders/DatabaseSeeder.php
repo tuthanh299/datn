@@ -54,8 +54,9 @@ class DatabaseSeeder extends Seeder
             RoleUsersTableSeeder::class,//
             PermissionsTableSeeder::class,//
             PermissionRoleTableSeeder::class,//
-            ImportInvoicesTableSeeder::class,//
-            ImportInvoiceDetailsTableSeeder::class,//
+            
+            ImportOrderTableSeeder::class,//
+            ImportOrderDetailsTableSeeder::class,//
         ]);
     }
 }

@@ -30,7 +30,7 @@ a{color:#000;text-decoration:unset !important;}
 .header-bottom-logo img{/* width:100px;*/
 }
 .header-bottom-banner img{width:500px;}
-.header-bottom-contact-img img{width:50px;animation:phonering-alo-circle-img-anim 1s infinite ease-in-out;}
+.header-bottom-contact-img i{font-size:50px;animation:phonering-alo-circle-img-anim 1s infinite ease-in-out;}
 .flex-header-bottom-contact{display:flex;align-items:center;gap:10px;}
 .header-bottom-contact-text{font-weight:bold;}
 .header-bottom-contact-num a{color:#000;font-weight:bold;}

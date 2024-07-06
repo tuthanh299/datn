@@ -12,7 +12,7 @@
             </span>
         </div>
         <div class="content-main account-user">
-            <form class="form" action="{{route('user.postregister')}}" method="POST">
+            <form class="form w-50 m-auto" action="{{route('user.postregister')}}" method="POST">
                 @csrf
                 <div>
                     <label class="mb-1">Họ:</label>
@@ -139,7 +139,7 @@
                     font-size: 1em;font-weight: bold;">{{ $message }}</div>
                 @enderror
                 <div class="text-center text-lg-start mt-3 btn-login-member">
-                    <input type="submit" class="btn-lg btn btn-sm bg-danger btn-block w-100"
+                    <input type="submit" class="btn-lg btn btn-sm bg-danger btn-block w-100 "
                         value="Đăng ký">
                 </div> 
             </form>

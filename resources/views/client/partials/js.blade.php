@@ -1,4 +1,8 @@
 <script type="text/javascript">
+    var ROUTE_ADDTOCART = @php echo '"'. route('user.cart') .'"'; @endphp,
+        ROUTE_CART = @php echo '"'. route('user.cart') .'"'; @endphp;
+</script> 
+<script type="text/javascript">
     function GoogleLanguageTranslatorInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'vi',
@@ -18,4 +22,5 @@
 <script src="{{ asset('vendors/slick/slick.js') }}"></script>
 <script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script>
 <script src="{{ asset('vendors/aos/aos.js') }}"></script>
+<script src="{{ asset('vendors/simplenotify/simple-notify.js') }}"></script>
 <script src="{{ asset('index/js/app.js') }}"></script>

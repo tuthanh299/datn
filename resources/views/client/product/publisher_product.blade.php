@@ -1,6 +1,6 @@
 @extends('client.layouts.index')
 @section('title')
-    <title> {{$pagename }}</title>
+    <title> {{ $pagename }}</title>
 @endsection
 @section('content')
     <div class="wrap-content">
@@ -21,8 +21,9 @@
                                             <a class="pic-product " href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                 title="Sản phẩm">
                                                 <div class="pic-product-img scale-img hover_light">
-                                                    <img class="w-100" src="{{ $v->product_photo_path ? $v->product_photo_path : asset('assets/noimage.jpg') }}"
-                                                                    alt="{{ $v->name }}">
+                                                    <img class="w-100"
+                                                        src="{{ $v->product_photo_path ? $v->product_photo_path : asset('assets/noimage.jpg') }}"
+                                                        alt="{{ $v->name }}">
                                                 </div>
                                             </a>
                                         </div>
@@ -57,13 +58,15 @@
                                             </div>
                                             <div class="product-button text-center">
                                                 <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
-                                                    <a href="{{ route('add_index.cart', ['id' => $v->id,'quantity'=>1]) }}"
-                                                        class="product-button-cart-action button-addnow text-light add-to-cart" data-route="{{ route('add_index.cart', ['id' => $v->id,'quantity'=>1]) }}"><i
+                                                    <a href="{{ route('add_index.cart', ['id' => $v->id, 'quantity' => 1]) }}"
+                                                        class="product-button-cart-action button-addnow text-light add-to-cart"
+                                                        data-route="{{ route('add_index.cart', ['id' => $v->id, 'quantity' => 1]) }}"><i
                                                             class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
                                                 </div>
                                                 <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
-                                                    <a href=""
-                                                        class="product-button-cart-action button-buynow text-light"><i
+                                                    <a href="#" class="product-button-cart-action add-to-cart text-light"
+                                                        data-route="{{ route('add_index.cart', ['id' => $v->id, 'quantity' => 1]) }}"
+                                                        data-act="buynow" data-direct="{{ route('user.cart') }}"><i
                                                             class="fa-solid fa-basket-shopping-simple me-1"></i>Mua ngay</a>
                                                 </div>
                                             </div>

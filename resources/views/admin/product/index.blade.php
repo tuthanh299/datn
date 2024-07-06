@@ -24,8 +24,9 @@
                             <input class="search-keyword form-control border-end-0 border"
                                 value="{{ request()->get('search_keyword') }}" type="search" name="search_keyword"
                                 placeholder="Nhập từ khóa để tìm kiếm">
+                            <input type="hidden" id="search_route" value="{{ route('product.index') }}">
                             <div class="input-group-append bg-primary rounded-right">
-                                <button class="btn btn-navbar text-white" type="button">
+                                <button class="btn btn-navbar text-white" onclick="onSearch()" type="button">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -38,7 +39,6 @@
                         <table class="table">
                             <thead>
                                 <tr>
-
                                     <th scope="col">Tên Sản Phẩm</th>
                                     <th scope="col">Hình Ảnh</th>
                                     <th scope="col">Danh mục</th>
@@ -46,32 +46,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                @if ($products)
+                                @if (!$products->isEmpty())
                                     @foreach ($products as $productItem)
                                         <tr>
                                             <td class="text-capitalize">{{ $productItem->name }}</td>
                                             <td>
                                                 <img class="adm-product-img"
-                                                    src="{{ $productItem->product_photo_path ? $productItem->product_photo_path : asset('assets/noimage.jpg') }} " alt="">
-                                            </td>
-                                            <td class="text-capitalize">{{ optional($productItem->category)->name }}</td>
-                                            <td>
-                                                <a href="{{ route('product.edit', ['id' => $productItem->id]) }}"
-                                                    class="btn btn-default">Sửa</a>
-                                                <a href=""
-                                                    data-url="{{ route('product.delete', ['id' => $productItem->id]) }}"
-                                                    class="btn btn-danger action_delete">Xóa</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @elseif ($searchresult !== null && $searchresult->total() > 0)
-                                    @foreach ($searchresult as $productItem)
-                                        <tr>
-                                            <td class="text-capitalize">{{ $productItem->name }}</td>
-                                            <td>
-                                                <img class="adm-product-img"
-                                                    src="{{ asset($productItem->product_photo_path) }} " alt="">
+                                                    src="{{ $productItem->product_photo_path ? $productItem->product_photo_path : asset('assets/noimage.jpg') }} "
+                                                    alt="">
                                             </td>
                                             <td class="text-capitalize">{{ optional($productItem->category)->name }}</td>
                                             <td>
@@ -84,16 +66,14 @@
                                         </tr>
                                     @endforeach
                                 @else
-                                    <td colspan="2">Không tìm thấy kết quả nào cho từ khóa của bạn.</td>
+                                    <td colspan="2">Không tìm thấy kết quả!</td>
                                 @endif
                             </tbody>
                         </table>
                     </div>
-                    @if ($searchresult || $products->hasMorePages())
                     <div class="col-md-12">
-                        {{ $searchresult ?? $products->links('pagination::bootstrap-5') }}
+                        {{ $products->links('pagination::bootstrap-5') }}
                     </div>
-                @endif
                 </div>
             </div>
         </div>

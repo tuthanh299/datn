@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ImportInvoiceDetailsTableSeeder extends Seeder
+class ImportOrderDetailsTableSeeder extends Seeder
 {
 
     /**

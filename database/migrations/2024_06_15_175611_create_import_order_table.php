@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('import_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('orders_code'); 
+            $table->string('order_code'); 
             $table->dateTime('import_date'); 
             $table->double('total_price'); 
             $table->timestamps();
@@ -27,7 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('import_invoices');
+        Schema::dropIfExists('import_orders');
 
     }
 };

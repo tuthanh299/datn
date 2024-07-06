@@ -12,21 +12,33 @@ class OrderController extends Controller
     private $order;
     private $orderdetail;
 
-    public function __construct(Order $order, OrderDetail $orderDetail){
+    public function __construct(Order $order, OrderDetail $orderDetail)
+    {
         $this->order = $order;
         $this->orderdetail = $orderDetail;
     }
-    public function index() 
+    public function index(Request $request)
     {
-        $order = $this->order::latest()->paginate(10);
+        $search = $request->input('search_keyword');
+        $order = null;
+        if ($search) {
+            $searchUnicode = '%' . $search . '%';
+            $order = $this->order::select('*')
+                ->where('order_code', 'LIKE', $searchUnicode)
+                ->latest()
+                ->paginate(10);
+            $order->setPath('order?search_keyword=' . $search);
+        } else {
+            $order = $this->order::latest()->paginate(15);
+
+        }
+
         return view('admin.order.index', compact('order'));
     }
     public function view($id)
     {
         $ImportOrder = $this->order->find($id);
-        $ImportOrderdetail = OrderDetail::where('order_id', $id)->get();
-
-        //return view('admin.order.view', compact('ImportOrder'));
+        $ImportOrderdetail = OrderDetail::where('order_id', $id)->get(); 
         dd($ImportOrder, $ImportOrderdetail);
     }
 
@@ -37,7 +49,7 @@ class OrderController extends Controller
                 'orders_code' => $request->orders_code,
                 'import_date' => $request->import_date,
                 'total_price' => $request->total_price,
-            ]; 
+            ];
             $ImportOrder = $this->order->create($dataCreate);
             $import_order_id = $ImportOrder->id;
             $details = count($request->product_id);

@@ -40,15 +40,16 @@ class DashboardController extends Controller
         }
 
         //tính tổng lời
-        $total_profit = 0;
-        foreach ($cthdb as $value) {
-            $product = Product::where('id', $value->product_id)->first();
-            if($product->sale_price == 0) {
-                $total_profit = $total_profit + ($product->regular_price * 30/100) * $value->quantity;
-            } else {
-                $total_profit = $total_profit + ($product->sale_price * 30/100) * $value->quantity;
-            }
-        }
+        $total_profit = $total_sale - $total_import_sale;
+        // foreach ($cthdb as $value) {
+        //     $product = Product::where('id', $value->product_id)->first();
+        //     if($product->sale_price == 0) {
+        //         $total_profit = $total_profit + ($product->regular_price * 30/100) * $value->quantity;
+        //     } else {
+        //         $total_profit = $total_profit + ($product->sale_price * 30/100) * $value->quantity;
+        //     }
+        // }
+        
         $sold_pro = Product::select('products.id', 'products.name', 'order_details.quantity as quantity', DB::raw('SUM(order_details.regular_price * order_details.quantity) as sold', ), 'orders.order_code as order_code', 'orders.total_price as total_price', 'orders.status as status')
                     ->join('order_details', 'order_details.product_id', '=', 'products.id')
                     ->join('orders', 'orders.id', '=', 'order_details.order_id')

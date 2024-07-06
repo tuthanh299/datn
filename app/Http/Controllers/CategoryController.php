@@ -26,20 +26,21 @@ class CategoryController extends Controller
     }
     public function index(Request $request)
     {
-        $search = $request->input('search_keyword');
-        $searchresult = null;
+        $search = $request->input('search_keyword'); 
         $categories = null;
         if ($search) {
-            $search = '%' . $search . '%';
-            $searchresult = $this->category::select('id', 'name')
-                ->where('name', 'LIKE', $search)
+            $searchUnicode = '%' . $search . '%';
+            $categories = $this->category::select('id', 'name')
+                ->where('name', 'LIKE', $searchUnicode)
                 ->latest()
                 ->paginate(10);
+            $categories->setPath('categories?search_keyword=' . $search);
         } else {
             $categories = $this->category::latest()->paginate(10);
         }
 
-        return view('admin.category.index', compact('categories', 'searchresult'));
+
+        return view('admin.category.index', compact('categories'));
     }
     public function store(CategoryAddRequest $request)
     {

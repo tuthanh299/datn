@@ -6,9 +6,12 @@
 @section('css')
     <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/simplenotify/simple-notify.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
+    <script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('vendors/simplenotify/simple-notify.js') }}"></script>
     <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
@@ -244,9 +247,4 @@
 
         </form>
     </div>
-@endsection
-@section('js')
-    <script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src="{{ asset('admins/admin.js') }}"></script>
 @endsection

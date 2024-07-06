@@ -38,31 +38,45 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search_keyword');
-        $searchresult = null;
         $products = null;
         if ($search) {
-            $search = '%' . $search . '%';
-            $searchresult = $this->product::select('id', 'name', 'product_photo_path')
-                ->where('name', 'LIKE', $search)
+            $searchUnicode = '%' . $search . '%';
+            $products = $this->product::select('id', 'name', 'product_photo_path')
+                ->where('name', 'LIKE', $searchUnicode)
                 ->latest()
                 ->paginate(10);
+            $products->setPath('product?search_keyword=' . $search);
         } else {
             $products = $this->product::latest()->paginate(10);
         }
+        return view('admin.product.index', compact('products'));
 
-        return view('admin.product.index', compact('products', 'searchresult'));
     }
     /* Warehouse */
 
-    public function warehouse()
+    public function warehouse(Request $request)
     {
-        $warehouse = $this->warehouse->latest()->paginate(10);
-
-        // Lấy thông tin sản phẩm cho từng kho hàng
-        foreach ($warehouse as $warehouseItem) {
-            $product = Product::find($warehouseItem->product_id);
-            $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
-            $warehouseItem->product_photo_path = $product ? $product->product_photo_path : 'Đường dẫn ảnh mặc định';
+        $search = $request->input('search_keyword');
+        $warehouse = null;
+        if ($search) {
+            $searchUnicode = '%' . $search . '%';
+            $warehouse = $this->product::select('*')
+                ->where('name', 'LIKE', $searchUnicode)
+                ->latest()
+                ->paginate(10); 
+            foreach ($warehouse as $warehouseItem) {
+                $product = Product::find($warehouseItem->id);
+                $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
+                $warehouseItem->product_photo_path = $product ? $product->product_photo_path : 'Đường dẫn ảnh mặc định';
+            }
+            $warehouse->setPath('warehouse?search_keyword=' . $search);
+        } else {
+            $warehouse = $this->warehouse->latest()->paginate(10);
+            foreach ($warehouse as $warehouseItem) {
+                $product = Product::find($warehouseItem->product_id);
+                $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
+                $warehouseItem->product_photo_path = $product ? $product->product_photo_path : 'Đường dẫn ảnh mặc định';
+            }
         }
 
         return view('admin.warehouse.index', compact('warehouse'));
@@ -196,4 +210,3 @@ class ProductController extends Controller
     }
 
 }
-
