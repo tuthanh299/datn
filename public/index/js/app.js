@@ -29,6 +29,31 @@ function PeShiner() {
     }
 }
 
+/* Show notify */
+function showNotify(
+    text = "Notify text",
+    title = "Thông báo",
+    status = "success"
+) {
+    new Notify({
+        status: status, // success, warning, error
+        title: title,
+        text: text,
+        effect: "fade",
+        speed: 400,
+        customClass: null,
+        customIcon: null,
+        showIcon: true,
+        showCloseButton: true,
+        autoclose: true,
+        autotimeout: 3000,
+        gap: 10,
+        distance: 10,
+        type: 3,
+        position: "right top",
+    });
+}
+
 function TranslateClick() {
     if (!isExist($(".changeLanguage"))) {
         $(".changeLanguage").click(function (event) {
@@ -303,12 +328,28 @@ function AllRun() {
                         var productHtml = `<div class="slick-product-category">`;
                         if (response.products && response.products.length > 0) {
                             response.products.forEach(function (product) {
+                                var priceComponent = "";
                                 var sale_price = formatMoney(
                                     product.sale_price
                                 );
                                 var regular_price = formatMoney(
                                     product.regular_price
                                 );
+                                if (product.sale_price) {
+                                    priceComponent = `<div class="price-product">
+                                                        <div class="price-new"> ${sale_price}</div>
+                                                        <div class="price-old">${regular_price} </div>
+                                                        <div class="discount">${product.discount}%</div>
+                                                    </div>`;
+                                } else if (product.regular_price) {
+                                    priceComponent = `<div class="price-product">
+                                                        <div class="price-new">${regular_price}</div>
+                                                    </div>`;
+                                } else {
+                                    priceComponent = `<div class="price-product">
+                                                        <div class="price-new">Liên hệ</div>
+                                                    </div>`;
+                                }
                                 productHtml += `
                                 <div class="product-item product-slick-item" data-id="${
                                     product.id
@@ -337,25 +378,25 @@ function AllRun() {
                                     product.name
                                 }</a>
                                             </div>
-                                            <div class="price-product">
-                                                    <div class="price-new"> 
-                                                    ${sale_price}
-                                                    </div>
-                                                    <div class="price-old">
-                                                    ${regular_price} 
-                                                    </div>
-                                                    <div class="discount">
-                                                    ${product.discount}% 
-                                                    </div>
-                                                </div>
+                                            ${priceComponent}
                                                 <div class="product-button text-center">
                                                 <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
-                                                    <a href="{{ route('add_index.cart', ['id' => $v->id,'quantity'=>1]) }}"
-                                                        class="product-button-cart-action button-addnow text-light add-to-cart" data-route="{{ route('add_index.cart', ['id' => $v->id,'quantity'=>1]) }}"><i
+                                                    <a href=""
+                                                        class="product-button-cart-action button-addnow text-light add-to-cart" data-route="${
+                                                            ROUTE_ADDTOCART +
+                                                            "/add/" +
+                                                            product.id +
+                                                            "&1"
+                                                        }"><i
                                                             class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
                                                 </div>
                                                 <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
-                                                    <a href="" class="product-button-cart-action button-buynow text-light"><i
+                                                    <a href="" class="product-button-cart-action button-buynow add-to-cart text-light" data-route="${
+                                                        ROUTE_ADDTOCART +
+                                                        "/add/" +
+                                                        product.id +
+                                                        "&1"
+                                                    }" data-act="buynow" data-direct="${ROUTE_CART}"><i
                                                             class="fa-solid fa-basket-shopping-simple me-1"></i>Mua ngay</a>
                                                 </div>
                                             </div>
@@ -419,31 +460,32 @@ function AllRun() {
         }
     };
 
-    $(document).ready(function () {
-        if ($(".product-from-ajax").length > 0) {
-            console.log("ok");
-            $("body").on("click", ".product-button-cart", function () {
-                const route = $(this).parents("[data-route]").data("route"),
-                    id = $(this).parents("[data-id]").data("id");
+    // $(document).ready(function () {
+    //     if ($(".product-from-ajax").length > 0) {
+    //         $("body").on("click", ".product-button-cart", function () {
+    //             const route = $(this).parents("[data-route]").data("route"),
+    //                 id = $(this).parents("[data-id]").data("id");
 
-                console.log(route, id);
-                $.ajax({
-                    url: route + "/" + id,
-                    type: "GET",
-                    success: function (response) {
-                        location.reload();
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                    },
-                });
-            });
-        }
-    });
+    //             console.log(route, id);
+    //             $.ajax({
+    //                 url: route + "/" + id,
+    //                 type: "GET",
+    //                 success: function (response) {
+    //                     location.reload();
+    //                 },
+    //                 error: function (xhr, status, error) {
+    //                     console.error(xhr.responseText);
+    //                 },
+    //             });
+    //         });
+    //     }
+    // });
 
     // Add to cart
     $("body").on("click", ".add-to-cart", function (event) {
         event.preventDefault();
+        const act = $(this).data("act") ? $(this).data("act") : 0,
+            direct = $(this).data("direct") ? $(this).data("direct") : 0;
         let route = $(this).data("route");
         let quantity = 0;
 
@@ -456,7 +498,11 @@ function AllRun() {
             url: route,
             type: "GET",
             success: function (response) {
-                alert("success", response);
+                if (act === "buynow" && direct) {
+                    window.location.href = direct;
+                } else {
+                    showNotify("Thêm giỏ hàng thành công!");
+                }
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);
@@ -477,7 +523,12 @@ function AllRun() {
                             parseInt(_target.nextElementSibling.value) - 1;
                     } else {
                         _target.nextElementSibling.value = 1;
-                        alert("Số lượng không được nhỏ hơn 1");
+                        showNotify(
+                            "Số lượng không được nhỏ hơn 1",
+                            "Thông báo",
+                            "error"
+                        );
+                        return false;
                     }
                     break;
                 case "quantity-plus-pro-detail":
@@ -485,7 +536,7 @@ function AllRun() {
                         parseInt(_target.previousElementSibling.value) + 1;
                     break;
                 default:
-                    alert("Không hợp lệ");
+                    showNotify("Không hợp lệ", "Thông báo", "error");
                     break;
             }
         }
@@ -503,8 +554,6 @@ function AllRun() {
                 id = $(this).parents(".procart[data-id]").data("id");
             let method = "";
 
-            console.log(route, method);
-
             switch (_target.classList[0]) {
                 case "counter-procart-minus":
                     if (_target.nextElementSibling.value > 1) {
@@ -513,7 +562,11 @@ function AllRun() {
                         method = "minus";
                     } else {
                         _target.nextElementSibling.value = 1;
-                        alert("Số lượng không được nhỏ hơn 1");
+                        showNotify(
+                            "Số lượng không được nhỏ hơn 1",
+                            "Thông báo",
+                            "error"
+                        );
                         return false;
                     }
                     break;
@@ -523,7 +576,7 @@ function AllRun() {
                     method = "plus";
                     break;
                 default:
-                    alert("Không hợp lệ");
+                    showNotify("Không hợp lệ", "Thông báo", "error");
                     break;
             }
 
@@ -556,18 +609,36 @@ function AllRun() {
             type: "GET",
             success: function (response) {
                 if (response) {
-                    $(".list-procart")
-                        .find('.procart[data-id="' + id + '"]')
-                        .remove();
-                    $(".list-procart")
-                        .find("#load-total")
-                        .text(formatMoney(response.total));
+                    if ($("body").find(".procart[data-id]").length - 1 === 0) {
+                        location.reload();
+                    } else {
+                        $(".list-procart")
+                            .find('.procart[data-id="' + id + '"]')
+                            .remove();
+                        $(".list-procart")
+                            .find("#load-total")
+                            .text(formatMoney(response.total));
+                    }
                 }
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);
             },
         });
+    });
+
+    $(".show-password").on("click", function () {
+        console.log("click");
+        var passwordInput = $(this).parents('body').find("input[name=password],input[name=confirm-password]");
+        if (passwordInput.attr("type") === "password") {
+            passwordInput.attr("type", "text");
+           $('body').find('.show-password>span').removeClass("fas fa-eye");
+           $('body').find('.show-password>span').addClass("fa-solid fa-eye-slash");
+        } else {
+            passwordInput.attr("type", "password");
+           $('body').find('.show-password>span').removeClass("fa-solid fa-eye-slash");
+           $('body').find('.show-password>span').addClass("fas fa-eye");
+        }
     });
 }
 

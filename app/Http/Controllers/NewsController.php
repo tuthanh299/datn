@@ -22,19 +22,18 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search_keyword');
-        $searchresult = null;
         $newspost = null;
         if ($search) {
-            $search = '%' . $search . '%';
-            $searchresult = $this->news::select('id', 'name','photo_path')
-                ->where('name', 'LIKE', $search)
+            $searchUnicode = '%' . $search . '%';
+            $newspost = $this->news::select('id', 'name', 'photo_path')
+                ->where('name', 'LIKE', $searchUnicode)
                 ->latest()
                 ->paginate(10);
+            $newspost->setPath('news?search_keyword=' . $search);
         } else {
             $newspost = $this->news::latest()->paginate(10);
         }
-
-        return view('admin.news.index', compact('newspost', 'searchresult'));
+        return view('admin.news.index', compact('newspost'));
     }
     public function create()
     {

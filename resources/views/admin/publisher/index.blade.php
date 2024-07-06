@@ -20,8 +20,9 @@
                         <input class="search-keyword form-control border-end-0 border"
                             value="{{ request()->get('search_keyword') }}" type="search" name="search_keyword"
                             placeholder="Nhập từ khóa để tìm kiếm">
+                        <input type="hidden" id="search_route" value="{{ route('publisher.index') }}">
                         <div class="input-group-append bg-primary rounded-right">
-                            <button class="btn btn-navbar text-white" type="button">
+                            <button class="btn btn-navbar text-white" onclick="onSearch()" type="button">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -40,8 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            @if ($publishers)
+                            @if (!$publishers->isEmpty())
                                 @foreach ($publishers as $publisher)
                                     <tr>
                                         <td>{{ $publisher->name }}</td>
@@ -57,38 +57,17 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @elseif ($searchresult !== null && $searchresult->total() > 0)
-                                @foreach ($searchresult as $publisher)
-                                    <tr>
-                                        <td>{{ $publisher->name }}</td>
-                                        <td>
-                                            <img class="publisher-image-thumb" src="{{ $publisher->photo_path }}"
-                                                alt="">
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('publisher.edit', ['id' => $publisher->id]) }}"
-                                                class="btn btn-default">Edit</a>
-                                            <a href=" "data-url="{{ route('publisher.delete', ['id' => $publisher->id]) }}"
-                                                class="btn btn-danger action_delete">Xóa</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
                             @else
-                                <td colspan="2">Không tìm thấy kết quả nào cho từ khóa của bạn.</td>
+                                <td colspan="2">Không tìm thấy kết quả!</td>
                             @endif
                         </tbody>
                     </table>
                 </div>
-
-                @if ($searchresult || $publishers->hasMorePages())
-                    <div class="col-md-12">
-                        {{ $searchresult ?? $publishers->links('pagination::bootstrap-5') }}
-                    </div>
-                @endif
+                <div class="col-md-12">
+                    {{ $publishers->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
 @endsection

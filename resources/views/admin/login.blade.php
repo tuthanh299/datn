@@ -9,20 +9,16 @@
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <?php
-    $cssFiles = glob('adminlte/dist/css/*.css');
+    $cssFiles = glob(public_path('adminlte/dist/css/*.css'));
     foreach ($cssFiles as $file) {
-        echo '<link rel="stylesheet" type="text/css" href="' . $file . '">';
-    }
-    ?>
-    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
-    <?php
-    $jsFiles = glob(public_path('adminlte/dist/js/*.js'));
-    foreach ($jsFiles as $file) {
         $file = str_replace(public_path(), '', $file);
-        echo '<script src="' . $file . '"></script>';
+        echo '<link rel="stylesheet"  href="' . $file . '"></link>';
     }
-    ?>
+    ?> 
+    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}"> 
+    <script src="{{ asset('/admins/js/app.js') }}"></script> 
 </head>
 
 <body class="sidebar-mini text-sm login-page">
@@ -44,7 +40,7 @@
                             <input type="email" pattern="[^ @]*@[^ @]*" name="email" id="username"
                                 value="{{ old('email') }}" class="form-control text-sm text-lowercase"
                                 placeholder="Nhập email" required autocomplete="off" />
-                                
+
                         </div>
                         <label class="emailMember-error error" for="emailMember" style=""></label>
                     </div>
@@ -77,8 +73,6 @@
     <div class="login-copyright text-sm">Powered by TL Bookstore</div>
 
 </body>
-<script>
-    
-</script>
+<script></script>
 
 </html>

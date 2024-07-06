@@ -24,7 +24,7 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Mã hóa đơn</label>
-                            <input type="text" class="form-control" name="orders_code"
+                            <input type="text" class="form-control" name="order_code"
                                 value="{{ $ImportOrderCode }}" readonly>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Tổng tiền</label>
-                            <input type="number" class="form-control format-price total_price" name="total_price" value="">
+                            <input type="number" class="form-control format-price total_price" name="total_price" value="" readonly>
                         </div>
                     </div>
                 </div>

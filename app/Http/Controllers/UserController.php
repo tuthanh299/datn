@@ -26,19 +26,18 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search_keyword');
-        $searchresult = null;
         $users = null;
         if ($search) {
-            $search = '%' . $search . '%';
-            $searchresult = $this->user::select('id', 'first_name', 'email')
-                ->where('email', 'LIKE', $search)
+            $searchUnicode = '%' . $search . '%';
+            $users = $this->user::select('id', 'first_name', 'last_name', 'email')
+                ->where('email', 'LIKE', $searchUnicode)
                 ->latest()
                 ->paginate(10);
+            $users->setPath('users?search_keyword=' . $search);
         } else {
             $users = $this->user->latest()->paginate(10);
         }
-
-        return view('admin.user.index', compact('users', 'searchresult'));
+        return view('admin.user.index', compact('users'));
     }
     public function create()
     {

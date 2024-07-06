@@ -21,20 +21,23 @@ class SliderController extends Controller
     }
     public function index(Request $request)
     {
-        $search = $request->input('search_keyword');
-        $searchresult = null;
+
+
+        $search = $request->input('search_keyword'); 
         $sliders = null;
         if ($search) {
-            $search = '%' . $search . '%';
-            $searchresult = $this->slider::select('id', 'name', 'description', 'photo_path')
-                ->where('name', 'LIKE', $search)
+            $searchUnicode = '%' . $search . '%';
+            $sliders = $this->slider::select('id', 'name', 'description', 'photo_path')
+                ->where('name', 'LIKE', $searchUnicode)
                 ->latest()
                 ->paginate(10);
+            $sliders->setPath('slider?search_keyword=' . $search);
+
         } else {
             $sliders = $this->slider->latest()->paginate(10);
-        }
+        } 
 
-        return view('admin.slider.index', compact('sliders', 'searchresult'));
+        return view('admin.slider.index', compact('sliders'));
     }
     public function create()
     {

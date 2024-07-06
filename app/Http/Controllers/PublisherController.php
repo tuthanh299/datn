@@ -28,19 +28,19 @@ class PublisherController extends Controller
     public function index(Request $request)
     { 
         $search = $request->input('search_keyword');
-        $searchresult = null;
         $publishers = null;
         if ($search) {
-            $search = '%' . $search . '%';
-            $searchresult = $this->publisher::select('id', 'name',"photo_path")
-                ->where('name', 'LIKE', $search)
+            $searchUnicode = '%' . $search . '%';
+            $publishers = $this->publisher::select('id', 'name',"photo_path")
+                ->where('name', 'LIKE', $searchUnicode)
                 ->latest()
                 ->paginate(10);
+                $publishers->setPath('publisher?search_keyword=' . $search);
         } else {
             $publishers = $this->publisher->latest()->paginate(10);
         }
        
-        return view('admin.publisher.index', compact('publishers','searchresult'));
+        return view('admin.publisher.index', compact('publishers'));
     }
     public function create()
     {

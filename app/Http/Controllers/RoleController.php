@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permission;
-use App\Models\Role;
-use Illuminate\Http\Request;
 use App\Http\Requests\RoleAddRequest;
 use App\Http\Requests\RoleEditRequest;
-
+use App\Models\Permission;
+use App\Models\Role;
 use App\Traits\DeleteModelTrait;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -23,20 +22,21 @@ class RoleController extends Controller
     }
     public function index(Request $request)
     {
+
         $search = $request->input('search_keyword');
-        $searchresult = null;
         $roles = null;
         if ($search) {
-            $search = '%' . $search . '%';
-            $searchresult = $this->role::select('id', 'name', 'display_name')
-                ->where('name', 'LIKE', $search)
+            $searchUnicode = '%' . $search . '%';
+            $roles = $this->role::select('id', 'name', 'display_name')
+                ->where('name', 'LIKE', $searchUnicode)
                 ->latest()
                 ->paginate(10);
+            $roles->setPath('roles?search_keyword=' . $search);
         } else {
             $roles = $this->role->latest()->paginate(10);
         }
-       
-        return view('admin.role.index', compact('roles','searchresult'));
+
+        return view('admin.role.index', compact('roles'));
     }
     public function create()
     {
@@ -73,8 +73,8 @@ class RoleController extends Controller
     }
     public function delete($id)
     {
-       
-        return $this->deleteModelTrait($id,$this->role);
+
+        return $this->deleteModelTrait($id, $this->role);
 
     }
 }

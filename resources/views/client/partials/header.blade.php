@@ -5,12 +5,10 @@ use App\Http\Controllers\Clients\IndexController;
     <div class="header-top">
         <div class="wrap-content">
             <div class="flex-header-top">
-                <div class="header-top-address">
-                    <a href target="_blank">
-                        <i class="fa-solid fa-location-dot"></i>
-                        Địa chỉ:
-                        65 Đ. Huỳnh Thúc Kháng, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh
-                    </a>
+                <div class="header-top-address w-25 text-light">
+                    <marquee behavior="" direction="">
+                        {{ IndexController::settings()->description }}
+                    </marquee>
                 </div>
                 <div class="header-top-social">
                     <div class="flex-social">
@@ -46,13 +44,12 @@ use App\Http\Controllers\Clients\IndexController;
                     <img src="{{ IndexController::settings()->logo_path }}" alt>
                 </div>
                 <div class="header-bottom-banner ">
-                    <img src="{{ asset('index/imgs/banner.jpg') }}" alt>
+                    
                 </div>
                 <div class="header-bottom-contact">
                     <div class="flex-header-bottom-contact">
                         <div class="header-bottom-contact-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsUrVUDIHp1hRpBesplVZXHOaKfLI2oyxpgQ&s"
-                                alt>
+                            <i class="fa-solid fa-phone-volume"></i>
                         </div>
                         <div class="header-bottom-contact-info">
                             <div class="header-bottom-contact-text">

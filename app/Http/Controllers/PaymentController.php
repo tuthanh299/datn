@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cart;
-use App\Models\DetailCart;
+ 
 use App\Models\Member;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -27,16 +26,16 @@ class PaymentController extends Controller
         $total = 0;
         $user = Auth::guard('member')->user();
 
-        // $cart[0]->cart_total = $total;
+       
 
         return view('client.order.payment', compact('user'));
-        //dd($carts);
+        
     }
 
     public function vnpay_payment(Request $request)
     {
 
-        //dd($request->all());
+        
 
         if (!Auth::guard('member')->check()) {
             return redirect()->route('user.login');
@@ -213,7 +212,6 @@ class PaymentController extends Controller
 
         foreach (session('cart') as $id => $details) {
             $orderDetail = new OrderDetail;
-
             $orderDetail->order_id = $orderInfo->id;
             $orderDetail->product_id = $details['product_id'];
             $orderDetail->quantity = $details['quantity'];

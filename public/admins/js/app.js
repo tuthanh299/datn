@@ -2,6 +2,31 @@ function isExist(className) {
     return document.getElementsByClassName(className).length > 0;
 }
 
+/* Show notify */
+function showNotify(
+    text = "Notify text",
+    title = "Thông báo",
+    status = "success"
+) {
+    new Notify({
+        status: status, // success, warning, error
+        title: title,
+        text: text,
+        effect: "fade",
+        speed: 400,
+        customClass: null,
+        customIcon: null,
+        showIcon: true,
+        showCloseButton: true,
+        autoclose: true,
+        autotimeout: 3000,
+        gap: 10,
+        distance: 10,
+        type: 3,
+        position: "right top",
+    });
+}
+
 /* PreviewImage */
 function previewImage(inputId, previewId) {
     const fileInput = document.getElementById(inputId);
@@ -78,6 +103,7 @@ function SumoSelectImportInvoive() {
         $(".sumoselectimportinvoice").SumoSelect({
             okCancelInMulti: true,
             placeholder: "Chọn sản phẩm",
+            search: true,
         });
         $(".sumoselectimportinvoice").on("change", function () {
             var productId = $(this).val();
@@ -123,20 +149,6 @@ function SumoSelectImportInvoive() {
     }
 }
 
-function calculateTotalPrice() {
-    var totalPrice = 0;
-    $(".product-call-by-ajax").each(function () {
-        var quantity = $(this).find('input[name="quantity[]"]').val();
-        var importPrice = $(this).find('input[name="import_price[]"]').val();
-        if (quantity && importPrice) {
-            totalPrice += parseFloat(quantity) * parseFloat(importPrice);
-        }
-    });
-    setTimeout(function () {
-        $('input[name="total_price"]').val(totalPrice.toFixed(2));
-    }, 2000);
-}
-
 function CheckRole() {
     /* Role */
     $(".checkbox_parent").on("click", function () {
@@ -156,43 +168,97 @@ function JsAdmin() {
     if (isExist("summernote")) {
         $(".summernote").summernote();
     }
+    $(".show-password").on("click", function () {        
+        var passwordInput = $(this).parents('body').find("input[name=password]");
+        if (passwordInput.attr("type") === "password") {
+            passwordInput.attr("type", "text");
+            $(this).find('span').removeClass("fas fa-eye");
+            $(this).find('span').addClass("fa-solid fa-eye-slash");
+        } else {
+            passwordInput.attr("type", "password");
+            $(this).find('span').removeClass("fa-solid fa-eye-slash");
+            $(this).find('span').addClass("fas fa-eye");
+        }
+    });
+    
 }
 
 function calculate() {
-    
+    $("body").on(
+        "change keyup",
+        "input.import_price, input.quantity-input",
+        function () {
+            let _total = 0;
 
-    $("body").on("change", "input.import_price, input.quantity-input", function () {
-        let _total = 0;
+            $("body")
+                .find(".product-call-by-ajax")
+                .each(function () {
+                    const currentPrice = $(this)
+                        .find("input.import_price")
+                        .val()
+                        ? parseInt($(this).find("input.import_price").val())
+                        : 0;
+                    const quantity = $(this)
+                        .find('input[name="quantity[]"]')
+                        .val()
+                        ? parseInt(
+                              $(this).find('input[name="quantity[]"]').val()
+                          )
+                        : 0;
 
-        $("body")
-            .find(".product-call-by-ajax")
-            .each(function () {
-                const currentPrice = $(this).find("input.import_price").val()?parseInt($(this).find("input.import_price").val()):0;
-                const quantity = $(this).find('input[name="quantity[]"]').val()?parseInt($(this).find('input[name="quantity[]"]').val()):0;
+                    let tempTotal = 0;
+                    tempTotal += currentPrice * quantity;
 
-                let tempTotal = 0;
-                tempTotal += currentPrice * quantity;
-
-                _total += tempTotal;
-                $('input[name="total_price"]').val(_total);
-            });
-    });
+                    _total += tempTotal;
+                    $('input[name="total_price"]').val(_total);
+                });
+        }
+    );
 }
-
+function onSearch() {
+    const route_og = $("input#search_route").val(),
+        keyword = $('input[name="search_keyword"]').val();
+    window.location.href = route_og + "?search_keyword=" + keyword;
+}
 window.onload = function () {
-    if (window.location.search) {
-        window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname + "?search_keyword="
-        );
+    if ($('input[name="search_keyword"]').length) {
+        $('input[name="search_keyword"]').on("keypress", function (e) {
+            if (e.which == 13) {
+                onSearch();
+                return false;
+            }
+        });
     }
 };
+if ($(".regular_price").length && $(".sale_price").length) {
+    $(".sale_price").on("change keyup", function (event) {
+        const regular_price = parseInt($(".regular_price").val()),
+            sale_price = parseInt($(this).val());
+        let discount = 0;
+
+        if (regular_price === 0) {
+            $(this).val(0);
+            $(".regular_price").focus();
+            showNotify("Vui lòng nhập giá bán!", "Thông báo", "error");
+        } else if (regular_price > sale_price) {
+            discount = Math.floor(
+                ((regular_price - $(this).val()) / regular_price) * 100
+            );
+        } else {
+            discount = 0;
+            $(this).val(0);
+            showNotify(
+                "Vui lòng nhập giá mới nhỏ hơn giá bán!",
+                "Thông báo",
+                "error"
+            );
+        }
+
+        $(".discount").val(discount);
+    });
+     
+}
 $(document).ready(function () {
-    $('input[name="quantity[]"], input[name="import_price[]"]').on(
-        "change",
-        calculateTotalPrice
-    );
     calculate();
     JsAdmin();
     CheckRole();

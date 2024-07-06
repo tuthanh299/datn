@@ -66,12 +66,7 @@ use App\Http\Controllers\Clients\IndexController;
                 <a href="{{ route('search') }} " title="Tìm kiếm">
                     Tìm kiếm
                 </a>
-            </li>
-            <li class="menu-main-li">
-                <a href="{{ route('contact') }} " title="Liên hệ">
-                    Liên hệ
-                </a>
-            </li>
+            </li> 
             <li class="menu-partials ">
                 <div class="flex-menu-partials">
 
@@ -109,7 +104,7 @@ use App\Http\Controllers\Clients\IndexController;
                                                 <i class="fa-solid fa-user"></i>
                                             </div>
                                             <div class="menu-bottom-account-text">
-                                                Xin chào, {{ $user->first_name }}
+                                                Xin chào, {{ IndexController::getUserInfo()->first_name }}
                                             </div>
                                         </div>
                                     </a>
@@ -122,7 +117,7 @@ use App\Http\Controllers\Clients\IndexController;
                                                 <i class="fa-solid fa-user"></i>
                                             </div>
                                             <div class="menu-bottom-account-text">
-                                                Đăng nhập / Đăng ký
+                                                Tài khoản
                                             </div>
                                         </div>
                                     </a>
