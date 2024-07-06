@@ -26,7 +26,7 @@
             @php
                 $total = 0;
             @endphp
-            @if (session('cart'))
+            @if (session('cart') != null)
                 @csrf
                 <div class="row">
                     <div class="top-cart col-md-12">
@@ -55,7 +55,7 @@
                                                     src="{{ $v['product_photo_path'] ? $v['product_photo_path'] : asset('assets/noimage.jpg') }}"
                                                     alt="">
                                             </a>
-                                            <a class="del-procart text-decoration-none"><i class="fa fa-times-circle"></i>
+                                            <a class="del-procart text-decoration-none delete-product"><i class="fa fa-times-circle"></i>
                                                 Xóa </a>
                                         </div>
                                         <!--Tên-->
@@ -103,17 +103,6 @@
                                                 <span class="counter-procart-plus counter-procart">+</span>
                                             </div>
                                         </div>
-                                        {{-- <div class="quantity-procart col-3 col-md-2 mg-col-10">
-                                    <span class="buttons_added">
-                                        <input class="minus is-form" type="button" value="-"
-                                            onclick="decreaseCount(event, this)">
-                                        @method('PATCH')
-                                        <input type="number" aria-label="quantity" class="input-qty"
-                                            value="{{ $v['quantity'] }}" max="10" min="1" name="quantity">
-                                        <input class="plus is-form" type="button" value="+"
-                                            onclick="increaseCount(event, this)">
-                                    </span>
-                                </div> --}}
                                         <!--end số lượng-->
                                         <!--Thành tiền-->
                                         @if ($v['sale_price'])
@@ -184,24 +173,27 @@
         });
 
         $(".delete-product").click(function(e) {
-            e.preventDefault();
+        e.preventDefault();
 
-            var ele = $(this);
+        var ele = $(this);
 
-            if (confirm("Bạn có chắc chắn?")) {
-                $.ajax({
-                    //url: '#',
-                    method: "DELETE",
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: ele.parents("tr").attr("rowId")
-                    },
-                    success: function(response) {
-                        window.location.reload();
-                    }
-                });
+        if (confirm("Bạn có chắc chắn?")) {
+            $.ajax({
+            url: '{{route('delete.cart', $k)}',
+            type: 'DELETE',
+            success: function(response) {
+                if (response.is_empty) {
+                    location.reload();
+                } else {
+                    $('#total').text(response.total);
+                }
             }
+            });
+        }
+
         });
+
+        
 
         function increaseCount(a, b) {
             var input = b.previousElementSibling;
@@ -222,5 +214,4 @@
                 changeHref(value);
             }
         }
-    </script>
 @endsection

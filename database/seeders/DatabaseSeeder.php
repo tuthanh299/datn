@@ -48,13 +48,14 @@ class DatabaseSeeder extends Seeder
             PublishersTableSeeder::class,//
             MemberSeeder::class,//
             ProductsTableSeeder::class,//
-            //ProeSeeder::class,//
             ProductGalleriesTableSeeder::class,//
             WarehousesTableSeeder::class,//
             RolesTableSeeder::class,//
+            RoleUsersTableSeeder::class,//
             PermissionsTableSeeder::class,//
-            ImportInvoicesTableSeeder::class,
-            ImportInvoiceDetailsTableSeeder::class,
+            PermissionRoleTableSeeder::class,//
+            ImportInvoicesTableSeeder::class,//
+            ImportInvoiceDetailsTableSeeder::class,//
         ]);
     }
 }

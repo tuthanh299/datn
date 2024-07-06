@@ -14,8 +14,7 @@ class RolesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        
+    {   
 
         //DB::table('roles')->delete();
         
@@ -59,15 +58,6 @@ class RolesTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 5,
-                'name' => 'Admin Tối Thượng',
-                'display_name' => 'Có tất cả các quyền xử lý',
-                'created_at' => '2024-06-07 16:16:31',
-                'updated_at' => '2024-06-07 16:16:31',
-                'deleted_at' => NULL,
-            ),
-            5 => 
-            array (
-                'id' => 6,
                 'name' => 'Nhân viên Viết Bài',
                 'display_name' => 'Có tất cả các quyền về bài viết tin tức',
                 'created_at' => '2024-06-09 02:08:40',

@@ -76,6 +76,8 @@ class CCartController extends Controller
             }
         }
 
-        return response()->json(['is_passed' => 'true', 'total' => $total]);
+        $isEmpty = session()->get('cart') && count(session()->get('cart')) == 0;
+
+        return response()->json(['is_passed' => 'true', 'total' => $total, 'is_empty' => $isEmpty]);
     }
 }

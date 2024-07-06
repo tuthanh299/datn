@@ -32,7 +32,7 @@
                                 <tr>
                                     <td class="">{{ $v->orders_code }}</td>
                                     <td class="">{{ $v->import_date }}</td>
-                                    <td class="">{{ $v->total_price }}</td>
+                                    <td class="">@formatmoney($v->total_price )</td>
                                     <td>
                                         <a href="{{ route('import_order.view', ['id' => $v->id]) }}"
                                             class="btn btn-default">Xem</a>
