@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label>Mã hóa đơn</label>
                             <input type="text" class="form-control" name="order_code"
-                                value="{!! $ImportOrder->order_code !!}" readonly>
+                                value="{!! $ImportOrder->import_orders_code !!}" readonly>
                         </div>
                     </div>
                     <div class="col-3">

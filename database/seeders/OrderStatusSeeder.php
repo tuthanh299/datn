@@ -13,12 +13,12 @@ class OrderStatusSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('orders_status')->insert([
-            ['name' => 'Đã đặt', 'class_order' => 'text-primary'],
-            ['name' => 'Đã xác nhận', 'class_order' => 'text-info'],
-            ['name' => 'Đang giao hàng', 'class_order' => 'text-warning'],
-            ['name' => 'Đã giao', 'class_order' => 'text-success'],
-            ['name' => 'Đã huỷ', 'class_order' => 'text-danger'],
+        DB::table('order_statuses')->insert([
+            ['name' => 'Đã đặt'],
+            ['name' => 'Đã xác nhận'],
+            ['name' => 'Đang giao hàng'],
+            ['name' => 'Đã giao'],
+            ['name' => 'Đã huỷ'],
         ]);
     }
 }

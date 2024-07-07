@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -38,8 +39,11 @@ class OrderController extends Controller
     public function view($id)
     {
         $ImportOrder = $this->order->find($id);
-        $ImportOrderdetail = OrderDetail::where('order_id', $id)->get(); 
-        dd($ImportOrder, $ImportOrderdetail);
+        $ImportOrderdetail = OrderDetail::join('products', 'products.id', '=', 'order_details.product_id')->where('order_id', $id)->get();
+        $status = OrderStatus::get();
+        //$ImportOrderdetail = OrderDetail::join('orders', 'order_details.order_id', '=', $id)->get();
+        return view('admin.order.view', compact('ImportOrder', 'ImportOrderdetail', 'status')); 
+        //dd($ImportOrder, $ImportOrderdetail, $status);
     }
 
     public function store(Request $request)

@@ -44,7 +44,7 @@
                             @if (!$ImportOrder->isEmpty())
                                 @foreach ($ImportOrder as $v)
                                     <tr>
-                                        <td class="">{{ $v->order_code }}</td>
+                                        <td class="">{{ $v->import_orders_code }}</td>
                                         <td class="">{{ $v->import_date }}</td>
                                         <td class="">@formatmoney($v->total_price)</td>
                                         <td>

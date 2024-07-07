@@ -22,14 +22,14 @@
                     <button type="button" class="btn btn-primary" onclick="history.back()">Thoát</button>
                 </div>
                 <div class="row col-12">
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>Mã hóa đơn</label>
                             <input type="text" class="form-control" name="orders_code"
                                 value="{!! $ImportOrder->order_code !!}" readonly>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>Thời gian</label>
                             <input type="datetime-local" min="{{ date('Y-m-d\TH:i') }}" class="form-control"
@@ -38,6 +38,13 @@
                                 readonly>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <select name="status" id="status">
+                            @foreach ($status as $item)
+                                <option value="{!! $item->id !!}">{{$item->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-3">
                         <div class="form-group">
                             <label>Tổng tiền</label>
@@ -45,14 +52,47 @@
                                 value="{!! $ImportOrder->total_price !!}" readonly>
                         </div>
                     </div>
-
                 </div>
-                <button type="button" class="btn btn-primary" onclick="history.back()">Thoát</button>
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Mã Sản Phẩm</th>
+                                <th scope="col">Tên Sản Phẩm</th>
+                                <th scope="col">Giá Sản Phẩm</th>
+                                <th scope="col">Số Lượng</th>
+                                <th scope="col">Tổng cộng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!$ImportOrderdetail->isEmpty())
+                                @foreach ($ImportOrderdetail as $v)
+                                    <tr>
+                                        <td class="">{{ $v->code }}</td>
+                                        <td class="">{{ $v->name }}</td>
+                                        @if ($v->sale_price > 0)
+                                            <td class="">@formatmoney($v->sale_price)</td>
+                                        @else
+                                            <td class="">@formatmoney($v->regular_price)</td>
+                                        @endif
+                                        <td class="">{{ $v->quantity }}</td>
+                                        @if ($v->sale_price > 0)
+                                        <td class="">@formatmoney($v->sale_price * $v->quantity)</td>
+                                    @else
+                                        <td class="">@formatmoney($v->regular_price * $v->quantity)</td>
+                                    @endif
+                                    </tr>
+                                @endforeach
+                            @else
+                                <td colspan="2">Không tìm thấy kết quả!</td>
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit" class="btn btn-primary">Lưu</button>
             </form>
-
-
         </div>
-
+        <button type="button" class="btn btn-primary" onclick="history.back()">Thoát</button>
     </div>
 
 </div>

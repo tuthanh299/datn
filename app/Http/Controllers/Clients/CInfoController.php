@@ -37,6 +37,7 @@ class CInfoController extends Controller
             'first_name' => $all['first_name'],
             'last_name'=> $all['last_name'],
             'phone' => $all['phone'],
+            'address' => $all['address'],
             'email' => $all['email'],
         ]);
 

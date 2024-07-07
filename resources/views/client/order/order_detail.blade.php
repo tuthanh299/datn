@@ -8,7 +8,7 @@
 <!-- Thông tin đơn hàng -->
 <div class="form-add-top">
     <div>
-        <a href="{{route('user.order')}}">Thoát</a>
+        <a href="" onclick="history.back()">Thoát</a>
     </div>
     <div class="title-name1">Thông tin đơn hàng</div>
     <div class="title-bill">ĐƠN HÀNG: <span class="id-bill">{{$hdb[0]->id}}</span>, ĐẶT
@@ -16,17 +16,6 @@
     <div class="flex-infor-bill">
         <div class="infor-bill">
             <div class="infor-bill-item">
-                Tình trạng thanh toán: 
-                <span>
-                    @switch($hdb[0]->payment_status)
-                    @case(0)
-                    Chưa thanh toán
-                    @break
-                    @case(1)
-                    Đã thanh toán
-                    @break
-                    @endswitch
-                </span>
             </div>
             <div class="title-name2">Địa chỉ nhận hàng: {{$user->address}}</div>
             <div class="infor-bill-item">
@@ -70,10 +59,14 @@
         <tbody>
             @foreach ($cthdb as $item)
             <tr>
-                <td>{{$item->product_id}}</td>
+                <td>{{$item->code}}</td>
                 <td>{{$item->name}}</td>
                 <td>{{$item->quantity}}</td>
-                <td>@formatmoney($item->price)</td>
+                @if($item->sale_price > 0) 
+                <td>@formatmoney($item->sale_price)</td>
+                @else
+                <td>@formatmoney($item->regular_price)</td>
+                @endif
             </tr>
             @endforeach
         </tbody>
