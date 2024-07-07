@@ -55,16 +55,7 @@ use App\Http\Controllers\Clients\IndexController;
                                                     href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                     title="{{ $v->name }}">{{ $v->name }}</a>
                                             </div>
-                                            <div class="-cart">
-                                                <div class="product-quantity">
-                                                    <span class="product-quantity-text">Còn hàng:</span>
-                                                    <span class="product-quantity-num-sub-text">
-                                                        <span class="product-quantity-num">4</span>
-                                                        <span class="product-quantity-num-sub-text">sản phẩm</span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="price-product">
+                                                                                        <div class="price-product">
                                                 @if ($v->discount)
                                                     <div class="price-new">
                                                         @formatmoney($v->sale_price)

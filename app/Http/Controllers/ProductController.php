@@ -37,49 +37,90 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {
+        $categories = $this->category->all();
+
         $search = $request->input('search_keyword');
         $products = null;
         if ($search) {
             $searchUnicode = '%' . $search . '%';
-            $products = $this->product::select('id', 'name', 'product_photo_path')
+            $products = $this->product::select('id', 'name', 'category_id','product_photo_path')
                 ->where('name', 'LIKE', $searchUnicode)
                 ->latest()
-                ->paginate(10);
+                ->paginate(15);
             $products->setPath('product?search_keyword=' . $search);
         } else {
-            $products = $this->product::latest()->paginate(10);
+            $products = $this->product::latest()->paginate(15);
         }
-        return view('admin.product.index', compact('products'));
+        return view('admin.product.index', compact('products', 'categories'));
 
     }
     /* Warehouse */
 
     public function warehouse(Request $request)
     {
+        $categories = $this->category->all();
+
         $search = $request->input('search_keyword');
         $warehouse = null;
+
         if ($search) {
             $searchUnicode = '%' . $search . '%';
             $warehouse = $this->product::select('*')
                 ->where('name', 'LIKE', $searchUnicode)
                 ->latest()
-                ->paginate(10); 
+                ->paginate(15);
+
             foreach ($warehouse as $warehouseItem) {
                 $product = Product::find($warehouseItem->id);
                 $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
-                $warehouseItem->product_photo_path = $product ? $product->product_photo_path : 'Đường dẫn ảnh mặc định';
+                $warehouseItem->product_photo_path = $product ? $product->product_photo_path : 'Ảnh không có sẵn';
+                $warehousedata = Warehouse::find($warehouseItem->id);
+
+                if ($warehousedata) {
+                    $warehouseItem->quantity = $warehousedata->quantity;
+
+                    // Lấy category_id từ bảng Product
+                    $category_id = $product ? $product->category_id : null;
+                    $warehouseItem->category_id = $category_id;
+
+                    if ($category_id) {
+                        // Tìm tên danh mục dựa trên category_id từ bảng Category
+                        $category = Category::find($category_id);
+                        $warehouseItem->category_name = $category ? $category->name : 'Không tìm thấy danh mục';
+                    } else {
+                        $warehouseItem->category_name = 'Không tìm thấy danh mục';
+                    }
+                } else {
+                    $warehouseItem->quantity = 'Không tìm thấy số lượng';
+                    $warehouseItem->category_id = 'Không tìm thấy danh mục';
+                    $warehouseItem->category_name = 'Không tìm thấy danh mục';
+                }
             }
+
             $warehouse->setPath('warehouse?search_keyword=' . $search);
         } else {
-            $warehouse = $this->warehouse->latest()->paginate(10);
+            $warehouse = $this->warehouse->latest()->paginate(15);
+
             foreach ($warehouse as $warehouseItem) {
                 $product = Product::find($warehouseItem->product_id);
                 $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
-                $warehouseItem->product_photo_path = $product ? $product->product_photo_path : 'Đường dẫn ảnh mặc định';
+                $warehouseItem->product_photo_path = $product ? $product->product_photo_path : 'Ảnh không có sẵn';
+
+                // Lấy category_id từ bảng Product
+                $category_id = $product ? $product->category_id : null;
+                $warehouseItem->category_id = $category_id;
+
+                if ($category_id) {
+                    // Tìm tên danh mục dựa trên category_id từ bảng Category
+                    $category = Category::find($category_id);
+                    $warehouseItem->category_name = $category ? $category->name : 'Không tìm thấy danh mục';
+                } else {
+                    $warehouseItem->category_name = 'Không tìm thấy danh mục';
+                }
             }
         }
 
-        return view('admin.warehouse.index', compact('warehouse'));
+        return view('admin.warehouse.index', compact('warehouse','categories'));
     }
 
     public function create()
@@ -207,6 +248,28 @@ class ProductController extends Controller
     {
         return $this->deleteModelTrait($id, $this->product);
 
+    }
+    public function getCategoryId(Request $request)
+    {
+        $categoryIds = $request->query('categoryId');
+        if (is_array($categoryIds)) {
+            $products = Product::whereIn('category_id', $categoryIds)->with('category')->get();
+        } else {
+            $products = Product::with('category')->get();
+        }
+        return response()->json(['products' => $products]);
+    }
+    public function getCategoryIdWarehouse(Request $request)
+    {
+        
+        $categoryIds = $request->query('categoryId');
+        
+        if (is_array($categoryIds)) {
+            $products = Product::whereIn('category_id', $categoryIds)->with('category')->get();
+        } else {
+            $products = Product::with('category')->get();
+        }
+        return response()->json(['products' => $products]);
     }
 
 }
