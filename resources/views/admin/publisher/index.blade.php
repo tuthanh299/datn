@@ -51,7 +51,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('publisher.edit', ['id' => $publisher->id]) }}"
-                                                class="btn btn-default">Edit</a>
+                                                class="btn btn-default">Sửa</a>
                                             <a href=" "data-url="{{ route('publisher.delete', ['id' => $publisher->id]) }}"
                                                 class="btn btn-danger action_delete">Xóa</a>
                                         </td>

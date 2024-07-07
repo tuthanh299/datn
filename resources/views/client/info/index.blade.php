@@ -29,11 +29,11 @@
                         </div>
                     @endif
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <h4 class=""><a href="{{ route('user.order') }}">Lịch sử mua hàng</a></h4>
                     <h4 class=""><a href="">Đổi mật khẩu</a></h4>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <form class="flex-user-infor" action="{{ route('user.info.update') }}" method="POST">
                         @csrf
                         <div class="user-infor-detail">

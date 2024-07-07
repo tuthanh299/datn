@@ -125,7 +125,7 @@ function SumoSelectImportInvoive() {
                                             <strong>${product.name}</strong>
                                         </h3>
                                     </div>
-                                    <div class="card-body">
+                                        <div class="card-body">
                                         <div class="form-group">
                                             <label for="">Số lượng nhập</label>
                                             <input type="number" name="quantity[]"  value="" class="form-control quantity-input">
@@ -149,6 +149,144 @@ function SumoSelectImportInvoive() {
     }
 }
 
+function SumoSelectFilterProduct() {
+    if (isExist("sumoselectfilterproduct")) {
+        $(".sumoselectfilterproduct").SumoSelect({
+            okCancelInMulti: false,
+            placeholder: "Chọn sản phẩm",
+            search: false,
+             
+        });
+        $(".sumoselectfilterproduct").on("change", function () {
+            var categoryId = $(this).val();
+          
+            $.ajax({
+                url: $(this).data("url"),
+                type: "GET",
+                data: { categoryId: categoryId },
+                success: function (response) {
+                    $(".filter-product-call-by-ajax").empty();
+                    if (response.products.length > 0) {
+                        $.each(response.products, function (index, product) {
+                            var productBlock = `
+                                <tr>
+                                    <td class="text-capitalize">${
+                                        product.name
+                                    }</td>
+                                    <td>
+                                        <img class="adm-product-img"
+                                            src="${
+                                                product.product_photo_path
+                                                    ? product.product_photo_path
+                                                    : "/assets/noimage.jpg"
+                                            }"
+                                            alt="">
+                                    </td>
+                                    <td class="text-capitalize">${
+                                        product.category
+                                            ? product.category.name
+                                            : "Không tìm thấy danh mục"
+                                    }</td>
+                                    <td>
+                                        <a href="/product/edit/${
+                                            product.id
+                                        }" class="btn btn-default">Sửa</a>
+                                        <a href="" data-url="/product/delete/${
+                                            product.id
+                                        }" class="btn btn-danger action_delete">Xóa</a>
+                                    </td>
+                                </tr>`;
+                            $(".filter-product-call-by-ajax").append(
+                                productBlock
+                            );
+                        });
+                    } else {
+                        $(".filter-product-call-by-ajax").append(
+                            '<tr><td colspan="4">Không tìm thấy kết quả!</td></tr>'
+                        );
+                    }
+                    $(".col-md-12.pagination").attr('hidden','true');
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                    $(".filter-product-call-by-ajax")
+                        .empty()
+                        .append(
+                            '<tr><td colspan="4">Đã xảy ra lỗi khi tải dữ liệu!</td></tr>'
+                        );
+                },
+            });
+        });
+    }
+}
+function SumoSelectFilterProductWarehouse() {
+    if (isExist("sumoselectfilterproductwarehouse")) {
+        $(".sumoselectfilterproductwarehouse").SumoSelect({
+            okCancelInMulti: false,
+            placeholder: "Chọn sản phẩm",
+            search: false,
+             
+        });
+        $(".sumoselectfilterproductwarehouse").on("change", function () {
+            var categoryId = $(this).val();
+          
+            $.ajax({
+                url: $(this).data("url"),
+                type: "GET",
+                data: { categoryId: categoryId },
+                success: function (response) {
+                    $(".filter-product-warehouse-call-by-ajax").empty();
+                    if (response.products.length > 0) {
+                        $.each(response.products, function (index, product) {
+                            var productBlock = `
+                                <tr class="row">
+                                    <td class="text-capitalize col-md-5">${
+                                        product.name
+                                    }</td>
+                                    <td class="col-md-2">
+                                        <img class="adm-product-img"
+                                            src="${
+                                                product.product_photo_path
+                                                    ? product.product_photo_path
+                                                    : "/assets/noimage.jpg"
+                                            }"
+                                            alt="">
+                                    </td>
+                                    <td class="text-capitalize col-md-4">${
+                                        product.category
+                                            ? product.category.name
+                                            : "Không tìm thấy danh mục"
+                                    }</td>
+                                    <td class="text-capitalize col-md-1">${
+                                        product.quantity
+                                            ? product.quantity
+                                            : "Không tìm thấy số lượng"
+                                    }</td>
+                                     
+                                </tr>`;
+                            $(".filter-product-warehouse-call-by-ajax").append(
+                                productBlock
+                            );
+                        });
+                    } else {
+                        $(".filter-product-warehouse-call-by-ajax").append(
+                            '<tr><td colspan="4">Không tìm thấy kết quả!</td></tr>'
+                        );
+                    }
+                    $(".col-md-12.pagination").attr('hidden','true');
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                    $(".filter-product-call-by-ajax")
+                        .empty()
+                        .append(
+                            '<tr><td colspan="4">Đã xảy ra lỗi khi tải dữ liệu!</td></tr>'
+                        );
+                },
+            });
+        });
+    }
+}
 function CheckRole() {
     /* Role */
     $(".checkbox_parent").on("click", function () {
@@ -168,19 +306,20 @@ function JsAdmin() {
     if (isExist("summernote")) {
         $(".summernote").summernote();
     }
-    $(".show-password").on("click", function () {        
-        var passwordInput = $(this).parents('body').find("input[name=password]");
+    $(".show-password").on("click", function () {
+        var passwordInput = $(this)
+            .parents("body")
+            .find("input[name=password]");
         if (passwordInput.attr("type") === "password") {
             passwordInput.attr("type", "text");
-            $(this).find('span').removeClass("fas fa-eye");
-            $(this).find('span').addClass("fa-solid fa-eye-slash");
+            $(this).find("span").removeClass("fas fa-eye");
+            $(this).find("span").addClass("fa-solid fa-eye-slash");
         } else {
             passwordInput.attr("type", "password");
-            $(this).find('span').removeClass("fa-solid fa-eye-slash");
-            $(this).find('span').addClass("fas fa-eye");
+            $(this).find("span").removeClass("fa-solid fa-eye-slash");
+            $(this).find("span").addClass("fas fa-eye");
         }
     });
-    
 }
 
 function calculate() {
@@ -256,7 +395,6 @@ if ($(".regular_price").length && $(".sale_price").length) {
 
         $(".discount").val(discount);
     });
-     
 }
 $(document).ready(function () {
     calculate();
@@ -264,6 +402,8 @@ $(document).ready(function () {
     CheckRole();
     initializeSelect2();
     SumoSelectImportInvoive();
+    SumoSelectFilterProduct();
+    SumoSelectFilterProductWarehouse();
     previewImage("file-zone", "photoUpload-preview"); // Cho Favicon
     previewImage("file-zone2", "photoUpload-preview2"); // Cho Logo
 });

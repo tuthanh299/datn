@@ -132,13 +132,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         /* Dashboard */
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
        
-        Route::prefix('import_order')->group(function () {
-            Route::get('', [ImportOrderController::class, 'index'])->name('import_order.index');
-            Route::get('/create', [ImportOrderController::class, 'create'])->name('import_order.create');
-            Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store');
-            Route::get('/view/{id}', [ImportOrderController::class, 'view'])->name('import_order.view');
-            Route::get('/get-product-id', [ImportOrderController::class, 'getProductId'])->name('get-product-id]');
-        }); 
+       
         Route::prefix('order')->group(function () {
             Route::get('', [OrderController::class, 'index'])->name('order.index');
             Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store');
@@ -229,6 +223,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit')->middleware('can:product-edit');
             Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
             Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete')->middleware('can:product-delete');
+            Route::get('/get-category-id', [ProductController::class, 'getCategoryId'])->name('get-category-id');
+            Route::get('/get-category-id-warehouse', [ProductController::class, 'getCategoryIdWarehouse'])->name('get-category-id-warehouse');
+
+
         });
          /* Warehouse */
          Route::prefix('warehouse')->group(function () {
