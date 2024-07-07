@@ -71,6 +71,7 @@ Route::prefix('/')->group(function () {
     Route::controller(CProductController::class)->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
+        Route::get('/product/{id}/buy-now', 'add')->name('product.add');
     });
 
     /* Cart */
@@ -80,7 +81,6 @@ Route::prefix('/')->group(function () {
         Route::get('/cart/update_quantity/{id?}&{method?}', 'changeQuantity')->name('update_quantity.cart');
         Route::get('/cart/delete/{id}', 'delete')->name('delete.cart');
         //Route::patch('/cart/update/{id}', 'update_qty')->name('update.cart');
-        Route::get('/product/add/{id}/{count}', 'add')->name('add.cart');
         
     });
 
@@ -98,10 +98,10 @@ Route::prefix('/')->group(function () {
     });
 
     /*Address Change*/
-    Route::controller(CChangeAddressController::class)->group(function() {
+    /*Route::controller(CChangeAddressController::class)->group(function() {
         Route::get('change-address', 'index')->name('user.changeaddress.index');
         Route::post('change-address/update', 'update')->name('user.changeaddress.update');
-    });
+    });*/
 
     /*Password Change*/
     Route::controller(CChangePasswordController::class)->group(function() {
@@ -123,7 +123,7 @@ Route::prefix('/')->group(function () {
 });
 
 Route::get('/admin', [HomeController::class, 'index'])->name('home');
-Route::get('/logout', [AdminController::class, 'logoutAdmin'])->name('logout.admin');
+Route::get('/logoutadmin', [AdminController::class, 'logoutAdmin'])->name('logout.admin');
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');

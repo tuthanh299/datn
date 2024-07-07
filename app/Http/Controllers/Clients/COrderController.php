@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\SaleInvoice;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +15,7 @@ class COrderController extends Controller
     {
         if (Auth::guard('member')->user()) {
             $user = Auth::guard('member')->user();
-            $hdb = SaleInvoice::where('member_id', $user->id)->get();
+            $hdb = Order::where('member_id', $user->id)->get();
 
             return view('client.order.order', compact('user', 'hdb'));
         }
@@ -24,8 +26,9 @@ class COrderController extends Controller
     {
         if (Auth::guard('member')->user()) {
             $user = Auth::guard('member')->user();
-            $hdb = SaleInvoice::where('member_id', $user->id)->get();
-            $cthdb = DB::table('sale_invoice_details')->join('products', 'sale_invoice_details.product_id', '=', 'products.id')->get();
+            $hdb = Order::where('member_id', $user->id)->get();
+            //$cthdb = DB::table('sale_invoice_details')->join('products', 'sale_invoice_details.product_id', '=', 'products.id')->get();
+            $cthdb = OrderDetail::join('products', 'order_details.product_id', '=', 'products.id')->get();
             return view('client.order.order_detail', compact('user', 'hdb', 'cthdb'));
             //dd($cthdb);
         }

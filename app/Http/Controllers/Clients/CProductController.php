@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class CProductController extends Controller
 {
@@ -30,6 +31,30 @@ class CProductController extends Controller
         }
 
         return view('client.product.detail', compact('productDetail', 'pageName'));
+    }
+
+    public function add(Request $request, $id )
+    {
+        //dd($request->all());
+
+        if (!Auth::guard('member')->check()) {
+            return redirect()->route('user.login');
+        }
+        $product = Product::where('id', $id)->first();
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            //$cart[$id]['quantity'] += $request->quantity;
+        } else {
+            $cart[$id]['product_id'] = $id;
+            $cart[$id]['name'] = $product->name;
+            $cart[$id]['regular_price'] = $product->regular_price;
+            $cart[$id]['sale_price'] = $product->sale_price;
+            $cart[$id]['product_photo_path'] = $product->product_photo_path;
+            //$cart[$id]['quantity'] = $quantity;
+        }
+
+        session()->put('cart', $cart);
     }
 
 }
