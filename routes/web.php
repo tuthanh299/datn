@@ -37,7 +37,7 @@ Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.logi
 Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
 Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
-Route::get('logout-user', [CUserController::class, 'logout'])->name('user.logout');
+Route::get('logout', [CUserController::class, 'logout'])->name('user.logout');
  
 /* GOOGLE LOGIN */
 //Route::get('/auth/{provider}/redirect', [GoogleLoginController::class, 'redirect'])->name('redirect');

@@ -10,7 +10,7 @@ class AdminController extends Controller
     public function logoutAdmin(Request $request)
     {
         $request->session()->forget(['type','user']);
-        $request->session()->flush();
+        // $request->session()->flush();
         Auth::logout();
 
         return redirect('/login');

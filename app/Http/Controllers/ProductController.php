@@ -62,7 +62,6 @@ class ProductController extends Controller
 
         $search = $request->input('search_keyword');
         $warehouse = null;
-
         if ($search) {
             $searchUnicode = '%' . $search . '%';
             $warehouse = $this->product::select('*')
@@ -97,10 +96,9 @@ class ProductController extends Controller
                 }
             }
 
-            $warehouse->setPath('warehouse?search_keyword=' . $search);
+        $warehouse->setPath('warehouse?search_keyword=' . $search);
         } else {
-            $warehouse = $this->warehouse->latest()->paginate(15);
-
+        $warehouse = $this->warehouse->latest()->paginate(15);
             foreach ($warehouse as $warehouseItem) {
                 $product = Product::find($warehouseItem->product_id);
                 $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
@@ -268,6 +266,9 @@ class ProductController extends Controller
             $products = Product::whereIn('category_id', $categoryIds)->with('category')->get();
         } else {
             $products = Product::with('category')->get();
+        }
+        foreach ($products as $key => $product) {
+            $products[$key]['quantity'] = Warehouse::where('product_id', $product->id)->pluck('quantity');
         }
         return response()->json(['products' => $products]);
     }

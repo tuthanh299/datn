@@ -510,9 +510,9 @@ function AllRun() {
         });
     });
 
-    // Quantity
-    $(".quantity-minus-pro-detail,.quantity-plus-pro-detail").on(
-        "click",
+    // Quantity detail page
+    $(".quantity-minus-pro-detail,.quantity-plus-pro-detail,input.qty-pro").on(
+        "click change",
         function (event) {
             const _target = event.target;
 
@@ -535,17 +535,28 @@ function AllRun() {
                     _target.previousElementSibling.value =
                         parseInt(_target.previousElementSibling.value) + 1;
                     break;
-                default:
-                    showNotify("Không hợp lệ", "Thông báo", "error");
+                case "qty-pro":
+                    if (_target.value < 1) {
+                        _target.value = 1;
+                        showNotify(
+                            "Số lượng không được nhỏ hơn 1",
+                            "Thông báo",
+                            "error"
+                        );
+                        return false;
+                    }
                     break;
+                // default:
+                //     showNotify("Không hợp lệ", "Thông báo", "error");
+                //     break;
             }
         }
     );
 
-    // Quantity with AJAX
+    // Quantity with AJAX || cart page
     $("body").on(
-        "click",
-        ".counter-procart-minus,.counter-procart-plus",
+        "click change",
+        ".counter-procart-minus,.counter-procart-plus,input.quantity-procart",
         function (event) {
             const _target = event.target;
             const route = $(this)
@@ -575,11 +586,24 @@ function AllRun() {
                         parseInt(_target.previousElementSibling.value) + 1;
                     method = "plus";
                     break;
-                default:
-                    showNotify("Không hợp lệ", "Thông báo", "error");
+                case "quantity-procart":
+                    if (_target.value < 1) {
+                        _target.value = 1;
+                        method = _target.value;
+                        showNotify(
+                            "Số lượng không được nhỏ hơn 1",
+                            "Thông báo",
+                            "error"
+                        );
+                    } else {
+                        method = _target.value;
+                    }
                     break;
+                // default:
+                //     showNotify("Không hợp lệ", "Thông báo", "error");
+                //     break;
             }
-
+            console.log("route");
             $.ajax({
                 url: route + method,
                 type: "GET",
@@ -629,15 +653,21 @@ function AllRun() {
 
     $(".show-password").on("click", function () {
         console.log("click");
-        var passwordInput = $(this).parents('body').find("input[name=password],input[name=confirm-password]");
+        var passwordInput = $(this)
+            .parents("body")
+            .find("input[name=password],input[name=confirm-password]");
         if (passwordInput.attr("type") === "password") {
             passwordInput.attr("type", "text");
-           $('body').find('.show-password>span').removeClass("fas fa-eye");
-           $('body').find('.show-password>span').addClass("fa-solid fa-eye-slash");
+            $("body").find(".show-password>span").removeClass("fas fa-eye");
+            $("body")
+                .find(".show-password>span")
+                .addClass("fa-solid fa-eye-slash");
         } else {
             passwordInput.attr("type", "password");
-           $('body').find('.show-password>span').removeClass("fa-solid fa-eye-slash");
-           $('body').find('.show-password>span').addClass("fas fa-eye");
+            $("body")
+                .find(".show-password>span")
+                .removeClass("fa-solid fa-eye-slash");
+            $("body").find(".show-password>span").addClass("fas fa-eye");
         }
     });
 }

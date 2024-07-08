@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                             </div> -->
-                        <form action="{{ route('cod') }}" method="POST" id="paymentForm">>
+                        <form action="{{ url('/vnpay_payment') }}" method="POST" id="paymentForm">>
                             @csrf
                             <p class="title-cart">Thông tin giao hàng:</p>
                             <div class="information-cart">
@@ -173,20 +173,9 @@
                                 </div>
                             </div>
                             <input type="hidden" name="total" value="{{ $total + $shipping }}">
-                            <button type="submit" name="payment" class="btn btn-primary">Thanh toán ngay</button>
+                            <button type="submit" name="type" value="payment" class="btn btn-primary">Thanh toán ngay</button>
+                            <button type="submit" name="type" value="payment_vnpay" class="btn btn-primary">Thanh toán bằng VNPAY</button>
                         </form>
-                        <form action="{{ url('/vnpay_payment') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="total" value="{{ $total + $shipping }}">
-                            <input type="hidden" name="fullname"
-                                value="{{ $user->last_name . ' ' . $user->first_name }}">
-                            <input type="hidden" name="address" value="{{ $user->address }}">
-                            <input type="hidden" name="phone" value="{{ $user->phone }}">
-                            <input type="hidden" name="note" value="">
-
-                            <button type="submit" name="redirect" class="btn btn-primary">Thanh toán bằng VNPAY</button>
-                        </form>
-
                     </div>
                 </div>
             </div>

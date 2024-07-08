@@ -57,7 +57,7 @@ class GoogleLoginController extends Controller
         try {
             $socialuser = Socialite::driver('google')->user();
 
-            // dd($socialuser->getRaw()['given_name']);
+            // dd($socialuser->getRaw());
             /*if(Member::where('email', $socialuser->getEmail())->exists())
             {
             return redirect()->route('user.login')->withErrors(['email' => 'Email đã đăng nhập']);
@@ -82,30 +82,14 @@ class GoogleLoginController extends Controller
                 $dataUser['email_verified_at'] = now();
                 $user = Member::create($dataUser);
                 
-                /* Old one */
-                // $user = Member::create([
-                //     'first_name' => $socialuser->getName(),
-                //     'last_name' => $socialuser->getName(),
-                //     'email' => $socialuser->getEmail(),
-                //     'phone' => '',
-                //     'address' => '',
-                //     'password' => '',
-                //     'google_id' => $socialuser->getId(),
-                //     //'provider_token' => $socialuser->token,
-                //     'email_verified_at' => now(),
-                // ]);
 
-                $member = Member::where('email', $socialuser->getEmail())->first();
-
-                Cart::create([
-                    'member_id' => $member->id,
-                    'cart_total' => 0,
-                ]);
 
                 Auth::guard('member')->login($user);
+                session()->put('user_id', Auth::guard('member')->user()->id);
                 return redirect('/');
             } else {
                 Auth::guard('member')->login($user);
+                session()->put('user_id', Auth::guard('member')->user()->id);
                 return redirect('/');
             }
             //dd($user);

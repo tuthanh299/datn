@@ -16,48 +16,33 @@
                     <div>Bạn chưa mua sản phẩm nào !</div>
                 @else
                     <table class="w-100">
-                        <tr>
-                            <th>Mã đơn hàng:</th>
-                            <th>Ngày đặt</th>
-                            <th>Trạng thái thanh toán</th>
-                            <th>Tình trạng vận chuyển</th>
-                            <th>Tổng tiền</th>
+                        <tr class="row">
+                            <th class="col-md-3">Mã đơn hàng:</th>
+                            <th class="col-md-3">Ngày đặt</th>
+                            <th class="col-md-3">Trạng thái</th>
+
+                            <th class="col-md-3">Tổng tiền</th>
                         </tr>
                         @foreach ($hdb as $hdb)
-                            <tr>
-                                <td>
+                            <tr class="row">
+                                <td class="col-md-3">
                                     <a href="{{ route('user.order.detail', ['id' => $hdb->id]) }}">
                                         {{ $hdb->order_code }}
                                     </a>
                                 </td>
-                                <td>{{ $hdb->created_at }}</td>
-                                @switch($hdb->TrangThaiThanhToan)
-                                    @case(0)
-                                        <td> Chưa thanh toán </td>
-                                    @break
+                                <td class="col-md-3">{{ $hdb->created_at }}</td>
+                                <td class="col-md-3">
+                                    @switch($hdb->status)
+                                        @case(0)
+                                            Chưa thanh toán
+                                        @break
 
-                                    @case(1)
-                                        <td> Đã thanh toán </td>
-                                    @break
-                                @endswitch
-                                @switch($hdb->shipping_status)
-                                    @case(0)
-                                        <td> Đơn hàng đang chờ duyệt </td>
-                                    @break
-
-                                    @case(1)
-                                        <td> Đơn hàng đã được duyệt </td>
-                                    @break
-
-                                    @case(2)
-                                        <td> Đơn hàng đang được vận chuyển </td>
-                                    @break
-
-                                    @case(3)
-                                        <td> Đơn hàng đã vận chuyển thành công</td>
-                                    @break
-                                @endswitch
-                                <td>@formatmoney($hdb->total_price)đ</td>
+                                        @case(1)
+                                            Đã thanh toán
+                                        @break
+                                    @endswitch
+                                </td>
+                                <td class="col-md-3">@formatmoney($hdb->total_price)</td>
                             </tr>
                         @endforeach
                     </table>

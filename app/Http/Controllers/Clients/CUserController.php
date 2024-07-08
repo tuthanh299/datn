@@ -113,6 +113,8 @@ class CUserController extends Controller
     public function logout()
     {
         Auth::guard('member')->logout();
+        session()->forget('user_id');
+
         return redirect()->route('index');
     }
 }
