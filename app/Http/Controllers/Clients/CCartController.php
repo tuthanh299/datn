@@ -3,27 +3,17 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 
 class CCartController extends Controller
 {
     public function index()
     {
-
-        if (Auth::guard('member')->check()) {
-            $user = Auth::guard('member')->user();
-            return view('client.order.cart', compact('user'));
-        }
-
-        return redirect()->route('user.login');
+        return view('client.order.cart', );
     }
 
     //thêm giỏ hàng từ index
     public function add_index($id = null, $quantity = 1)
     {
-        if (!Auth::guard('member')->check()) {
-            return redirect()->route('user.login');
-        }
         $product = Product::where('id', $id)->first();
         $cart = session()->get('cart', []);
 
@@ -48,8 +38,10 @@ class CCartController extends Controller
 
         if ($method === 'plus') {
             $cart[$id]['quantity']++;
-        } else {
+        } elseif ($method === 'minus') {
             $cart[$id]['quantity']--;
+        } else {
+            $cart[$id]['quantity'] = $method;
         }
         $updatePrice = ($cart[$id]['sale_price'] ? $cart[$id]['sale_price'] : $cart[$id]['regular_price']) * $cart[$id]['quantity'];
         session()->put('cart', $cart);

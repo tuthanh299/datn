@@ -17,13 +17,7 @@ class CAboutusController extends Controller
         } else {
             $pageName = 'Về chúng tôi';
             $aboutusin = 'Nội dung đang cập nhật';
-        }
-
-        if (Auth::guard('member')->check()) {
-            $user = Auth::guard('member')->user();
-            return view('client.aboutus.index', compact('pageName', 'aboutusin', 'user'));
-        }
-
+        } 
         return view('client.aboutus.index', compact('pageName', 'aboutusin'));
     }
 }

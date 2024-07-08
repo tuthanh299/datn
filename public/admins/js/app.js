@@ -51,19 +51,34 @@ function previewImage(inputId, previewId) {
 /* Action delete */
 function actionDelete(event) {
     event.preventDefault();
-    if (!isExist("action_delete")) return;
+    if (!isExist("action_delete")) {
+        return false;
+    }
+
+    let noti = {};
+    if (PERMISSION=='false') {
+        noti = {
+            title: "Bạn không thể thực hiện thao tác này!",
+            text: "Vui lòng liên hệ người có thẩm quyền cao hơn!",
+            icon: "info",
+            showCancelButton: true,
+            showConfirmButton:false,
+        };
+    } else {
+        noti = {
+            title: "Bạn có chắc không?",
+            text: "Bạn sẽ không thể hoàn tác hành động này!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Có, hãy xóa nó!",
+        };
+    }
 
     let urlRequest = $(this).data("url");
     let that = $(this);
-    Swal.fire({
-        title: "Bạn có chắc không?",
-        text: "Bạn sẽ không thể hoàn tác hành động này!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Có, hãy xóa nó!",
-    }).then((result) => {
+    Swal.fire(noti).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
                 type: "GET",
@@ -155,11 +170,10 @@ function SumoSelectFilterProduct() {
             okCancelInMulti: false,
             placeholder: "Chọn sản phẩm",
             search: false,
-             
         });
         $(".sumoselectfilterproduct").on("change", function () {
             var categoryId = $(this).val();
-          
+
             $.ajax({
                 url: $(this).data("url"),
                 type: "GET",
@@ -188,10 +202,10 @@ function SumoSelectFilterProduct() {
                                             : "Không tìm thấy danh mục"
                                     }</td>
                                     <td>
-                                        <a href="/product/edit/${
+                                        <a href="product/edit/${
                                             product.id
                                         }" class="btn btn-default">Sửa</a>
-                                        <a href="" data-url="/product/delete/${
+                                        <a href="" data-url="product/delete/${
                                             product.id
                                         }" class="btn btn-danger action_delete">Xóa</a>
                                     </td>
@@ -205,7 +219,7 @@ function SumoSelectFilterProduct() {
                             '<tr><td colspan="4">Không tìm thấy kết quả!</td></tr>'
                         );
                     }
-                    $(".col-md-12.pagination").attr('hidden','true');
+                    $(".col-md-12.pagination").attr("hidden", "true");
                 },
                 error: function (xhr, status, error) {
                     console.log(error);
@@ -225,11 +239,10 @@ function SumoSelectFilterProductWarehouse() {
             okCancelInMulti: false,
             placeholder: "Chọn sản phẩm",
             search: false,
-             
         });
         $(".sumoselectfilterproductwarehouse").on("change", function () {
             var categoryId = $(this).val();
-          
+
             $.ajax({
                 url: $(this).data("url"),
                 type: "GET",
@@ -273,7 +286,7 @@ function SumoSelectFilterProductWarehouse() {
                             '<tr><td colspan="4">Không tìm thấy kết quả!</td></tr>'
                         );
                     }
-                    $(".col-md-12.pagination").attr('hidden','true');
+                    $(".col-md-12.pagination").attr("hidden", "true");
                 },
                 error: function (xhr, status, error) {
                     console.log(error);

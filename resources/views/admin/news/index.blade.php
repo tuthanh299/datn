@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
+    <script type="text/javascript">
+        var PERMISSION = @php echo CheckPermissionAdmin(session()->get('user')[0]['id'], 'delete_news')?'"true"':'"false"' @endphp;
+    </script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
+    <script src="{{ asset('vendors/simplenotify/simple-notify.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
@@ -55,7 +59,7 @@
                                                 class="btn btn-danger action_delete">Xóa</a>
                                         </td>
                                     </tr>
-                                @endforeach 
+                                @endforeach
                             @else
                                 <td colspan="2">Không tìm thấy kết quả!</td>
                             @endif
@@ -65,7 +69,7 @@
                 <div class="col-md-12">
                     {{ $newspost->links('pagination::bootstrap-5') }}
                 </div>
-                 
+
             </div>
         </div>
     </div>

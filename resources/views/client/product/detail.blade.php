@@ -80,7 +80,7 @@
                             <div class="attr-content-pro-detail d-flex flex-wrap align-items-center justify-content-between">
                                 <div class="quantity-pro-detail">
                                     <span class="quantity-minus-pro-detail">-</span>
-                                    <input type="number" class="qty-pro" min="1" value="1" readonly />
+                                    <input type="number" class="qty-pro" min="1" value="1" />
                                     <span class="quantity-plus-pro-detail">+</span>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                         <div>
                             <div class="cart-pro-detail d-flex flex-wrap align-items-center justify-content-between">
                                 <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center add-to-cart" href="{{route('add_index.cart', ['id' => $productDetail->id])}}" data-route="{{ route('add_index.cart', ['id' => $productDetail->id]) }}"><i class="bi bi-basket2"></i><span>Thêm vào giỏ hàng</span></a>
-                                <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center"  ><i class="bi bi-cart2"></i><span>Mua ngay</span></a>
+                                <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center add-to-cart" data-route="{{ route('add_index.cart', ['id' => $productDetail->id]) }}" data-act="buynow" data-direct="{{route('user.cart')}}" ><i class="bi bi-cart2"></i><span>Mua ngay</span></a>
                             </div>
                         </div>
                     </div>
