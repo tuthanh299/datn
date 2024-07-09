@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
+<script type="text/javascript">
+    var PERMISSION = @php echo CheckPermissionAdmin(session()->get('user')[0]['id'], 'delete_warehouse')?'"true"':'"false"' @endphp;
+</script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('/admins/js/jquery.sumoselect.min.js') }}"></script>
@@ -45,9 +48,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-4">
-                            <a href="{{ route('product.create') }} " class="btn btn-success float-right m-2">Thêm</a>
-                        </div>
+                     
                     </div>
                     <div class="col-md-12">
                         <table class="table">

@@ -546,7 +546,7 @@ textarea.form-control-lg{min-height:calc(1.5em + (1rem + 2px))}
 .input-group>.form-control:focus,.input-group>.form-select:focus{z-index:3}
 .input-group .btn{position:relative;z-index:2}
 .input-group .btn:focus{z-index:3}
-.input-group-text{display:flex;align-items:center;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:center;white-space:nowrap;background-color:#e9ecef;border:1px solid #ced4da;border-radius:.25rem}
+.input-group-text{display:flex;align-items:center;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:center;white-space:nowrap;background-color:#e9ecef;border:1px solid #ced4da;border-radius:.25rem;height: 100%;}
 .input-group-lg>.btn,.input-group-lg>.form-control,.input-group-lg>.form-select,.input-group-lg>.input-group-text{padding:.5rem 1rem;font-size:1.25rem;border-radius:.3rem}
 .input-group-sm>.btn,.input-group-sm>.form-control,.input-group-sm>.form-select,.input-group-sm>.input-group-text{padding:.25rem .5rem;font-size:.875rem;border-radius:.2rem}
 .input-group-lg>.form-select,.input-group-sm>.form-select{padding-right:3rem}

@@ -427,6 +427,128 @@ class PermissionsTableSeeder extends Seeder
                 'parent_id' => 40,
                 'key_permissions' => 'edit_staticnews',
             ),
+            41 => 
+            array (
+                'id' => 43,
+                'name' => 'Quản lý kho',
+                'display_name' => 'Quản lý kho',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 0,
+                'key_permissions' => '',
+            ),
+            42 => 
+            array (
+                'id' => 44,
+                'name' => 'Danh sách kho',
+                'display_name' => 'Danh sách kho',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 43,
+                'key_permissions' => 'list_warehouse',
+            ),
+            43 => 
+            array (
+                'id' => 45,
+                'name' => 'Đơn nhập',
+                'display_name' => 'Đơn nhập',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 0,
+                'key_permissions' => '',
+            ),
+            44 => 
+            array (
+                'id' => 46,
+                'name' => 'Danh sách đơn nhập',
+                'display_name' => 'Danh sách đơn nhập',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 45,
+                'key_permissions' => 'list_import_order',
+            ),
+            45 => 
+            array (
+                'id' => 47,
+                'name' => 'Thêm đơn nhập',
+                'display_name' => 'Thêm đơn nhập',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 45,
+                'key_permissions' => 'add_import_order',
+            ),
+            46 => 
+            array (
+                'id' => 48,
+                'name' => 'Xem đơn nhập',
+                'display_name' => 'Xem đơn nhập',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 45,
+                'key_permissions' => 'view_import_order',
+            ),
+            47 => 
+            array (
+                'id' => 49,
+                'name' => 'Xóa đơn nhập',
+                'display_name' => 'Xóa đơn nhập',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 45,
+                'key_permissions' => 'delete_import_order',
+            ),
+            48 => 
+
+            array (
+                'id' => 50,
+                'name' => 'Đơn hàng',
+                'display_name' => 'Đơn hàng',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 0,
+                'key_permissions' => '',
+            ),
+            49 => 
+            array (
+                'id' => 51,
+                'name' => 'Danh sách đơn hàng',
+                'display_name' => 'Danh sách đơn hàng',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 50,
+                'key_permissions' => 'list_order',
+            ),
+            50 => 
+            array (
+                'id' => 52,
+                'name' => 'Xem & sửa đơn hàng',
+                'display_name' => 'Xem & sửa đơn hàng',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 50,
+                'key_permissions' => 'view_edit_order',
+            ), 
+            51 => 
+            array (
+                'id' => 53,
+                'name' => 'Thống kê',
+                'display_name' => 'Thống kê',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 0,
+                'key_permissions' => '',
+            ), 
+            52 => 
+            array (
+                'id' => 54,
+                'name' => 'Xem thống kê',
+                'display_name' => 'Xem thống kê',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 53,
+                'key_permissions' => '',
+            ), 
+            
         ));
         
         

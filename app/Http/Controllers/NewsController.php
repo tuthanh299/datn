@@ -47,6 +47,8 @@ class NewsController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'content' => $request->content,
+                'status' => $request->filled('status') ? $request->status : false,
+                'outstanding' => $request->filled('outstanding') ? $request->outstanding : false,
             ];
             $dataPhotoNews = $this->storagetrait($request, 'photo_path', 'news');
 
@@ -72,6 +74,8 @@ class NewsController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'content' => $request->content,
+                'status' => $request->filled('status') ? $request->status : false,
+                'outstanding' => $request->filled('outstanding') ? $request->outstanding : false,
             ];
             $dataPhotoNews = $this->storagetrait($request, 'photo_path', 'news');
             if (!empty($dataPhotoNews)) {

@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
+<script type="text/javascript">
+    var PERMISSION = @php echo CheckPermissionAdmin(session()->get('user')[0]['id'], 'delete_product')?'"true"':'"false"' @endphp;
+</script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/jquery.sumoselect.min.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script>

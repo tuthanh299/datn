@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
+<script type="text/javascript">
+    var PERMISSION = @php echo CheckPermissionAdmin(session()->get('user')[0]['id'], 'delete_import_order')?'"true"':'"false"' @endphp;
+</script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
@@ -44,7 +47,7 @@
                             @if (!$ImportOrder->isEmpty())
                                 @foreach ($ImportOrder as $v)
                                     <tr>
-                                        <td class="">{{ $v->import_orders_code }}</td>
+                                        <td class="">{{ $v->order_code }}</td>
                                         <td class="">{{ $v->import_date }}</td>
                                         <td class="">@formatmoney($v->total_price)</td>
                                         <td>

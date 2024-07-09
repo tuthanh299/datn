@@ -25,15 +25,16 @@ class IndexController extends Controller
     {
 
         $sliders = Slider::select('name', 'description', 'photo_path')->get();
-        $news = News::select('id', 'name', 'description', 'photo_path')->get();
+        $news = News::select('id', 'name', 'description', 'photo_path')->where('status', 1)
+        ->where('outstanding', 1)
+        ->whereNull('deleted_at')->get();
         $aboutus = StaticNews::select('name', 'description', )->first();
         $publisher = Publisher::select('id', 'name', 'photo_path')->get();
-        $category_first = Category::with('children')->where('parent_id', 0)->get();
-
+        $category_first = Category::with('children')->where('outstanding', 1)->where('status', 1)->whereNull('deleted_at')->where('parent_id', 0)->get();
         $productOutstanding = Product::select('id', 'name', 'product_photo_path', 'regular_price', 'sale_price', 'discount', )
             ->where('status', 1)
             ->where('outstanding', 1)
-            ->where('deleted_at', null)
+            ->whereNull('deleted_at')
             ->get(); 
         if (Auth::guard('member')->user()) {
             $user = Auth::guard('member')->user();
@@ -48,14 +49,14 @@ class IndexController extends Controller
     {
         $publisher = Publisher::where('id', $id)->firstOrFail();
         $pagename = $publisher->name;
-        $publisherproduct = Product::where('publisher_id', $id)->where('deleted_at', null)->latest()->paginate(20);
+        $publisherproduct = Product::where('publisher_id', $id)->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
         return view('client.product.publisher_product', compact('publisherproduct', 'pagename'));
     }
     public function CategoryIdProduct($id)
     {
         $category = Category::where('id', $id)->firstOrFail();
         $pagename = $category->name;
-        $categoryidproduct = Product::where('category_id', $id)->where('deleted_at', null)->latest()->paginate(20);
+        $categoryidproduct = Product::where('category_id', $id)->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
         return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename'));
     }
 
@@ -68,7 +69,7 @@ class IndexController extends Controller
 
     public static function MenuCategory()
     {
-        $menufisrt = Category::with('children')->where('parent_id', 0)->get();
+        $menufisrt = Category::with('children')->where('status', 1)->whereNull('deleted_at')->where('parent_id', 0)->get();
         return $menufisrt;
     }
     public static function getUserInfo()

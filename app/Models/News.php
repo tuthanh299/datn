@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class News extends Model
 {
     use SoftDeletes;
-    protected $fillable =['name','description','content','photo_path','photo_name'];
+    protected $fillable =['name','description','content','photo_path','photo_name','status',
+        'outstanding',];
 
 }

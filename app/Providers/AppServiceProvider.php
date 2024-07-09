@@ -156,6 +156,34 @@ class AppServiceProvider extends ServiceProvider
             return  $user->CheckPermissionAccess('edit_staticnews');
             
         });
+        Gate::define('warehouse-list', function (User $user) {
+            return  $user->CheckPermissionAccess('list_warehouse');
+            
+        });
+        Gate::define('import-order-list', function (User $user) {
+            return  $user->CheckPermissionAccess('list_import_order');
+            
+        });
+        Gate::define('import-order-add', function (User $user) {
+            return  $user->CheckPermissionAccess('add_import_order');
+            
+        });
+        Gate::define('import-order-view', function (User $user) {
+            return  $user->CheckPermissionAccess('view_import_order');
+            
+        });
+        Gate::define('import-order-delete', function (User $user) {
+            return  $user->CheckPermissionAccess('delete_import_order');
+            
+        });
+        Gate::define('order-list', function (User $user) {
+            return  $user->CheckPermissionAccess('list_order');
+            
+        });
+        Gate::define('order-view-edit', function (User $user) {
+            return  $user->CheckPermissionAccess('view_edit_order');
+            
+        });
         
         Schema::defaultStringLength(length: 191);
     }

@@ -62,13 +62,15 @@
                                 </label>
                             </div>
                             @foreach ($permissionsParent as $permissionsParentItem)
-                                <div class="checkbox-role card border-primary mb-3 col-md-3">
+                                <div class="checkbox-role card border-primary mb-3  col-md-3">
                                     <div class="card-header card-header-role">
                                         <label for="">
                                             <input type="checkbox" value="{{ $permissionsParentItem->id }}"
-                                                name=" " id="" class="checkbox_parent">
+                                                name="" id="" class="checkbox_parent">
                                         </label>
-                                        Module {{ $permissionsParentItem->name }}
+                                        <b class="text-uppercase text-light">
+                                            Module {{ $permissionsParentItem->name }}
+                                        </b>
                                     </div>
                                     <div class="row">
                                         @foreach ($permissionsParentItem->PermissionChildren as $permissionsChildrenItem)

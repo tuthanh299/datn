@@ -114,7 +114,7 @@ use App\Http\Controllers\Clients\IndexController;
                         <span>{{ $v->name }}</span>
                     </div>
                     <div class="flex-categorysecond">
-                        @foreach ($v->children as $category_second)
+                        @foreach ($v->children()->where('outstanding', 1)->where('status', 1)->whereNull('deleted_at')->get() as $category_second)
                             <div class="categorysecond" data-idf="{{ $v->id }}"
                                 data-ids="{{ $category_second->id }}"
                                 data-url="{{ route('get-category-data', ['categoryId' => $category_second->id]) }}">

@@ -655,7 +655,7 @@ function AllRun() {
         console.log("click");
         var passwordInput = $(this)
             .parents("body")
-            .find("input[name=password],input[name=confirm-password]");
+            .find("input[name=password],input[name=confirm-password],input[name=current_password],input[name=new_password],input[name=new_password_confirm]");
         if (passwordInput.attr("type") === "password") {
             passwordInput.attr("type", "text");
             $("body").find(".show-password>span").removeClass("fas fa-eye");

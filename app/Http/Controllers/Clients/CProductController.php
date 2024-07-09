@@ -10,7 +10,7 @@ class CProductController extends Controller
 {
     public function index()
     {
-        $productInternal = Product::select('id', 'name', 'product_photo_path', 'regular_price', 'sale_price', 'discount')->where('deleted_at', null)->latest()->paginate(20);
+        $productInternal = Product::select('id', 'name', 'product_photo_path', 'regular_price', 'sale_price', 'discount')->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
         $pageName = 'Sản phẩm';
         
 

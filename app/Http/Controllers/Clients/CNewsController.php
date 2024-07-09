@@ -9,8 +9,7 @@ class CNewsController extends Controller
 {
     public function index()
     {
-        $newsInternal = News::select('id', 'name', 'description', 'photo_path')->latest()->paginate(8);
-        
+        $newsInternal = News::select('id', 'name', 'description', 'photo_path')->where('status', 1)->whereNull('deleted_at')->latest()->paginate(8); 
         return view('client.news.index', compact('newsInternal'));
     }
 
