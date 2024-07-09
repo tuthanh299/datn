@@ -37,37 +37,62 @@ class CategoriesSeeder extends Seeder
 
         DB::table('categories')->insert([
             //văn học
-            ['name' => 'Văn học', 'parent_id' => '0'], //1
-            ['name' => 'Tiểu thuyết', 'parent_id' => '1'],  //2
-            ['name' => 'Tiểu thuyết trong nước', 'parent_id' => '2'], //3
-            ['name' => 'Tiểu thuyết nước ngoài', 'parent_id' => '2'], //4
+            ['name' => 'Văn học', 'parent_id' => '0','status' => 1,
+                'outstanding' => 1,], //1
+            ['name' => 'Tiểu thuyết', 'parent_id' => '1','status' => 1,
+                'outstanding' => 1,],  //2
+            ['name' => 'Tiểu thuyết trong nước', 'parent_id' => '2','status' => 1,
+                'outstanding' => 1,], //3
+            ['name' => 'Tiểu thuyết nước ngoài', 'parent_id' => '2','status' => 1,
+                'outstanding' => 1,], //4
             //end văn học
             //sách giáo khoa
-            ['name' => 'Sách giáo khoa', 'parent_id' => '0'], //5
-            ['name' => 'Ngữ văn', 'parent_id' => '5'], //6
-            ['name' => 'Toán', 'parent_id' => '5'], //7 
-            ['name' => 'Tiếng Anh', 'parent_id' => '5'], //8
-            ['name' => 'Ngữ văn cấp 1', 'parent_id' => '6'], //9
-            ['name' => 'Ngữ văn cấp 2', 'parent_id' => '6'], //10
-            ['name' => 'Ngữ văn cấp 3', 'parent_id' => '6'], //11
-            ['name' => 'Toán cấp 1', 'parent_id' => '7'], //12
-            ['name' => 'Toán cấp 2', 'parent_id' => '7'], //13
-            ['name' => 'Toán cấp 3', 'parent_id' => '7'], //14
-            ['name' => 'Tiếng anh cấp 1', 'parent_id' => '8'], //15
-            ['name' => 'Tiếng anh cấp 2', 'parent_id' => '8'], //16
-            ['name' => 'Tiếng anh cấp 3', 'parent_id' => '8'], //17
+            ['name' => 'Sách giáo khoa', 'parent_id' => '0','status' => 1,
+                'outstanding' => 1,], //5
+            ['name' => 'Ngữ văn', 'parent_id' => '5','status' => 1,
+                'outstanding' => 1,], //6
+            ['name' => 'Toán', 'parent_id' => '5','status' => 1,
+                'outstanding' => 1,], //7 
+            ['name' => 'Tiếng Anh', 'parent_id' => '5','status' => 1,
+                'outstanding' => 1,], //8
+            ['name' => 'Ngữ văn cấp 1', 'parent_id' => '6','status' => 1,
+                'outstanding' => 1,], //9
+            ['name' => 'Ngữ văn cấp 2', 'parent_id' => '6','status' => 1,
+                'outstanding' => 1,], //10
+            ['name' => 'Ngữ văn cấp 3', 'parent_id' => '6','status' => 1,
+                'outstanding' => 1,], //11
+            ['name' => 'Toán cấp 1', 'parent_id' => '7','status' => 1,
+                'outstanding' => 1,], //12
+            ['name' => 'Toán cấp 2', 'parent_id' => '7','status' => 1,
+                'outstanding' => 1,], //13
+            ['name' => 'Toán cấp 3', 'parent_id' => '7','status' => 1,
+                'outstanding' => 1,], //14
+            ['name' => 'Tiếng anh cấp 1', 'parent_id' => '8','status' => 1,
+                'outstanding' => 1,], //15
+            ['name' => 'Tiếng anh cấp 2', 'parent_id' => '8','status' => 1,
+                'outstanding' => 1,], //16
+            ['name' => 'Tiếng anh cấp 3', 'parent_id' => '8','status' => 1,
+                'outstanding' => 1,], //17
             //end sách giáo khoa
             //Sách tham khảo
-            ['name' => 'Sách tham khảo', 'parent_id' => '0'], //18
-            ['name' => 'Toán', 'parent_id' => '18'], //19
-            ['name' => 'Ngữ văn', 'parent_id' => '18'], //20
-            ['name' => 'Tiếng anh', 'parent_id' => '18'], //21
+            ['name' => 'Sách tham khảo', 'parent_id' => '0','status' => 1,
+                'outstanding' => 1,], //18
+            ['name' => 'Toán', 'parent_id' => '18','status' => 1,
+                'outstanding' => 1,], //19
+            ['name' => 'Ngữ văn', 'parent_id' => '18','status' => 1,
+                'outstanding' => 1,], //20
+            ['name' => 'Tiếng anh', 'parent_id' => '18','status' => 1,
+                'outstanding' => 1,], //21
             //end sách tham khảo
             //Truyện tranh
-            ['name' => 'Sách thiếu nhi, thiếu niên', 'parent_id' => '0'], //22
-            ['name' => 'Truyện tranh thiếu nhi', 'parent_id' => '22'], //23
-            ['name' => 'Manga - Comic', 'parent_id' => '22'], //24
-            ['name' => 'Kiến thức bách khoa', 'parent_id' => '22'], //25
+            ['name' => 'Sách thiếu nhi, thiếu niên', 'parent_id' => '0','status' => 1,
+                'outstanding' => 1,], //22
+            ['name' => 'Truyện tranh thiếu nhi', 'parent_id' => '22','status' => 1,
+                'outstanding' => 1,], //23
+            ['name' => 'Manga - Comic', 'parent_id' => '22','status' => 1,
+                'outstanding' => 1,], //24
+            ['name' => 'Kiến thức bách khoa', 'parent_id' => '22','status' => 1,
+                'outstanding' => 1,], //25
         ]);
     }
 }

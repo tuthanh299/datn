@@ -117,7 +117,7 @@
                                             @enderror
                                         </div>
                                         <div class="row">
-                                            <div class="form-group col-6">
+                                            <div class="form-group col-md-6">
                                                 <label>Mã sách</label>
                                                 <input type="text"
                                                     class="form-control   @error('code') is-invalid @enderror"
@@ -126,7 +126,7 @@
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-6">
+                                            <div class="form-group col-md-6">
                                                 <label>Giá bán</label>
                                                 <input type="number"
                                                     class="form-control format-price regular_price @error('regular_price') is-invalid @enderror "
@@ -135,7 +135,7 @@
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-6">
+                                            <div class="form-group col-md-6">
                                                 <label>Tác giả:</label>
                                                 <input type="text"
                                                     class="text-capitalize form-control @error('author') is-invalid @enderror"
@@ -144,7 +144,7 @@
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-6">
+                                            <div class="form-group col-md-6">
                                                 <label>Giá mới</label>
                                                 <input type="number"
                                                     class="form-control format-price sale_price  @error('sale_price') is-invalid @enderror"
@@ -153,7 +153,7 @@
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-6">
+                                            <div class="form-group col-md-6">
                                                 <label>Năm xuất bản:</label>
                                                 <input type="text"
                                                     class="form-control @error('publishing_year') is-invalid @enderror"
@@ -162,13 +162,13 @@
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-6">
+                                            <div class="form-group col-md-6">
                                                 <label>Chiết khấu(%):</label>
                                                 <input type="number" class="form-control discount" name="discount"
                                                     value="{{ $product->discount }}" readonly>
 
                                             </div>
-                                            <div class="form-group col-6">
+                                            <div class="form-group col-md-6">
                                                 <label>Hiển thị:</label>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="status"
@@ -177,7 +177,7 @@
                                                     <label class="form-check-label" for="status">Hiển thị</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group col-6">
+                                            <div class="form-group col-md-6">
                                                 <label>Nổi bật:</label>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="outstanding"

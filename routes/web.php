@@ -134,16 +134,16 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
        
        
         Route::prefix('order')->group(function () {
-            Route::get('', [OrderController::class, 'index'])->name('order.index');
+            Route::get('', [OrderController::class, 'index'])->name('order.index')->middleware('can:order-list');
             Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store');
-            Route::get('/view/{id}', [OrderController::class, 'view'])->name('order.view');
+            Route::get('/view/{id}', [OrderController::class, 'view'])->name('order.view')->middleware('can:import-order-view-edit');
         });
         /* Import_order */
         Route::prefix('import_order')->group(function () {
-            Route::get('', [ImportOrderController::class, 'index'])->name('import_order.index');
-            Route::get('/create', [ImportOrderController::class, 'create'])->name('import_order.create');
-            Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store');
-            Route::get('/delete/{id}', [ImportOrderController::class, 'delete'])->name('import_order.delete');
+            Route::get('', [ImportOrderController::class, 'index'])->name('import_order.index')->middleware('can:import-order-list');
+            Route::get('/create', [ImportOrderController::class, 'create'])->name('import_order.create')->middleware('can:import-order-add');
+            Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store')->middleware('can:import-order-view');
+            Route::get('/delete/{id}', [ImportOrderController::class, 'delete'])->name('import_order.delete')->middleware('can:import-order-delete');
             Route::get('/view/{id}', [ImportOrderController::class, 'view'])->name('import_order.view');
             Route::get('/get-product-id', [ImportOrderController::class, 'getProductId'])->name('get-product-id]');
         });
@@ -230,7 +230,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         });
          /* Warehouse */
          Route::prefix('warehouse')->group(function () {
-            Route::get('', [ProductController::class, 'warehouse'])->name('product.warehouse'); 
+            Route::get('', [ProductController::class, 'warehouse'])->name('product.warehouse')->middleware('can:warehouse-list'); 
         }); 
 
     });

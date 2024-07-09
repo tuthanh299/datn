@@ -13,22 +13,22 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('zalo');
-            $table->string('address');
-            $table->string('fanpage');
-            $table->string('website');
-            $table->string('link_map');
-            $table->mediumText('iframe_map');
-            $table->string('logo_path');
-            $table->string('logo_name');
-            $table->string('favicon_path');
-            $table->string('favicon_name');
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('zalo')->nullable();
+            $table->string('address')->nullable();
+            $table->string('fanpage')->nullable();
+            $table->string('website')->nullable();
+            $table->string('link_map')->nullable();
+            $table->mediumText('iframe_map')->nullable();
+            $table->string('logo_path')->nullable();
+            $table->string('logo_name')->nullable();
+            $table->string('favicon_path')->nullable();
+            $table->string('favicon_name')->nullable();
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
     }
 

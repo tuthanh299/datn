@@ -93,6 +93,26 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Hiển thị:</label>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="status"
+                                                name="status" value="1"
+                                                @if (old('status') == 1) checked @endif>
+                                            <label class="form-check-label" for="status">Hiển thị</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Nổi bật:</label>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="outstanding"
+                                                name="outstanding" value="1"
+                                                @if (old('outstanding') == 1) checked @endif>
+                                            <label class="form-check-label" for="outstanding">Nổi bật</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

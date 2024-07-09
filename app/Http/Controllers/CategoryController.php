@@ -47,7 +47,8 @@ class CategoryController extends Controller
         $this->category->create([
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-
+            'status' => $request->filled('status') ? $request->status : false,
+            'outstanding' => $request->filled('outstanding') ? $request->outstanding : false,
         ]);
         return redirect()->route('categories.index');
     }
@@ -71,7 +72,8 @@ class CategoryController extends Controller
         $this->category->find($id)->update([
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-
+            'status' => $request->filled('status') ? $request->status : false,
+            'outstanding' => $request->filled('outstanding') ? $request->outstanding : false,
         ]);
         return redirect()->route('categories.index');
 

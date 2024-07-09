@@ -110,32 +110,33 @@ $user = HomeController::getUser();
                         </ul>
                 @endif
                 </li>
-                @if (CheckPermissionAdmin($user->id, ''))
+                @if (CheckPermissionAdmin($user->id, 'list_order','list_import_order'))
                     <li
                         class="nav-item {{ Route::current()->getName() === 'import_order.index' || Route::current()->getName() === 'order.index' ? 'menu-open' : null }}">
                         <a href="#"
                             class="nav-link {{ Route::current()->getName() === 'import_order.index' || Route::current()->getName() === 'order.index' ? 'active' : null }}">
                             <i class="nav-icon text-sm fas fa-layer-group"></i>
                             <p class="text-capitalize">
-                                Group Hóa Đơn
+                                Group Đơn Hàng
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            
+                            <li class="nav-item">
+                                <a href="{{ route('order.index') }}" class="nav-link {{ Route::current()->getName() === 'order.index' ? 'active' : null }}">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p class="text-capitalize">
+                                        Đơn hàng
+                                    </p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{ route('import_order.index') }}"
                                     class="nav-link {{ Route::current()->getName() === 'import_order.index' ? 'active' : null }}">
                                     <i class="nav-icon text-sm fas fa-boxes"></i>
                                     <p class="text-capitalize">
-                                        Hóa Đơn Nhập
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('order.index') }}" class="nav-link {{ Route::current()->getName() === 'order.index' ? 'active' : null }}">
-                                    <i class="nav-icon fas fa-book"></i>
-                                    <p class="text-capitalize">
-                                        Hóa Đơn Bán
+                                        Đơn nhập
                                     </p>
                                 </a>
                             </li>

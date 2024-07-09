@@ -67,7 +67,9 @@
                                             <input type="checkbox" value="{{ $permissionsParentItem->id }}"
                                                 name=" " id="" class="checkbox_parent">
                                         </label>
-                                        Module {{ $permissionsParentItem->name }}
+                                        <b class="text-uppercase text-light">
+                                            Module {{ $permissionsParentItem->name }}
+                                        </b>
                                     </div>
                                     <div class="row">
                                         @foreach ($permissionsParentItem->PermissionChildren as $permissionsChildrenItem)
