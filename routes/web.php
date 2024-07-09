@@ -105,7 +105,7 @@ Route::prefix('/')->group(function () {
 
     /*Password Change*/
     Route::controller(CChangePasswordController::class)->group(function() {
-        Route::get('change-password', 'index')->name('user.changepassword.index');
+        Route::get('change-password', 'index')->name('user.changepassword');
         Route::post('change-password/update', 'update')->name('user.changepassword.update');
     });
 
