@@ -130,7 +130,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::prefix('admin')->group(function () {
         /* Dashboard */
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('can:statistic-list');
        
        
         Route::prefix('order')->group(function () {
@@ -236,3 +236,4 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     });
 });
 
+ 
