@@ -546,7 +546,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
                 'parent_id' => 53,
-                'key_permissions' => '',
+                'key_permissions' => 'list_statistic',
             ), 
             
         ));

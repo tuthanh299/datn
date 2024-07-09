@@ -184,6 +184,10 @@ class AppServiceProvider extends ServiceProvider
             return  $user->CheckPermissionAccess('view_edit_order');
             
         });
+        Gate::define('statistic-list', function (User $user) {
+            return  $user->CheckPermissionAccess('list_statistic');
+            
+        });
         
         Schema::defaultStringLength(length: 191);
     }
