@@ -56,13 +56,13 @@ function actionDelete(event) {
     }
 
     let noti = {};
-    if (PERMISSION=='false') {
+    if (PERMISSION == "false") {
         noti = {
             title: "Bạn không thể thực hiện thao tác này!",
             text: "Vui lòng liên hệ người có thẩm quyền cao hơn!",
             icon: "info",
             showCancelButton: true,
-            showConfirmButton:false,
+            showConfirmButton: false,
         };
     } else {
         noti = {
@@ -409,6 +409,72 @@ if ($(".regular_price").length && $(".sale_price").length) {
         $(".discount").val(discount);
     });
 }
+
+function daysInMonth(month, year) {
+    const daysInMonths = [
+        31,
+        year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0) ? 29 : 28,
+        31,
+        30,
+        31,
+        30,
+        31,
+        31,
+        30,
+        31,
+        30,
+        31,
+    ];
+    return daysInMonths[month - 1];
+}
+
+function formatMoney(money) {
+    return new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+    })
+        .format(money)
+        .replace(/\s/g, "");
+}
+
+function chartJS() {
+    const ctx = document.getElementById("chart-js");
+
+    let arrDateTime = [];
+    const date = new Date(),
+        dateTime = daysInMonth(date.getMonth()+1, date.getYear());
+
+    for (let i = 0; i < dateTime; i++) {
+        arrDateTime.push("" + (i+1));
+    }
+
+    // for (let i = 0; i < profitBaseOnDate.length; i++) {
+    //     profitBaseOnDate[i] = formatMoney(profitBaseOnDate[i]);
+    // }
+    // console.log(profitBaseOnDate);
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: arrDateTime,
+            datasets: [
+                {
+                    label: "Tổng doanh thu trong ngày",
+                    data: profitBaseOnDate,
+                    borderColor: '#ffb1c1',
+                    backgroundColor: '#ffb1c180',
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+}
 $(document).ready(function () {
     calculate();
     JsAdmin();
@@ -419,4 +485,5 @@ $(document).ready(function () {
     SumoSelectFilterProductWarehouse();
     previewImage("file-zone", "photoUpload-preview"); // Cho Favicon
     previewImage("file-zone2", "photoUpload-preview2"); // Cho Logo
+    chartJS();
 });

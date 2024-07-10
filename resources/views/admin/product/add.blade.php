@@ -170,7 +170,7 @@
                                                 <label>Chiết khấu(%):</label>
                                                 <input type="number"
                                                     class="form-control discount @error('discount') is-invalid @enderror"
-                                                    name="discount" placeholder="" value="{{ old('discount') }}">
+                                                    name="discount" placeholder="" value="{{ old('discount') }}" readonly>
                                                 @error('discount')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror

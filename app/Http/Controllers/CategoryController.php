@@ -32,11 +32,10 @@ class CategoryController extends Controller
             $searchUnicode = '%' . $search . '%';
             $categories = $this->category::select('id', 'name')
                 ->where('name', 'LIKE', $searchUnicode)
-                ->latest()
                 ->paginate(10);
             $categories->setPath('categories?search_keyword=' . $search);
         } else {
-            $categories = $this->category::latest()->paginate(10);
+            $categories = $this->category::paginate(10);
         }
 
 
