@@ -22,6 +22,7 @@ class DashboardController extends Controller
             return redirect()->route('admin.login');
         }
         $product = Product::get();
+        $hdball = Order::get();
         $hdb = Order::whereIn('status',[3,5])->get();
         $cthdb = OrderDetail::get();
         $hdn = ImportOrder::get();
@@ -73,7 +74,7 @@ class DashboardController extends Controller
         $status = OrderStatuse::get();
         $sold_pro = Order::get();
 
-        return view('admin.dashboard.dashboard', compact('product', 'hdb', 'hdn', 'category', 'total_sale', 'cthdb', 'sold_pro', 'total_import_sale', 'total_profit', 'cthdn', 'profitBaseOnDate','status'));
+        return view('admin.dashboard.dashboard', compact('product', 'hdb','hdball', 'hdn', 'category', 'total_sale', 'cthdb', 'sold_pro', 'total_import_sale', 'total_profit', 'cthdn', 'profitBaseOnDate','status'));
         //return view('admin.dashboard.dashboard', compact('cthdb', 'sold_pro'));
         //dd( $sold_pro, $cthdb, $product, $hdb, $hdn, $category, $total_sale);
     }

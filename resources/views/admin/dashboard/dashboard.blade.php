@@ -58,7 +58,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Tổng số đơn hàng</span>
-                            <span class="info-box-number">{{ $hdb->count() }}</span>
+                            <span class="info-box-number">{{ $hdball->count() }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
