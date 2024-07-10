@@ -135,8 +135,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
        
         Route::prefix('order')->group(function () {
             Route::get('', [OrderController::class, 'index'])->name('order.index')->middleware('can:order-list');
-            Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store');
-            Route::get('/view/{id}', [OrderController::class, 'view'])->name('order.view')->middleware('can:import-order-view-edit');
+           
+            Route::get('/view/{id}', [OrderController::class, 'view'])->name('order.view')->middleware('can:order-view-edit');
         });
         /* Import_order */
         Route::prefix('import_order')->group(function () {

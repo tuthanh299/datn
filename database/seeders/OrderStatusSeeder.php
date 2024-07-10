@@ -14,11 +14,12 @@ class OrderStatusSeeder extends Seeder
     public function run(): void
     {
         DB::table('order_statuses')->insert([
-            ['name' => 'Đã đặt'],
-            ['name' => 'Đã xác nhận'],
-            ['name' => 'Đang giao hàng'],
-            ['name' => 'Đã giao'],
-            ['name' => 'Đã huỷ'],
+            ['id'=>1 , 'name' => 'Mới đặt'],
+            ['id'=>2 ,'name' => 'Đã xác nhận'],
+            ['id'=>3 ,'name' => 'Đã thanh toán'],
+            ['id'=>4 ,'name' => 'Đang giao hàng'],
+            ['id'=>5 ,'name' => 'Đã giao'],
+            ['id'=>6 ,'name' => 'Đã huỷ'],
         ]);
     }
 }

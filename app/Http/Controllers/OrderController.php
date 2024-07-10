@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
-use App\Models\OrderStatus;
+use App\Models\OrderStatuse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -21,6 +21,8 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search_keyword');
+        $status = OrderStatuse::get();
+
         $order = null;
         if ($search) {
             $searchUnicode = '%' . $search . '%';
@@ -34,42 +36,25 @@ class OrderController extends Controller
 
         }
 
-        return view('admin.order.index', compact('order'));
+        return view('admin.order.index', compact('order','status'));
     }
-    public function view($id)
+    public function view($id,Request $request)
     {
-        $ImportOrder = $this->order->find($id);
-        $ImportOrderdetail = OrderDetail::join('products', 'products.id', '=', 'order_details.product_id')->where('order_id', $id)->get();
-        $status = OrderStatus::get();
-        //$ImportOrderdetail = OrderDetail::join('orders', 'order_details.order_id', '=', $id)->get();
-        return view('admin.order.view', compact('ImportOrder', 'ImportOrderdetail', 'status')); 
-        //dd($ImportOrder, $ImportOrderdetail, $status);
-    }
-
-    public function store(Request $request)
-    {
+        $Order= $this->order->find($id);
+        $OrderDetail = OrderDetail::join('products', 'products.id', '=', 'order_details.product_id')->where('order_id', $id)->get();
+        $status = OrderStatuse::get();
         try {
             $dataCreate = [
-                'orders_code' => $request->orders_code,
-                'import_date' => $request->import_date,
-                'total_price' => $request->total_price,
-            ];
-            $ImportOrder = $this->order->create($dataCreate);
-            $import_order_id = $ImportOrder->id;
-            $details = count($request->product_id);
-            for ($i = 0; $i < $details; $i++) {
-                $dataCreateImportOrderDetail = [
-                    'import_order_id' => $import_order_id,
-                    'product_id' => $request->product_id[$i],
-                    'import_price' => $request->import_price[$i],
-                    'quantity' => $request->quantity[$i],
-                ];
-                $this->orderdetail->create($dataCreateImportOrderDetail);
-            }
-
-            return redirect()->route('import_order.index');
+                'status' => $request->status,
+                            ];
+            $Order= $this->order->find($id)->update($dataCreate); 
+            return redirect()->route('order.index');
         } catch (\Exception $exception) {
             Log::error('Lỗi:' . $exception->getMessage() . 'Line:' . $exception->getLine());
         }
+        return view('admin.order.view', compact('Order', 'OrderDetail', 'status')); 
+         
     }
+
+    
 }

@@ -42,32 +42,15 @@
                         <tbody>
                             @if (!$order->isEmpty())
                                 @foreach ($order as $v)
+                                @php
+                                    $order_status = $v->status-1;
+                                @endphp
                                     <tr>
                                         <td class="">{{ $v->order_code }}</td>
                                         <td class="">{{ $v->fullname }}</td>
                                         <td class="">@formatmoney($v->total_price)</td>
                                         <td class="">{{ $v->created_at }}</td>
-                                        @switch($v->status)
-                                            @case(1)
-                                                <td class="">Đơn hàng mới đặt</td>
-                                            @break
-
-                                            @case(2)
-                                                <td class="">Đã xác nhận</td>
-                                            @break
-
-                                            @case(3)
-                                                <td class="">Đang giao hàng</td>
-                                            @break
-
-                                            @case(4)
-                                                <td class="">Đã giao hàng</td>
-                                            @break
-
-                                            @case(5)
-                                                <td class="">Đã huỷ</td>
-                                            @break
-                                        @endswitch
+                                        <td class="">{{ $status[$order_status]['name'] }}</td>
                                         <td>
                                             <a href="{{ route('order.view', ['id' => $v->id]) }}"
                                                 class="btn btn-default">Xem</a>

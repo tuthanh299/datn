@@ -15,6 +15,9 @@
     <script src="{{ asset('/adminlte/dist/js/pages/dashboard2.js') }}"></script>
     <script src="{{ asset('/adminlte/plugins/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
+    <script type="text/javascript">
+    const profitBaseOnDate = @php echo json_encode($profitBaseOnDate) @endphp;
+    </script>
 @endsection
 <div class="content-wrapper">
     @include('admin.partials.content-header', ['name' => 'Thống kê', 'key' => ''])
@@ -93,19 +96,19 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <p class="text-center">
                                         <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
                                     </p>
 
                                     <div class="chart">
                                         <!-- Sales Chart Canvas -->
-                                        <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
+                                        <canvas id="chart-js" height="180" style="height: 180px;"></canvas>
                                     </div>
                                     <!-- /.chart-responsive -->
                                 </div>
                                 <!-- /.col -->
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="description-block border-right">
@@ -175,30 +178,21 @@
                                   </thead>
                                   <tbody>
                                       @foreach ($sold_pro as $item)
+                                      @php
+                                      $order_status = $item->status - 1;
+                                          $color = array(
+                                            0=>'badge-primary',
+                                            1=>'badge-info',
+                                            2=>'badge-success',
+                                            3=>'badge-warning',
+                                            4=>'badge-success',
+                                            5=>'badge-danger',
+                                  );
+                                      @endphp
                                           <tr>
                                               <td><a href="#">{{ $item->order_code }}</a></td>
                                               <td>@formatmoney($item->total_price)</td>
-                                              @switch($item->status)
-                                                  @case(1)
-                                                      <td class="badge badge-warning">Đơn hàng mới đặt</td>
-                                                  @break
-
-                                                  @case(2)
-                                                      <td class="badge badge-primary">Đã xác nhận</td>
-                                                  @break
-
-                                                  @case(3)
-                                                      <td class="badge badge-primary">Đang giao hàng</td>
-                                                  @break
-
-                                                  @case(4)
-                                                      <td class="badge badge-success">Đã giao hàng</td>
-                                                  @break
-
-                                                  @case(5)
-                                                      <td class="badge badge-danger">Đã huỷ</td>
-                                                  @break
-                                              @endswitch
+                                              <td class="w-50 badge {{$color[$order_status]}}">{{$status[$order_status]['name']}}</td>
                                           </tr>
                                       @endforeach
                                   </tbody>

@@ -17,16 +17,13 @@
         <div class="container-fluid">
 
             <form action="" method="">
-                @csrf
-                <div class="card-footer text-sm sticky-top">
-                    <button type="button" class="btn btn-primary" onclick="history.back()">Thoát</button>
-                </div>
+                @csrf 
                 <div class="row col-12">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Mã hóa đơn</label>
                             <input type="text" class="form-control" name="orders_code"
-                                value="{!! $ImportOrder->order_code !!}" readonly>
+                                value="{!! $Order->order_code !!}" readonly>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -34,14 +31,15 @@
                             <label>Thời gian</label>
                             <input type="datetime-local" min="{{ date('Y-m-d\TH:i') }}" class="form-control"
                                 name="import_date"
-                                value="{{ \Carbon\Carbon::parse($ImportOrder->created_at)->format('Y-m-d\TH:i') }}"
+                                value="{{ \Carbon\Carbon::parse($Order->created_at)->format('Y-m-d\TH:i') }}"
                                 readonly>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <select name="status" id="status">
+                        <label>Trạng thái</label> 
+                        <select name="status" class="form-control " id="status">
                             @foreach ($status as $item)
-                                <option value="{!! $item->id !!}">{{$item->name}}</option>
+                                <option value="{!! $item->id !!}" {{$Order->status == $item->id ? 'selected' : '' }}>{{$item->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -49,7 +47,7 @@
                         <div class="form-group">
                             <label>Tổng tiền</label>
                             <input type="number" class="form-control" name="total_price"
-                                value="{!! $ImportOrder->total_price !!}" readonly>
+                                value="{!! $Order->total_price !!}" readonly>
                         </div>
                     </div>
                 </div>
@@ -65,8 +63,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (!$ImportOrderdetail->isEmpty())
-                                @foreach ($ImportOrderdetail as $v)
+                            @if (!$OrderDetail->isEmpty())
+                                @foreach ($OrderDetail as $v)
                                     <tr>
                                         <td class="">{{ $v->code }}</td>
                                         <td class="">{{ $v->name }}</td>
@@ -92,7 +90,7 @@
                 <button type="submit" class="btn btn-primary">Lưu</button>
             </form>
         </div>
-        <button type="button" class="btn btn-primary" onclick="history.back()">Thoát</button>
+        
     </div>
 
 </div>
