@@ -54,6 +54,31 @@ function showNotify(
     });
 }
 
+/* Show error notify */
+function showErrorNotify(
+    text = "Notify text",
+    title = "Thông báo",
+    status = "error"
+) {
+    new Notify({
+        status: status, // success, warning, error
+        title: title,
+        text: text,
+        effect: "fade",
+        speed: 400,
+        customClass: null,
+        customIcon: null,
+        showIcon: true,
+        showCloseButton: true,
+        autoclose: true,
+        autotimeout: 3000,
+        gap: 10,
+        distance: 10,
+        type: 3,
+        position: "right top",
+    });
+}
+
 function TranslateClick() {
     if (!isExist($(".changeLanguage"))) {
         $(".changeLanguage").click(function (event) {
@@ -508,7 +533,7 @@ function AllRun() {
                 console.error(xhr.responseText);
             },
         });
-    });
+    }); 
 
     // Quantity detail page
     $(".quantity-minus-pro-detail,.quantity-plus-pro-detail,input.qty-pro").on(

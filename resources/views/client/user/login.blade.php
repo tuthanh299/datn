@@ -47,13 +47,13 @@
                     font-size: 1em;font-weight: bold;">{{ $message }}</div>
                 @enderror
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="form-check form-check-login mb-0">
+                    <!--<div class="form-check form-check-login mb-0">
                         <label for="remember-me" class="text-info"><span>Ghi nhớ đăng nhập</span>
                             <span class="align-middle">
-                                <input id="remember-me" name="remember_me" type="checkbox"></span></label><br>
-                    </div>
+                                <input id="remember-me" name="remember_me" type="checkbox"></span></label>
+                    </div>-->
                     <div class="form-check form-check-login mb-0">
-                        <a href="">Quên mật khẩu?</a>
+                        <!--<a href="">Quên mật khẩu?</a>-->
                     </div>
                 </div>
 

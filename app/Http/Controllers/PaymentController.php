@@ -146,8 +146,11 @@ class PaymentController extends Controller
             }
             // vui lòng tham khảo thêm tại code demo
         }else {
-            session()->forget('cart');
-            return redirect()->route('user.cart');
+            //session()->forget('cart');
+            return redirect()->route('user.cart')->with('notify', [
+                'status' => 'error',
+                'message' => 'Thanh toán không thành công'
+            ]);;
         }
     }
 
@@ -169,12 +172,18 @@ class PaymentController extends Controller
                 $warehouse->save();
             }
             session()->forget('cart');
-            return redirect()->route('user.cart');
+            return redirect()->route('user.cart')->with('notify', [
+                'status' => 'success',
+                'message' => 'Thanh toán thành công'
+            ]);
             //dd('Đã thanh toán phí dịch vụ');
         }
         //session()->forget('url_prev');
         //return redirect($url)->with('errors' ,'Lỗi trong quá trình thanh toán phí dịch vụ');
-        dd('Lỗi thanh toán phí dịch vụ');
+        return redirect()->route('user.cart')->with('notify', [
+            'status' => 'error',
+            'message' => 'Thanh toán không thành công'
+        ]);
     }
 
     public function momo_payment(Request $request)
@@ -227,7 +236,10 @@ class PaymentController extends Controller
 
         session()->forget('cart');
 
-        return redirect()->route('user.cart');
+        return redirect()->route('user.cart')->with('notify', [
+            'status' => 'success',
+            'message' => 'Thanh toán thành công'
+        ]);;
     }
 
     public function generateOrderCode()

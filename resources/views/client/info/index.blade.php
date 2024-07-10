@@ -74,13 +74,13 @@
                                 <input type="number" class="form-control" id="phone" name="phone"
                                     value="{{ $user->phone }}" placeholder="Nhập số điện thoại">
                             </div>
-                            {{-- <div class="form-group mb-2">
-        <label class="fw-bold mb-2" for>Địa chỉ: </label>
-        <input type="text" class="form-control"
-            id="address" name="address"
-            value="{{$user->address}}"
-            placeholder="Nhập địa chỉ">
-    </div> --}}
+                            <div class="form-group mb-2">
+                                <label class="fw-bold mb-2" for>Địa chỉ: </label>
+                                <input type="text" class="form-control"
+                                    id="address" name="address"
+                                    value="{{$user->address}}"
+                                    placeholder="Nhập địa chỉ">
+                            </div>
                             <div class="d-flex gap-2 mt-2">
                                 <div class="flex-btn">
                                     <button type="submit" class="btn btn-success">Cập nhật</button>

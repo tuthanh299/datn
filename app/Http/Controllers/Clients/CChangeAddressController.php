@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CChangeAddressController extends Controller
 {
-    public function index() 
+    public function index()
     {
         if(Auth::guard('member')->user()) 
         {

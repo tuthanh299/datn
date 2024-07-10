@@ -155,63 +155,30 @@
     </div>
 @endsection
 @section('js')
-    <script type="text/javascript">
-        $(".edit-cart-info").change(function(e) {
-            e.preventDefault();
-            var ele = $(this);
-            $.ajax({
-                url: '#',
-                method: "patch",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    id: ele.parents("tr").attr("rowId"),
-                },
-                success: function(response) {
-                    window.location.reload();
-                }
-            });
+<script>
+    function showErrorNotify(text = "Notify text", title = "Thông báo", status = "error") {
+        new Notify({
+            status: status, // success, warning, error
+            title: title,
+            text: text,
+            effect: "fade",
+            speed: 400,
+            customClass: null,
+            customIcon: null,
+            showIcon: true,
+            showCloseButton: true,
+            autoclose: true,
+            autotimeout: 3000,
+            gap: 10,
+            distance: 10,
+            type: 3,
+            position: "right top",
         });
+    }
 
-        $(".delete-product").click(function(e) {
-        e.preventDefault();
-
-        var ele = $(this);
-
-        if (confirm("Bạn có chắc chắn?")) {
-            $.ajax({
-            url: '{{route('delete.cart', $k)}',
-            type: 'DELETE',
-            success: function(response) {
-                if (response.is_empty) {
-                    location.reload();
-                } else {
-                    $('#total').text(response.total);
-                }
-            }
-            });
-        }
-
-        });
-
-        
-
-        function increaseCount(a, b) {
-            var input = b.previousElementSibling;
-            var value = parseInt(input.value, 10);
-            value = isNaN(value) ? 0 : value;
-            value++;
-            input.value = value;
-            changeHref(value);
-        }
-
-        function decreaseCount(a, b) {
-            var input = b.nextElementSibling;
-            var value = parseInt(input.value, 10);
-            if (value > 1) {
-                value = isNaN(value) ? 0 : value;
-                value--;
-                input.value = value;
-                changeHref(value);
-            }
-        }
+    // Check for Laravel session flash messages and trigger notification
+    @if(session('notify'))
+        showErrorNotify("{{ session('notify.message') }}", "Thông báo", "{{ session('notify.status') }}");
+    @endif
+</script>
 @endsection
