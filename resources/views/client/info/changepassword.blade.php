@@ -45,7 +45,7 @@
                                         <span class="fas fa-lock"></span>
                                     </div>
                                 </div>
-                                <input type="password" name="current_password" id="password" class="form-control text-sm"
+                                <input type="password" name="current_password" id="current_password" class="form-control text-sm"
                                     placeholder="Nhập mật khẩu" />
                                 <div class="input-group-append">
                                     <div class="input-group-text show-password">
@@ -54,6 +54,10 @@
                                 </div>
                             </div>
                         </div>
+                        @error('current_password')
+                            <div style="color: #dd0505;
+                            font-size: 1em;font-weight: bold;">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label for="" class="mb-2"><b>Mật khẩu mới: </b></label>
                             <div class="input-group mb-3">
@@ -71,6 +75,10 @@
                                 </div>
                             </div>
                         </div>
+                        @error('new_password')
+                        <div style="color: #dd0505;
+                            font-size: 1em;font-weight: bold;">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label for="" class="mb-2"><b>Xác nhận mật khẩu mới: </b></label>
                             <div class="input-group mb-3">
@@ -88,6 +96,10 @@
                                 </div>
                             </div>
                         </div>
+                        @error('new_password_confirm')
+                        <div style="color: #dd0505;
+                            font-size: 1em;font-weight: bold;">{{ $message }}</div>
+                        @enderror
                         <button type="submit" class="btn btn-danger">Đổi mật khẩu</button>
                     </form>
                 </div>

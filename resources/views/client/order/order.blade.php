@@ -9,12 +9,12 @@
         <div class="title-main">
             <span>Lịch sử đơn hàng</span>
         </div>
+        @if (count($hdb) >= 0)   
+            <div>Bạn chưa mua sản phẩm nào !</div>
+        @else
         <div class="content-main">
             <div class="form-add-top">
                 <span class="title-name1">Tài khoản của bạn</span>
-                @if (count($hdb) < 0)
-                    <div>Bạn chưa mua sản phẩm nào !</div>
-                @else
                     <table class="w-100">
                         <tr class="row">
                             <th class="col-md-3">Mã đơn hàng:</th>
@@ -34,11 +34,25 @@
                                 <td class="col-md-3">
                                     @switch($hdb->status)
                                         @case(0)
-                                            Chưa thanh toán
+                                            Mới đặt
                                         @break
-
                                         @case(1)
-                                            Đã thanh toán
+                                            Đã xác nhận
+                                        @break
+                                        @case(2)
+                                            Đang giao cho shipper
+                                        @break
+                                        @case(3)
+                                            Đã giao cho shipper
+                                        @break
+                                        @case(4)
+                                            Giao hàng cho khách thành công
+                                        @break
+                                        @case(5)
+                                            Giao hàng cho khách thất bại
+                                        @break
+                                        @case(6)
+                                            Đơn hàng đã huỷ
                                         @break
                                     @endswitch
                                 </td>
@@ -46,8 +60,8 @@
                             </tr>
                         @endforeach
                     </table>
-                @endif
             </div>
         </div>
+        @endif
     </div>
 @endsection

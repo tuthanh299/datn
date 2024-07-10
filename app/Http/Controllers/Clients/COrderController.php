@@ -18,6 +18,7 @@ class COrderController extends Controller
             $hdb = Order::where('member_id', $user->id)->get();
 
             return view('client.order.order', compact('user', 'hdb'));
+            //dd(count($hdb));
         }
         return redirect()->route('login');
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -20,24 +21,37 @@ class CChangePasswordController extends Controller
 
     public function update(Request $request)
     {
-        //dd($request->all());
         $request->validate([
             'current_password' => 'required',
-            'password' => 'required|string|min:8|confirmed',
+            'new_password' => 'required|string|min:8',
+            'new_password_confirm' => 'required|string|min:8',
         ]);
-
+    
         $user = Auth::guard('member')->user();
 
         // Kiểm tra mật khẩu hiện tại
         if (!Hash::check($request->current_password, $user->password)) {
-            return back()->with('error', 'Mật khẩu hiện tại không đúng.');
+                return back()->with('fail', 'Mật khẩu hiện tại không đúng.');
+        }
+
+        if(!$request->new_password == $request->new_password_confirm){
+            return back()->with('fail', 'Mật khẩu mới và xác nhận mật khẩu không trùng nhau');
+        }
+    
+        // Kiểm tra nếu mật khẩu mới trùng với mật khẩu cũ
+        if (Hash::check($request->new_password, $user->password)) {
+            return back()->with('fail', 'Mật khẩu mới phải khác với mật khẩu cũ.');
         }
 
         // Cập nhật mật khẩu mới
-        $user->password = Hash::make($request->password);
-
-        return redirect()->route('user.changepassword.index')->with('success', 'Đổi mật khẩu thành công.');
-        //dd($user);
+        /*Member::where('id', $user->id)->update([
+            'password', Hash::make($request->new_password),
+        ]);*/
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+    
+        return redirect()->route('user.changepassword')->with('success', 'Đổi mật khẩu thành công.');
     }
+    
 
 }

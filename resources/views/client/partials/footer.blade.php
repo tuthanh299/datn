@@ -30,11 +30,11 @@ use App\Http\Controllers\Clients\IndexController;
                 <div class="footer-news">
                     <div class="footer-fanpage">
                         <div id="fb-root"></div>
-                        <div class="fb-page" data-href="https://www.facebook.com/facebook" data-tabs="timeline"
+                        <div class="fb-page" data-href="{{ IndexController::settings()->fanpage }}" data-tabs="timeline"
                             data-width="" data-height="" data-small-header="false" data-adapt-container-width="true"
                             data-hide-cover="false" data-show-facepile="true">
-                            <blockquote cite="https://www.facebook.com/facebook" class="fb-xfbml-parse-ignore"><a
-                                    href="https://www.facebook.com/facebook">Facebook</a></blockquote>
+                            <blockquote cite="{{ IndexController::settings()->fanpage }}" class="fb-xfbml-parse-ignore"><a
+                                    href="{{ IndexController::settings()->fanpage }}">Facebook</a></blockquote>
                         </div>
                     </div>
                 </div>

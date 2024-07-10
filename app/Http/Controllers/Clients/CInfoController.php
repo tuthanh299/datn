@@ -33,6 +33,9 @@ class CInfoController extends Controller
         $all = $request->all();
         $user = Auth::guard('member')->user();
 
+        $first_name_check = $all['first_name'] == $user->first_name;
+        $last_name_check = $all['last_name'] == $user->last_name;
+
         $check = Member::where('id', $user->id)->update([
             'first_name' => $all['first_name'],
             'last_name'=> $all['last_name'],
