@@ -3,24 +3,7 @@ use App\Http\Controllers\Clients\IndexController;
 
 ?>
 
-
-@isset($aboutus)
-    <div class="wrap-intro py50">
-        <div class="wrap-content">
-            <div class="intro-title">
-                <div class="intro-sub-name">
-                    Đôi nét về
-                </div>
-                <div class="intro-name">
-                    {{ $aboutus->name }}
-                </div>
-            </div>
-            <div class="intro-desc">
-                {!! $aboutus->description !!}
-            </div>
-        </div>
-    </div>
-@endisset
+ 
 
 @isset($productOutstanding)
     @if (!$productOutstanding->isEmpty())

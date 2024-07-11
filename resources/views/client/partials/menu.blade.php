@@ -52,11 +52,7 @@ use App\Http\Controllers\Clients\IndexController;
                     </div>
                 </div>
             </li>
-            <li class="menu-main-li">
-                <a href="{{ route('aboutus') }}" title="Về chúng tôi">
-                    Về chúng tôi
-                </a>
-            </li>
+           
             <li class="menu-main-li">
                 <a href="{{ route('news') }}" title="Tin tức & sự kiện">
                     Tin tức & sự kiện
