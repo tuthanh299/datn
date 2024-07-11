@@ -18,9 +18,8 @@
 @endsection
 
 @section('content')
-    <div class="content-wrapper">
+    <div class="content-wrapper ">
 
-        @include('admin.partials.content-header', ['name' => 'Sản phẩm', 'key' => '/ Thêm'])
 
         <form action="{{ route('product.store') }} " method="POST" enctype="multipart/form-data">
             @csrf
@@ -170,7 +169,8 @@
                                                 <label>Chiết khấu(%):</label>
                                                 <input type="number"
                                                     class="form-control discount @error('discount') is-invalid @enderror"
-                                                    name="discount" placeholder="" value="{{ old('discount') }}" readonly>
+                                                    name="discount" placeholder="" value="{{ old('discount') }}"
+                                                    readonly>
                                                 @error('discount')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror

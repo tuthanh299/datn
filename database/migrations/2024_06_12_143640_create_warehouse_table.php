@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();            
             $table->foreignId('product_id')->constrained();
             $table->string('quantity')->nullable(); 
-            $table->double('import_price')->nullable();
+            // $table->double('import_price')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

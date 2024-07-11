@@ -110,7 +110,7 @@ $user = HomeController::getUser();
                         </ul>
                 @endif
                 </li>
-                @if (CheckPermissionAdmin($user->id, 'list_order','list_import_order'))
+                @if (CheckPermissionAdmin($user->id, 'list_order', 'list_import_order'))
                     <li
                         class="nav-item {{ Route::current()->getName() === 'import_order.index' || Route::current()->getName() === 'order.index' ? 'menu-open' : null }}">
                         <a href="#"
@@ -122,9 +122,10 @@ $user = HomeController::getUser();
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            
+
                             <li class="nav-item">
-                                <a href="{{ route('order.index') }}" class="nav-link {{ Route::current()->getName() === 'order.index' ? 'active' : null }}">
+                                <a href="{{ route('order.index') }}"
+                                    class="nav-link {{ Route::current()->getName() === 'order.index' ? 'active' : null }}">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p class="text-capitalize">
                                         Đơn hàng
@@ -144,41 +145,15 @@ $user = HomeController::getUser();
                     </li>
                 @endif
 
-                @if (CheckPermissionAdmin($user->id, 'list_news,list_staticnews'))
-                    <li
-                        class="nav-item {{ Route::current()->getName() === 'staticnews.index' || Route::current()->getName() === 'news.index' ? 'menu-open' : null }}">
-                        <a href="#"
-                            class="nav-link {{ Route::current()->getName() === 'staticnews.index' || Route::current()->getName() === 'news.index' ? 'active' : null }} ">
-                            <i class="nav-icon text-sm far fa-newspaper"></i>
+                @if (CheckPermissionAdmin($user->id, 'list_news'))
+                    <li class="nav-item">
+                        <a href="{{ route('news.index') }}"
+                            class="nav-link {{ Route::current()->getName() === 'news.index' ? 'active' : null }}">
+                            <i class="nav-icon fas fa-copy"></i>
                             <p class="text-capitalize">
-                                Group Bài Viết
-                                <i class="right fas fa-angle-left"></i>
+                                Bài Viết tin tức
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            @if (CheckPermissionAdmin($user->id, 'list_staticnews'))
-                                <li class="nav-item">
-                                    <a href="{{ route('staticnews.index') }}"
-                                        class="nav-link {{ Route::current()->getName() === 'staticnews.index' ? 'active' : null }}">
-                                        <i class="nav-icon fas fa-file"></i>
-                                        <p class="text-capitalize">
-                                            Bài viết giới thiệu
-                                        </p>
-                                    </a>
-                                </li>
-                            @endif
-                            @if (CheckPermissionAdmin($user->id, 'list_news'))
-                                <li class="nav-item">
-                                    <a href="{{ route('news.index') }}"
-                                        class="nav-link {{ Route::current()->getName() === 'news.index' ? 'active' : null }}">
-                                        <i class="nav-icon fas fa-copy"></i>
-                                        <p class="text-capitalize">
-                                            Bài Viết tin tức
-                                        </p>
-                                    </a>
-                                </li>
-                            @endif
-                        </ul>
                     </li>
                 @endif
                 @if (CheckPermissionAdmin($user->id, 'list_user,list_role'))
@@ -239,7 +214,7 @@ $user = HomeController::getUser();
                             </p>
                         </a>
                     </li>
-                @endif 
+                @endif
             </ul>
         </nav>
     </div>

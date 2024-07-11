@@ -11,9 +11,8 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-    @include('admin.partials.content-header', ['name' => 'Bài viết', 'key' => '/ Thêm'])
-    <div class="content">
-        <div class="container-fluid">
+     <div class="content">
+        <div class="container-fluid pt-3">
             <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
                 <div class="card-footer text-sm sticky-top">
                     <button type="submit" class="btn btn-primary">Lưu</button>

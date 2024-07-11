@@ -10,12 +10,10 @@
     <script script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-
-    @include('admin.partials.content-header', ['name' => 'Hóa Đơn Nhập', 'key' => '/ Chi Tiết'])
+ 
 
     <div class="content">
-        <div class="container-fluid">
-
+        <div class="container-fluid pt-3">
             <form action="" method="">
                 @csrf
                 <div class="card-footer text-sm sticky-top">
@@ -26,7 +24,7 @@
                         <div class="form-group">
                             <label>Mã hóa đơn</label>
                             <input type="text" class="form-control" name="order_code"
-                                value="{!! $ImportOrder->import_orders_code !!}" readonly>
+                                value="{{ $ImportOrder->order_code }}" readonly>
                         </div>
                     </div>
                     <div class="col-3">
@@ -38,14 +36,17 @@
                                 readonly>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label>Tổng tiền</label>
-                            <input type="number" class="form-control" name="total_price"
-                                value="{!! $ImportOrder->total_price !!}" readonly>
+                    @php
+                    /*
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Tổng tiền</label>
+                                <input type="number" class="form-control" name="total_price"
+                                    value="{!! $ImportOrder->total_price !!}" readonly>
+                            </div>
                         </div>
-                    </div>
-
+                    */
+                    @endphp
                 </div>
                 <div class="row col-12 list-import-invoice-detail">
 
@@ -64,11 +65,15 @@
                                         <input type="number" value="{!! $v->quantity !!}" class="form-control"
                                             readonly>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="">Giá nhập(Cho một sản phẩm)</label>
-                                        <input type="number" value="{!! $v->import_price !!}" class="form-control"
-                                            readonly>
-                                    </div>
+                                    @php
+                                        /*
+                                        <div class="form-group">
+                                            <label for="">Giá nhập(Cho một sản phẩm)</label>
+                                            <input type="number" value="{!! $v->import_price !!}" class="form-control"
+                                                readonly>
+                                        </div>
+                                        */
+                                    @endphp
                                 </div>
                             </div>
                         </div>

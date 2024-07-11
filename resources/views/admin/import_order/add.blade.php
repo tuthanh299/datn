@@ -10,11 +10,9 @@
     <script script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-
-    @include('admin.partials.content-header', ['name' => 'Hóa Đơn Nhập', 'key' => '/ Thêm'])
-
+ 
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid pt-3">
             <form action="{{ route('import_order.store') }}" method="POST">
                 @csrf
                 <div class="card-footer text-sm sticky-top">
@@ -35,12 +33,16 @@
                                 name="import_date" value="{{ $TimeCreateImportOrder->format('Y-m-d\TH:i') }}" readonly>
                         </div>
                     </div>
+                    @php
+                    /*
                     <div class="col-3">
                         <div class="form-group">
                             <label>Tổng tiền</label>
                             <input type="number" class="form-control format-price total_price" name="total_price" value="" readonly>
                         </div>
                     </div>
+                     */
+                     @endphp
                 </div>
                 <div class="row col-12">
                     <div class="row col-8 list-product-call-by-ajax">

@@ -9,9 +9,8 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-    @include('admin.partials.content-header', ['name' => 'Hóa Đơn Bán', 'key' => '/ Danh Sách'])
-    <div class="content">
-        <div class="container-fluid">
+     <div class="content">
+        <div class="container-fluid pt-3">
             <div class="row">
                 <div class="col-md-6 mb-2">
                     <form action="" class="form-inline" method="GET">

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('order_code'); 
             $table->dateTime('import_date'); 
-            $table->double('total_price'); 
+            // $table->double('total_price'); 
             $table->timestamps();
             $table->softDeletes();
         });

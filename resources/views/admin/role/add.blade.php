@@ -9,10 +9,9 @@
 @endsection
 <div class="content-wrapper">
 
-    @include('admin.partials.content-header', ['name' => 'Vai Trò', 'key' => '/ Thêm'])
-
+ 
     <div class="content role-style">
-        <div class="container-fluid">
+        <div class="container-fluid pt-3">
             <div class="row">
                 <form action="{{ route('roles.store') }}  " method="POST" enctype="multipart/form-data" class="w-100">
                     @csrf

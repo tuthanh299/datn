@@ -13,10 +13,9 @@
 @endsection
 <div class="content-wrapper">
 
-    @include('admin.partials.content-header', ['name' => 'Nhà Xuất Bản', 'key' => '/ Thêm'])
-
+ 
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid pt-3">
 
             <form action="{{ route('publisher.store') }}" method="POST" enctype="multipart/form-data">
                 <div class="col-md-12 mb-3">

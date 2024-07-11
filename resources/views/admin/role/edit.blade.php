@@ -9,10 +9,9 @@
 @endsection
 <div class="content-wrapper">
 
-    @include('admin.partials.content-header', ['name' => 'Vai Trò', 'key' => '/ Sửa'])
-
+ 
     <div class="content role-style">
-        <div class="container-fluid">
+        <div class="container-fluid pt-3">
             <div class="row">
                 <form action="{{ route('roles.update', ['id' => $role->id]) }}" method="POST"
                     enctype="multipart/form-data" class="w-100">

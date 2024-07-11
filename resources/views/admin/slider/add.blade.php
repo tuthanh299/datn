@@ -10,10 +10,9 @@
 @endsection
 <div class="content-wrapper">
 
-    @include('admin.partials.content-header', ['name' => 'Slider', 'key' => '/ Thêm'])
-
+ 
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid pt-3">
 
             <form action="{{ route('slider.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf

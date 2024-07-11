@@ -11,11 +11,9 @@
 @endsection
 <div class="content-wrapper">
 
-    @include('admin.partials.content-header', ['name' => 'Hóa Đơn Bán', 'key' => '/ Chi Tiết'])
-
+ 
     <div class="content">
-        <div class="container-fluid">
-
+        <div class="container-fluid pt-3">
             <form action="" method="">
                 @csrf 
                 <div class="row col-12">
@@ -23,7 +21,7 @@
                         <div class="form-group">
                             <label>Mã hóa đơn</label>
                             <input type="text" class="form-control" name="orders_code"
-                                value="{!! $Order->order_code !!}" readonly>
+                                value="{{$Order->order_code}}" readonly>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -37,11 +35,19 @@
                     </div>
                     <div class="col-md-3">
                         <label>Trạng thái</label> 
-                        <select name="status" class="form-control " id="status">
-                            @foreach ($status as $item)
-                                <option value="{!! $item->id !!}" {{$Order->status == $item->id ? 'selected' : '' }}>{{$item->name}}</option>
-                            @endforeach
-                        </select>
+                        @if ($Order->status == 5 || $Order->status == 6)
+                        @php
+                            $order_status = $Order->status-1;
+                        @endphp
+                        <input type="text" class="form-control" value="{{$status[$order_status]['name']}}" readonly>
+                        @else
+                            <select name="status" class="form-control " id="status">
+                                @foreach ($status as $item)
+                                    <option value="{!! $item->id !!}" {{$Order->status == $item->id ? 'selected' : '' }}>{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                        
                     </div>
                     <div class="col-3">
                         <div class="form-group">

@@ -9,7 +9,7 @@
         <div class="title-main">
             <span>Lịch sử đơn hàng</span>
         </div>
-        @if (count($hdb) >= 0)   
+        @if (count($hdb) <= 0)   
             <div>Bạn chưa mua sản phẩm nào !</div>
         @else
         <div class="content-main">

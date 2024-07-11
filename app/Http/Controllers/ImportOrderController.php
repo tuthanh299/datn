@@ -52,7 +52,6 @@ class ImportOrderController extends Controller
             $dataCreate = [
                 'order_code' => $request->order_code,
                 'import_date' => $request->import_date,
-                'total_price' => $request->total_price,
             ];
             $ImportOrder = $this->ImportOrder->create($dataCreate);
             $import_order_id = $ImportOrder->id;
@@ -62,14 +61,12 @@ class ImportOrderController extends Controller
                 $dataCreateImportOrderDetail = [
                     'import_order_id' => $import_order_id,
                     'product_id' => $request->product_id[$i],
-                    'import_price' => $request->import_price[$i],
                     'quantity' => $request->quantity[$i],
                 ];
                 $this->ImportOrderdetail->create($dataCreateImportOrderDetail);
 
                 $product = Warehouse::find($request->product_id[$i]);
                 $product->quantity = $product->quantity + $request->quantity[$i];
-                $product->import_price = $request->import_price[$i];
                 $product->save();
             }
 
