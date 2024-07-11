@@ -9,9 +9,8 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-    @include('admin.partials.content-header', ['name' => 'Slider', 'key' => '/ Sửa'])
-    <div class="content">
-        <div class="container-fluid">
+     <div class="content">
+        <div class="container-fluid pt-3">
             <form action=" {{ route('slider.update', ['id' => $slider->id]) }} " method="POST"
                 enctype="multipart/form-data">
                 @csrf

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             PublisherSeeder::class,
             RoleSeeder::class,
             SettingSeeder::class,
-            StaticNewsSeeder::class,
+            
         ]);
         $this->call(PublishersTableSeeder::class);
         $this->call(ProductGalleriesTableSeeder::class);
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             NewsTableSeeder::class,//
             SettingSeeder::class,//
             SlidersTableSeeder::class,//
-            StaticNewsTableSeeder::class,//
+           
             UserSeeder::class,//
             CategoriesSeeder::class,//
             PublishersTableSeeder::class,//

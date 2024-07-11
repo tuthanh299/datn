@@ -7,13 +7,9 @@
 @section('js')
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
-<div class="content-wrapper">
-
-    @include('admin.partials.content-header', ['name' => 'Danh Mục Sản Phẩm', 'key' => '/ Thêm'])
-
+<div class="content-wrapper"> 
     <div class="content">
-        <div class="container-fluid">
-
+        <div class="container-fluid pt-3"> 
             <form action="{{ route('categories.store') }} " method="POST">
                 @csrf
                 <div class="row col-12">

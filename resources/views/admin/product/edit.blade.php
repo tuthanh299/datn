@@ -20,8 +20,7 @@
 @section('content')
     <div class="content-wrapper">
 
-        @include('admin.partials.content-header', ['name' => 'Sản phẩm', 'key' => '/ Sửa'])
-        <form action="{{ route('product.update', ['id' => $product->id]) }} " method="POST" enctype="multipart/form-data">
+         <form action="{{ route('product.update', ['id' => $product->id]) }} " method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-footer text-sm sticky-top">
                 <button type="submit" class="btn btn-primary">Lưu</button>

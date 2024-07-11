@@ -12,9 +12,8 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-    @include('admin.partials.content-header', ['name' => 'Cấu hình chung', 'key' => ''])
-    <div class="content">
-        <div class="container-fluid">
+     <div class="content">
+        <div class="container-fluid pt-3">
             <div class="row">
                 <div class="col-md-12">
                     <form action="{{ route('setting.update') }}" method="POST" enctype="multipart/form-data">

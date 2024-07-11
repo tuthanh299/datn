@@ -145,14 +145,15 @@ function SumoSelectImportInvoive() {
                                             <label for="">Số lượng nhập</label>
                                             <input type="number" name="quantity[]"  value="" class="form-control quantity-input">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="">Giá nhập / sản phẩm</label>
-                                            <input type="number" name="import_price[]" value=""  class="form-control format-price import_price">
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                         `;
+                        // <div class="form-group">
+                        //                     <label for="">Giá nhập / sản phẩm</label>
+                        //                     <input type="number" name="import_price[]" value=""  class="form-control format-price import_price">
+                        //                 </div>
                         $(".list-product-call-by-ajax").append(productBlock);
                     });
                 },

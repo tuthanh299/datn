@@ -67,6 +67,10 @@ class PaymentController extends Controller
             $orderDetail->regular_price = $details['regular_price'];
             $orderDetail->sale_price = $details['sale_price'];
             $orderDetail->save();
+
+            $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
+            $warehouse->quantity -= $details['quantity'];
+            $warehouse->save();
         }
 
         if ($request['type'] === 'payment_vnpay') {

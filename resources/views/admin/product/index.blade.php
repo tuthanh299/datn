@@ -19,8 +19,7 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('admin.partials.content-header', ['name' => 'Sản phẩm', 'key' => '/ Danh Sách'])
-        <div class="content">
+         <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="row mb-2">

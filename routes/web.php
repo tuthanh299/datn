@@ -2,18 +2,16 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Clients\CInfoController;
 use App\Http\Controllers\Clients\CAboutusController;
 use App\Http\Controllers\Clients\CCartController;
-use App\Http\Controllers\Clients\CChangeAddressController;
 use App\Http\Controllers\Clients\CChangePasswordController;
+use App\Http\Controllers\Clients\CInfoController;
 use App\Http\Controllers\Clients\CNewsController;
 use App\Http\Controllers\Clients\COrderController;
 use App\Http\Controllers\Clients\CProductController;
 use App\Http\Controllers\Clients\CSearchController;
 use App\Http\Controllers\Clients\CUserController;
 use App\Http\Controllers\Clients\IndexController;
-use App\Http\Controllers\Clients\CContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImportOrderController;
@@ -31,20 +29,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
- 
+
 /* Client */
 Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.login');
 Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
 Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
 Route::get('logout', [CUserController::class, 'logout'])->name('user.logout');
- 
+
 /* GOOGLE LOGIN */
 //Route::get('/auth/{provider}/redirect', [GoogleLoginController::class, 'redirect'])->name('redirect');
 //Route::get('/auth/{provider}/callback', [GoogleLoginController::class, 'callback'])->name('callback');
 Route::get('/auth/google', [GoogleLoginController::class, 'redirect'])->name('redirect');
 Route::get('/auth/google/callback', [GoogleLoginController::class, 'callback'])->name('callback');
-
 
 Route::prefix('/')->group(function () {
     /* Index */
@@ -81,37 +78,37 @@ Route::prefix('/')->group(function () {
         Route::get('/cart/update_quantity/{id?}&{method?}', 'changeQuantity')->name('update_quantity.cart');
         Route::get('/cart/delete/{id}', 'delete')->name('delete.cart');
         //Route::patch('/cart/update/{id}', 'update_qty')->name('update.cart');
-        
+
     });
 
     /* Info */
-    Route::controller(CInfoController::class)->group(function() {
+    Route::controller(CInfoController::class)->group(function () {
         Route::get('user-info', 'index')->name('user.info');
         Route::post('user-info/update', 'update')->name('user.info.update');
         Route::delete('user-info/delete', 'delete')->name('user.info.delete');
     });
 
     /*Order*/
-    Route::controller(COrderController::class)->group(function() {
+    Route::controller(COrderController::class)->group(function () {
         Route::get('order', 'index')->name('user.order');
         Route::get('order/{id}', 'detail')->name('user.order.detail');
     });
 
     /*Address Change*/
     /*Route::controller(CChangeAddressController::class)->group(function() {
-        Route::get('change-address', 'index')->name('user.changeaddress.index');
-        Route::post('change-address/update', 'update')->name('user.changeaddress.update');
+    Route::get('change-address', 'index')->name('user.changeaddress.index');
+    Route::post('change-address/update', 'update')->name('user.changeaddress.update');
     });*/
 
     /*Password Change*/
-    Route::controller(CChangePasswordController::class)->group(function() {
+    Route::controller(CChangePasswordController::class)->group(function () {
         Route::get('change-password', 'index')->name('user.changepassword');
         Route::post('change-password/update', 'update')->name('user.changepassword.update');
     });
 
     /* PAYMENT */
 
-    Route::controller(PaymentController::class)->group(function() {
+    Route::controller(PaymentController::class)->group(function () {
         Route::get('/payment', 'index')->name('user.payment');
         Route::post('/cod_payment', 'cod_payment')->name('cod');
         Route::post('/vnpay_payment', 'vnpay_payment')->name('vnpay');
@@ -127,15 +124,11 @@ Route::get('/logoutadmin', [AdminController::class, 'logoutAdmin'])->name('logou
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
-
     Route::prefix('admin')->group(function () {
         /* Dashboard */
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('can:statistic-list');
-       
-       
         Route::prefix('order')->group(function () {
             Route::get('', [OrderController::class, 'index'])->name('order.index')->middleware('can:order-list');
-           
             Route::get('/view/{id}', [OrderController::class, 'view'])->name('order.view')->middleware('can:order-view-edit');
         });
         /* Import_order */
@@ -170,11 +163,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
         /* Setting */
         Route::get('setting', [SettingController::class, 'index'])->name('setting.index')->middleware('can:setting-list');
         Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update')->middleware('can:setting-edit');
-
-        /* Staticnews */
-        Route::get('staticnews', [StaticNewsController::class, 'index'])->name('staticnews.index')->middleware('can:staticnews-list');
-        Route::post('staticnews/update', [StaticNewsController::class, 'update'])->name('staticnews.update')->middleware('can:staticnews-edit');
-
+         
         /* Category */
         Route::prefix('categories')->group(function () {
             Route::get('', [CategoryController::class, 'index'])->name('categories.index')->middleware('can:category-list');
@@ -226,14 +215,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/get-category-id', [ProductController::class, 'getCategoryId'])->name('get-category-id');
             Route::get('/get-category-id-warehouse', [ProductController::class, 'getCategoryIdWarehouse'])->name('get-category-id-warehouse');
 
-
         });
-         /* Warehouse */
-         Route::prefix('warehouse')->group(function () {
-            Route::get('', [ProductController::class, 'warehouse'])->name('product.warehouse')->middleware('can:warehouse-list'); 
-        }); 
+        /* Warehouse */
+        Route::prefix('warehouse')->group(function () {
+            Route::get('', [ProductController::class, 'warehouse'])->name('product.warehouse')->middleware('can:warehouse-list');
+        });
 
     });
 });
-
- 

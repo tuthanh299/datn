@@ -8,11 +8,9 @@
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper">
-
-    @include('admin.partials.content-header', ['name' => 'Danh Mục Sản Phẩm', 'key' => '/ Sửa'])
-
+ 
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid pt-3">
 
             <form action="{{ route('categories.update', ['id' => $category->id]) }}" method="POST">
                 @csrf

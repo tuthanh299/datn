@@ -13,10 +13,9 @@
 @endsection
 <div class="content-wrapper">
 
-    @include('admin.partials.content-header', ['name' => 'Nhà Xuất Bản', 'key' => '/ Sửa'])
-
+ 
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid pt-3">
 
             <form action=" {{ route('publisher.update', ['id' => $publisher->id]) }} " method="POST"
                 enctype="multipart/form-data">

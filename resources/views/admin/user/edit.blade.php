@@ -11,10 +11,9 @@
 @endsection
 <div class="content-wrapper">
 
-    @include('admin.partials.content-header', ['name' => 'Danh Sách Nhân Viên', 'key' => ' /Nhân Viên'])
-
+ 
     <div class="content">
-        <div class="container-fluid">
+        <div class="container-fluid pt-3">
             <div class="row">
 
                 <div class="col-md-6">

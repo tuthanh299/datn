@@ -19,9 +19,8 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-        @include('admin.partials.content-header', ['name' => 'Kho', 'key' => '/ Danh Sách'])
-        <div class="content">
-            <div class="container-fluid">
+         <div class="content">
+            <div class="container-fluid pt-3">
                 <div class="row">
                     <div class="row mb-2">
                         <div class="col-md-4 filter-product-warehouse-admin">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderStatuse;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -36,25 +37,34 @@ class OrderController extends Controller
 
         }
 
-        return view('admin.order.index', compact('order','status'));
+        return view('admin.order.index', compact('order', 'status'));
     }
-    public function view($id,Request $request)
+    public function view($id, Request $request)
     {
-        $Order= $this->order->find($id);
+        $Order = $this->order->find($id);
         $OrderDetail = OrderDetail::join('products', 'products.id', '=', 'order_details.product_id')->where('order_id', $id)->get();
         $status = OrderStatuse::get();
         try {
             $dataCreate = [
                 'status' => $request->status,
-                            ];
-            $Order= $this->order->find($id)->update($dataCreate); 
+            ];
+            $this->order->find($id)->update($dataCreate);
+
+            // Update warehouse
+            if ($request->status == 6) {
+                foreach ($OrderDetail as $k => $v) {
+                    $warehouse = Warehouse::where('product_id', $v->product_id)->first();
+                    $inventory = $warehouse->quantity + $v->quantity;
+                    $warehouse->update(['quantity' => $inventory]);
+                }
+            }
+
             return redirect()->route('order.index');
         } catch (\Exception $exception) {
             Log::error('Lỗi:' . $exception->getMessage() . 'Line:' . $exception->getLine());
         }
-        return view('admin.order.view', compact('Order', 'OrderDetail', 'status')); 
-         
+        return view('admin.order.view', compact('Order', 'OrderDetail', 'status'));
+
     }
 
-    
 }

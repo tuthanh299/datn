@@ -29,7 +29,12 @@ class COrderController extends Controller
             $user = Auth::guard('member')->user();
             $hdb = Order::where('member_id', $user->id)->get();
             //$cthdb = DB::table('sale_invoice_details')->join('products', 'sale_invoice_details.product_id', '=', 'products.id')->get();
-            $cthdb = OrderDetail::join('products', 'order_details.product_id', '=', 'products.id')->get();
+            //$cthdb = OrderDetail::join('products', 'order_details.product_id', '=', 'products.id')->get();
+            $cthdb = DB::table('order_details')
+            ->join('orders', 'orders.id', '=', 'order_details.id')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->get();
+
             return view('client.order.order_detail', compact('user', 'hdb', 'cthdb'));
             //dd($cthdb);
         }
