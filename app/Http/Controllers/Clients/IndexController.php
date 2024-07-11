@@ -28,7 +28,7 @@ class IndexController extends Controller
         $news = News::select('id', 'name', 'description', 'photo_path')->where('status', 1)
         ->where('outstanding', 1)
         ->whereNull('deleted_at')->get();
-        $aboutus = StaticNews::select('name', 'description', )->first();
+       
         $publisher = Publisher::select('id', 'name', 'photo_path')->get();
         $category_first = Category::with('children')->where('outstanding', 1)->where('status', 1)->whereNull('deleted_at')->where('parent_id', 0)->get();
         $productOutstanding = Product::select('id', 'name', 'product_photo_path', 'regular_price', 'sale_price', 'discount', )
@@ -39,10 +39,10 @@ class IndexController extends Controller
         if (Auth::guard('member')->user()) {
             $user = Auth::guard('member')->user();
 
-            return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first', 'user'));
+            return view('client.index', compact('sliders', 'news', 'productOutstanding',  'publisher', 'category_first', 'user'));
 
         }
-        return view('client.index', compact('sliders', 'news', 'productOutstanding', 'aboutus', 'publisher', 'category_first'));
+        return view('client.index', compact('sliders', 'news', 'productOutstanding',  'publisher', 'category_first'));
 
     }
     public function PublisherProduct($id)

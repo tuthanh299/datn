@@ -2,7 +2,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Clients\CAboutusController;
+ 
 use App\Http\Controllers\Clients\CCartController;
 use App\Http\Controllers\Clients\CChangePasswordController;
 use App\Http\Controllers\Clients\CInfoController;
@@ -55,10 +55,8 @@ Route::prefix('/')->group(function () {
     Route::controller(CSearchController::class)->group(function () {
         Route::get('/search', 'index')->name('search');
     });
-    /* About Us */
-    Route::controller(CAboutusController::class)->group(function () {
-        Route::get('/aboutus', 'index')->name('aboutus');
-    });
+  
+    
     /* News */
     Route::controller(CNewsController::class)->group(function () {
         Route::get('/news', 'index')->name('news');
