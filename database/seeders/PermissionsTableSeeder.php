@@ -397,36 +397,8 @@ class PermissionsTableSeeder extends Seeder
                 'parent_id' => 35,
                 'key_permissions' => 'delete_publisher',
             ),
-            38 => 
-            array (
-                'id' => 40,
-                'name' => 'Bài Viết Giới Thiệu',
-                'display_name' => 'Bài Viết Giới Thiệu',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'parent_id' => 0,
-                'key_permissions' => '',
-            ),
-            39 => 
-            array (
-                'id' => 41,
-                'name' => 'Xem Bài Viết Giới Thiệu',
-                'display_name' => 'Xem Bài Viết Giới Thiệu',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'parent_id' => 40,
-                'key_permissions' => 'list_staticnews',
-            ),
-            40 => 
-            array (
-                'id' => 42,
-                'name' => 'Sửa Bài Viết Giới Thiệu',
-                'display_name' => 'Sửa Bài Viết Giới Thiệu',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-                'parent_id' => 40,
-                'key_permissions' => 'edit_staticnews',
-            ),
+           
+             
             41 => 
             array (
                 'id' => 43,
@@ -548,7 +520,56 @@ class PermissionsTableSeeder extends Seeder
                 'parent_id' => 53,
                 'key_permissions' => 'list_statistic',
             ), 
-            
+            53 => 
+            array (
+                'id' => 55,
+                'name' => 'Người Dùng',
+                'display_name' => 'Người Dùng',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 0,
+                'key_permissions' => '',
+            ),
+            54 => 
+            array (
+                'id' => 56,
+                'name' => 'Danh Sách Người Dùng',
+                'display_name' => 'Danh Sách Người Dùng',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 55,
+                'key_permissions' => 'list_member',
+            ),
+            55 => 
+            array (
+                'id' => 57,
+                'name' => 'Thêm Người Dùng',
+                'display_name' => 'Thêm Người Dùng',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 55,
+                'key_permissions' => 'add_member',
+            ),
+            56 => 
+            array (
+                'id' => 58,
+                'name' => 'Sửa Người Dùng',
+                'display_name' => 'Sửa Người Dùng',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 55,
+                'key_permissions' => 'edit_member',
+            ),
+            57 => 
+            array (
+                'id' => 59,
+                'name' => 'Xóa Người Dùng',
+                'display_name' => 'Xóa Người Dùng',
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'parent_id' => 55,
+                'key_permissions' => 'delete_member',
+            ),
         ));
         
         

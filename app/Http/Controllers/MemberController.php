@@ -2,63 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserAddRequest;
-use App\Http\Requests\UserEditRequest;
-use App\Models\Role;
-use App\Models\User;
-use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
+use App\Http\Requests\MemberAddRequest;
+use App\Http\Requests\MemberEditRequest;
+
+ use App\Models\Member;
+use App\Traits\DeleteModelTrait;
+ 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-
-class UserController extends Controller
+class MemberController extends Controller
 {
     use DeleteModelTrait;
 
-    private $user;
-    private $role;
-    public function __construct(User $user, Role $role)
+    private $member;
+    
+    public function __construct(Member $member)
     {
-        $this->user = $user;
-        $this->role = $role;
+        $this->member = $member;
+     
     }
     public function index(Request $request)
     {
         $search = $request->input('search_keyword');
-        $users = null;
+        $members = null;
         if ($search) {
             $searchUnicode = '%' . $search . '%';
-            $users = $this->user::select('id', 'first_name', 'last_name', 'email')
+            $members = $this->member::select('id', 'first_name', 'last_name', 'email')
                 ->where('email', 'LIKE', $searchUnicode)
                 ->latest()
                 ->paginate(10);
-            $users->setPath('users?search_keyword=' . $search);
+            $members->setPath('members?search_keyword=' . $search);
         } else {
-            $users = $this->user->latest()->paginate(10);
+            $members = $this->member->latest()->paginate(10);
         }
-        return view('admin.user.index', compact('users'));
+        return view('admin.member.index', compact('members'));
     }
+     
     public function create()
     {
-        $roles = $this->role->all();
-        return view('admin.user.add', compact('roles'));
+        
+        return view('admin.member.add');
     }
-    public function store(UserAddRequest $request)
+    public function store(MemberAddRequest $request)
     {
         try {
             DB::beginTransaction();
-            $user = $this->user->create([
+            $this->member->create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'phone' => $request->phone,
                 'address' => $request->address,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-            ]);
-            $user->roles()->attach($request->role_id);
+            ]);           
+            
             DB::commit();
-            return redirect()->route('users.index');
+            return redirect()->route('member.index');
 
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -67,13 +68,13 @@ class UserController extends Controller
     }
     public function edit($id)
     {
-        $roles = $this->role->all();
-        $user = $this->user->find($id);
-        $roleUser = $user->roles;
-        return view('admin.user.edit', compact('roles', 'user', 'roleUser'));
+       
+        $member = $this->member->find($id);
+      
+        return view('admin.member.edit', compact('member'));
     }
 
-    public function update(UserEditRequest $request, $id)
+    public function update(MemberEditRequest $request, $id)
     {
 
         try {
@@ -84,13 +85,12 @@ class UserController extends Controller
             if (!empty($request->password)) {
                 $update['password'] = Hash::make($request->password);
             }
-
             DB::beginTransaction();
-            $this->user->find($id)->update($update);
-            $user = $this->user->find($id);
-            $user->roles()->sync($request->role_id);
+            $this->member->find($id)->update($update);
+            $member = $this->member->find($id);
+           
             DB::commit();
-            return redirect()->route('users.index');
+            return redirect()->route('member.index');
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error('Message:' . $exception->getMessage() . 'Line:' . $exception->getLine());
@@ -99,8 +99,7 @@ class UserController extends Controller
     }
     public function delete($id)
     {
-        return $this->deleteModelTrait($id, $this->user);
+        return $this->deleteModelTrait($id, $this->member);
 
     }
-
 }

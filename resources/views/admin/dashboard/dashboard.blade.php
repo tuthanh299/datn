@@ -1,3 +1,6 @@
+@php
+    $year_now = (int) date('Y', time());
+@endphp
 @extends('admin.layouts.admin') @section('title')
     <title>Thống kê</title>
     @endsection @section('content')@section('css')
@@ -19,7 +22,7 @@
         const profitBaseOnDate = @php echo json_encode($profitBaseOnDate) @endphp;
     </script>
 @endsection
-<div class="content-wrapper"> 
+<div class="content-wrapper">
     <div class="content">
         <div class="container-fluid">
             <div class="row pt-3">
@@ -27,7 +30,7 @@
                     <div class="info-box">
                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-list"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Tổng thể loại</span>
+                            <span class="info-box-text">Tổng danh mục</span>
                             <span class="info-box-number">
                                 {{ $category->count() }}
                             </span>
@@ -67,11 +70,11 @@
                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-wallet"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Doanh Thu</span>
-                            <span class="info-box-number">@formatmoney($total_sale)</span>
+                            <span class="info-box-text" id="statistic-title">Doanh thu tháng {{ date('m/Y') }}</span>
+                            <span class="info-box-number" id="statistic-number">@formatmoney($total_sale)</span>
                         </div>
                     </div>
-                     
+
                 </div>
             </div>
             <!-- /.row -->
@@ -94,12 +97,31 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <div class="row mb-3" id="filter">
+                                <div class="col-3">
+                                    <select name="month" id="month" class="form-control">
+                                        <option value="">Chọn tháng</option>
+                                        @for ($month = 1; $month <= 12; $month++)
+                                            <option value="{{ $month }}"
+                                                {{ $month == date('m') ? 'selected' : '' }}>
+                                                Tháng {{ $month }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <select name="year" id="year" class="form-control">
+                                        <option value="">Chọn năm</option>
+                                        @for ($year = 2000; $year <= $year_now; $year++)
+                                            <option value="{{ $year }}" {{ $year == $year_now ? 'selected' : '' }}>Năm {{ $year }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <button type="button" id="btn-filter" class="btn btn-success">Thống kê</button>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p class="text-center">
-                                        <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                                    </p>
-
                                     <div class="chart">
                                         <!-- Sales Chart Canvas -->
                                         <canvas id="chart-js" height="180" style="height:320px;"></canvas>

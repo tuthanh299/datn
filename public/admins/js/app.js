@@ -429,6 +429,17 @@ function daysInMonth(month, year) {
     return daysInMonths[month - 1];
 }
 
+function makeDateTime(month, year) {
+    let arrDateTime = [];
+    const dateTime = daysInMonth(month, year);
+
+    for (let i = 0; i < dateTime; i++) {
+        arrDateTime.push("" + (i + 1));
+    }
+
+    return arrDateTime;
+}
+
 function formatMoney(money) {
     return new Intl.NumberFormat("vi-VN", {
         style: "currency",
@@ -440,30 +451,22 @@ function formatMoney(money) {
 
 function chartJS() {
     const ctx = document.getElementById("chart-js");
+    const date = new Date();
 
-    let arrDateTime = [];
-    const date = new Date(),
-        dateTime = daysInMonth(date.getMonth()+1, date.getYear());
+    let arrDateTime = makeDateTime(date.getMonth() + 1, date.getYear());
 
-    for (let i = 0; i < dateTime; i++) {
-        arrDateTime.push("" + (i+1));
-    }
-
-    // for (let i = 0; i < profitBaseOnDate.length; i++) {
-    //     profitBaseOnDate[i] = formatMoney(profitBaseOnDate[i]);
-    // }
-    // console.log(profitBaseOnDate);
-
-    new Chart(ctx, {
+    const chart = new Chart(ctx, {
         type: "bar",
         data: {
             labels: arrDateTime,
             datasets: [
                 {
-                    label: "Tổng doanh thu trong ngày",
+                    label: `Tổng doanh thu trong tháng ${date.getMonth() + 1}/${
+                        date.getYear() + 1900
+                    }`,
                     data: profitBaseOnDate,
-                    borderColor: '#ffb1c1',
-                    backgroundColor: '#ffb1c180',
+                    borderColor: "#ffb1c1",
+                    backgroundColor: "#ffb1c180",
                 },
             ],
         },
@@ -471,10 +474,38 @@ function chartJS() {
             scales: {
                 y: {
                     beginAtZero: true,
+                    min: 0,
                 },
             },
         },
     });
+
+    if ($("#btn-filter").length) {
+        $("#btn-filter").on("click", function () {
+            const month = parseInt(
+                $(this).parents("#filter").find("select#month").val()
+            );
+            const year = parseInt(
+                $(this).parents("#filter").find("select#year").val()
+            );
+
+            $.ajax({
+                url: `/admin/dashboard/${month}&${year}`,
+                type: "GET",
+                success: function (data) {
+                    $("#statistic-title").text(
+                        "Doanh thu tháng " + month + "/" + year
+                    );
+                    $("#statistic-number").text(formatMoney(data.total));
+
+                    chart.data.labels = makeDateTime(month, year);
+                    chart.data.datasets[0].label = `Tổng doanh thu trong tháng ${month}/${year}`;
+                    chart.data.datasets[0].data = data.profit;
+                    chart.update();
+                },
+            });
+        });
+    }
 }
 $(document).ready(function () {
     calculate();

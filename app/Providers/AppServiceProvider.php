@@ -148,14 +148,7 @@ class AppServiceProvider extends ServiceProvider
             return  $user->CheckPermissionAccess('edit_setting');
             
         });
-        Gate::define('staticnews-list', function (User $user) {
-            return  $user->CheckPermissionAccess('list_staticnews');
-            
-        });
-        Gate::define('staticnews-edit', function (User $user) {
-            return  $user->CheckPermissionAccess('edit_staticnews');
-            
-        });
+       
         Gate::define('warehouse-list', function (User $user) {
             return  $user->CheckPermissionAccess('list_warehouse');
             
@@ -188,7 +181,22 @@ class AppServiceProvider extends ServiceProvider
             return  $user->CheckPermissionAccess('list_statistic');
             
         });
-        
+        Gate::define('member-list', function (User $user) {
+            return  $user->CheckPermissionAccess('list_member');
+            
+        });
+        Gate::define('member-add', function (User $user) {
+            return  $user->CheckPermissionAccess('add_member');
+            
+        });
+        Gate::define('member-edit', function (User $user) {
+            return  $user->CheckPermissionAccess('edit_member');
+            
+        });
+        Gate::define('member-delete', function (User $user) {
+            return  $user->CheckPermissionAccess('delete_member');
+            
+        });
         Schema::defaultStringLength(length: 191);
     }
 }

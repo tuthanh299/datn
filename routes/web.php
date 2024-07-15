@@ -2,6 +2,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\GoogleLoginController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MemberController;
  
 use App\Http\Controllers\Clients\CCartController;
 use App\Http\Controllers\Clients\CChangePasswordController;
@@ -23,8 +24,7 @@ use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
-use App\Http\Controllers\StaticNewsController;
-use App\Http\Controllers\UserController;
+ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -125,6 +125,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         /* Dashboard */
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('can:statistic-list');
+        Route::get('/dashboard/{month?}&{year?}', [DashboardController::class, 'filter'])->name('ajax.dashboard');
         Route::prefix('order')->group(function () {
             Route::get('', [OrderController::class, 'index'])->name('order.index')->middleware('can:order-list');
             Route::get('/view/{id}', [OrderController::class, 'view'])->name('order.view')->middleware('can:order-view-edit');
@@ -146,6 +147,15 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit')->middleware('can:users-edit');
             Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
             Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete')->middleware('can:users-delete');
+        });
+        /* Member */
+        Route::prefix('member')->group(function () {
+            Route::get('', [MemberController::class, 'index'])->name('member.index')->middleware('can:member-list');
+            Route::get('/create', [MemberController::class, 'create'])->name('member.create')->middleware('can:member-add');
+            Route::post('/store', [MemberController::class, 'store'])->name('member.store');
+            Route::get('/edit/{id}', [MemberController::class, 'edit'])->name('member.edit')->middleware('can:member-edit');
+            Route::post('/update/{id}', [MemberController::class, 'update'])->name('member.update');
+            Route::get('/delete/{id}', [MemberController::class, 'delete'])->name('member.delete')->middleware('can:member-delete');
         });
 
         /* Role */
