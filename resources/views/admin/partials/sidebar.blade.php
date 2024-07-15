@@ -32,7 +32,8 @@ $user = HomeController::getUser();
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <li class="nav-item {{ Route::current()->getName() === 'dashboard.index' ? 'menu-open' : null }}">
+                @if (CheckPermissionAdmin($user->id, 'list_statistic'))
+                <li class="nav-item {{ Route::current()->getName() === 'dashboard.index'  ? 'menu-open' : null }}">
                     <a href="#"
                         class="nav-link {{ Route::current()->getName() === 'dashboard.index' ? 'active' : null }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -51,6 +52,8 @@ $user = HomeController::getUser();
                         </li>
                     </ul>
                 </li>
+                @endif
+
                 @if (CheckPermissionAdmin($user->id, 'list_product,list_category,list_publisher,list_warehouse'))
                     <li
                         class="nav-item {{ Route::current()->getName() === 'product.index' || Route::current()->getName() === 'publisher.index' || Route::current()->getName() === 'categories.index' || Route::current()->getName() === 'product.warehouse' ? 'menu-open' : null }}">
@@ -145,22 +148,12 @@ $user = HomeController::getUser();
                     </li>
                 @endif
 
-                @if (CheckPermissionAdmin($user->id, 'list_news'))
-                    <li class="nav-item">
-                        <a href="{{ route('news.index') }}"
-                            class="nav-link {{ Route::current()->getName() === 'news.index' ? 'active' : null }}">
-                            <i class="nav-icon fas fa-copy"></i>
-                            <p class="text-capitalize">
-                                Bài Viết tin tức
-                            </p>
-                        </a>
-                    </li>
-                @endif
-                @if (CheckPermissionAdmin($user->id, 'list_user,list_role'))
+                
+                @if (CheckPermissionAdmin($user->id, 'list_user,list_role','list_member'))
                     <li
-                        class="nav-item {{ Route::current()->getName() === 'users.index' || Route::current()->getName() === 'roles.index' ? 'menu-open' : null }}">
+                        class="nav-item {{ Route::current()->getName() === 'users.index' || Route::current()->getName() === 'roles.index' || Route::current()->getName() === 'member.index' ? 'menu-open' : null }}">
                         <a href="#"
-                            class="nav-link {{ Route::current()->getName() === 'users.index' || Route::current()->getName() === 'roles.index' ? 'active' : null }}">
+                            class="nav-link {{ Route::current()->getName() === 'users.index' || Route::current()->getName() === 'roles.index' ||  Route::current()->getName() === 'member.index' ? 'active' : null }}">
                             <i class="nav-icon text-sm fas fa-users"></i>
                             <p class="text-capitalize">
                                 Group users
@@ -179,6 +172,17 @@ $user = HomeController::getUser();
                                     </a>
                                 </li>
                             @endif
+                            @if (CheckPermissionAdmin($user->id, 'list_member'))
+                                <li class="nav-item">
+                                    <a href="{{ route('member.index') }}"
+                                        class="nav-link {{ Route::current()->getName() === 'member.index' ? 'active' : null }}">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p class="text-capitalize">
+                                            Danh Sách Người Dùng
+                                        </p>
+                                    </a>
+                                </li>
+                            @endif
                             @if (CheckPermissionAdmin($user->id, 'list_role'))
                                 <li class="nav-item">
                                     <a href="{{ route('roles.index') }}"
@@ -193,6 +197,7 @@ $user = HomeController::getUser();
                         </ul>
                     </li>
                 @endif
+                
                 @if (CheckPermissionAdmin($user->id, 'list_slider'))
                     <li class="nav-item">
                         <a href="{{ route('slider.index') }}"
@@ -200,6 +205,17 @@ $user = HomeController::getUser();
                             <i class="nav-icon far fa-image"></i>
                             <p class="text-capitalize">
                                 Slider
+                            </p>
+                        </a>
+                    </li>
+                @endif
+                @if (CheckPermissionAdmin($user->id, 'list_news'))
+                    <li class="nav-item">
+                        <a href="{{ route('news.index') }}"
+                            class="nav-link {{ Route::current()->getName() === 'news.index' ? 'active' : null }}">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p class="text-capitalize">
+                                Bài Viết tin tức
                             </p>
                         </a>
                     </li>
