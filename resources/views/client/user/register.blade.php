@@ -22,8 +22,8 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        <input type="text" name="lastname" id="lastname" class="form-control text-sm "
-                            placeholder="Nhập họ" autocomplete="off" />
+                        <input type="text" name="lastname" id="lastname" class="form-control text-sm"
+                        value="{{ old('lastname') }}" placeholder="Nhập họ" autocomplete="off" />
                     </div>
                 </div>
                 @error('lastname')
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <input type="text" name="firstname" id="firstname" class="form-control text-sm "
-                            placeholder="Nhập tên" autocomplete="off" />
+                        value="{{ old('firstname') }}"  placeholder="Nhập tên" autocomplete="off" />
                     </div>
                 </div>
                 @error('firstname')
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <input type="text" name="phone" class="form-control text-sm "
-                            placeholder="Nhập số điện thoại" autocomplete="off" />
+                        value="{{ old('phone') }}"  placeholder="Nhập số điện thoại" autocomplete="off" />
                     </div>
                 </div>
                 @error('phone')
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <input type="text" name="address" class="form-control text-sm "
-                            placeholder="Nhập địa chỉ" autocomplete="off" />
+                        value="{{ old('address') }}"  placeholder="Nhập địa chỉ" autocomplete="off" />
                     </div>
                 </div>
                 @error('address')
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         <input type="text" name="email" value="{{ old('email') }}"
-                            class="form-control text-sm " placeholder="Nhập email" autocomplete="off" />
+                         class="form-control text-sm " placeholder="Nhập email" autocomplete="off" />
                     </div>
                     <label class="emailMember-error error"   for="emailMember"
                         style=""></label>

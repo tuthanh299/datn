@@ -38,61 +38,86 @@ class CategoriesSeeder extends Seeder
         DB::table('categories')->insert([
             //văn học
             ['name' => 'Văn học', 'parent_id' => '0','status' => 1,
-                'outstanding' => 1,], //1
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //1
             ['name' => 'Tiểu thuyết', 'parent_id' => '1','status' => 1,
-                'outstanding' => 1,],  //2
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',],  //2
             ['name' => 'Tiểu thuyết trong nước', 'parent_id' => '2','status' => 1,
-                'outstanding' => 1,], //3
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //3
             ['name' => 'Tiểu thuyết nước ngoài', 'parent_id' => '2','status' => 1,
-                'outstanding' => 1,], //4
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //4
             //end văn học
             //sách giáo khoa
             ['name' => 'Sách giáo khoa', 'parent_id' => '0','status' => 1,
-                'outstanding' => 1,], //5
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //5
             ['name' => 'Ngữ văn', 'parent_id' => '5','status' => 1,
-                'outstanding' => 1,], //6
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //6
             ['name' => 'Toán', 'parent_id' => '5','status' => 1,
-                'outstanding' => 1,], //7 
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //7 
             ['name' => 'Tiếng Anh', 'parent_id' => '5','status' => 1,
-                'outstanding' => 1,], //8
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //8
             ['name' => 'Ngữ văn cấp 1', 'parent_id' => '6','status' => 1,
-                'outstanding' => 1,], //9
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //9
             ['name' => 'Ngữ văn cấp 2', 'parent_id' => '6','status' => 1,
-                'outstanding' => 1,], //10
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //10
             ['name' => 'Ngữ văn cấp 3', 'parent_id' => '6','status' => 1,
-                'outstanding' => 1,], //11
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //11
             ['name' => 'Toán cấp 1', 'parent_id' => '7','status' => 1,
-                'outstanding' => 1,], //12
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //12
             ['name' => 'Toán cấp 2', 'parent_id' => '7','status' => 1,
-                'outstanding' => 1,], //13
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //13
             ['name' => 'Toán cấp 3', 'parent_id' => '7','status' => 1,
-                'outstanding' => 1,], //14
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //14
             ['name' => 'Tiếng anh cấp 1', 'parent_id' => '8','status' => 1,
-                'outstanding' => 1,], //15
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //15
             ['name' => 'Tiếng anh cấp 2', 'parent_id' => '8','status' => 1,
-                'outstanding' => 1,], //16
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //16
             ['name' => 'Tiếng anh cấp 3', 'parent_id' => '8','status' => 1,
-                'outstanding' => 1,], //17
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //17
             //end sách giáo khoa
             //Sách tham khảo
             ['name' => 'Sách tham khảo', 'parent_id' => '0','status' => 1,
-                'outstanding' => 1,], //18
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //18
             ['name' => 'Toán', 'parent_id' => '18','status' => 1,
-                'outstanding' => 1,], //19
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //19
             ['name' => 'Ngữ văn', 'parent_id' => '18','status' => 1,
-                'outstanding' => 1,], //20
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //20
             ['name' => 'Tiếng anh', 'parent_id' => '18','status' => 1,
-                'outstanding' => 1,], //21
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //21
             //end sách tham khảo
             //Truyện tranh
             ['name' => 'Sách thiếu nhi, thiếu niên', 'parent_id' => '0','status' => 1,
-                'outstanding' => 1,], //22
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //22
             ['name' => 'Truyện tranh thiếu nhi', 'parent_id' => '22','status' => 1,
-                'outstanding' => 1,], //23
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //23
             ['name' => 'Manga - Comic', 'parent_id' => '22','status' => 1,
-                'outstanding' => 1,], //24
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //24
             ['name' => 'Kiến thức bách khoa', 'parent_id' => '22','status' => 1,
-                'outstanding' => 1,], //25
+                'outstanding' => 1,                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',], //25
         ]);
     }
 }

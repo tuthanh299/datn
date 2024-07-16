@@ -63,6 +63,16 @@
                             Năm xuất bản: <span
                                 class="attribute-product-detail-text">{{ $productDetail->publishing_year }}</span>
                         </div>
+                        <div class="attribute-product-detail">
+                            Số lượng tồn kho: <span
+                                class="attribute-product-detail-text" id="qty_shown">{{ $qty }}</span>
+                        </div>
+                        <input type="hidden" id="qty" value="{{$qty}}">
+                        <div class="attribute-product-detail" style="display: none">
+                            Số lượng có trong giỏ hàng: <span
+                                 id="cqty_shown">{{ $cqtyincart }}</span>
+                        </div>
+                        <input type="hidden" id="cqty" value="{{$cqtyincart}}">
                         <div class="price-product-detail">
                             Giá: 
                             @if ($productDetail->sale_price)
@@ -80,7 +90,7 @@
                             <div class="attr-content-pro-detail d-flex flex-wrap align-items-center justify-content-between">
                                 <div class="quantity-pro-detail">
                                     <span class="quantity-minus-pro-detail">-</span>
-                                    <input type="number" class="qty-pro" min="1" value="1" />
+                                    <input type="number" id="qty_product" class="qty-pro" min="1" value="1" data-max-quantity="{{ $qty }}" />
                                     <span class="quantity-plus-pro-detail">+</span>
                                 </div>
                             </div>
@@ -159,4 +169,6 @@
 
         </div>
     </div>
+@endsection
+@section('js')
 @endsection

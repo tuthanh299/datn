@@ -83,8 +83,27 @@ class CUserController extends Controller
         'address' => ['required'],
         'phone' => ['required']
         ]);*/
+        $popularDomains = [
+            'gmail.com',
+            'yahoo.com',
+            'hotmail.com',
+            'outlook.com',
+            'live.com',
+            'aol.com',
+            'icloud.com',
+            'mail.com',
+            'yandex.com',
+            'protonmail.com'
+        ];
 
         $cre = $request->all();
+
+        $domain = substr(strrchr($request->email, "@"), 1);
+
+        if(!in_array($domain, $popularDomains)) {
+            //return response()->json(['error' => 'Email domain is not popular.'], 400);
+            redirect()->route('user.register')->with('fail', 'Địa chỉ email không xác định');
+        }
 
         if ($cre) {
             Member::create([
@@ -98,10 +117,10 @@ class CUserController extends Controller
 
             $member = Member::where('email', $request->email)->first();
 
-            Cart::create([
+            /*Cart::create([
                 'member_id' => $member->id,
                 'cart_total' => 0,
-            ]);
+            ]);*/
 
             return redirect()->route('user.login')->with('success', 'Đăng ký thành công');
             //dd($cre, 'true');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAddRequest;
+use App\Http\Requests\UserEditRequest;
 use App\Models\Cart;
 use App\Models\DetailCart;
 use App\Models\Member;
@@ -23,12 +24,38 @@ class CInfoController extends Controller
         return redirect()->route('user.login');
     }
 
-    public function update(Request $request) 
+    public function update(UserEditRequest $request) 
     {
         if(!Auth::guard('member')->check())
         {
             return redirect()->route('user.login');
         }
+
+        $popularDomains = [
+            'gmail.com',
+            'yahoo.com',
+            'hotmail.com',
+            'gmail.com.vn',
+            'outlook.com',
+            'live.com',
+            'aol.com',
+            'icloud.com',
+            'mail.com',
+            'yandex.com',
+            'protonmail.com'
+        ];
+
+        $cre = $request->all();
+
+        $domain = substr(strrchr($request->email, "@"), 1);
+
+        if(!in_array($domain, $popularDomains)) {
+            //return response()->json(['error' => 'Email domain is not popular.'], 400);
+            redirect()->route('user.register')->with('fail', 'Địa chỉ email không xác định');
+        }
+
+        $address = $request->input('address');
+        dd($request->all());
 
         $all = $request->all();
         $user = Auth::guard('member')->user();

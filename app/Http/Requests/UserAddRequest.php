@@ -52,6 +52,13 @@ class UserAddRequest extends FormRequest
             ],
             'password' => [
                 'required',
+                'string',
+                'min:8',
+                'max:32',
+                'regex:/[a-z]/', 
+                'regex:/[A-Z]/', 
+                'regex:/[0-9]/', 
+                'regex:/[@$!%*#?&]/', 
             ],
         ];
     }
@@ -74,6 +81,9 @@ class UserAddRequest extends FormRequest
             'email.max' => 'Email không vượt quá 255 ký tự',
             'email.email' => 'Vui lòng nhập đúng định dạng email',
             'password.required' => 'Mật khẩu không được để trống',
+            'password.min' => 'Mật khẩu không được dưới 8 ký tự',
+            'password.max' => 'Mật khẩu không được quá 32 ký tự',
+            'password.regex' => 'Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa, chữ thường, và ký tự đặc biệt',
         ];
     }
 

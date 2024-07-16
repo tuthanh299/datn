@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RoleUsersTableSeeder extends Seeder
 {
@@ -16,9 +17,9 @@ class RoleUsersTableSeeder extends Seeder
     {
         
 
-        \DB::table('role_users')->delete();
+        //DB::table('role_users')->delete();
         
-        \DB::table('role_users')->insert(array (
+        DB::table('role_users')->insert(array (
             0 => 
             array (
                 'id' => 1,

@@ -39,24 +39,22 @@ class DatabaseSeeder extends Seeder
         $this->call(StaticNewsTableSeeder::class);*/
 
         $this->call([
-            NewsTableSeeder::class,//
-            SettingSeeder::class,//
-            SlidersTableSeeder::class,//
-           
-            UserSeeder::class,//
-            CategoriesSeeder::class,//
-            PublishersTableSeeder::class,//
-            MemberSeeder::class,//
-            ProductsTableSeeder::class,//
-            ProductGalleriesTableSeeder::class,//
-            WarehousesTableSeeder::class,//
-            RolesTableSeeder::class,//
-            RoleUsersTableSeeder::class,//
-            PermissionsTableSeeder::class,//
-            PermissionRoleTableSeeder::class,//
-            
-            ImportOrderTableSeeder::class,//
-            ImportOrderDetailsTableSeeder::class,//
+            NewsTableSeeder::class,// 1
+            SettingSeeder::class,// 2
+            SlidersTableSeeder::class,// 3
+            UserSeeder::class,// 4
+            CategoriesSeeder::class,// 5
+            PublishersTableSeeder::class,// 6
+            MemberSeeder::class,// 7
+            ProductsTableSeeder::class,// 8
+            WarehousesTableSeeder::class,// 9
+            RolesTableSeeder::class,// 10
+            RoleUsersTableSeeder::class,// 11
+            PermissionsTableSeeder::class,// 12
+            PermissionRoleTableSeeder::class,// 13
+            ImportOrderTableSeeder::class,// 14
+            ImportOrderDetailsTableSeeder::class,// 15
+            OrderStatusSeeder::class,
         ]);
     }
 }
