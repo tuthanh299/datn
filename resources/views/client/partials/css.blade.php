@@ -12,3 +12,4 @@ use App\Http\Controllers\Clients\IndexController;
 <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
 <link href="{{ asset('vendors/simplenotify/simple-notify.css') }}" rel="stylesheet">
 <link href="{{ asset('index/css/style.css') }}" rel="stylesheet">
+@yield('css')

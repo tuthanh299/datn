@@ -45,9 +45,11 @@ class UserEditRequest extends FormRequest
                 'max:255',
             ],
             'email' => [
-                'required',               
+                'required',
+                'string',            
                 'max:255',
                 'email',
+                'unique:members,email'
             ],
              
         ];
@@ -68,6 +70,7 @@ class UserEditRequest extends FormRequest
             'email.required' => 'Email không được để trống',           
             'email.max' => 'Email không vượt quá 255 ký tự',
             'email.email' => 'Vui lòng nhập đúng định dạng email',
-                ];
+            'email.unique' => 'Email đã được sử dụng ở tài khoản khác',
+        ];
     }
 }

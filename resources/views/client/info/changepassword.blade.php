@@ -30,13 +30,13 @@
                     @endif
                 </div>
                 <div class="col-md-3">
+                    <h4 class=""><a href="{{ route('user.info') }}">Thông tin tài khoản</a></h4>
                     <h4 class=""><a href="{{ route('user.order') }}">Lịch sử mua hàng</a></h4>
                     <h4 class=""><a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a></h4>
                 </div>
                 <div class="col-md-6">
                     <form action="{{ route('user.changepassword.update') }}" class="form " method="POST">
                         @csrf
-
                         <div class="form-group">
                             <label for="" class="mb-2"><b>Mật khẩu hiện tại: </b></label>
                             <div class="input-group mb-3">
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <input type="password" name="current_password" id="current_password" class="form-control text-sm"
-                                    placeholder="Nhập mật khẩu" />
+                                    placeholder="Nhập mật khẩu hiện tại" />
                                 <div class="input-group-append">
                                     <div class="input-group-text show-password">
                                         <span class="fas fa-eye"></span>
@@ -100,7 +100,7 @@
                         <div style="color: #dd0505;
                             font-size: 1em;font-weight: bold;">{{ $message }}</div>
                         @enderror
-                        <button type="submit" class="btn btn-danger">Đổi mật khẩu</button>
+                        <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
                     </form>
                 </div>
             </div>

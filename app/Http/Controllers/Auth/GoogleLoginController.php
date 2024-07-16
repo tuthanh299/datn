@@ -10,10 +10,6 @@ use Laravel\Socialite\Facades\Socialite;
 
 class GoogleLoginController extends Controller
 {
-    /*public function redirect ($provider)
-    {
-    return Socialite::driver($provider)->redirect();
-    }*/
 
     public function redirect()
     {

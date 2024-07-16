@@ -506,37 +506,128 @@ function AllRun() {
     //     }
     // });
 
-    // Add to cart
+    // Add to cart Tu
     $("body").on("click", ".add-to-cart", function (event) {
         event.preventDefault();
         const act = $(this).data("act") ? $(this).data("act") : 0,
             direct = $(this).data("direct") ? $(this).data("direct") : 0;
         let route = $(this).data("route");
-        let quantity = 0;
+        var quantity = 0;
 
         if ($(".qty-pro").length) {
             quantity = $(".qty-pro").val();
-            route = route + quantity;
+            //route = route + quantity;
         }
 
-        $.ajax({
-            url: route,
-            type: "GET",
-            success: function (response) {
-                if (act === "buynow" && direct) {
-                    window.location.href = direct;
-                } else {
-                    showNotify("Thêm giỏ hàng thành công!");
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-            },
-        });
-    }); 
+        var warehouse_qty_obj = document.getElementById("qty");
+        var warehouse_qty = parseInt(warehouse_qty_obj.value, 10); // đổi text thành int nguyên
 
-    // Quantity detail page
+        var in_cart_quantity_obj = document.getElementById("cqty");
+        var in_cart_quantity = parseInt(in_cart_quantity_obj.value, 10); // đổi text thành int nguyên
+        //var total_qty = quantity + in_cart_quantity;
+        var total_qty = 0;
+
+        if(parseInt(quantity, 10) + parseInt(in_cart_quantity, 10) > parseInt(warehouse_qty, 10)) {
+            showNotify(
+                `Bạn đã thêm quá số lượng tồn kho`,
+                "Thông báo",
+                "error"
+            );
+            console.log("Thất bại:", {
+                in_cart_quantity: in_cart_quantity,
+                warehouse_qty: warehouse_qty,
+                quantity: quantity,
+                total_qty: parseInt(quantity, 10) + parseInt(in_cart_quantity, 10) ,
+            });
+        } else {
+            route = route + quantity;
+            $.ajax({
+                url: route,
+                type: "GET",
+                data: {
+                    in_cart_quantity: in_cart_quantity,
+                    warehouse_qty: warehouse_qty,
+                    quantity: quantity,
+                },
+                success: function (response) {
+                    if (act === "buynow" && direct) {
+                        window.location.href = direct;
+                    } else {
+                        route = route + quantity;
+                        location.reload();
+                        showNotify("Thêm giỏ hàng thành công!");
+                        console.log("Thành công:", {
+                            in_cart_quantity: in_cart_quantity,
+                            warehouse_qty: warehouse_qty,
+                            quantity: quantity,
+                            total_qty: parseInt(quantity, 10) + parseInt(in_cart_quantity, 10) ,
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                },
+            });
+        }
+    });
+
+    // Quantity detail page 1
     $(".quantity-minus-pro-detail,.quantity-plus-pro-detail,input.qty-pro").on(
+        "click change",
+        function (event) {
+            const _target = event.target;
+            const qtyInput = _target.closest('.quantity-pro-detail').querySelector('input.qty-pro');
+            const maxQuantity = parseInt(qtyInput.getAttribute('data-max-quantity')) || Infinity;
+
+            switch (_target.classList[0]) {
+                case "quantity-minus-pro-detail":
+                    if (qtyInput.value > 1) {
+                        qtyInput.value = parseInt(qtyInput.value) - 1;
+                    } else {
+                        qtyInput.value = 1;
+                        showNotify(
+                            "Số lượng không được nhỏ hơn 1",
+                            "Thông báo",
+                            "error"
+                        );
+                    }
+                    break;
+                case "quantity-plus-pro-detail":
+                    if (qtyInput.value < maxQuantity) {
+                        qtyInput.value = parseInt(qtyInput.value) + 1;
+                    } else {
+                        showNotify(
+                            `Bạn đã nhập quá số lượng tồn kho`,
+                            "Thông báo",
+                            "error"
+                        );
+                    }
+                    break;
+                case "qty-pro":
+                    if (_target.value < 1) {
+                        _target.value = 1;
+                        showNotify(
+                            "Số lượng không được nhỏ hơn 1",
+                            "Thông báo",
+                            "error"
+                        );
+                    } else if (_target.value > maxQuantity) {
+                        _target.value = maxQuantity;
+                        showNotify(
+                            `Bạn đã nhập quá số lượng tồn kho`,
+                            "Thông báo",
+                            "error"
+                        );
+                    }
+                    break;
+                //default:
+                    //showNotify("Không hợp lệ", "Thông báo", "error");
+                    //break;
+            }
+        });
+
+    // Quantity detail page 2
+    /*$(".quantity-minus-pro-detail,.quantity-plus-pro-detail,input.qty-pro").on(
         "click change",
         function (event) {
             const _target = event.target;
@@ -571,12 +662,12 @@ function AllRun() {
                         return false;
                     }
                     break;
-                // default:
-                //     showNotify("Không hợp lệ", "Thông báo", "error");
-                //     break;
+                default:
+                    showNotify("Không hợp lệ", "Thông báo", "error");
+                     break;
             }
         }
-    );
+    );*/
 
     // Quantity with AJAX || cart page
     $("body").on(
@@ -589,6 +680,8 @@ function AllRun() {
                     .data("route"),
                 id = $(this).parents(".procart[data-id]").data("id");
             let method = "";
+            const qtyInput = _target.closest('.quantity-counter-procart').querySelector('input.quantity-procart');
+            const maxQuantity = parseInt(qtyInput.getAttribute('data-max-quantity')) || Infinity;
 
             switch (_target.classList[0]) {
                 case "counter-procart-minus":
@@ -607,16 +700,32 @@ function AllRun() {
                     }
                     break;
                 case "counter-procart-plus":
-                    _target.previousElementSibling.value =
+                    if (_target.previousElementSibling.value >= maxQuantity) {
+                        showNotify(
+                            `Bạn đã thêm quá số lượng tồn kho`,
+                            "Thông báo",
+                            "error"
+                        );
+                    } else {
+                        _target.previousElementSibling.value =
                         parseInt(_target.previousElementSibling.value) + 1;
-                    method = "plus";
-                    break;
+                        method = "plus";
+                        break;
+                    }
+
                 case "quantity-procart":
                     if (_target.value < 1) {
                         _target.value = 1;
                         method = _target.value;
                         showNotify(
                             "Số lượng không được nhỏ hơn 1",
+                            "Thông báo",
+                            "error"
+                        );
+                    } else if (_target.value >= maxQuantity) {
+                        _target.value = maxQuantity;
+                        showNotify(
+                            "Bạn đã nhập quá số lượng tồn kho",
                             "Thông báo",
                             "error"
                         );
@@ -644,11 +753,17 @@ function AllRun() {
                 },
             });
         }
-    );
+    );  
 
     // Delete product from cart
     $("body").on("click", ".del-procart", function (event) {
         event.preventDefault();
+
+        const userConfirmed = confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?");
+    
+        if (!userConfirmed) {
+            return;
+        }
 
         const route = $(this).parents(".procart[data-route]").data("route"),
             id = $(this).parents(".procart[data-id]").data("id");

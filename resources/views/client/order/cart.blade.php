@@ -34,12 +34,11 @@
                         <div class="list-procart">
                             <div class="procart procart-label">
                                 <div class="row row-10">
-                                    <div class="pic-procart col-3 col-md-2 mg-col-10">Hình ảnh</div>
-                                    <div class=" col-6 col-md-5 mg-col-10">Tên sản phẩm</div>
-                                    <div class="quantity-procart col-3 col-md-2 mg-col-10">
-                                        Số lượng
-                                    </div>
-                                    <div class="price-procart col-3 col-md-3 mg-col-10">Đơn giá / Thành tiền</div>
+                                    <div class="pic-procart col-2 col-md-2 mg-col-10">Hình ảnh</div>
+                                    <div class=" col-2 col-md-2 mg-col-10">Tên sản phẩm</div>
+                                    <div class="quantity-procart col-2 col-md-2 mg-col-10">Số lượng</div>
+                                    <div class="price-procart col-2 col-md-2 mg-col-10">Đơn giá</div>
+                                    <div class="price-procart col-2 col-md-2 mg-col-10">Thành tiền</div>
                                 </div>
                             </div>
                             <!--thẻ sản phẩm giỏ hàng-->
@@ -59,8 +58,8 @@
                                                 Xóa </a>
                                         </div>
                                         <!--Tên-->
-                                        <div class="info-procart col-6 col-md-5 mg-col-10">
-                                            <h3 class="name-procart"><a class="text-decoration-none" target="_blank"
+                                        <div class="info-procart col-2 col-md-2 mg-col-10">
+                                            <h3 class="name-procart"><a class="text-decoration-none" href="{{ route('product.detail', ['id' => $v['product_id']]) }}"
                                                     title=""> {{ $v['name'] }} </a></h3>
                                         </div>
 
@@ -81,42 +80,30 @@
                                                         </div> -->
 
                                         <!--Số lượng-->
-                                        <div class="quantity-procart col-3 col-md-2 mg-col-10">
-                                            <div class="price-procart price-procart-rp">
-
-                                                <p class="price-new-cart load-price-new-">
-
-                                                </p>
-                                                <p class="price-old-cart load-price-">
-
-                                                </p>
-
-                                                <p class="price-new-cart load-price-">
-
-                                                </p>
-
-                                            </div>
+                                        <div class="quantity-procart col-2 col-md-2 mg-col-10">
                                             <div class="quantity-counter-procart quantity-counter-procart-" data-route="{{ route('update_quantity.cart',['id'=>$k]) }}">
                                                 <span class="counter-procart-minus counter-procart">-</span>
                                                 <input type="number" class="quantity-procart" min="1"
-                                                    value="{{ $v['quantity'] }}" data-pid=" " data-code="" />
+                                                    value="{{ $v['quantity'] }}" data-pid=" " data-code="" data-max-quantity="{{ $v['product_qty'] }}"/>
                                                 <span class="counter-procart-plus counter-procart">+</span>
                                             </div>
                                         </div>
                                         <!--end số lượng-->
                                         <!--Thành tiền-->
                                         @if ($v['sale_price'])
-                                            <div class="price-procart col-3 col-md-3 mg-col-10">
+                                            <div class="price-procart col-2 col-md-2 mg-col-10">
                                                 <p class="price-new-cart load-price-new"> @formatmoney($v['sale_price']) </p>
-                                                <p class="price-old-cart load-price"> @formatmoney($v['regular_price'])</p>
-                                                <p class="price-new-cart load-price"> @formatmoney($v['sale_price'] * $v['quantity']) </p>
+                                            </div>
+                                            <div class="price-procart col-2 col-md-3 mg-col-10">
+                                                <p class="price-new-cart load-price"> @formatmoney($v['sale_price'] * $v['quantity']) </p>  
                                             </div>
                                         @else
-                                            <div class="price-procart col-3 col-md-3 mg-col-10">
+                                            <div class="price-procart col-2 col-md-3 mg-col-10">
                                                 <p class="price-new-cart load-price-new"> @formatmoney($v['regular_price']) </p>
-                                                <p class="price-new-cart load-price-new load-price-total"> @formatmoney($v['regular_price'] * $v['quantity']) </p>
                                             </div>
-                                            </td>
+                                            <div class="price-procart col-2 col-md-3 mg-col-10">
+                                                <p class="price-new-cart load-price-new load-price-total"> @formatmoney($v['regular_price'] * $v['quantity']) </p> 
+                                            </div>
                                         @endif
                                     </div>
                                 </div>
@@ -176,7 +163,6 @@
         });
     }
 
-    // Check for Laravel session flash messages and trigger notification
     @if(session('notify'))
         showErrorNotify("{{ session('notify.message') }}", "Thông báo", "{{ session('notify.status') }}");
     @endif

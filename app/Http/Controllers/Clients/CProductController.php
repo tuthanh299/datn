@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Warehouse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,13 @@ class CProductController extends Controller
 
         $productDetail = Product::find($id);
         $pageName = $productDetail->name;
-        
+        $qty = Warehouse::where('product_id', $id)->value('quantity');
+        $cart = session()->get('cart', []);
+        $cqtyincart = isset($cart[$id]['quantity']) ? $cart[$id]['quantity'] : 0;
 
-        return view('client.product.detail', compact('productDetail', 'pageName'));
+        //dd($qty);
+
+        return view('client.product.detail', compact('productDetail', 'pageName', 'qty', 'cqtyincart'));
     }
 
     public function add(Request $request, $id )
@@ -36,6 +41,15 @@ class CProductController extends Controller
         }
         $product = Product::where('id', $id)->first();
         $cart = session()->get('cart', []);
+        $quantityToAdd = $request->input('qty-pro');
+        $wqty = Warehouse::where('product_id', $id)->value('quantity');
+
+        $currentQuantityInCart = isset($cart[$id]['quantity']) ? $cart[$id]['quantity'] : 0;
+        $totalQuantity = $currentQuantityInCart + $quantityToAdd;
+
+        if ($totalQuantity > $wqty) {
+            return response()->json(['error' => 'Số lượng sản phẩm trong giỏ hàng vượt quá số lượng tồn kho'], 400);
+        }
 
         if (isset($cart[$id])) {
             //$cart[$id]['quantity'] += $request->quantity;

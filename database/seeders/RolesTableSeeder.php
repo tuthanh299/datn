@@ -24,8 +24,8 @@ class RolesTableSeeder extends Seeder
                 'id' => 1,
                 'name' => 'admin',
                 'display_name' => 'Quản trị hệ thống',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',
                 'deleted_at' => NULL,
             ),
             1 => 
@@ -33,8 +33,8 @@ class RolesTableSeeder extends Seeder
                 'id' => 2,
                 'name' => 'manager',
                 'display_name' => 'Quản lý',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',
                 'deleted_at' => NULL,
             ),
             2 => 
@@ -42,8 +42,8 @@ class RolesTableSeeder extends Seeder
                 'id' => 3,
                 'name' => 'Nhập liệu bài viết',
                 'display_name' => '',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => '2024-07-04 12:22:59',
+                'updated_at' => '2024-07-04 12:22:59',
                 'deleted_at' => NULL,
             ),
             3 => 

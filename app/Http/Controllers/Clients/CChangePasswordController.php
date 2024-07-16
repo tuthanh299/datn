@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PasswordChangeRequest;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,14 +20,8 @@ class CChangePasswordController extends Controller
         return redirect()->route('login');
     }
 
-    public function update(Request $request)
+    public function update(PasswordChangeRequest $request)
     {
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|string|min:8',
-            'new_password_confirm' => 'required|string|min:8',
-        ]);
-    
         $user = Auth::guard('member')->user();
 
         // Kiểm tra mật khẩu hiện tại

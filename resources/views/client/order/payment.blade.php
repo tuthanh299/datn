@@ -73,80 +73,25 @@
                 </div>
                 <div class="bottom-cart col-12 col-lg-5">
                     <div class="section-cart">
-                        <!--<p class="title-cart">Hình thức thanh toán:</p>
-                            <div class="information-cart">
-                                <div class="payments-cart form-check"> <input type="radio" class="form-check-input"
-                                        id="payments-" name="dataOrder[payments]" value="" required> <label
-                                        class="payments-label form-check-label" for="payments-" data-payments="">
-                                        Thanh toán qua hình thức COD</label>
+                        <p class="title-cart">Hình thức thanh toán:</p>
+                            <!--<div class="information-cart">
+                                <div class="payments-cart form-check">
+                                    <input type="radio" class="form-check-input" id="payments-cod" name="dataOrder[payments]" value="cod" required checked>
+                                    <label class="payments-label form-check-label" for="payments-cod" data-payments="">
+                                        Thanh toán khi nhận hàng
+                                    </label>
+                                </div>
+                                <div class="payments-cart form-check">
+                                    <input type="radio" class="form-check-input" id="payments-vnpay" name="dataOrder[payments]" value="vnpay" required>
+                                    <label class="payments-label form-check-label" for="payments-vnpay" data-payments="">
+                                        Thanh toán trực tuyến qua VNPAY
+                                    </label>
                                     <div class="payments-info payments-info- transition">
-                                        Khách hàng thanh toán cho shipper khi nhận được hàng.
                                     </div>
                                 </div>
-                                <div class="payments-cart form-check"> <input type="radio" class="form-check-input"
-                                        id="payments-" name="dataOrder[payments]" value="" required> <label
-                                        class="payments-label form-check-label" for="payments-" data-payments="">
-                                        Thanh toán trực tuyến qua Momo</label>
-                                    <div class="payments-info payments-info- transition">
-
-                                    </div>
-                                </div>
-                                <div class="payments-cart form-check"> <input type="radio" class="form-check-input"
-                                        id="payments-" name="dataOrder[payments]" value="" required> <label
-                                        class="payments-label form-check-label" for="payments-" data-payments="">
-                                        Thanh toán trực tuyến qua VNPAY</label>
-                                    <div class="payments-info payments-info- transition">
-
-                                    </div>
-                                </div>
-                            </div> -->
+                            </div>-->
                         <!-- Form COD Payment -->
-                        <button type="button" class="btn btn-primary" onclick="showForm('cod')">Thanh toán ngay</button>
-                        <button type="button" class="btn btn-primary" onclick="showForm('vnpay')">Thanh toán bằng VNPAY</button>
-                        <form action="{{ url('/cod_payment') }}" method="POST" id="codPaymentForm" style="display: block;">
-                            @csrf
-                            <p class="title-cart">Thông tin giao hàng:</p>
-                            <div class="information-cart">
-                                <div class="row row-10">
-                                    <div class="input-cart col-md-6 mg-col-10">
-                                        <div class="form-floating form-floating-cus">
-                                            <input type="text" class="form-control text-sm" id="fullname_cod"
-                                                name="fullname" placeholder="Họ tên"
-                                                value="{{ $user->last_name . ' ' . $user->first_name }}" required /> 
-                                            <label for="fullname_cod">Họ tên</label>
-                                        </div>
-                                        <div class="invalid-feedback">Vui lòng nhập họ tên</div>
-                                    </div>
-                                    <div class="input-cart col-md-6 mg-col-10">
-                                        <div class="form-floating form-floating-cus"> 
-                                            <input type="number" class="form-control text-sm" id="phone_cod" name="phone"
-                                                placeholder="Điện thoại" value="{{ $user->phone }}" required /> 
-                                            <label for="phone_cod">Điện thoại</label> 
-                                        </div>
-                                        <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
-                                    </div>
-                                </div>
-                                <div class="input-cart">
-                                    <div class="form-floating form-floating-cus"> 
-                                        <input type="text" class="form-control text-sm" id="address_cod" name="address"
-                                            placeholder="Địa chỉ" value="{{ $user->address }}" required /> 
-                                        <label for="address_cod">Địa chỉ</label> 
-                                    </div>
-                                    <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
-                                </div>
-                                <div class="input-cart">
-                                    <div class="form-floating form-floating-cus">
-                                        <textarea class="form-control text-sm" id="note_cod" name="note" placeholder="Yêu cầu khác"></textarea> 
-                                        <label for="note_cod">Yêu cầu khác</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="hidden" name="total" value="{{ $total + $shipping }}">
-                            <button type="submit" class="btn btn-primary">Thanh toán ngay</button>
-                        </form>
-
-                        <!-- Form VNPAY Payment -->
-                        <form action="{{ url('/vnpay_payment') }}" method="POST" id="vnpayPaymentForm" style="display: none;">
+                        <form action="{{ url('/payment_return') }}" method="POST" id="paymentForm">
                             @csrf
                             <p class="title-cart">Thông tin giao hàng:</p>
                             <div class="information-cart">
@@ -185,6 +130,7 @@
                                 </div>
                             </div>
                             <input type="hidden" name="total" value="{{ $total + $shipping }}">
+                            <button type="submit" name="type" value="payment" class="btn btn-primary">Thanh toán khi nhận hàng</button>
                             <button type="submit" name="type" value="payment_vnpay" class="btn btn-primary">Thanh toán bằng VNPAY</button>
                         </form>
                     </div>
@@ -195,17 +141,8 @@
 @endsection
 @section('js')
 <script>
-    function showForm(type) {
-        var codForm = document.getElementById('codPaymentForm');
-        var vnpayForm = document.getElementById('vnpayPaymentForm');
-
-        if (type === 'cod') {
-            codForm.style.display = 'block';
-            vnpayForm.style.display = 'none';
-        } else if (type === 'vnpay') {
-            codForm.style.display = 'none';
-            vnpayForm.style.display = 'block';
-        }
-    }
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+        console.log('Form is submitting');
+    });
 </script>
 @endsection

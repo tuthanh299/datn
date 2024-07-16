@@ -3,18 +3,20 @@ namespace App\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Warehouse;
 
 class CCartController extends Controller
 {
     public function index()
     {
-        return view('client.order.cart', );
+        return view('client.order.cart');
     }
 
     //thêm giỏ hàng từ index
-    public function add_index($id = null, $quantity = 1)
+    public function add_index($id = null, $quantity)
     {
         $product = Product::where('id', $id)->first();
+        $qty = Warehouse::where('product_id', $id)->value('quantity');
         $cart = session()->get('cart', []);
 
         if (isset($cart[$id])) {
@@ -26,6 +28,7 @@ class CCartController extends Controller
             $cart[$id]['sale_price'] = $product->sale_price;
             $cart[$id]['product_photo_path'] = $product->product_photo_path;
             $cart[$id]['quantity'] = $quantity;
+            $cart[$id]['product_qty'] = $qty;
         }
 
         session()->put('cart', $cart);
@@ -43,6 +46,7 @@ class CCartController extends Controller
         } else {
             $cart[$id]['quantity'] = $method;
         }
+
         $updatePrice = ($cart[$id]['sale_price'] ? $cart[$id]['sale_price'] : $cart[$id]['regular_price']) * $cart[$id]['quantity'];
         session()->put('cart', $cart);
         foreach (session('cart') as $id => $details) {

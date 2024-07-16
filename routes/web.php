@@ -10,6 +10,7 @@ use App\Http\Controllers\Clients\CInfoController;
 use App\Http\Controllers\Clients\CNewsController;
 use App\Http\Controllers\Clients\COrderController;
 use App\Http\Controllers\Clients\CProductController;
+use App\Http\Controllers\Clients\CRateController;
 use App\Http\Controllers\Clients\CSearchController;
 use App\Http\Controllers\Clients\CUserController;
 use App\Http\Controllers\Clients\IndexController;
@@ -104,12 +105,21 @@ Route::prefix('/')->group(function () {
         Route::post('change-password/update', 'update')->name('user.changepassword.update');
     });
 
+    /*Rate*/
+    Route::controller(CRateController::class)->group(function () {
+        Route::get('rate', 'index')->name('user.rate');
+        Route::get('/rate/{id}', 'rate')->name('user.rate.rate');
+        Route::get('/rate/{id}/{rate_id}', 'detail')->name('user.rate.detail');
+        Route::post('rate/store', 'store')->name('user.rate.store');
+    });
+
     /* PAYMENT */
 
     Route::controller(PaymentController::class)->group(function () {
         Route::get('/payment', 'index')->name('user.payment');
         Route::post('/cod_payment', 'cod_payment')->name('cod');
         Route::post('/vnpay_payment', 'vnpay_payment')->name('vnpay');
+        Route::post('/payment_return', 'combination')->name('combination');
         Route::get('/vnpay_return', 'return')->name('vnpay.return');
     });
 
