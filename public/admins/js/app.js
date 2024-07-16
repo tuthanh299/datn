@@ -429,7 +429,7 @@ function daysInMonth(month, year) {
     return daysInMonths[month - 1];
 }
 
-function makeDateTime(month, year) {
+function getDayInMonth(month, year) {
     let arrDateTime = [];
     const dateTime = daysInMonth(month, year);
 
@@ -453,7 +453,7 @@ function chartJS() {
     const ctx = document.getElementById("chart-js");
     const date = new Date();
 
-    let arrDateTime = makeDateTime(date.getMonth() + 1, date.getYear());
+    let arrDateTime = getDayInMonth(date.getMonth() + 1, date.getYear());
 
     const chart = new Chart(ctx, {
         type: "bar",
@@ -484,22 +484,35 @@ function chartJS() {
         $("#btn-filter").on("click", function () {
             const month = parseInt(
                 $(this).parents("#filter").find("select#month").val()
+                    ? $(this).parents("#filter").find("select#month").val()
+                    : 0
             );
             const year = parseInt(
                 $(this).parents("#filter").find("select#year").val()
             );
 
+            if (!year)
+                return showNotify("Vui lòng chọn năm!", "Thống báo", "error");
+
             $.ajax({
                 url: `/admin/dashboard/${month}&${year}`,
                 type: "GET",
                 success: function (data) {
-                    $("#statistic-title").text(
-                        "Doanh thu tháng " + month + "/" + year
-                    );
                     $("#statistic-number").text(formatMoney(data.total));
 
-                    chart.data.labels = makeDateTime(month, year);
-                    chart.data.datasets[0].label = `Tổng doanh thu trong tháng ${month}/${year}`;
+                    if (month && year) {
+                        $("#statistic-title").text(
+                            `Doanh thu tháng ${month}/${year}`
+                        );
+                        chart.data.labels = getDayInMonth(month, year);
+                        chart.data.datasets[0].label = `Tổng doanh thu trong tháng ${month}/${year}`;
+                    } else {
+                        $("#statistic-title").text(`Doanh thu năm ${year}`);
+                        chart.data.labels = [
+                            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+                        ];
+                        chart.data.datasets[0].label = `Tổng doanh thu trong năm ${year}`;
+                    }
                     chart.data.datasets[0].data = data.profit;
                     chart.update();
                 },
@@ -517,5 +530,7 @@ $(document).ready(function () {
     SumoSelectFilterProductWarehouse();
     previewImage("file-zone", "photoUpload-preview"); // Cho Favicon
     previewImage("file-zone2", "photoUpload-preview2"); // Cho Logo
-    chartJS();
+    if ($("#chart-js").length) {
+        chartJS();
+    }
 });
