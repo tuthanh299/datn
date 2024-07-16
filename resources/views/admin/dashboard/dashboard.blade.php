@@ -5,11 +5,13 @@
     <title>Thống kê</title>
     @endsection @section('content')@section('css')
     <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/simplenotify/simple-notify.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
     <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
+    <script src="{{ asset('vendors/simplenotify/simple-notify.js') }}"></script>
     <script src="{{ asset('/adminlte/dist/js/adminlte.js') }}"></script>
 
     <script src="{{ asset('/adminlte/dist/js/adminlte.min.js') }}"></script>

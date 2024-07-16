@@ -135,7 +135,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         /* Dashboard */
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('can:statistic-list');
-        Route::get('/dashboard/{month?}&{year?}', [DashboardController::class, 'filter'])->name('ajax.dashboard');
+        Route::get('/dashboard/{month?}&{year}', [DashboardController::class, 'filter'])->name('ajax.dashboard');
         Route::prefix('order')->group(function () {
             Route::get('', [OrderController::class, 'index'])->name('order.index')->middleware('can:order-list');
             Route::get('/view/{id}', [OrderController::class, 'view'])->name('order.view')->middleware('can:order-view-edit');
