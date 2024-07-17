@@ -74,16 +74,12 @@ use App\Http\Controllers\Clients\IndexController;
                                         <div class="menu-bottom-cart">
                                             <div class="menu-bottom-cart-icon">
                                                 <i class="fa-solid fa-cart-shopping"></i>
-                                                @if(Auth::guard('member')->check())
                                                 <div class="menu-bottom-cart-num">
                                                    @php
                                                        $cart = session()->get('cart');
                                                    @endphp
                                                    {{ isset($cart) ? count($cart) : 0 }}
                                                 </div>
-                                                @else
-                                                <div></div>
-                                                @endif
                                             </div>
                                             <div class="menu-bottom-cart-text">
                                                 Giỏ hàng

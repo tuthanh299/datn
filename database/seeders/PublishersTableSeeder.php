@@ -156,7 +156,7 @@ Ngay từ cuốn sách đầu tiên, độc giả đã dành sự quan tâm và 
                 'id' => 13,
                 'name' => 'NXB Lao Động',
                 'description' => 'Nhà xuất bản Lao Động là một trong những đơn vị xuất bản lớn tại Việt Nam, chuyên hoạt động trong lĩnh vực xuất bản sách, tài liệu về khoa học xã hội, triết học, kinh tế, và các sách giáo khoa. Nhà xuất bản này có vai trò quan trọng trong việc phổ biến kiến thức và nghiên cứu các vấn đề xã hội, kinh tế của đất nước.',
-                'photo_path' => '/storage/publisher/1/6ppqmHpBftqFjGG303qs.pn',
+                'photo_path' => '/storage/publisher/1/6ppqmHpBftqFjGG303qs.png',
                 'photo_name' => 'nxbld.png',
                 'created_at' => NULL,
                 'updated_at' => NULL,

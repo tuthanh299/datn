@@ -25,27 +25,6 @@
                     <div class="infor-bill-item">
                     </div>
                     <div class="title-name2">Địa chỉ nhận hàng: {{$user->address}}</div>
-                    <div class="infor-bill-item">
-                        Vận chuyển: <span>
-                            @switch($hdb[0]->shipping_status)
-                            @case(0)
-                                <td> Đơn hàng đang chờ duyệt </td>
-                            @break
-                
-                            @case(1)
-                                <td> Đơn hàng đã được duyệt </td>
-                            @break
-                
-                            @case(2)
-                                <td> Đơn hàng đang được vận chuyển </td>
-                            @break
-                
-                            @case(3)
-                                <td> Đơn hàng đã vận chuyển thành công</td>
-                            @break
-                            @endswitch
-                        </span>
-                    </div>
                     <div class="infor-bill-item">{{$user->last_name . ' ' . $user->first_name}} </div>
                     <div class="infor-bill-item">Vietnam</div>
                     <div class="infor-bill-item">{{$user->sdt}}</div>

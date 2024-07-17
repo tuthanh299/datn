@@ -396,34 +396,9 @@ function AllRun() {
                                             </a>
                                         </div>
                                         <div class="info-product">
-                                            <div class="name-product"><a class="text-split-2" href="/product/${
-                                                product.id
-                                            }"
-                                                    title="${product.name}">${
-                                    product.name
-                                }</a>
-                                            </div>
+                                            <div class="name-product"><a class="text-split-2" href="/product/${product.id}"title="${product.name}">${product.name}</a></div>
                                             ${priceComponent}
                                                 <div class="product-button text-center">
-                                                <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
-                                                    <a href=""
-                                                        class="product-button-cart-action button-addnow text-light add-to-cart" data-route="${
-                                                            ROUTE_ADDTOCART +
-                                                            "/add/" +
-                                                            product.id +
-                                                            "&1"
-                                                        }"><i
-                                                            class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
-                                                </div>
-                                                <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
-                                                    <a href="" class="product-button-cart-action button-buynow add-to-cart text-light" data-route="${
-                                                        ROUTE_ADDTOCART +
-                                                        "/add/" +
-                                                        product.id +
-                                                        "&1"
-                                                    }" data-act="buynow" data-direct="${ROUTE_CART}"><i
-                                                            class="fa-solid fa-basket-shopping-simple me-1"></i>Mua ngay</a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
