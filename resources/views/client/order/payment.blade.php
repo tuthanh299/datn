@@ -145,4 +145,93 @@
         console.log('Form is submitting');
     });
 </script>
+
+<script>
+    $(document).ready(function () {
+        function formatNumber(amount) {
+            let parts = amount.toString().split(".");
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return parts.join(".");
+        }
+
+        $('#form-thanhtoan').submit(function (event) {
+            var selectedValue = $('input[name="flexRadioDefault"]:checked').val();
+
+            if (selectedValue === 'vietqr') {
+                event.preventDefault(); // Ngăn chặn submit form
+
+                // Gửi yêu cầu AJAX đến tệp PHP
+                $.ajax({
+                    url: '',
+                    type: 'POST',
+                    data: {
+                        action: "getcode"
+                    },
+                    success: function (response) {
+                        var code = response;
+                        var tiendon = <?= $c->totalCheckout($_SESSION['checkout']) ?>;
+                        $("#code").text(code);
+                        $("#tiendon").text(formatNumber(tiendon));
+                        var QR =
+                            "https://img.vietqr.io/image/MB-4660590747532-compact2.png?amount=" +
+                            30000 + "&addInfo=MUASACH.VN THANHTOANDONHANG " + code +
+                            "&accountName=AU DUONG HOANG LONG";
+                        $('#img-pay').attr('src', QR); // Đổi thuộc tính src của thẻ img
+                        setTimeout(() => {
+                            intervalId = setInterval(() => {
+                                checkpaid(code, tiendon);
+                            }, 1000);
+                        }, 20000);
+                        // Hiển thị popup
+                        $('#checkout-popup').removeClass('d-none').css('display', 'flex');
+                    },
+                    error: function () {
+                        console.error('An error occurred while processing the request.');
+                    }
+                });
+
+                var isSuccess = false;
+                var intervalId;
+
+                async function checkpaid(content, price) {
+                    if (isSuccess) {
+                        return;
+                    } else {
+                        try {
+                            const response = await fetch(
+                                "https://script.google.com/macros/s/AKfycbzOZqcyCYqnJSfao-td0YWU1lQ6f_XuTYul7qvNySDXchmR0hi-wj8FkkEUKDknyC1QBg/exec"
+                            );
+                            const data = await response.json();
+                            const lastPaid = data.data[data.data.length - 1];
+                            const lastPrice = lastPaid["Giá trị"];
+                            const lastContent = lastPaid["Mô tả"];
+                            if (lastPrice >= price && lastContent.includes(content)) {
+                                // alert("Thành công");
+                                isSuccess = true;
+                                clearInterval(intervalId);
+                                // Thêm input ẩn vào form để gửi giá trị xác định cho nút submit
+                                $('<input>').attr({
+                                    type: 'hidden',
+                                    name: 'xacnhanthanhtoan',
+                                    value: 'true'
+                                }).appendTo('#form-thanhtoan');
+                                $('#form-thanhtoan').off('submit').submit();
+                            } else {
+                                console.log('không thành công');
+                            }
+                        } catch {
+                            console.error('Lỗi');
+                        }
+                    }
+                }
+
+                $('#closePopup').click(function () {
+                    // Ẩn popup và dừng việc gọi API
+                    $('#checkout-popup').addClass('d-none');
+                    clearInterval(intervalId);
+                });
+            }
+        });
+    });
+</script>
 @endsection

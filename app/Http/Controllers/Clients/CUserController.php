@@ -93,7 +93,8 @@ class CUserController extends Controller
             'icloud.com',
             'mail.com',
             'yandex.com',
-            'protonmail.com'
+            'protonmail.com',
+            'caothang.edu.vn'
         ];
 
         $cre = $request->all();
@@ -102,7 +103,7 @@ class CUserController extends Controller
 
         if(!in_array($domain, $popularDomains)) {
             //return response()->json(['error' => 'Email domain is not popular.'], 400);
-            redirect()->route('user.register')->with('fail', 'Địa chỉ email không xác định');
+            return redirect()->route('user.register')->with('fail', 'Địa chỉ email không xác định');
         }
 
         if ($cre) {
