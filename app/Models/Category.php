@@ -24,4 +24,8 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id')->with('childrenRecursive');
     }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

@@ -7,13 +7,13 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-         <div class="content">
+        <div class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            Trang Quản Trị
-                        </div>
+                <div class="row d-block">
+                    <div class="col-md-12 text-center d-flex justify-content-center align-items-center">
+                        <h2 class=" mt-5">
+                            <b>Chào mừng bạn đến với trang quản trị TL Bookstore</b>
+                        </h2>
                     </div>
                 </div>
             </div>

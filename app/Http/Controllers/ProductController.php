@@ -244,6 +244,7 @@ class ProductController extends Controller
 
     public function delete($id)
     {
+        Warehouse::where('product_id', $id)->delete();
         return $this->deleteModelTrait($id, $this->product);
 
     }

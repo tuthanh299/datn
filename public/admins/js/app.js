@@ -411,6 +411,16 @@ if ($(".regular_price").length && $(".sale_price").length) {
     });
 }
 
+
+function formatMoney(money) {
+    return new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+    })
+        .format(money)
+        .replace(/\s/g, "");
+}
+
 function daysInMonth(month, year) {
     const daysInMonths = [
         31,
@@ -439,16 +449,6 @@ function getDayInMonth(month, year) {
 
     return arrDateTime;
 }
-
-function formatMoney(money) {
-    return new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-    })
-        .format(money)
-        .replace(/\s/g, "");
-}
-
 function chartJS() {
     const ctx = document.getElementById("chart-js");
     const date = new Date();

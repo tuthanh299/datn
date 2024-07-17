@@ -114,7 +114,9 @@
                                     <select name="year" id="year" class="form-control">
                                         <option value="">Chọn năm</option>
                                         @for ($year = 2000; $year <= $year_now; $year++)
-                                            <option value="{{ $year }}" {{ $year == $year_now ? 'selected' : '' }}>Năm {{ $year }}</option>
+                                            <option value="{{ $year }}"
+                                                {{ $year == $year_now ? 'selected' : '' }}>Năm {{ $year }}
+                                            </option>
                                         @endfor
                                     </select>
                                 </div>
@@ -198,4 +200,6 @@
                     <!-- /.card -->
                 </div>
             </div>
-        @endsection
+        </div>
+    </div>
+@endsection
