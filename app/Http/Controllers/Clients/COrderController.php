@@ -32,6 +32,7 @@ class COrderController extends Controller
             $hdb = Order::where('id', $id)->get();
             //$cthdb = DB::table('sale_invoice_details')->join('products', 'sale_invoice_details.product_id', '=', 'products.id')->get();
             $cthdb = OrderDetail::join('products', 'products.id', '=', 'order_details.product_id')->where('order_id', $id)->get();
+            //$cthdb = DB::table('order_details')->join('products', 'order_details.product_id', '=', 'products.id')->get();
             return view('client.order.order_detail', compact('user', 'hdb', 'cthdb'));
             //dd($cthdb);
         }

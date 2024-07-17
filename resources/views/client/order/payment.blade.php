@@ -1,5 +1,9 @@
 @extends('client.layouts.index')
 
+@section('css')
+
+@endsection
+
 @section('title')
     <title>Thanh toán</title>
 @endsection
@@ -138,6 +142,14 @@
             </div>
         </div>
     </div>
+    <div id="vietqr-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Scan mã QR để thanh toán</p>
+            <img src="URL_TO_YOUR_GENERATED_QR_CODE" alt="QR Code" width="200px">
+            <button id="cancel-vietqr" class="btn btn-danger">Hủy thanh toán</button>
+        </div>
+    </div>
 @endsection
 @section('js')
 <script>
@@ -155,7 +167,6 @@
         }
 
         $('#form-thanhtoan').submit(function (event) {
-            var selectedValue = $('input[name="flexRadioDefault"]:checked').val();
 
             if (selectedValue === 'vietqr') {
                 event.preventDefault(); // Ngăn chặn submit form
@@ -169,9 +180,7 @@
                     },
                     success: function (response) {
                         var code = response;
-                        var tiendon = <?= $c->totalCheckout($_SESSION['checkout']) ?>;
                         $("#code").text(code);
-                        $("#tiendon").text(formatNumber(tiendon));
                         var QR =
                             "https://img.vietqr.io/image/MB-4660590747532-compact2.png?amount=" +
                             30000 + "&addInfo=MUASACH.VN THANHTOANDONHANG " + code +

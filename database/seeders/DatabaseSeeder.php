@@ -51,10 +51,12 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,// 10
             RoleUsersTableSeeder::class,// 11
             PermissionsTableSeeder::class,// 12
-            PermissionRoleTableSeeder::class,// 13
+            PermissionRolesTableSeeder::class,// 13
             ImportOrderTableSeeder::class,// 14
             ImportOrderDetailsTableSeeder::class,// 15
             OrderStatusSeeder::class,
         ]);
+        $this->call(OrdersTableSeeder::class);
+        $this->call(OrderDetailsTableSeeder::class);
     }
 }
