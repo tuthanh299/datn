@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            //$table->integer('category_id');
             $table->mediumText('description');
             $table->mediumText('content');
             $table->string('product_photo_name')->nullable();
@@ -29,8 +28,10 @@ return new class extends Migration
             $table->boolean('outstanding')->default(false);        
             $table->timestamps();
             $table->softDeletes(); 
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('publisher_id')->constrained();
+
+            // Thêm khóa ngoại với ràng buộc ON DELETE CASCADE
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('publisher_id')->constrained()->onDelete('cascade');
         });
     }
 

@@ -35,7 +35,7 @@ class CategoryController extends Controller
                 ->paginate(10);
             $categories->setPath('categories?search_keyword=' . $search);
         } else {
-            $categories = $this->category::paginate(10);
+            $categories = $this->category::latest()->paginate(10);
         }
 
 
