@@ -38,6 +38,8 @@ class UserAddRequest extends FormRequest
                 'required',
                 'string',
                 'max:10',
+                'regex:/^(086|096|097|098|032|033|034|035|036|037|038|039|070|079|077|076|078|083|084|085|081|082|091|094|088|089|099|090)\d{7}$/', 
+                'regex:/^(?!.*00).*$/'
             ],
             'address' => [
                 'required',
@@ -55,10 +57,7 @@ class UserAddRequest extends FormRequest
                 'string',
                 'min:8',
                 'max:32',
-                'regex:/[a-z]/', 
-                'regex:/[A-Z]/', 
-                'regex:/[0-9]/', 
-                'regex:/[@$!%*#?&]/', 
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,32}$/'
             ],
         ];
     }
@@ -74,6 +73,7 @@ class UserAddRequest extends FormRequest
             'last_name.max' => 'Họ và tên đệm không được vượt quá 100 ký tự',
             'phone.required' => 'Số điện thoại không được để trống',
             'phone.max' => 'Số điện thoại không được vượt quá 10 ký tự',
+            'phone.regex' => 'Số điện thoại không hợp lệ',
             'address.required' => 'Địa chỉ không được để trống',
             'address.max' => 'Địa chỉ không được vượt quá 255 ký tự',
             'email.required' => 'Email không được để trống',
@@ -83,8 +83,7 @@ class UserAddRequest extends FormRequest
             'password.required' => 'Mật khẩu không được để trống',
             'password.min' => 'Mật khẩu không được dưới 8 ký tự',
             'password.max' => 'Mật khẩu không được quá 32 ký tự',
-            'password.regex' => 'Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa, chữ thường, và ký tự đặc biệt',
+            'password.regex' => 'Mật khẩu phải bao gồm ít nhất một chữ cái thường, một chữ cái hoa, một chữ số và một ký tự đặc biệt.',
         ];
     }
-
 }
