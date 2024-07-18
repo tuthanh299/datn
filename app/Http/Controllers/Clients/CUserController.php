@@ -92,6 +92,7 @@ class CUserController extends Controller
             'aol.com',
             'icloud.com',
             'mail.com',
+            'mail.com.vn',
             'yandex.com',
             'protonmail.com',
             'caothang.edu.vn'
@@ -102,7 +103,6 @@ class CUserController extends Controller
         $domain = substr(strrchr($request->email, "@"), 1);
 
         if(!in_array($domain, $popularDomains)) {
-            //return response()->json(['error' => 'Email domain is not popular.'], 400);
             return redirect()->route('user.register')->with('fail', 'Địa chỉ email không xác định');
         }
 

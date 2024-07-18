@@ -161,7 +161,8 @@
 
     let str =document.getElementById('sub-total').innerHTML;
     let num = parseFloat(str.replace(/,/g, ''));
-    var total = num * 1000 - 30000; //đang trừ 30000 tiền ship
+    //var total = num * 1000 - 30000; //đang trừ 30000 tiền ship
+    var total = num * 1000;
 
     document.addEventListener('DOMContentLoaded', function () {
     var isProcessing = false;

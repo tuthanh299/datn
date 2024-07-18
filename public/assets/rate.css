@@ -105,41 +105,36 @@ input.star:hover ~ label.star:before {
   color: #f5b301;
 }
 
-    /* CSS for the popup container */
-    .popup-container {
-      display: none;
-      /* Initially hidden */
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      /* Semi-transparent black background */
-      z-index: 9999;
-      /* Ensure popup is on top */
-  }
+.popup-container {
+  display: none;
+  /* Initially hidden */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Semi-transparent black background */
+  z-index: 9999;
+  /* Ensure popup is on top */
+  position: fixed;
+}
 
-  /* CSS for the popup content */
-  .popup-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      text-align: center;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
+.popup-content {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: absolute;
+}
 
-  /* Close button style */
-  .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 20px;
-      cursor: pointer;
-  }
-
-  /* Optional: Button style to trigger the popup */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
