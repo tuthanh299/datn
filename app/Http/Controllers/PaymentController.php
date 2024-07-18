@@ -27,85 +27,6 @@ class PaymentController extends Controller
         return view('client.order.payment', compact('user'));
 
     }
-    public function return (Request $request)
-    {
-        if (!Auth::guard('member')->check()) {
-            return redirect()->route('user.login');
-        }
-        if ($request->vnp_ResponseCode == "00") {
-            //dd($request->all(), session('cart'));
-
-            Order::where('order_code', $request->vnp_TxnRef)->update([
-                'status' => 2,
-            ]);
-
-            foreach (session('cart') as $id => $details) {
-                $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
-                $warehouse->quantity -= $details['quantity'];
-            }
-
-            session()->forget('cart');
-            return redirect()->route('user.cart')->with('notify', [
-                'status' => 'success',
-                'message' => 'Thanh toán thành công'
-            ]);
-            //dd('Đã thanh toán phí dịch vụ');
-        }
-        //session()->forget('url_prev');
-        //return redirect($url)->with('errors' ,'Lỗi trong quá trình thanh toán phí dịch vụ');
-        return redirect()->route('user.cart')->with('notify', [
-            'status' => 'error',
-            'message' => 'Thanh toán không thành công'
-        ]);
-    }
-
-    /*public function cod_payment(Request $request)
-    {
-        if (!Auth::guard('member')->check()) {
-            return redirect()->route('user.login');
-        }
-        $orderInfo = new Order;
-        $total = 30000;
-        $order_code = $this->generateOrderCode();
-
-        foreach (session('cart') as $id => $details) {
-            $total += ($details['sale_price'] ? $details['sale_price'] : $details['regular_price']) * $details['quantity'];
-        }
-
-        //$member = Member::where('id', Auth::guard('member')->user()->id);
-        $orderInfo->order_code = $order_code;
-        $orderInfo->member_id = Auth::guard('member')->user()->id;
-        $orderInfo->fullname = $request->fullname;
-        $orderInfo->phone = $request->phone;
-        $orderInfo->address = $request->address;
-        $orderInfo->note = $request->note;
-        $orderInfo->total_price = $total;
-        $orderInfo->status = 1;
-        $orderInfo->save();
-
-        foreach (session('cart') as $id => $details) {
-            $orderDetail = new OrderDetail;
-            $orderDetail->order_id = $orderInfo->id;
-            $orderDetail->product_id = $details['product_id'];
-            $orderDetail->quantity = $details['quantity'];
-            $orderDetail->regular_price = $details['regular_price'];
-            $orderDetail->sale_price = $details['sale_price'];
-            $orderDetail->save();
-        }
-
-        foreach (session('cart') as $id => $details) {
-            $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
-            $warehouse->quantity -= $details['quantity'];
-            $warehouse->save();
-        }
-
-        session()->forget('cart');
-
-        return redirect()->route('user.cart')->with('notify', [
-            'status' => 'success',
-            'message' => 'Thanh toán thành công'
-        ]);;
-    }*/
 
     public function combination(Request $request) {
         
@@ -116,42 +37,51 @@ class PaymentController extends Controller
         $data = $request->all();
         //dd($request['type']);
 
+        $request->merge([
+            'fullname_vnpay' => $request->fullname,
+            'address_vnpay' => $request->address,
+            'phone_vnpay' => $request->phone,
+            'note_vnpay' => $request->note,
+        ]);
+
         $total = 30000;
 
-        $orderInfo = new Order;
         $order_code = $this->generateOrderCode();
 
-        foreach (session('cart') as $id => $details) {
-            $total += ($details['sale_price'] ? $details['sale_price'] : $details['regular_price']) * $details['quantity'];
-        }
-
-        //$member = Member::where('id', Auth::guard('member')->user()->id);
-        $orderInfo->order_code = $order_code;
-        $orderInfo->member_id = Auth::guard('member')->user()->id;
-        $orderInfo->fullname = $request->fullname;
-        $orderInfo->phone = $request->phone;
-        $orderInfo->address = $request->address;
-        $orderInfo->note = $request->note;
-        $orderInfo->total_price = $total;
-        $orderInfo->status = 1;
-        $orderInfo->save();
-
-        foreach (session('cart') as $id => $details) {
-            $orderDetail = new OrderDetail;
-
-            $orderDetail->order_id = $orderInfo->id;
-            $orderDetail->product_id = $details['product_id'];
-            $orderDetail->quantity = $details['quantity'];
-            $orderDetail->regular_price = $details['regular_price'];
-            $orderDetail->sale_price = $details['sale_price'];
-            $orderDetail->save();
-
-            $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
-            $warehouse->quantity -= $details['quantity'];
-            $warehouse->save();
-        }
-
+        //controller thanh toán vnpay
         if ($request['type'] === 'payment_vnpay') {
+
+            $orderInfo = new Order();
+            foreach (session('cart') as $id => $details) {
+                $total += ($details['sale_price'] ? $details['sale_price'] : $details['regular_price']) * $details['quantity'];
+            }
+    
+            //$member = Member::where('id', Auth::guard('member')->user()->id);
+            $orderInfo->order_code = $order_code;
+            $orderInfo->member_id = Auth::guard('member')->user()->id;
+            $orderInfo->fullname = $request->fullname;
+            $orderInfo->phone = $request->phone;
+            $orderInfo->address = $request->address;
+            $orderInfo->note = $request->note;
+            $orderInfo->total_price = $total;
+            $orderInfo->status = 1;
+            $orderInfo->save();
+
+            foreach (session('cart') as $id => $details) {
+                $orderDetail = new OrderDetail;
+    
+                $orderDetail->order_id = $orderInfo->id;
+                $orderDetail->product_id = $details['product_id'];
+                $orderDetail->quantity = $details['quantity'];
+                $orderDetail->regular_price = $details['regular_price'];
+                $orderDetail->sale_price = $details['sale_price'];
+                $orderDetail->save();
+    
+                $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
+                $warehouse->quantity -= $details['quantity'];
+                $warehouse->save();
+            }
+
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
             //$vnp_Returnurl = "https://localhost/vnpay_php/vnpay_return.php";
             //$vnp_Returnurl = "http://127.0.0.1:8000/vnpay_return";
@@ -224,7 +154,90 @@ class PaymentController extends Controller
             }
             // vui lòng tham khảo thêm tại code demo
         }
-        else {
+        // controller thanh toán cod
+        else if($request->input('type') === 'payment') {
+            $orderInfo = new Order;
+            foreach (session('cart') as $id => $details) {
+                $total += ($details['sale_price'] ? $details['sale_price'] : $details['regular_price']) * $details['quantity'];
+            }
+    
+            //$member = Member::where('id', Auth::guard('member')->user()->id);
+            $orderInfo->order_code = $order_code;
+            $orderInfo->member_id = Auth::guard('member')->user()->id;
+            $orderInfo->fullname = $request->fullname;
+            $orderInfo->phone = $request->phone;
+            $orderInfo->address = $request->address;
+            $orderInfo->note = $request->note;
+            $orderInfo->total_price = $total;
+            $orderInfo->status = 1;
+            $orderInfo->save();
+    
+            foreach (session('cart') as $id => $details) {
+                $orderDetail = new OrderDetail;
+    
+                $orderDetail->order_id = $orderInfo->id;
+                $orderDetail->product_id = $details['product_id'];
+                $orderDetail->quantity = $details['quantity'];
+                $orderDetail->regular_price = $details['regular_price'];
+                $orderDetail->sale_price = $details['sale_price'];
+                $orderDetail->save();
+    
+                $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
+                $warehouse->quantity -= $details['quantity'];
+                $warehouse->save();
+            }
+
+            foreach (session('cart') as $id => $details) {
+                $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
+                $warehouse->quantity -= $details['quantity'];
+            }
+
+            session()->forget('cart');
+            return redirect()->route('user.cart')->with('notify', [
+                'status' => 'success',
+                'message' => 'Thanh toán thành công'
+            ]);
+            // thanh toán vietqr
+        } else {
+            $orderInfo = new Order();
+            foreach (session('cart') as $id => $details) {
+                $total += ($details['sale_price'] ? $details['sale_price'] : $details['regular_price']) * $details['quantity'];
+            }
+    
+            //$member = Member::where('id', Auth::guard('member')->user()->id);
+            $orderInfo->order_code = $order_code;
+            $orderInfo->member_id = Auth::guard('member')->user()->id;
+            $orderInfo->fullname = $request->fullname;
+            $orderInfo->phone = $request->phone;
+            $orderInfo->address = $request->address;
+            $orderInfo->note = $request->note;
+            $orderInfo->total_price = $total;
+            $orderInfo->status = 1;
+            $orderInfo->save();
+    
+            foreach (session('cart') as $id => $details) {
+                $orderDetail = new OrderDetail;
+    
+                $orderDetail->order_id = $orderInfo->id;
+                $orderDetail->product_id = $details['product_id'];
+                $orderDetail->quantity = $details['quantity'];
+                $orderDetail->regular_price = $details['regular_price'];
+                $orderDetail->sale_price = $details['sale_price'];
+                $orderDetail->save();
+    
+                $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
+                $warehouse->quantity -= $details['quantity'];
+                $warehouse->save();
+            }
+
+            foreach (session('cart') as $id => $details) {
+                $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
+                $warehouse->quantity -= $details['quantity'];
+            }
+
+            Order::where('order_code', $order_code)->update([
+                'status' => 2,
+            ]);
             foreach (session('cart') as $id => $details) {
                 $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
                 $warehouse->quantity -= $details['quantity'];
@@ -238,6 +251,48 @@ class PaymentController extends Controller
         }
 
         //session()->forget('cart');
+        return redirect()->route('user.cart')->with('notify', [
+            'status' => 'error',
+            'message' => 'Thanh toán không thành công'
+        ]);
+    }
+
+    public function return (Request $request)
+    {
+        if (!Auth::guard('member')->check()) {
+            return redirect()->route('user.login');
+        }
+        if ($request->vnp_ResponseCode == "00") {
+            //dd($request->all());
+            //dd($request->all(), session('cart'));
+            Order::where('order_code', $request->vnp_TxnRef)->update([
+                'status' => 2,
+            ]); 
+
+            foreach (session('cart') as $id => $details) {
+                $warehouse = Warehouse::where('product_id', $details['product_id'])->first();
+                $warehouse->quantity -= $details['quantity'];
+            }
+            session()->forget('cart');
+            return redirect()->route('user.cart')->with('notify', [
+                'status' => 'success',
+                'message' => 'Thanh toán thành công'
+            ]);
+            //dd('Đã thanh toán phí dịch vụ');
+        }
+
+        $hdb = Order::where('order_code', $request->vnp_TxnRef)->get();
+
+        $cthdb = OrderDetail::where('order_id', $hdb->id)->get();
+
+        foreach($cthdb as $v) {
+            $v->delete();
+        }
+
+        $hdb->delete();
+
+        //session()->forget('url_prev');
+        //return redirect($url)->with('errors' ,'Lỗi trong quá trình thanh toán phí dịch vụ');
         return redirect()->route('user.cart')->with('notify', [
             'status' => 'error',
             'message' => 'Thanh toán không thành công'

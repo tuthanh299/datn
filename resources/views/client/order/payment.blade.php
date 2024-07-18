@@ -1,7 +1,7 @@
 @extends('client.layouts.index')
 
 @section('css')
-
+    <link rel="stylesheet" href="{{asset('assets/rate.css')}}">
 @endsection
 
 @section('title')
@@ -71,7 +71,7 @@
                         </div>
                         <div class="total-procart">
                             <p>Tổng tiền:</p>
-                            <p class="total-price load-price-total">@formatmoney($total + $shipping)</p>
+                            <p class="total-price load-price-total" id="sub-total">@formatmoney($total + $shipping)</p>
                         </div>
                     </div>
                 </div>
@@ -136,111 +136,99 @@
                             <input type="hidden" name="total" value="{{ $total + $shipping }}">
                             <button type="submit" name="type" value="payment" class="btn btn-primary">Thanh toán khi nhận hàng</button>
                             <button type="submit" name="type" value="payment_vnpay" class="btn btn-primary">Thanh toán bằng VNPAY</button>
+                            <button type="submit" name="type" value="online" id="vietqr" class="btn btn-primary">
+                                Thanh toán bằng QR
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="vietqr-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Scan mã QR để thanh toán</p>
-            <img src="URL_TO_YOUR_GENERATED_QR_CODE" alt="QR Code" width="200px">
-            <button id="cancel-vietqr" class="btn btn-danger">Hủy thanh toán</button>
+    <div id="popupContainer" class="popup-container">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <img id="img-pay" alt="Popup Image">
         </div>
     </div>
 @endsection
 @section('js')
 <script>
-    document.getElementById('paymentForm').addEventListener('submit', function(event) {
-        console.log('Form is submitting');
-    });
-</script>
+    function closePopup() {
+        var popup = document.getElementById('popupContainer');
+        popup.style.display = 'none'; // Ẩn popup bằng cách thay đổi thuộc tính display của nó
+    }
 
-<script>
-    $(document).ready(function () {
-        function formatNumber(amount) {
-            let parts = amount.toString().split(".");
-            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            return parts.join(".");
+    let str =document.getElementById('sub-total').innerHTML;
+    let num = parseFloat(str.replace(/,/g, ''));
+    var total = num * 1000 - 30000; //đang trừ 30000 tiền ship
+
+    document.addEventListener('DOMContentLoaded', function () {
+    var isProcessing = false;
+
+    document.getElementById('vietqr').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        if (isProcessing) {
+            return;
         }
 
-        $('#form-thanhtoan').submit(function (event) {
+        isProcessing = true;
 
-            if (selectedValue === 'vietqr') {
-                event.preventDefault(); // Ngăn chặn submit form
+        var tiendon = total;
+        var code = generateRandomNumbers().join('');
+        var QR = "https://img.vietqr.io/image/MB-4660590747532-compact2.png?amount=" +
+            tiendon + "&addInfo=TLBOOKSTORE_" + code +
+            "&accountName=AU DUONG HOANG LONG";
+        
+        var imgPay = document.getElementById('img-pay');
+        imgPay.setAttribute('src', QR);
 
-                // Gửi yêu cầu AJAX đến tệp PHP
-                $.ajax({
-                    url: '',
-                    type: 'POST',
-                    data: {
-                        action: "getcode"
-                    },
-                    success: function (response) {
-                        var code = response;
-                        $("#code").text(code);
-                        var QR =
-                            "https://img.vietqr.io/image/MB-4660590747532-compact2.png?amount=" +
-                            30000 + "&addInfo=MUASACH.VN THANHTOANDONHANG " + code +
-                            "&accountName=AU DUONG HOANG LONG";
-                        $('#img-pay').attr('src', QR); // Đổi thuộc tính src của thẻ img
-                        setTimeout(() => {
-                            intervalId = setInterval(() => {
-                                checkpaid(code, tiendon);
-                            }, 1000);
-                        }, 20000);
-                        // Hiển thị popup
-                        $('#checkout-popup').removeClass('d-none').css('display', 'flex');
-                    },
-                    error: function () {
-                        console.error('An error occurred while processing the request.');
-                    }
-                });
+        var intervalId = setInterval(function () {
+            checkpaid(code, tiendon, intervalId);
+        }, 1000);
 
-                var isSuccess = false;
-                var intervalId;
-
-                async function checkpaid(content, price) {
-                    if (isSuccess) {
-                        return;
-                    } else {
-                        try {
-                            const response = await fetch(
-                                "https://script.google.com/macros/s/AKfycbzOZqcyCYqnJSfao-td0YWU1lQ6f_XuTYul7qvNySDXchmR0hi-wj8FkkEUKDknyC1QBg/exec"
-                            );
-                            const data = await response.json();
-                            const lastPaid = data.data[data.data.length - 1];
-                            const lastPrice = lastPaid["Giá trị"];
-                            const lastContent = lastPaid["Mô tả"];
-                            if (lastPrice >= price && lastContent.includes(content)) {
-                                // alert("Thành công");
-                                isSuccess = true;
-                                clearInterval(intervalId);
-                                // Thêm input ẩn vào form để gửi giá trị xác định cho nút submit
-                                $('<input>').attr({
-                                    type: 'hidden',
-                                    name: 'xacnhanthanhtoan',
-                                    value: 'true'
-                                }).appendTo('#form-thanhtoan');
-                                $('#form-thanhtoan').off('submit').submit();
-                            } else {
-                                console.log('không thành công');
-                            }
-                        } catch {
-                            console.error('Lỗi');
-                        }
-                    }
-                }
-
-                $('#closePopup').click(function () {
-                    // Ẩn popup và dừng việc gọi API
-                    $('#checkout-popup').addClass('d-none');
-                    clearInterval(intervalId);
-                });
-            }
-        });
+        document.getElementById('popupContainer').style.display = 'block';
     });
+
+    async function checkpaid(content, price, intervalId) {
+        try {
+            const response = await fetch(
+                "https://script.google.com/macros/s/AKfycbyWztGeW79KZ5itRELpNkiC-pSkBHmfnI3tBP4ig9ToVq7tX2fxmz1Ocl_L726pwDWYZQ/exec"
+            );
+            const data = await response.json();
+            const lastPaid = data.data[data.data.length - 1];
+            const lastPrice = lastPaid["Giá trị"];
+            const lastContent = lastPaid["Mô tả"];
+            if (lastPrice >= price && lastContent.includes(content)) {
+                clearInterval(intervalId);
+                var form = document.getElementById('paymentForm');
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'xacnhanthanhtoan';
+                input.value = 'true';
+                form.appendChild(input); 
+                form.submit();
+            } else {
+                console.log('Chưa thanh toán thành công');
+            }
+        } catch (error) {
+            console.error('Lỗi khi gọi API kiểm tra thanh toán:', error);
+        } finally {
+            isProcessing = false;
+        }
+    }
+
+    function generateRandomNumbers() {
+        const numbers = [];
+        for (let i = 1; i < 6; i++) {
+            const randomNumber = Math.floor(Math.random() * 100) + 1;
+            numbers.push(randomNumber);
+        }
+        return numbers;
+    }
+});
+
+
 </script>
 @endsection
