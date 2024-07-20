@@ -14,7 +14,11 @@
                 <div class="col-md-6">
                     <h4 class=""><a href="{{ route('user.info') }}">Thông tin tài khoản</a></h4>
                     <h4 class=""><a href="{{ route('user.order') }}">Lịch sử mua hàng</a></h4>
-                    <h4 class=""><a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a></h4>
+                    @if ($user->password != null)
+                        <h4 class=""><a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a></h4>
+                    @else
+                        
+                    @endif
                 </div>
                 <div class="col-md-6">
                     <div>Bạn chưa mua sản phẩm nào !</div>

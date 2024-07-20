@@ -6,11 +6,7 @@
 @section('content')
     <!-- Thông tin user -->
     <div class="wrap-content">
-        <div class="title-main">
-            <span>
-                Thông tin tài khoản
-            </span>
-        </div>
+ 
         <div class="content-main">
             <div class="form-add-top row">
                 <div class="return">
@@ -32,7 +28,11 @@
                 <div class="col-md-3">
                     <h4 class=""><a href="{{ route('user.info') }}">Thông tin tài khoản</a></h4>
                     <h4 class=""><a href="{{ route('user.order') }}">Lịch sử mua hàng</a></h4>
-                    <h4 class=""><a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a></h4>
+                    @if ($user->password != null)
+                        <h4 class=""><a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a></h4>
+                    @else
+                        
+                    @endif
                 </div>
                 <div class="col-md-9">
                     <form class="flex-user-infor" action="{{ route('user.info.update') }}" method="POST">
