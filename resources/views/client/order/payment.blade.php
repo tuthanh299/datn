@@ -1,7 +1,7 @@
 @extends('client.layouts.index')
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('assets/rate.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/rate.css') }}">
 @endsection
 
 @section('title')
@@ -78,22 +78,22 @@
                 <div class="bottom-cart col-12 col-lg-5">
                     <div class="section-cart">
                         <p class="title-cart">Hình thức thanh toán:</p>
-                            <!--<div class="information-cart">
-                                <div class="payments-cart form-check">
-                                    <input type="radio" class="form-check-input" id="payments-cod" name="dataOrder[payments]" value="cod" required checked>
-                                    <label class="payments-label form-check-label" for="payments-cod" data-payments="">
-                                        Thanh toán khi nhận hàng
-                                    </label>
-                                </div>
-                                <div class="payments-cart form-check">
-                                    <input type="radio" class="form-check-input" id="payments-vnpay" name="dataOrder[payments]" value="vnpay" required>
-                                    <label class="payments-label form-check-label" for="payments-vnpay" data-payments="">
-                                        Thanh toán trực tuyến qua VNPAY
-                                    </label>
-                                    <div class="payments-info payments-info- transition">
+                        <!--<div class="information-cart">
+                                    <div class="payments-cart form-check">
+                                        <input type="radio" class="form-check-input" id="payments-cod" name="dataOrder[payments]" value="cod" required checked>
+                                        <label class="payments-label form-check-label" for="payments-cod" data-payments="">
+                                            Thanh toán khi nhận hàng
+                                        </label>
                                     </div>
-                                </div>
-                            </div>-->
+                                    <div class="payments-cart form-check">
+                                        <input type="radio" class="form-check-input" id="payments-vnpay" name="dataOrder[payments]" value="vnpay" required>
+                                        <label class="payments-label form-check-label" for="payments-vnpay" data-payments="">
+                                            Thanh toán trực tuyến qua VNPAY
+                                        </label>
+                                        <div class="payments-info payments-info- transition">
+                                        </div>
+                                    </div>
+                                </div>-->
                         <!-- Form COD Payment -->
                         <form action="{{ url('/payment_return') }}" method="POST" id="paymentForm">
                             @csrf
@@ -104,39 +104,43 @@
                                         <div class="form-floating form-floating-cus">
                                             <input type="text" class="form-control text-sm" id="fullname_vnpay"
                                                 name="fullname" placeholder="Họ tên"
-                                                value="{{ $user->last_name . ' ' . $user->first_name }}" required /> 
+                                                value="{{ $user->last_name . ' ' . $user->first_name }}" required />
                                             <label for="fullname_vnpay">Họ tên</label>
                                         </div>
                                         <div class="invalid-feedback">Vui lòng nhập họ tên</div>
                                     </div>
                                     <div class="input-cart col-md-6 mg-col-10">
-                                        <div class="form-floating form-floating-cus"> 
-                                            <input type="number" class="form-control text-sm" id="phone_vnpay" name="phone"
-                                                placeholder="Điện thoại" value="{{ $user->phone }}" required /> 
-                                            <label for="phone_vnpay">Điện thoại</label> 
+                                        <div class="form-floating form-floating-cus">
+                                            <input type="number" class="form-control text-sm" id="phone_vnpay"
+                                                name="phone" placeholder="Điện thoại" value="{{ $user->phone }}"
+                                                required />
+                                            <label for="phone_vnpay">Điện thoại</label>
                                         </div>
                                         <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
                                     </div>
                                 </div>
                                 <div class="input-cart">
-                                    <div class="form-floating form-floating-cus"> 
+                                    <div class="form-floating form-floating-cus">
                                         <input type="text" class="form-control text-sm" id="address_vnpay" name="address"
-                                            placeholder="Địa chỉ" value="{{ $user->address }}" required /> 
-                                        <label for="address_vnpay">Địa chỉ</label> 
+                                            placeholder="Địa chỉ" value="{{ $user->address }}" required />
+                                        <label for="address_vnpay">Địa chỉ</label>
                                     </div>
                                     <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
                                 </div>
                                 <div class="input-cart">
                                     <div class="form-floating form-floating-cus">
-                                        <textarea class="form-control text-sm" id="note_vnpay" name="note" placeholder="Yêu cầu khác"></textarea> 
+                                        <textarea class="form-control text-sm" id="note_vnpay" name="note" placeholder="Yêu cầu khác"></textarea>
                                         <label for="note_vnpay">Yêu cầu khác</label>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="total" value="{{ $total + $shipping }}">
-                            <button type="submit" name="type" value="payment" class="btn btn-primary">Thanh toán khi nhận hàng</button>
-                            <button type="submit" name="type" value="payment_vnpay" class="btn btn-primary">Thanh toán bằng VNPAY</button>
-                            <button type="submit" name="type" value="online" id="vietqr" class="btn btn-primary">
+                            <input id="total-total" type="hidden" name="total" value="{{ $total + $shipping }}">
+                            <button type="submit" name="type" value="payment" class="btn btn-primary">Thanh toán khi
+                                nhận hàng</button>
+                            <button type="submit" name="type" value="payment_vnpay" class="btn btn-primary">Thanh
+                                toán bằng VNPAY</button>
+                            <button type="submit" name="type" value="online" id="vietqr"
+                                class="btn btn-primary">
                                 Thanh toán bằng QR
                             </button>
                         </form>
@@ -153,83 +157,97 @@
     </div>
 @endsection
 @section('js')
-<script>
-    function closePopup() {
-        var popup = document.getElementById('popupContainer');
-        popup.style.display = 'none'; // Ẩn popup bằng cách thay đổi thuộc tính display của nó
-    }
-
-    let str =document.getElementById('sub-total').innerHTML;
-    let num = parseFloat(str.replace(/,/g, ''));
-    //var total = num * 1000 - 30000; //đang trừ 30000 tiền ship
-    var total = num * 1000;
-
-    document.addEventListener('DOMContentLoaded', function () {
-    var isProcessing = false;
-
-    document.getElementById('vietqr').addEventListener('click', function (event) {
-        event.preventDefault();
-
-        if (isProcessing) {
-            return;
+    <script>
+        function closePopup() {
+            var popup = document.getElementById('popupContainer');
+            popup.style.display = 'none'; // Ẩn popup bằng cách thay đổi thuộc tính display của nó
         }
 
-        isProcessing = true;
+        let str = document.getElementById('total-total').value;
+        let num = parseInt(str);
+        //var total = num * 1000 - 30000; //đang trừ 30000 tiền ship
+        //var total = num * 1000;
+        var total = num;
 
-        var tiendon = total;
-        var code = generateRandomNumbers().join('');
-        var QR = "https://img.vietqr.io/image/MB-4660590747532-compact2.png?amount=" +
-            tiendon + "&addInfo=TLBOOKSTORE_" + code +
-            "&accountName=AU DUONG HOANG LONG";
-        
-        var imgPay = document.getElementById('img-pay');
-        imgPay.setAttribute('src', QR);
+        document.addEventListener('DOMContentLoaded', function() {
+            var isProcessing = false;
 
-        var intervalId = setInterval(function () {
-            checkpaid(code, tiendon, intervalId);
-        }, 1000);
+            document.getElementById('vietqr').addEventListener('click', function(event) {
+                var fullname = document.getElementById('fullname_vnpay').value;
+                var phone = document.getElementById('phone_vnpay').value;
+                var address = document.getElementById('address_vnpay').value;
 
-        document.getElementById('popupContainer').style.display = 'block';
-    });
+                if (!fullname || !phone || !address) {
+                    event.preventDefault(); // Ngăn không cho form submit
+                    if (!fullname) {
+                        alert('Vui lòng nhập họ tên');
+                    } else if (!phone) {
+                        alert('Vui lòng nhập số điện thoại');
+                    } else if (!address) {
+                        alert('Vui lòng nhập địa chỉ');
+                    }
+                } else {
+                    event.preventDefault();
 
-    async function checkpaid(content, price, intervalId) {
-        try {
-            const response = await fetch(
-                "https://script.google.com/macros/s/AKfycbyWztGeW79KZ5itRELpNkiC-pSkBHmfnI3tBP4ig9ToVq7tX2fxmz1Ocl_L726pwDWYZQ/exec"
-            );
-            const data = await response.json();
-            const lastPaid = data.data[data.data.length - 1];
-            const lastPrice = lastPaid["Giá trị"];
-            const lastContent = lastPaid["Mô tả"];
-            if (lastPrice >= price && lastContent.includes(content)) {
-                clearInterval(intervalId);
-                var form = document.getElementById('paymentForm');
-                var input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'xacnhanthanhtoan';
-                input.value = 'true';
-                form.appendChild(input); 
-                form.submit();
-            } else {
-                console.log('Chưa thanh toán thành công');
+                    if (isProcessing) {
+                        return;
+                    }
+
+                    isProcessing = true;
+
+                    var tiendon = total;
+                    var code = generateRandomNumbers().join('');
+                    var QR = "https://img.vietqr.io/image/MB-4660590747532-compact2.png?amount=" +
+                        tiendon + "&addInfo=TLBOOKSTORE_" + code +
+                        "&accountName=AU DUONG HOANG LONG";
+
+                    var imgPay = document.getElementById('img-pay');
+                    imgPay.setAttribute('src', QR);
+
+                    var intervalId = setInterval(function() {
+                        checkpaid(code, tiendon, intervalId);
+                    }, 1000);
+
+                    document.getElementById('popupContainer').style.display = 'block';
+                }
+            });
+
+            async function checkpaid(content, price, intervalId) {
+                try {
+                    const response = await fetch(
+                        "https://script.google.com/macros/s/AKfycbyWztGeW79KZ5itRELpNkiC-pSkBHmfnI3tBP4ig9ToVq7tX2fxmz1Ocl_L726pwDWYZQ/exec"
+                    );
+                    const data = await response.json();
+                    const lastPaid = data.data[data.data.length - 1];
+                    const lastPrice = lastPaid["Giá trị"];
+                    const lastContent = lastPaid["Mô tả"];
+                    if (lastPrice >= price && lastContent.includes(content)) {
+                        clearInterval(intervalId);
+                        var form = document.getElementById('paymentForm');
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'xacnhanthanhtoan';
+                        input.value = 'true';
+                        form.appendChild(input);
+                        form.submit();
+                    } else {
+                        console.log('Chưa thanh toán thành công');
+                    }
+                } catch (error) {
+                    console.error('Lỗi khi gọi API kiểm tra thanh toán:', error);
+                } finally {
+                    isProcessing = false;
+                }
             }
-        } catch (error) {
-            console.error('Lỗi khi gọi API kiểm tra thanh toán:', error);
-        } finally {
-            isProcessing = false;
-        }
-    }
 
-    function generateRandomNumbers() {
-        const numbers = [];
-        for (let i = 1; i < 6; i++) {
-            const randomNumber = Math.floor(Math.random() * 100) + 1;
-            numbers.push(randomNumber);
-        }
-        return numbers;
-    }
-});
-
-
-</script>
+            function generateRandomNumbers() {
+                const numbers = [];
+                for (let i = 1; i < 6; i++) {
+                    const randomNumber = Math.floor(Math.random() * 100) + 1;
+                    numbers.push(randomNumber);
+                }
+                return numbers;
+            }
+        });
+    </script>
 @endsection
